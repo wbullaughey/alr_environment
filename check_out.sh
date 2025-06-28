@@ -7,6 +7,12 @@ function pull(){
       if [[ $? -eq 0 ]]; then
          echo "pull $MODULE"
          git pull
+         if [[ $? -eq 0 ]]; then
+            echo $MODULE updated
+         else
+            echo update $MODULE failed
+            exit
+         fi
          popd >/dev/null 2>&1
       else
           echo "pushd failed"
