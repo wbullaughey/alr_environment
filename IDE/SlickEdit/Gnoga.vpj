@@ -90,6 +90,14 @@
                 <Exec CmdLine="./build.sh execute"/>
             </Target>
             <Target
+                Name="Build All"
+                MenuCaption="Build All"
+                RunFromDir="%rw"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveWorkspaceFiles">
+                <Exec CmdLine="./build.sh all"/>
+            </Target>
+            <Target
                 Name="Compile"
                 MenuCaption="&amp;Compile"
                 Dialog="_gnuc_options_form Compile"
@@ -185,6 +193,14 @@
                 Verbose="1"
                 Beep="1">
                 <Exec CmdLine="./build.sh execute"/>
+            </Target>
+            <Target
+                Name="Build All"
+                MenuCaption="Build All"
+                RunFromDir="%rw"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveWorkspaceFiles">
+                <Exec CmdLine="./build.sh all"/>
             </Target>
             <Target
                 Name="Compile"

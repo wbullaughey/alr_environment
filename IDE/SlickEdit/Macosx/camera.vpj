@@ -77,7 +77,8 @@
                 MenuCaption="Help_Test"
                 RunFromDir="%rw"
                 CaptureOutputWith="ProcessBuffer"
-                SaveOption="SaveWorkspaceFiles">
+                SaveOption="SaveWorkspaceFiles"
+                ClearProcessBuffer="1">
                 <Exec CmdLine="./build.sh help_test"/>
             </Target>
             <Target
@@ -85,7 +86,8 @@
                 MenuCaption="build all"
                 RunFromDir="%rw"
                 CaptureOutputWith="ProcessBuffer"
-                SaveOption="SaveWorkspaceFiles">
+                SaveOption="SaveWorkspaceFiles"
+                ClearProcessBuffer="1">
                 <Exec CmdLine="./build.sh all"/>
             </Target>
             <Target
@@ -201,7 +203,8 @@
                 MenuCaption="Help_Test"
                 RunFromDir="%rw"
                 CaptureOutputWith="ProcessBuffer"
-                SaveOption="SaveWorkspaceFiles">
+                SaveOption="SaveWorkspaceFiles"
+                ClearProcessBuffer="1">
                 <Exec CmdLine="./build.sh help_test"/>
             </Target>
             <Target
@@ -209,7 +212,8 @@
                 MenuCaption="build all"
                 RunFromDir="%rw"
                 CaptureOutputWith="ProcessBuffer"
-                SaveOption="SaveWorkspaceFiles">
+                SaveOption="SaveWorkspaceFiles"
+                ClearProcessBuffer="1">
                 <Exec CmdLine="./build.sh all"/>
             </Target>
             <Target

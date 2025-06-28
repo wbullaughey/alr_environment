@@ -67,11 +67,11 @@ esac
 
 function build () {
    DIRECTORY=$1
-   MODE=$2
-   if [[ "$MODE" = "help_test" && "$KIND" = "library" ]]; then
-      output LIST no build help build for $DIRECTORY
+   BUILD_MODE=$2
+   if [[ "$BUILD_MODE" = "help_test" && "$KIND" = "library" ]]; then
+      output LIST no build help build for $DIRECTORY BUILD_MODE $BUILD_MODE kind $KIND
    else
-      output TRACE building $DIRECTORY mode $MODE kind $KIND
+      output TRACE building $DIRECTORY BUILD_MODE $BUILD_MODE kind $KIND
 
 
       pushd $DIRECTORY > /dev/null 2>&1
@@ -79,9 +79,9 @@ function build () {
          echo "pushd to $DIRECTORY failed"
          exit
       fi
-   #  echo building `pwd` mode $MODE
+   #  echo building `pwd` BUILD_MODE $BUILD_MODE
       $SCRIPT_DIR/fix_alire_toml.sh alire.toml.source
-      COMMAND="alr build -- -j10 -s -k -gnatE -vl -v $ALR_OPTIONS"
+      COMMAND="alr build -- -j10 -s -k -gnatE -vl -v $ALR_OPTIONS -XBUILD_MODE=$BUILD_MODE"
 
       echo COMMAND $COMMAND
       $COMMAND
@@ -96,28 +96,28 @@ function build () {
 }
 
 function build_all () {
-   MODE=$1
-   echo build_all for MODE $MODE
+   BUILD_MODE=$1
+   echo build_all for BUILD_MODE $BUILD_MODE
    pushd $SCRIPT_DIR > /dev/null 2>&1
    if [[ $? -ne 0 ]]; then
       echo "pushd to $SCRIPT_DIR failed"
       exit
    fi
-   build "aunit" $MODE library
-   build "ada_lib" $MODE  library
-   build "ada_lib/aunit" $MODE library
-   build "ada_lib/ada_lib_test_lib" $MODE library
-   build "ada_lib/ada_lib_tests" $MODE program
-   build "applications/video/camera" $MODE program
-   build "applications/video/camera/driver" $MODE program
-   build "applications/video/camera/driver/unit_test" $MODE program
-   build "applications/video/camera/test_lib" $MODE library
-   build "applications/video/camera/unit_test" $MODE program
-   build "gnoga_lib/gnoga_ada_lib" $MODE library
-   build "gnoga_lib/gnoga_options" $MODE library
-   build "vendor/github.com/gnoga" $MODE library
-   build ".    " $MODE
-   echo all directories built for mode $MODE
+   build "aunit" $BUILD_MODE library
+   build "ada_lib" $BUILD_MODE  library
+   build "ada_lib/aunit" $BUILD_MODE library
+   build "ada_lib/ada_lib_test_lib" $BUILD_MODE library
+   build "ada_lib/ada_lib_tests" $BUILD_MODE program
+   build "applications/video/camera" $BUILD_MODE program
+   build "applications/video/camera/driver" $BUILD_MODE program
+   build "applications/video/camera/driver/unit_test" $BUILD_MODE program
+   build "applications/video/camera/test_lib" $BUILD_MODE library
+   build "applications/video/camera/unit_test" $BUILD_MODE program
+   build "gnoga_lib/gnoga_ada_lib" $BUILD_MODE library
+   build "gnoga_lib/gnoga_options" $BUILD_MODE library
+   build "vendor/github.com/gnoga" $BUILD_MODE library
+   build ".    " $BUILD_MODE library
+   echo all directories built for BUILD_MODE $BUILD_MODE
    popd
 }
 

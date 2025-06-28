@@ -1965,7 +1965,6 @@ COMMON_OBJ=$(OUTDIR)/gnoga-gui-plugin-ace_editor.o \
 	$(OUTDIR)/zbtest-commands.o $(OUTDIR)/zbtest-functions.o \
 	$(OUTDIR)/zbtest-input_parser.o $(OUTDIR)/zbtest-main.o \
 	$(OUTDIR)/zbtest-states.o $(OUTDIR)/zbtest-xml_data.o \
-	$(OUTDIR)/gnoga-ada_lib-debug.o $(OUTDIR)/gnoga-ada_lib.o \
 	$(OUTDIR)/gnoga-application-gtk_window.o \
 	$(OUTDIR)/gnoga-application-multi_connect.o \
 	$(OUTDIR)/gnoga-application-singleton.o \
@@ -3953,7 +3952,6 @@ ALL_OBJ=$(OUTDIR)/gnoga-gui-plugin-ace_editor.o \
 	$(OUTDIR)/zbtest-commands.o $(OUTDIR)/zbtest-functions.o \
 	$(OUTDIR)/zbtest-input_parser.o $(OUTDIR)/zbtest-main.o \
 	$(OUTDIR)/zbtest-states.o $(OUTDIR)/zbtest-xml_data.o \
-	$(OUTDIR)/gnoga-ada_lib-debug.o $(OUTDIR)/gnoga-ada_lib.o \
 	$(OUTDIR)/gnoga-application-gtk_window.o \
 	$(OUTDIR)/gnoga-application-multi_connect.o \
 	$(OUTDIR)/gnoga-application-singleton.o \
@@ -4279,9 +4277,6 @@ $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/zanyblue/src/test/unittest/te
 	$(COMPILE_ADA)
 
 $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/zanyblue/src/test/unittest/parameters/%.ada
-	$(COMPILE_ADA)
-
-$(OUTDIR)/%.o : ../../vendor/github.com/gnoga/ada_lib/%.ada
 	$(COMPILE_ADA)
 
 $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/demo/tic_tac_toe/%.ada
@@ -4858,9 +4853,6 @@ $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/zanyblue/src/test/unittest/te
 	$(COMPILE_ADB)
 
 $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/zanyblue/src/test/unittest/parameters/%.adb
-	$(COMPILE_ADB)
-
-$(OUTDIR)/%.o : ../../vendor/github.com/gnoga/ada_lib/%.adb
 	$(COMPILE_ADB)
 
 $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/demo/tic_tac_toe/%.adb
@@ -7136,7 +7128,6 @@ COMMON_OBJ=$(OUTDIR)/gnoga-gui-plugin-ace_editor.o \
 	$(OUTDIR)/zbtest-commands.o $(OUTDIR)/zbtest-functions.o \
 	$(OUTDIR)/zbtest-input_parser.o $(OUTDIR)/zbtest-main.o \
 	$(OUTDIR)/zbtest-states.o $(OUTDIR)/zbtest-xml_data.o \
-	$(OUTDIR)/gnoga-ada_lib-debug.o $(OUTDIR)/gnoga-ada_lib.o \
 	$(OUTDIR)/gnoga-application-gtk_window.o \
 	$(OUTDIR)/gnoga-application-multi_connect.o \
 	$(OUTDIR)/gnoga-application-singleton.o \
@@ -9124,7 +9115,6 @@ ALL_OBJ=$(OUTDIR)/gnoga-gui-plugin-ace_editor.o \
 	$(OUTDIR)/zbtest-commands.o $(OUTDIR)/zbtest-functions.o \
 	$(OUTDIR)/zbtest-input_parser.o $(OUTDIR)/zbtest-main.o \
 	$(OUTDIR)/zbtest-states.o $(OUTDIR)/zbtest-xml_data.o \
-	$(OUTDIR)/gnoga-ada_lib-debug.o $(OUTDIR)/gnoga-ada_lib.o \
 	$(OUTDIR)/gnoga-application-gtk_window.o \
 	$(OUTDIR)/gnoga-application-multi_connect.o \
 	$(OUTDIR)/gnoga-application-singleton.o \
@@ -9450,9 +9440,6 @@ $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/zanyblue/src/test/unittest/te
 	$(COMPILE_ADA)
 
 $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/zanyblue/src/test/unittest/parameters/%.ada
-	$(COMPILE_ADA)
-
-$(OUTDIR)/%.o : ../../vendor/github.com/gnoga/ada_lib/%.ada
 	$(COMPILE_ADA)
 
 $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/demo/tic_tac_toe/%.ada
@@ -10029,9 +10016,6 @@ $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/zanyblue/src/test/unittest/te
 	$(COMPILE_ADB)
 
 $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/zanyblue/src/test/unittest/parameters/%.adb
-	$(COMPILE_ADB)
-
-$(OUTDIR)/%.o : ../../vendor/github.com/gnoga/ada_lib/%.adb
 	$(COMPILE_ADB)
 
 $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/demo/tic_tac_toe/%.adb
