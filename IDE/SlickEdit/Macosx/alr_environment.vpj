@@ -38,6 +38,7 @@
         <F N="../../../alr_environment.gpr"/>
         <F N="../../../config/alr_environment_config.gpr"/>
         <F N="../../../build.sh"/>
+        <F N="../../../ada_lib/build.sh"/>
         <F N="../../../build_all.sh"/>
         <F N="../../../check_in.sh"/>
         <F N="../../../check_out.sh"/>

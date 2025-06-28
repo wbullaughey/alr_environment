@@ -47,9 +47,8 @@ function output() {
 WHICH_ALR=`which alr`
 #output TRACE PATH $PATH
 #output TRACE which alr $WHICH_ALR
-output TRACE SCRIPT_DIR $SCRIPT_DIR
-output TRACE global build WHICH $WHICH DIRECTORY $DIRECTORY \
-   SCRIPT_DIR $SCRIPT_DIR KIND $KIND DO_TRACE $DO_TRACE
+output LIST global build WHICH $WHICH DIRECTORY $DIRECTORY
+output TRACE global build SCRIPT_DIR $SCRIPT_DIR KIND $KIND DO_TRACE $DO_TRACE
 
 case $KIND in
 

@@ -1,6 +1,7 @@
 obj/
 alire/
 bin/
+config/
 save/
 vendor/
 *.mak
@@ -14,6 +15,7 @@ vendor/
 *.swp
 *.stdout
 suites
+TRACE.txt
 GNAT-*
 *-save
 *.save
