@@ -7,3 +7,6 @@
 [submodule "vendor/github.com/gnoga"]
 	path = vendor/github.com/gnoga
 	url = git@github.com:wbullaughey/gnoga
+[submodule "applications"]
+	path = applications
+	url = git@github.com:wbullaughey/applications.git
