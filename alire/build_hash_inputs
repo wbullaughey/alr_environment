@@ -1,5 +1,4 @@
 external:ALR_ENVIRONMENT_LIBRARY_TYPE=default
 external:LIBRARY_TYPE=default
-profile:alr_environment=RELEASE
-switches:alr_environment=-O3,-fdata-sections,-ffunction-sections,-gnatW8,-gnatn
-version:gnat_native=14.2.1
+profile:alr_environment=DEVELOPMENT
+switches:alr_environment=-Og,-fdata-sections,-ffunction-sections,-g,-gnatVa,-gnatW8,-gnatw.X,-gnatwa,-gnaty-d,-gnaty3,-gnatyA,-gnatyB,-gnatyI,-gnatyO,-gnatyS,-gnatya,-gnatyb,-gnatyc,-gnatye,-gnatyf,-gnatyh,-gnatyi,-gnatyk,-gnatyl,-gnatym,-gnatyn,-gnatyp,-gnatyr,-gnatyt,-gnatyu,-gnatyx
