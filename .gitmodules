@@ -10,3 +10,6 @@
 [submodule "applications"]
 	path = applications
 	url = git@github.com:wbullaughey/applications.git
+[submodule "gnoga_lib"]
+	path = gnoga_lib
+	url = git@github.com:wbullaughey
