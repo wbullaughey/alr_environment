@@ -1,6 +1,6 @@
 <!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
 <Project
-    WorkingDir="../../../../../../GNAT/gnatcoll-core/"
+    WorkingDir="../../vendor/github.com/gnatcoll-core/"
     Version="10.0"
     VendorName="SlickEdit"
     TemplateName="Ada - GNU Ada Compiler"
@@ -26,15 +26,14 @@
             Filters="*.*"
             GUID="{7F8DE9E4-5B02-405C-8D2D-31056438F67D}"/>
         <F
-            N="../../../../../../GNAT/gnatcoll-core/core/src/*.ad?"
+            N="../../vendor/github.com/gnatcoll-core/src/*.ad?"
             Recurse="1"
             Excludes="*.a;*.o;*.ali"/>
-        <F
-            N="../../../../../../GNAT/gnatcoll-core/projects/*.ad?"
-            Recurse="1"
-            Excludes="*.a;*.o;*.ali"/>
-        <F N="../../../../../../GNAT/gnatcoll-core/alire.toml"/>
-        <F N="../../../../../../GNAT/gnatcoll-core/build.sh"/>
+        <F N="../../vendor/github.com/gnatcoll-core/.gitignore"/>
+        <F N="../../vendor/github.com/gnatcoll-core/.gitmodules"/>
+        <F N="../../vendor/github.com/gnatcoll-core/alire.toml"/>
+        <F N="../../vendor/github.com/gnatcoll-core/build.sh"/>
+        <F N="../../vendor/github.com/gnatcoll-core/gnatcoll.gpr"/>
     </Files>
     <Config
         Name="Debug"
@@ -53,7 +52,7 @@
                 ClearProcessBuffer="1"
                 Verbose="1"
                 Beep="1">
-                <Exec CmdLine="./build.sh"/>
+                <Exec CmdLine="./build.sh execute"/>
             </Target>
             <Target
                 Name="Compile"
@@ -161,7 +160,7 @@
                 ClearProcessBuffer="1"
                 Verbose="1"
                 Beep="1">
-                <Exec CmdLine="./build.sh"/>
+                <Exec CmdLine="./build.sh execute"/>
             </Target>
             <Target
                 Name="Compile"

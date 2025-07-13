@@ -1,11 +1,8 @@
 name = "alr_environment"
-description = "top container"
-/config/
+description = "root level"
 version = "0.1.0-dev"
 
-authors = ["Your Name"]
-maintainers = ["Your Name <example@example.com>"]
-maintainers-logins = ["github-username"]
-licenses = "MIT OR Apache-2.0 WITH LLVM-exception"
-website = ""
-tags = []
+authors = ["Wayne Bullaughey"]
+maintainers = ["Wayne Bullaughey <wlb122@verizon.net>"]
+maintainers-logins = ["wbullaughey"]
+

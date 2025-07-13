@@ -53,6 +53,7 @@
             Excludes=""/>
         <F N="../../applications/video/camera/unit_test/.gitignore"/>
         <F N="../../applications/video/camera/unit_test/alire.toml"/>
+        <F N="../../applications/video/camera/unit_test/alire.toml.source"/>
         <F N="../../applications/video/camera/unit_test/build.sh"/>
         <F N="../../applications/video/camera/unit_test/build.txt"/>
         <F N="../../applications/video/camera/unit_test/camera_tests.gpr"/>
@@ -114,7 +115,7 @@
             <Target
                 Name="Build All"
                 MenuCaption="Build All"
-                RunFromDir="../../../applications/video/camera/unit_test/"
+                RunFromDir="/Users/wayne/Project/git/alr/alr_environment/applications/video/camera/unit_test/"
                 CaptureOutputWith="ProcessBuffer"
                 SaveOption="SaveWorkspaceFiles"
                 ClearProcessBuffer="1">
@@ -240,7 +241,7 @@
             <Target
                 Name="Build All"
                 MenuCaption="Build All"
-                RunFromDir="../../../applications/video/camera/unit_test/"
+                RunFromDir="/Users/wayne/Project/git/alr/alr_environment/applications/video/camera/unit_test/"
                 CaptureOutputWith="ProcessBuffer"
                 SaveOption="SaveWorkspaceFiles"
                 ClearProcessBuffer="1">
