@@ -1,10 +1,13 @@
 <!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
 <Project
-    WorkingDir="."
+    WorkingDir="../../applications/video/camera/driver/lib/"
     Version="10.0"
     VendorName="SlickEdit"
     TemplateName="Ada - GNU Ada Compiler"
-    Customized="1">
+    Customized="1"
+    BuildSystem=""
+    BuildMakeFile=""
+    BuildMakeJobs="">
     <Files>
         <Folder
             Name="Source Files"
@@ -23,13 +26,15 @@
             Filters="*.*"
             GUID="{9D6A281E-BC32-4223-97DE-38B42BB1BAD5}"/>
         <F
-            N="../../video/camera/driver/lib/src/*.ad?"
+            N="../../applications/video/camera/driver/lib/src/*.ad?"
             Recurse="0"
             Excludes=""
             L="1"/>
-        <F N="../../video/camera/driver/lib/.gitignore"/>
-        <F N="../../video/camera/driver/lib/alire.toml"/>
-        <F N="../../video/camera/driver/lib/driver_lib.gpr"/>
+        <F N="../../applications/video/camera/driver/lib/.gitignore"/>
+        <F N="../../applications/video/camera/driver/lib/alire.toml"/>
+        <F N="../../applications/video/camera/driver/lib/build.sh"/>
+        <F N="../../applications/video/camera/driver/camera_driver.gpr"/>
+        <F N="../../applications/video/camera/driver/lib/driver_lib.gpr"/>
     </Files>
     <Config
         Name="Debug"
@@ -56,22 +61,23 @@
             <Target
                 Name="Build"
                 MenuCaption="&amp;Build"
-                Dialog="_gnuc_options_form Compile"
                 CaptureOutputWith="ProcessBuffer"
                 Deletable="0"
                 SaveOption="SaveWorkspaceFiles"
-                RunFromDir="%rw">
-                <Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t build'/>
+                RunFromDir="%rw"
+                ClearProcessBuffer="1"
+                Verbose="1"
+                Beep="1">
+                <Exec CmdLine="./build.sh execute"/>
             </Target>
             <Target
                 Name="Rebuild"
                 MenuCaption="&amp;Rebuild"
-                Dialog="_gnuc_options_form Compile"
                 CaptureOutputWith="ProcessBuffer"
                 Deletable="0"
                 SaveOption="SaveWorkspaceFiles"
                 RunFromDir="%rw">
-                <Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t rebuild'/>
+                <Exec CmdLine=""/>
             </Target>
             <Target
                 Name="Debug"
@@ -160,22 +166,23 @@
             <Target
                 Name="Build"
                 MenuCaption="&amp;Build"
-                Dialog="_gnuc_options_form Compile"
                 CaptureOutputWith="ProcessBuffer"
                 Deletable="0"
                 SaveOption="SaveWorkspaceFiles"
-                RunFromDir="%rw">
-                <Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t build'/>
+                RunFromDir="%rw"
+                ClearProcessBuffer="1"
+                Verbose="1"
+                Beep="1">
+                <Exec CmdLine="./build.sh execute"/>
             </Target>
             <Target
                 Name="Rebuild"
                 MenuCaption="&amp;Rebuild"
-                Dialog="_gnuc_options_form Compile"
                 CaptureOutputWith="ProcessBuffer"
                 Deletable="0"
                 SaveOption="SaveWorkspaceFiles"
                 RunFromDir="%rw">
-                <Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t rebuild'/>
+                <Exec CmdLine=""/>
             </Target>
             <Target
                 Name="Debug"

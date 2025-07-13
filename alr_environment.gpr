@@ -1,0 +1,36 @@
+with "config/alr_environment_config.gpr";
+with "default_config.gpr";
+
+project Alr_Environment is
+
+   for Library_Name use "Alr_Environment";
+   for Library_Version use Project'Library_Name & ".so." & Alr_Environment_Config.Crate_Version;
+
+   for Object_Dir use "obj/" & Alr_Environment_Config.Build_Profile;
+   for Create_Missing_Dirs use "True";
+   for Library_Dir use "lib/" & Alr_Environment_Config.Build_Profile;
+   for Source_Dirs use ("src/");
+
+   type Build_Mode_Type is ("execute", "help_test");
+   Build_Mode : Build_Mode_Type := external ("BUILD_MODE", "execute");
+
+   for Source_Dirs use ("src/", "config/", "src/"); -- & Build_Mode);
+
+   type Library_Type_Type is ("relocatable", "static", "static-pic");
+   Library_Type : Library_Type_Type :=
+     external ("ALR_ENVIRONMENT_LIBRARY_TYPE", external ("LIBRARY_TYPE", "static"));
+   for Library_Kind use Library_Type;
+
+   package Compiler is
+      for Default_Switches ("Ada") use Default_Config.Ada_Compiler_Switches;
+   end Compiler;
+
+   package Binder is
+      for Switches ("Ada") use ("-Es"); --  Symbolic traceback
+   end Binder;
+
+   package Install is
+      for Artifacts (".") use ("share");
+   end Install;
+
+end Alr_Environment;

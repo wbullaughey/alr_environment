@@ -1,6 +1,6 @@
 <!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
 <Project
-    WorkingDir="../../video/camera/driver/"
+    WorkingDir="../../applications/video/camera/driver/"
     DisableExeName="1"
     Version="10.0"
     VendorName="SlickEdit"
@@ -23,18 +23,20 @@
             Filters="*.*"
             GUID="{046C45EE-9D10-4082-A50B-8732A9B65338}"/>
         <F
-            N="../../video/camera/driver/src/*.ad?"
+            N="../../applications/video/camera/driver/src/*.ad?"
             Recurse="0"
             Excludes=""
             L="1"/>
-        <F N="../../video/camera/driver/alire.toml"/>
-        <F N="../../video/camera/driver/build.sh"/>
-        <F N="../../video/camera/driver/camera_driver.gpr"/>
-        <F N="../../video/camera/driver/help"/>
-        <F N="../../video/camera/driver/list-camera_driver.txt"/>
-        <F N="../../video/camera/driver/list-driver.txt"/>
-        <F N="../../video/camera/driver/run.sh"/>
-        <F N="../../video/camera/driver/run_driver.sh"/>
+        <F N="../../applications/video/camera/driver/alire.toml"/>
+        <F N="../../applications/video/camera/driver/build.sh"/>
+        <F N="../../applications/video/camera/driver/build_both.sh"/>
+        <F N="../../applications/video/camera/driver/camera_driver.gpr"/>
+        <F N="../../applications/video/camera/unit_test/driver_test.sh"/>
+        <F N="../../applications/video/camera/driver/help"/>
+        <F N="../../applications/video/camera/driver/list-camera_driver.txt"/>
+        <F N="../../applications/video/camera/driver/list-driver.txt"/>
+        <F N="../../applications/video/camera/driver/run.sh"/>
+        <F N="../../applications/video/camera/driver/run_driver.sh"/>
     </Files>
     <Config
         Name="Debug"
@@ -54,7 +56,16 @@
                 ClearProcessBuffer="1"
                 Verbose="1"
                 Beep="1">
-                <Exec CmdLine="./build.sh remote"/>
+                <Exec CmdLine="./build.sh execute"/>
+            </Target>
+            <Target
+                Name="help_test"
+                MenuCaption="help_test"
+                RunFromDir="%rw"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveWorkspaceFiles"
+                ClearProcessBuffer="1">
+                <Exec CmdLine="./build.sh help_test"/>
             </Target>
             <Target
                 Name="Rebuild"
@@ -62,8 +73,11 @@
                 CaptureOutputWith="ProcessBuffer"
                 Deletable="0"
                 SaveOption="SaveWorkspaceFiles"
-                RunFromDir="%rw">
-                <Exec CmdLine="gprbuild -d -f -p -P%rn.gpr "/>
+                RunFromDir="/Users/wayne/Project/git/alr/alr_environment"
+                Verbose="1"
+                ClearProcessBuffer="1"
+                Beep="1">
+                <Exec CmdLine="./build_all.sh"/>
             </Target>
             <Target
                 Name="Compile"

@@ -41,6 +41,7 @@ abstract project Default_Config is
 --         ,"-gnatyt" -- Check token spacing
 --         ,"-gnatyu" -- Check unnecessary blank lines
            ,"-gnatyx" -- Check extra parentheses
+           ,"-gnatwJ" -- allow () for agregats
           );
    OS_VERSION := External ("OS_VERSION", "");
 

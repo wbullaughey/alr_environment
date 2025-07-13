@@ -23,14 +23,21 @@ OUTFILE=camera_test_driver
 CFG_INC=
 CFG_LIB=
 CFG_OBJ=
-COMMON_OBJ=
+COMMON_OBJ=$(OUTDIR)/camera_driver.o
 OBJ=$(COMMON_OBJ) $(CFG_OBJ)
-ALL_OBJ=
+ALL_OBJ=$(OUTDIR)/camera_driver.o
 
 COMPILE=gnat -c -g $(CFG_INC) -o "$(OUTDIR)/$(*F).o" "$<"
 LINK=gnat -g -o "$(OUTFILE)" $(OBJ) $(CFG_LIB)
 COMPILE_ADA=gnat -c -g -o "$(OUTDIR)/$(*F).o" "$<"
 COMPILE_ADB=gnat -c -g -o "$(OUTDIR)/$(*F).o" "$<"
+
+# Pattern rules
+$(OUTDIR)/%.o : ../../applications/video/camera/driver/src/%.ada
+	$(COMPILE_ADA)
+
+$(OUTDIR)/%.o : ../../applications/video/camera/driver/src/%.adb
+	$(COMPILE_ADB)
 
 # Build rules
 all: $(OUTFILE)
@@ -63,14 +70,21 @@ OUTFILE=camera_test_driver
 CFG_INC=
 CFG_LIB=
 CFG_OBJ=
-COMMON_OBJ=
+COMMON_OBJ=$(OUTDIR)/camera_driver.o
 OBJ=$(COMMON_OBJ) $(CFG_OBJ)
-ALL_OBJ=
+ALL_OBJ=$(OUTDIR)/camera_driver.o
 
 COMPILE=gnat -O -c $(CFG_INC) -o "$(OUTDIR)/$(*F).o" "$<"
 LINK=gnat -O -o "$(OUTFILE)" $(OBJ) $(CFG_LIB)
 COMPILE_ADA=gnat -O -c -o "$(OUTDIR)/$(*F).o" "$<"
 COMPILE_ADB=gnat -O -c -o "$(OUTDIR)/$(*F).o" "$<"
+
+# Pattern rules
+$(OUTDIR)/%.o : ../../applications/video/camera/driver/src/%.ada
+	$(COMPILE_ADA)
+
+$(OUTDIR)/%.o : ../../applications/video/camera/driver/src/%.adb
+	$(COMPILE_ADB)
 
 # Build rules
 all: $(OUTFILE)

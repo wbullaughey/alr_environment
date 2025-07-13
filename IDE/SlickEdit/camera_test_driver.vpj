@@ -1,6 +1,6 @@
 <!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
 <Project
-    WorkingDir="../../video/camera/driver/"
+    WorkingDir="../../applications/video/camera/driver/"
     Version="10.0"
     VendorName="SlickEdit"
     TemplateName="Ada - GNU Ada Compiler"
@@ -26,30 +26,30 @@
             Filters="*.*"
             GUID="{EEDEC317-13A6-406E-A53B-C2D98964F19B}"/>
         <F
-            N="../../video/camera/driver/src/*.ad?"
+            N="../../applications/video/camera/driver/src/*.ad?"
             Recurse="0"
             Excludes=""
             L="1"/>
         <F
-            N="../../video/camera/driver/*.gpr"
+            N="../../applications/video/camera/driver/*.gpr"
             Recurse="0"
             Excludes=""
             L="1"/>
         <F
-            N="../../video/camera/driver/*.sh"
+            N="../../applications/video/camera/driver/*.sh"
             Recurse="0"
             Excludes=""
             L="1"/>
-        <F N="../../video/camera/driver/alire.toml"/>
-        <F N="../../video/camera/driver/build.sh"/>
-        <F N="../../video/camera/driver/camera_driver.gpr"/>
+        <F N="../../applications/video/camera/driver/alire.toml"/>
+        <F N="../../applications/video/camera/driver/build.sh"/>
+        <F N="../../applications/video/camera/driver/camera_driver.gpr"/>
         <F
             N="camera_test_driver.mak"
             Type="Makefile"/>
-        <F N="../../video/camera/driver/help"/>
-        <F N="../../video/camera/driver/list-camera_driver.txt"/>
-        <F N="../../video/camera/driver/run.sh"/>
-        <F N="../../video/camera/driver/suites"/>
+        <F N="../../applications/video/camera/driver/help"/>
+        <F N="../../applications/video/camera/driver/list-camera_driver.txt"/>
+        <F N="../../applications/video/camera/driver/run.sh"/>
+        <F N="../../applications/video/camera/driver/suites"/>
     </Files>
     <Config
         Name="Debug"
@@ -68,7 +68,15 @@
                 ClearProcessBuffer="1"
                 Verbose="1"
                 Beep="1">
-                <Exec CmdLine="./build.sh"/>
+                <Exec CmdLine="./build.sh execute"/>
+            </Target>
+            <Target
+                Name="Build All"
+                MenuCaption="Build All"
+                RunFromDir="%rw"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveWorkspaceFiles">
+                <Exec CmdLine="./build.sh all"/>
             </Target>
             <Target
                 Name="Compile"
@@ -173,7 +181,15 @@
                 ClearProcessBuffer="1"
                 Verbose="1"
                 Beep="1">
-                <Exec CmdLine="./build.sh"/>
+                <Exec CmdLine="./build.sh execute"/>
+            </Target>
+            <Target
+                Name="Build All"
+                MenuCaption="Build All"
+                RunFromDir="%rw"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveWorkspaceFiles">
+                <Exec CmdLine="./build.sh all"/>
             </Target>
             <Target
                 Name="Compile"

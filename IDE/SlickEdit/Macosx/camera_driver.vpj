@@ -1,6 +1,6 @@
 <!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
 <Project
-    WorkingDir="../../../video/camera/test_driver"
+    WorkingDir="../../../applications/video/camera/test_driver"
     Version="10.0"
     VendorName="SlickEdit"
     TemplateName="Ada - GNU Ada Compiler"
@@ -26,16 +26,16 @@
             Filters="*.*"
             GUID="{856CD17F-0A98-448E-A017-348CE53B7D2C}"/>
         <F
-            N="../../../video/camera/test_driver/src/*.ad?"
+            N="../../../applications/video/camera/test_driver/src/*.ad?"
             Recurse="0"
             Excludes=""
             L="1"/>
-        <F N="../../../video/camera/test_driver/alire.toml"/>
-        <F N="../../../video/camera/test_driver/build.sh"/>
-        <F N="../../../video/camera/test_driver/camera_driver.gpr"/>
-        <F N="../../../video/camera/test_driver/config/camera_driver_config.gpr"/>
-        <F N="../../../video/camera/test_driver/list-camera_driver.txt"/>
-        <F N="../../../video/camera/test_driver/run.sh"/>
+        <F N="../../../applications/video/camera/test_driver/alire.toml"/>
+        <F N="../../../applications/video/camera/test_driver/build.sh"/>
+        <F N="../../../applications/video/camera/test_driver/camera_driver.gpr"/>
+        <F N="../../../applications/video/camera/test_driver/config/camera_driver_config.gpr"/>
+        <F N="../../../applications/video/camera/test_driver/list-camera_driver.txt"/>
+        <F N="../../../applications/video/camera/test_driver/run.sh"/>
     </Files>
     <Config
         Name="Debug"

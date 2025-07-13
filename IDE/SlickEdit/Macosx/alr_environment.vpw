@@ -1,0 +1,32 @@
+<!DOCTYPE Workspace SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpw.dtd">
+<Workspace Version="10.0" VendorName="SlickEdit">
+    <Projects>
+        <Project File="../Ada.vpj"/>
+        <Project File="../ada_lib.vpj"/>
+        <Project File="../ada_lib_aunit.vpj"/>
+        <Project File="../ada_lib_aunit_tests.vpj"/>
+        <Project File="../ada_lib_test_lib.vpj"/>
+        <Project File="../alias_list.vpj"/>
+        <Project File="alr_environment.vpj"/>
+        <Project File="../applications.vpj"/>
+        <Project File="../aunit.vpj"/>
+        <Project File="camera.vpj"/>
+        <Project File="../camera_lib.vpj"/>
+        <Project File="../camera_test_driver.vpj"/>
+        <Project File="camera_test_lib.vpj"/>
+        <Project File="../camera_unit_test.vpj"/>
+        <Project File="../documentation.vpj"/>
+        <Project File="../driver.vpj"/>
+        <Project File="../Driver_Lib.vpj"/>
+        <Project File="../driver_unit_test.vpj"/>
+        <Project File="../gnat.vpj"/>
+        <Project File="gnatcoll.13.vpj"/>
+        <Project File="../gnatcoll.vpj"/>
+        <Project File="../Gnoga.vpj"/>
+        <Project File="../gnoga_ada_lib.vpj"/>
+        <Project File="../gnoga_examples.vpj"/>
+        <Project File="../gnoga_options.vpj"/>
+        <Project File="../gpr.vpj"/>
+        <Project File="../video_lib.vpj"/>
+    </Projects>
+</Workspace>

@@ -42,78 +42,7 @@ COMMON_OBJ=$(OUTDIR)/gnoga-gui-plugin-ace_editor.o \
 	$(OUTDIR)/gnoga-gui-plugin-message_boxes.o \
 	$(OUTDIR)/field-operations.o $(OUTDIR)/mine_detector.o \
 	$(OUTDIR)/user_if.o $(OUTDIR)/password_gen-program.o \
-	$(OUTDIR)/password_gen-ui.o $(OUTDIR)/compile_all.o \
-	$(OUTDIR)/pragmarc-ansi_tty_control.o $(OUTDIR)/pragmarc-b_strings.o \
-	$(OUTDIR)/pragmarc-binary_searcher.o \
-	$(OUTDIR)/pragmarc-binary_semaphore_handler.o \
-	$(OUTDIR)/pragmarc-cards-decks-general.o \
-	$(OUTDIR)/pragmarc-cards-decks-us.o $(OUTDIR)/pragmarc-cards-us.o \
-	$(OUTDIR)/pragmarc-concurrent_pipeline.o \
-	$(OUTDIR)/pragmarc-conversions-vectors.o \
-	$(OUTDIR)/pragmarc-data_structures-bags-unbounded-protection.o \
-	$(OUTDIR)/pragmarc-data_structures-bags-unbounded-unprotected.o \
-	$(OUTDIR)/pragmarc-data_structures-lists-bounded-protection.o \
-	$(OUTDIR)/pragmarc-data_structures-lists-unbounded-protection.o \
-	$(OUTDIR)/pragmarc-data_structures-queues-bounded-protection-non_blocking.o \
-	$(OUTDIR)/pragmarc-data_structures-queues-bounded-unprotected.o \
-	$(OUTDIR)/pragmarc-data_structures-queues-unbounded-protection-non_blocking.o \
-	$(OUTDIR)/pragmarc-data_structures-queues-unbounded-unprotected.o \
-	$(OUTDIR)/pragmarc-data_structures-sets-discrete.o \
-	$(OUTDIR)/pragmarc-data_structures-skip_lists-unbounded.o \
-	$(OUTDIR)/pragmarc-data_structures-stacks-unbounded-protection.o \
-	$(OUTDIR)/pragmarc-data_structures-stacks-unbounded-unprotected.o \
-	$(OUTDIR)/pragmarc-date_handler.o \
-	$(OUTDIR)/pragmarc-encryption-bifid.o \
-	$(OUTDIR)/pragmarc-encryption-simple_xor.o \
-	$(OUTDIR)/pragmarc-encryption-threefish-block_1024.o \
-	$(OUTDIR)/pragmarc-encryption-threefish-block_256.o \
-	$(OUTDIR)/pragmarc-encryption-threefish-block_512.o \
-	$(OUTDIR)/pragmarc-encryption-threefish.o \
-	$(OUTDIR)/pragmarc-encryption-trifid.o \
-	$(OUTDIR)/pragmarc-genetic_algorithm.o $(OUTDIR)/pragmarc-hash.o \
-	$(OUTDIR)/pragmarc-hash_fast_variable_length.o \
-	$(OUTDIR)/pragmarc-images.o $(OUTDIR)/pragmarc-job_pools.o \
-	$(OUTDIR)/pragmarc-least_squares_fitting.o \
-	$(OUTDIR)/pragmarc-line_fields.o \
-	$(OUTDIR)/pragmarc-luhn_generation.o \
-	$(OUTDIR)/pragmarc-matching-character_regular_expression.o \
-	$(OUTDIR)/pragmarc-matching-quick_string.o \
-	$(OUTDIR)/pragmarc-matching-regular_expression.o \
-	$(OUTDIR)/pragmarc-math.o $(OUTDIR)/pragmarc-menu_handler.o \
-	$(OUTDIR)/pragmarc-mixed_case.o $(OUTDIR)/pragmarc-permutations.o \
-	$(OUTDIR)/pragmarc-persistent_skip_list_unbounded.o \
-	$(OUTDIR)/pragmarc-postfix_calculator.o \
-	$(OUTDIR)/pragmarc-protected_option.o \
-	$(OUTDIR)/pragmarc-randomness-combined.o \
-	$(OUTDIR)/pragmarc-randomness-isaac.o \
-	$(OUTDIR)/pragmarc-randomness-kiss.o \
-	$(OUTDIR)/pragmarc-randomness-real_ranges.o \
-	$(OUTDIR)/pragmarc-randomness-threefry.o \
-	$(OUTDIR)/pragmarc-randomness-u32_ranges.o \
-	$(OUTDIR)/pragmarc-randomness-universal.o \
-	$(OUTDIR)/pragmarc-rational_postfix_calculator.o \
-	$(OUTDIR)/pragmarc-rem_nn_wrapper.o \
-	$(OUTDIR)/pragmarc-safety-pointers.o \
-	$(OUTDIR)/pragmarc-safety-semaphores.o \
-	$(OUTDIR)/pragmarc-safety-suspension_objects.o \
-	$(OUTDIR)/pragmarc-skein-block_1024.o \
-	$(OUTDIR)/pragmarc-skein-block_256.o \
-	$(OUTDIR)/pragmarc-skein-block_512.o $(OUTDIR)/pragmarc-skein.o \
-	$(OUTDIR)/pragmarc-sorting-heap.o \
-	$(OUTDIR)/pragmarc-sorting-insertion.o \
-	$(OUTDIR)/pragmarc-sorting-quick.o \
-	$(OUTDIR)/pragmarc-sorting-radix.o \
-	$(OUTDIR)/pragmarc-task_communication-forwarders.o \
-	$(OUTDIR)/pragmarc-task_communication-monitors.o \
-	$(OUTDIR)/pragmarc-task_communication-transporters.o \
-	$(OUTDIR)/pragmarc-text_io.o $(OUTDIR)/pragmarc-three_way.o \
-	$(OUTDIR)/pragmarc-title_comparisons.o \
-	$(OUTDIR)/pragmarc-ubi-block_1024.o \
-	$(OUTDIR)/pragmarc-ubi-block_256.o \
-	$(OUTDIR)/pragmarc-ubi-block_512.o \
-	$(OUTDIR)/pragmarc-unbounded_numbers-integers.o \
-	$(OUTDIR)/pragmarc-unbounded_numbers-rationals.o \
-	$(OUTDIR)/pragmarc-word_input.o $(OUTDIR)/random_int-program.o \
+	$(OUTDIR)/password_gen-ui.o $(OUTDIR)/random_int-program.o \
 	$(OUTDIR)/random_int-ui.o $(OUTDIR)/generic_blackboard.o \
 	$(OUTDIR)/gnat-sockets-server.o $(OUTDIR)/generic_blackboard.o \
 	$(OUTDIR)/gnat-sockets-server.o $(OUTDIR)/generic_blackboard.o \
@@ -2036,7 +1965,6 @@ COMMON_OBJ=$(OUTDIR)/gnoga-gui-plugin-ace_editor.o \
 	$(OUTDIR)/zbtest-commands.o $(OUTDIR)/zbtest-functions.o \
 	$(OUTDIR)/zbtest-input_parser.o $(OUTDIR)/zbtest-main.o \
 	$(OUTDIR)/zbtest-states.o $(OUTDIR)/zbtest-xml_data.o \
-	$(OUTDIR)/gnoga-ada_lib-debug.o $(OUTDIR)/gnoga-ada_lib.o \
 	$(OUTDIR)/gnoga-application-gtk_window.o \
 	$(OUTDIR)/gnoga-application-multi_connect.o \
 	$(OUTDIR)/gnoga-application-singleton.o \
@@ -2101,78 +2029,7 @@ ALL_OBJ=$(OUTDIR)/gnoga-gui-plugin-ace_editor.o \
 	$(OUTDIR)/gnoga-gui-plugin-message_boxes.o \
 	$(OUTDIR)/field-operations.o $(OUTDIR)/mine_detector.o \
 	$(OUTDIR)/user_if.o $(OUTDIR)/password_gen-program.o \
-	$(OUTDIR)/password_gen-ui.o $(OUTDIR)/compile_all.o \
-	$(OUTDIR)/pragmarc-ansi_tty_control.o $(OUTDIR)/pragmarc-b_strings.o \
-	$(OUTDIR)/pragmarc-binary_searcher.o \
-	$(OUTDIR)/pragmarc-binary_semaphore_handler.o \
-	$(OUTDIR)/pragmarc-cards-decks-general.o \
-	$(OUTDIR)/pragmarc-cards-decks-us.o $(OUTDIR)/pragmarc-cards-us.o \
-	$(OUTDIR)/pragmarc-concurrent_pipeline.o \
-	$(OUTDIR)/pragmarc-conversions-vectors.o \
-	$(OUTDIR)/pragmarc-data_structures-bags-unbounded-protection.o \
-	$(OUTDIR)/pragmarc-data_structures-bags-unbounded-unprotected.o \
-	$(OUTDIR)/pragmarc-data_structures-lists-bounded-protection.o \
-	$(OUTDIR)/pragmarc-data_structures-lists-unbounded-protection.o \
-	$(OUTDIR)/pragmarc-data_structures-queues-bounded-protection-non_blocking.o \
-	$(OUTDIR)/pragmarc-data_structures-queues-bounded-unprotected.o \
-	$(OUTDIR)/pragmarc-data_structures-queues-unbounded-protection-non_blocking.o \
-	$(OUTDIR)/pragmarc-data_structures-queues-unbounded-unprotected.o \
-	$(OUTDIR)/pragmarc-data_structures-sets-discrete.o \
-	$(OUTDIR)/pragmarc-data_structures-skip_lists-unbounded.o \
-	$(OUTDIR)/pragmarc-data_structures-stacks-unbounded-protection.o \
-	$(OUTDIR)/pragmarc-data_structures-stacks-unbounded-unprotected.o \
-	$(OUTDIR)/pragmarc-date_handler.o \
-	$(OUTDIR)/pragmarc-encryption-bifid.o \
-	$(OUTDIR)/pragmarc-encryption-simple_xor.o \
-	$(OUTDIR)/pragmarc-encryption-threefish-block_1024.o \
-	$(OUTDIR)/pragmarc-encryption-threefish-block_256.o \
-	$(OUTDIR)/pragmarc-encryption-threefish-block_512.o \
-	$(OUTDIR)/pragmarc-encryption-threefish.o \
-	$(OUTDIR)/pragmarc-encryption-trifid.o \
-	$(OUTDIR)/pragmarc-genetic_algorithm.o $(OUTDIR)/pragmarc-hash.o \
-	$(OUTDIR)/pragmarc-hash_fast_variable_length.o \
-	$(OUTDIR)/pragmarc-images.o $(OUTDIR)/pragmarc-job_pools.o \
-	$(OUTDIR)/pragmarc-least_squares_fitting.o \
-	$(OUTDIR)/pragmarc-line_fields.o \
-	$(OUTDIR)/pragmarc-luhn_generation.o \
-	$(OUTDIR)/pragmarc-matching-character_regular_expression.o \
-	$(OUTDIR)/pragmarc-matching-quick_string.o \
-	$(OUTDIR)/pragmarc-matching-regular_expression.o \
-	$(OUTDIR)/pragmarc-math.o $(OUTDIR)/pragmarc-menu_handler.o \
-	$(OUTDIR)/pragmarc-mixed_case.o $(OUTDIR)/pragmarc-permutations.o \
-	$(OUTDIR)/pragmarc-persistent_skip_list_unbounded.o \
-	$(OUTDIR)/pragmarc-postfix_calculator.o \
-	$(OUTDIR)/pragmarc-protected_option.o \
-	$(OUTDIR)/pragmarc-randomness-combined.o \
-	$(OUTDIR)/pragmarc-randomness-isaac.o \
-	$(OUTDIR)/pragmarc-randomness-kiss.o \
-	$(OUTDIR)/pragmarc-randomness-real_ranges.o \
-	$(OUTDIR)/pragmarc-randomness-threefry.o \
-	$(OUTDIR)/pragmarc-randomness-u32_ranges.o \
-	$(OUTDIR)/pragmarc-randomness-universal.o \
-	$(OUTDIR)/pragmarc-rational_postfix_calculator.o \
-	$(OUTDIR)/pragmarc-rem_nn_wrapper.o \
-	$(OUTDIR)/pragmarc-safety-pointers.o \
-	$(OUTDIR)/pragmarc-safety-semaphores.o \
-	$(OUTDIR)/pragmarc-safety-suspension_objects.o \
-	$(OUTDIR)/pragmarc-skein-block_1024.o \
-	$(OUTDIR)/pragmarc-skein-block_256.o \
-	$(OUTDIR)/pragmarc-skein-block_512.o $(OUTDIR)/pragmarc-skein.o \
-	$(OUTDIR)/pragmarc-sorting-heap.o \
-	$(OUTDIR)/pragmarc-sorting-insertion.o \
-	$(OUTDIR)/pragmarc-sorting-quick.o \
-	$(OUTDIR)/pragmarc-sorting-radix.o \
-	$(OUTDIR)/pragmarc-task_communication-forwarders.o \
-	$(OUTDIR)/pragmarc-task_communication-monitors.o \
-	$(OUTDIR)/pragmarc-task_communication-transporters.o \
-	$(OUTDIR)/pragmarc-text_io.o $(OUTDIR)/pragmarc-three_way.o \
-	$(OUTDIR)/pragmarc-title_comparisons.o \
-	$(OUTDIR)/pragmarc-ubi-block_1024.o \
-	$(OUTDIR)/pragmarc-ubi-block_256.o \
-	$(OUTDIR)/pragmarc-ubi-block_512.o \
-	$(OUTDIR)/pragmarc-unbounded_numbers-integers.o \
-	$(OUTDIR)/pragmarc-unbounded_numbers-rationals.o \
-	$(OUTDIR)/pragmarc-word_input.o $(OUTDIR)/random_int-program.o \
+	$(OUTDIR)/password_gen-ui.o $(OUTDIR)/random_int-program.o \
 	$(OUTDIR)/random_int-ui.o $(OUTDIR)/generic_blackboard.o \
 	$(OUTDIR)/gnat-sockets-server.o $(OUTDIR)/generic_blackboard.o \
 	$(OUTDIR)/gnat-sockets-server.o $(OUTDIR)/generic_blackboard.o \
@@ -4095,7 +3952,6 @@ ALL_OBJ=$(OUTDIR)/gnoga-gui-plugin-ace_editor.o \
 	$(OUTDIR)/zbtest-commands.o $(OUTDIR)/zbtest-functions.o \
 	$(OUTDIR)/zbtest-input_parser.o $(OUTDIR)/zbtest-main.o \
 	$(OUTDIR)/zbtest-states.o $(OUTDIR)/zbtest-xml_data.o \
-	$(OUTDIR)/gnoga-ada_lib-debug.o $(OUTDIR)/gnoga-ada_lib.o \
 	$(OUTDIR)/gnoga-application-gtk_window.o \
 	$(OUTDIR)/gnoga-application-multi_connect.o \
 	$(OUTDIR)/gnoga-application-singleton.o \
@@ -4423,9 +4279,6 @@ $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/zanyblue/src/test/unittest/te
 $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/zanyblue/src/test/unittest/parameters/%.ada
 	$(COMPILE_ADA)
 
-$(OUTDIR)/%.o : ../../vendor/github.com/gnoga/ada_lib/%.ada
-	$(COMPILE_ADA)
-
 $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/demo/tic_tac_toe/%.ada
 	$(COMPILE_ADA)
 
@@ -4502,9 +4355,6 @@ $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/zanyblue/src/test/unittest/te
 	$(COMPILE_ADA)
 
 $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/zanyblue/src/test/unittest/text/buffer/%.ada
-	$(COMPILE_ADA)
-
-$(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/PragmARC/%.ada
 	$(COMPILE_ADA)
 
 $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/zanyblue/src/test/unittest/text/characters/%.ada
@@ -5005,9 +4855,6 @@ $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/zanyblue/src/test/unittest/te
 $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/zanyblue/src/test/unittest/parameters/%.adb
 	$(COMPILE_ADB)
 
-$(OUTDIR)/%.o : ../../vendor/github.com/gnoga/ada_lib/%.adb
-	$(COMPILE_ADB)
-
 $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/demo/tic_tac_toe/%.adb
 	$(COMPILE_ADB)
 
@@ -5084,9 +4931,6 @@ $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/zanyblue/src/test/unittest/te
 	$(COMPILE_ADB)
 
 $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/zanyblue/src/test/unittest/text/buffer/%.adb
-	$(COMPILE_ADB)
-
-$(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/PragmARC/%.adb
 	$(COMPILE_ADB)
 
 $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/zanyblue/src/test/unittest/text/characters/%.adb
@@ -5361,78 +5205,7 @@ COMMON_OBJ=$(OUTDIR)/gnoga-gui-plugin-ace_editor.o \
 	$(OUTDIR)/gnoga-gui-plugin-message_boxes.o \
 	$(OUTDIR)/field-operations.o $(OUTDIR)/mine_detector.o \
 	$(OUTDIR)/user_if.o $(OUTDIR)/password_gen-program.o \
-	$(OUTDIR)/password_gen-ui.o $(OUTDIR)/compile_all.o \
-	$(OUTDIR)/pragmarc-ansi_tty_control.o $(OUTDIR)/pragmarc-b_strings.o \
-	$(OUTDIR)/pragmarc-binary_searcher.o \
-	$(OUTDIR)/pragmarc-binary_semaphore_handler.o \
-	$(OUTDIR)/pragmarc-cards-decks-general.o \
-	$(OUTDIR)/pragmarc-cards-decks-us.o $(OUTDIR)/pragmarc-cards-us.o \
-	$(OUTDIR)/pragmarc-concurrent_pipeline.o \
-	$(OUTDIR)/pragmarc-conversions-vectors.o \
-	$(OUTDIR)/pragmarc-data_structures-bags-unbounded-protection.o \
-	$(OUTDIR)/pragmarc-data_structures-bags-unbounded-unprotected.o \
-	$(OUTDIR)/pragmarc-data_structures-lists-bounded-protection.o \
-	$(OUTDIR)/pragmarc-data_structures-lists-unbounded-protection.o \
-	$(OUTDIR)/pragmarc-data_structures-queues-bounded-protection-non_blocking.o \
-	$(OUTDIR)/pragmarc-data_structures-queues-bounded-unprotected.o \
-	$(OUTDIR)/pragmarc-data_structures-queues-unbounded-protection-non_blocking.o \
-	$(OUTDIR)/pragmarc-data_structures-queues-unbounded-unprotected.o \
-	$(OUTDIR)/pragmarc-data_structures-sets-discrete.o \
-	$(OUTDIR)/pragmarc-data_structures-skip_lists-unbounded.o \
-	$(OUTDIR)/pragmarc-data_structures-stacks-unbounded-protection.o \
-	$(OUTDIR)/pragmarc-data_structures-stacks-unbounded-unprotected.o \
-	$(OUTDIR)/pragmarc-date_handler.o \
-	$(OUTDIR)/pragmarc-encryption-bifid.o \
-	$(OUTDIR)/pragmarc-encryption-simple_xor.o \
-	$(OUTDIR)/pragmarc-encryption-threefish-block_1024.o \
-	$(OUTDIR)/pragmarc-encryption-threefish-block_256.o \
-	$(OUTDIR)/pragmarc-encryption-threefish-block_512.o \
-	$(OUTDIR)/pragmarc-encryption-threefish.o \
-	$(OUTDIR)/pragmarc-encryption-trifid.o \
-	$(OUTDIR)/pragmarc-genetic_algorithm.o $(OUTDIR)/pragmarc-hash.o \
-	$(OUTDIR)/pragmarc-hash_fast_variable_length.o \
-	$(OUTDIR)/pragmarc-images.o $(OUTDIR)/pragmarc-job_pools.o \
-	$(OUTDIR)/pragmarc-least_squares_fitting.o \
-	$(OUTDIR)/pragmarc-line_fields.o \
-	$(OUTDIR)/pragmarc-luhn_generation.o \
-	$(OUTDIR)/pragmarc-matching-character_regular_expression.o \
-	$(OUTDIR)/pragmarc-matching-quick_string.o \
-	$(OUTDIR)/pragmarc-matching-regular_expression.o \
-	$(OUTDIR)/pragmarc-math.o $(OUTDIR)/pragmarc-menu_handler.o \
-	$(OUTDIR)/pragmarc-mixed_case.o $(OUTDIR)/pragmarc-permutations.o \
-	$(OUTDIR)/pragmarc-persistent_skip_list_unbounded.o \
-	$(OUTDIR)/pragmarc-postfix_calculator.o \
-	$(OUTDIR)/pragmarc-protected_option.o \
-	$(OUTDIR)/pragmarc-randomness-combined.o \
-	$(OUTDIR)/pragmarc-randomness-isaac.o \
-	$(OUTDIR)/pragmarc-randomness-kiss.o \
-	$(OUTDIR)/pragmarc-randomness-real_ranges.o \
-	$(OUTDIR)/pragmarc-randomness-threefry.o \
-	$(OUTDIR)/pragmarc-randomness-u32_ranges.o \
-	$(OUTDIR)/pragmarc-randomness-universal.o \
-	$(OUTDIR)/pragmarc-rational_postfix_calculator.o \
-	$(OUTDIR)/pragmarc-rem_nn_wrapper.o \
-	$(OUTDIR)/pragmarc-safety-pointers.o \
-	$(OUTDIR)/pragmarc-safety-semaphores.o \
-	$(OUTDIR)/pragmarc-safety-suspension_objects.o \
-	$(OUTDIR)/pragmarc-skein-block_1024.o \
-	$(OUTDIR)/pragmarc-skein-block_256.o \
-	$(OUTDIR)/pragmarc-skein-block_512.o $(OUTDIR)/pragmarc-skein.o \
-	$(OUTDIR)/pragmarc-sorting-heap.o \
-	$(OUTDIR)/pragmarc-sorting-insertion.o \
-	$(OUTDIR)/pragmarc-sorting-quick.o \
-	$(OUTDIR)/pragmarc-sorting-radix.o \
-	$(OUTDIR)/pragmarc-task_communication-forwarders.o \
-	$(OUTDIR)/pragmarc-task_communication-monitors.o \
-	$(OUTDIR)/pragmarc-task_communication-transporters.o \
-	$(OUTDIR)/pragmarc-text_io.o $(OUTDIR)/pragmarc-three_way.o \
-	$(OUTDIR)/pragmarc-title_comparisons.o \
-	$(OUTDIR)/pragmarc-ubi-block_1024.o \
-	$(OUTDIR)/pragmarc-ubi-block_256.o \
-	$(OUTDIR)/pragmarc-ubi-block_512.o \
-	$(OUTDIR)/pragmarc-unbounded_numbers-integers.o \
-	$(OUTDIR)/pragmarc-unbounded_numbers-rationals.o \
-	$(OUTDIR)/pragmarc-word_input.o $(OUTDIR)/random_int-program.o \
+	$(OUTDIR)/password_gen-ui.o $(OUTDIR)/random_int-program.o \
 	$(OUTDIR)/random_int-ui.o $(OUTDIR)/generic_blackboard.o \
 	$(OUTDIR)/gnat-sockets-server.o $(OUTDIR)/generic_blackboard.o \
 	$(OUTDIR)/gnat-sockets-server.o $(OUTDIR)/generic_blackboard.o \
@@ -7355,7 +7128,6 @@ COMMON_OBJ=$(OUTDIR)/gnoga-gui-plugin-ace_editor.o \
 	$(OUTDIR)/zbtest-commands.o $(OUTDIR)/zbtest-functions.o \
 	$(OUTDIR)/zbtest-input_parser.o $(OUTDIR)/zbtest-main.o \
 	$(OUTDIR)/zbtest-states.o $(OUTDIR)/zbtest-xml_data.o \
-	$(OUTDIR)/gnoga-ada_lib-debug.o $(OUTDIR)/gnoga-ada_lib.o \
 	$(OUTDIR)/gnoga-application-gtk_window.o \
 	$(OUTDIR)/gnoga-application-multi_connect.o \
 	$(OUTDIR)/gnoga-application-singleton.o \
@@ -7420,78 +7192,7 @@ ALL_OBJ=$(OUTDIR)/gnoga-gui-plugin-ace_editor.o \
 	$(OUTDIR)/gnoga-gui-plugin-message_boxes.o \
 	$(OUTDIR)/field-operations.o $(OUTDIR)/mine_detector.o \
 	$(OUTDIR)/user_if.o $(OUTDIR)/password_gen-program.o \
-	$(OUTDIR)/password_gen-ui.o $(OUTDIR)/compile_all.o \
-	$(OUTDIR)/pragmarc-ansi_tty_control.o $(OUTDIR)/pragmarc-b_strings.o \
-	$(OUTDIR)/pragmarc-binary_searcher.o \
-	$(OUTDIR)/pragmarc-binary_semaphore_handler.o \
-	$(OUTDIR)/pragmarc-cards-decks-general.o \
-	$(OUTDIR)/pragmarc-cards-decks-us.o $(OUTDIR)/pragmarc-cards-us.o \
-	$(OUTDIR)/pragmarc-concurrent_pipeline.o \
-	$(OUTDIR)/pragmarc-conversions-vectors.o \
-	$(OUTDIR)/pragmarc-data_structures-bags-unbounded-protection.o \
-	$(OUTDIR)/pragmarc-data_structures-bags-unbounded-unprotected.o \
-	$(OUTDIR)/pragmarc-data_structures-lists-bounded-protection.o \
-	$(OUTDIR)/pragmarc-data_structures-lists-unbounded-protection.o \
-	$(OUTDIR)/pragmarc-data_structures-queues-bounded-protection-non_blocking.o \
-	$(OUTDIR)/pragmarc-data_structures-queues-bounded-unprotected.o \
-	$(OUTDIR)/pragmarc-data_structures-queues-unbounded-protection-non_blocking.o \
-	$(OUTDIR)/pragmarc-data_structures-queues-unbounded-unprotected.o \
-	$(OUTDIR)/pragmarc-data_structures-sets-discrete.o \
-	$(OUTDIR)/pragmarc-data_structures-skip_lists-unbounded.o \
-	$(OUTDIR)/pragmarc-data_structures-stacks-unbounded-protection.o \
-	$(OUTDIR)/pragmarc-data_structures-stacks-unbounded-unprotected.o \
-	$(OUTDIR)/pragmarc-date_handler.o \
-	$(OUTDIR)/pragmarc-encryption-bifid.o \
-	$(OUTDIR)/pragmarc-encryption-simple_xor.o \
-	$(OUTDIR)/pragmarc-encryption-threefish-block_1024.o \
-	$(OUTDIR)/pragmarc-encryption-threefish-block_256.o \
-	$(OUTDIR)/pragmarc-encryption-threefish-block_512.o \
-	$(OUTDIR)/pragmarc-encryption-threefish.o \
-	$(OUTDIR)/pragmarc-encryption-trifid.o \
-	$(OUTDIR)/pragmarc-genetic_algorithm.o $(OUTDIR)/pragmarc-hash.o \
-	$(OUTDIR)/pragmarc-hash_fast_variable_length.o \
-	$(OUTDIR)/pragmarc-images.o $(OUTDIR)/pragmarc-job_pools.o \
-	$(OUTDIR)/pragmarc-least_squares_fitting.o \
-	$(OUTDIR)/pragmarc-line_fields.o \
-	$(OUTDIR)/pragmarc-luhn_generation.o \
-	$(OUTDIR)/pragmarc-matching-character_regular_expression.o \
-	$(OUTDIR)/pragmarc-matching-quick_string.o \
-	$(OUTDIR)/pragmarc-matching-regular_expression.o \
-	$(OUTDIR)/pragmarc-math.o $(OUTDIR)/pragmarc-menu_handler.o \
-	$(OUTDIR)/pragmarc-mixed_case.o $(OUTDIR)/pragmarc-permutations.o \
-	$(OUTDIR)/pragmarc-persistent_skip_list_unbounded.o \
-	$(OUTDIR)/pragmarc-postfix_calculator.o \
-	$(OUTDIR)/pragmarc-protected_option.o \
-	$(OUTDIR)/pragmarc-randomness-combined.o \
-	$(OUTDIR)/pragmarc-randomness-isaac.o \
-	$(OUTDIR)/pragmarc-randomness-kiss.o \
-	$(OUTDIR)/pragmarc-randomness-real_ranges.o \
-	$(OUTDIR)/pragmarc-randomness-threefry.o \
-	$(OUTDIR)/pragmarc-randomness-u32_ranges.o \
-	$(OUTDIR)/pragmarc-randomness-universal.o \
-	$(OUTDIR)/pragmarc-rational_postfix_calculator.o \
-	$(OUTDIR)/pragmarc-rem_nn_wrapper.o \
-	$(OUTDIR)/pragmarc-safety-pointers.o \
-	$(OUTDIR)/pragmarc-safety-semaphores.o \
-	$(OUTDIR)/pragmarc-safety-suspension_objects.o \
-	$(OUTDIR)/pragmarc-skein-block_1024.o \
-	$(OUTDIR)/pragmarc-skein-block_256.o \
-	$(OUTDIR)/pragmarc-skein-block_512.o $(OUTDIR)/pragmarc-skein.o \
-	$(OUTDIR)/pragmarc-sorting-heap.o \
-	$(OUTDIR)/pragmarc-sorting-insertion.o \
-	$(OUTDIR)/pragmarc-sorting-quick.o \
-	$(OUTDIR)/pragmarc-sorting-radix.o \
-	$(OUTDIR)/pragmarc-task_communication-forwarders.o \
-	$(OUTDIR)/pragmarc-task_communication-monitors.o \
-	$(OUTDIR)/pragmarc-task_communication-transporters.o \
-	$(OUTDIR)/pragmarc-text_io.o $(OUTDIR)/pragmarc-three_way.o \
-	$(OUTDIR)/pragmarc-title_comparisons.o \
-	$(OUTDIR)/pragmarc-ubi-block_1024.o \
-	$(OUTDIR)/pragmarc-ubi-block_256.o \
-	$(OUTDIR)/pragmarc-ubi-block_512.o \
-	$(OUTDIR)/pragmarc-unbounded_numbers-integers.o \
-	$(OUTDIR)/pragmarc-unbounded_numbers-rationals.o \
-	$(OUTDIR)/pragmarc-word_input.o $(OUTDIR)/random_int-program.o \
+	$(OUTDIR)/password_gen-ui.o $(OUTDIR)/random_int-program.o \
 	$(OUTDIR)/random_int-ui.o $(OUTDIR)/generic_blackboard.o \
 	$(OUTDIR)/gnat-sockets-server.o $(OUTDIR)/generic_blackboard.o \
 	$(OUTDIR)/gnat-sockets-server.o $(OUTDIR)/generic_blackboard.o \
@@ -9414,7 +9115,6 @@ ALL_OBJ=$(OUTDIR)/gnoga-gui-plugin-ace_editor.o \
 	$(OUTDIR)/zbtest-commands.o $(OUTDIR)/zbtest-functions.o \
 	$(OUTDIR)/zbtest-input_parser.o $(OUTDIR)/zbtest-main.o \
 	$(OUTDIR)/zbtest-states.o $(OUTDIR)/zbtest-xml_data.o \
-	$(OUTDIR)/gnoga-ada_lib-debug.o $(OUTDIR)/gnoga-ada_lib.o \
 	$(OUTDIR)/gnoga-application-gtk_window.o \
 	$(OUTDIR)/gnoga-application-multi_connect.o \
 	$(OUTDIR)/gnoga-application-singleton.o \
@@ -9742,9 +9442,6 @@ $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/zanyblue/src/test/unittest/te
 $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/zanyblue/src/test/unittest/parameters/%.ada
 	$(COMPILE_ADA)
 
-$(OUTDIR)/%.o : ../../vendor/github.com/gnoga/ada_lib/%.ada
-	$(COMPILE_ADA)
-
 $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/demo/tic_tac_toe/%.ada
 	$(COMPILE_ADA)
 
@@ -9821,9 +9518,6 @@ $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/zanyblue/src/test/unittest/te
 	$(COMPILE_ADA)
 
 $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/zanyblue/src/test/unittest/text/buffer/%.ada
-	$(COMPILE_ADA)
-
-$(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/PragmARC/%.ada
 	$(COMPILE_ADA)
 
 $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/zanyblue/src/test/unittest/text/characters/%.ada
@@ -10324,9 +10018,6 @@ $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/zanyblue/src/test/unittest/te
 $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/zanyblue/src/test/unittest/parameters/%.adb
 	$(COMPILE_ADB)
 
-$(OUTDIR)/%.o : ../../vendor/github.com/gnoga/ada_lib/%.adb
-	$(COMPILE_ADB)
-
 $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/demo/tic_tac_toe/%.adb
 	$(COMPILE_ADB)
 
@@ -10403,9 +10094,6 @@ $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/zanyblue/src/test/unittest/te
 	$(COMPILE_ADB)
 
 $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/zanyblue/src/test/unittest/text/buffer/%.adb
-	$(COMPILE_ADB)
-
-$(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/PragmARC/%.adb
 	$(COMPILE_ADB)
 
 $(OUTDIR)/%.o : ../../vendor/github.com/gnoga/deps/zanyblue/src/test/unittest/text/characters/%.adb

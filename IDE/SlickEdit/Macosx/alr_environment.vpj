@@ -1,0 +1,168 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+    WorkingDir="../../../"
+    DisableExeName="1"
+    Version="10.0"
+    VendorName="SlickEdit"
+    TemplateName="Ada - gprbuild">
+    <Files>
+        <Folder
+            Name="Source Files"
+            Filters="*.ada;*.adb;*.c;*.cpp"
+            GUID="{46261B96-6218-472D-9F5C-4D9C78643359}"></Folder>
+        <Folder
+            Name="Header Files"
+            Filters="*.h;*.ads"
+            GUID="{9B76E2CD-8DDB-461D-B294-9E367EA4C4FA}"></Folder>
+        <Folder
+            Name="Resource Files"
+            Filters="*.def;*.res"
+            GUID="{55D9AFB7-365C-4382-B4C1-4F124701BF9D}"/>
+        <Folder
+            Name="Other Files"
+            Filters="*.*"
+            GUID="{8AB93196-3F01-450E-9D88-83996189CE2D}"/>
+        <F
+            N="../../../src/*.ad?"
+            Recurse="0"
+            Excludes=""
+            L="1"/>
+        <F
+            N="../../../*.sh"
+            Recurse="0"
+            Excludes="*.a;*.o;*.ali"
+            L="1"/>
+        <F N="../../../.gitignore"/>
+        <F N="../../../.gitmodules"/>
+        <F N="../../../alire.toml"/>
+        <F N="../../../alr_environment.gpr"/>
+        <F N="../../../config/alr_environment_config.gpr"/>
+        <F N="../../../build.sh"/>
+        <F N="../../../ada_lib/build.sh"/>
+        <F N="../../../build_all.sh"/>
+        <F N="../../../check_in.sh"/>
+        <F N="../../../check_out.sh"/>
+        <F N="../../../default_config.gpr"/>
+        <F N="../../../global_build.sh"/>
+        <F N="../../../list-help_tests.txt"/>
+        <F N="../../../list-run_all_unit_tests.txt"/>
+        <F N="../../../remote_build.sh"/>
+        <F N="routines.sh"/>
+        <F N="../../../routines.sh"/>
+        <F N="../../../rsync.sh"/>
+        <F N="../../../run_all_apps.sh"/>
+    </Files>
+    <Config
+        Name="Debug"
+        Type="gnuc"
+        DebugCallbackName="gdb"
+        OutputFile="main%exe"
+        ObjectDir="obj"
+        CompilerConfigName="Latest Version">
+        <Menu>
+            <Target
+                Name="Build"
+                MenuCaption="&amp;Build"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw"
+                Verbose="1"
+                ClearProcessBuffer="1"
+                Beep="1">
+                <Exec CmdLine="./build.sh execute"/>
+            </Target>
+            <Target
+                Name="Build All"
+                MenuCaption="Build All"
+                RunFromDir="%rw"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveWorkspaceFiles">
+                <Exec CmdLine="./build.sh all"/>
+            </Target>
+            <Target
+                Name="Run All Help"
+                MenuCaption="Run All Help"
+                RunFromDir="%rw"
+                SaveOption="SaveAll"
+                CaptureOutputWith="ProcessBuffer"
+                ClearProcessBuffer="1">
+                <Exec CmdLine="./run_all_apps.sh help"/>
+            </Target>
+            <Target
+                Name="run all help tests"
+                MenuCaption="run all help tests"
+                RunFromDir="%rw"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveWorkspaceFiles">
+                <Exec CmdLine="./run_all_apps.sh test"/>
+            </Target>
+            <Target
+                Name="Rebuild"
+                MenuCaption="&amp;Rebuild"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine="gprbuild -d -f -p -P%rn.gpr "/>
+            </Target>
+            <Target
+                Name="Compile"
+                MenuCaption="&amp;Compile"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine="gprbuild -ws -c -f -u -p -P%rn.gpr %f"/>
+            </Target>
+            <Target
+                Name="Clean"
+                MenuCaption="C&amp;lean"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="/Users/wayne/Project/git/alr/alr_environment/"
+                ClearProcessBuffer="1">
+                <Exec CmdLine="./global_build.sh"/>
+            </Target>
+            <Target
+                Name="Pretty Print"
+                MenuCaption="&amp;Pretty Print"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine="gnat pretty -rnb -P%rn.gpr %f"/>
+            </Target>
+            <Target
+                Name="Debug"
+                MenuCaption="&amp;Debug"
+                BuildFirst="1"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveNone"
+                RunFromDir="%rw">
+                <Exec CmdLine='vsdebugio -prog "%o"'/>
+            </Target>
+            <Target
+                Name="Execute"
+                MenuCaption="E&amp;xecute"
+                Dialog="_gnuc_options_form Run/Debug"
+                BuildFirst="1"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine='"%o"'/>
+            </Target>
+            <Target
+                Name="dash"
+                MenuCaption="-"
+                Deletable="0">
+                <Exec/>
+            </Target>
+        </Menu>
+    </Config>
+    <List Name="RTE">
+    </List>
+</Project>

@@ -22,7 +22,36 @@
                 ClearProcessBuffer="1"
                 Verbose="1"
                 Beep="1">
-                <Exec CmdLine="./build.sh"/>
+                <Exec CmdLine="./build.sh execute"/>
+            </Target>
+            <Target
+                Name="Build All"
+                MenuCaption="Build All"
+                SaveOption="SaveAll"
+                ClearProcessBuffer="1"
+                CaptureOutputWith="ProcessBuffer"
+                RunFromDir="%rw">
+                <Exec CmdLine="./build.sh all"/>
+            </Target>
+            <Target
+                Name="Help_Test"
+                MenuCaption="Help_Test"
+                RunFromDir="%rw"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveAll">
+                <Exec CmdLine="./build.sh help_test"/>
+            </Target>
+            <Target
+                Name="Rebuild"
+                MenuCaption="&amp;Rebuild"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                ClearProcessBuffer="1"
+                Beep="1"
+                Verbose="1"
+                RunFromDir="%rw">
+                <Exec CmdLine="./build.sh both"/>
             </Target>
             <Target
                 Name="Compile"
@@ -45,18 +74,6 @@
                 SaveOption="SaveCurrent"
                 RunFromDir="%rw">
                 <Exec CmdLine='g++ %xup -g -o "%o" %f %libs'/>
-            </Target>
-            <Target
-                Name="Rebuild"
-                MenuCaption="&amp;Rebuild"
-                CaptureOutputWith="ProcessBuffer"
-                Deletable="0"
-                SaveOption="SaveWorkspaceFiles"
-                ClearProcessBuffer="1"
-                Beep="1"
-                RunFromDir="%rw"
-                Verbose="1">
-                <Exec CmdLine="./build.sh quick_build"/>
             </Target>
             <Target
                 Name="Debug"
@@ -150,6 +167,7 @@
             <F N="../../build_all.sh"/>
             <F N="../../ada_lib/ada_lib_tests/loop.sh"/>
             <F N="../../remote_build.sh"/>
+            <F N="../../ada_lib/ada_lib_tests/run.sh"/>
         </Folder>
         <Folder
             Name="Resource Files"
@@ -174,17 +192,16 @@
                 Excludes=""/>
             <F N="../../ada_lib/ada_lib_tests/.gitignore"/>
             <F N="../../ada_lib/ada_lib_tests/ada_lib_tests.gpr"/>
+            <F N="../../ada_lib/ada_lib_tests/config/ada_lib_tests_config.gpr"/>
             <F N="../../ada_lib/ada_lib_tests/alire.toml"/>
-            <F N="../../ada_lib/ada_lib_tests/build.txt"/>
-            <F N="../../build_all.txt"/>
             <F N="../../ada_lib/ada_lib_tests/file_copy_source"/>
             <F N="../../ada_lib/ada_lib_tests/help"/>
-            <F N="../../ada_lib/ada_lib_tests/list-ada_lib-all.txt"/>
-            <F N="../../ada_lib/ada_lib_tests/list-ada_lib.txt"/>
+            <F N="../../ada_lib/ada_lib_tests/list-test_ada_lib.txt"/>
+            <F N="../../ada_lib/ada_lib_tests/log.txt"/>
             <F N="../../ada_lib/ada_lib_tests/notes.txt"/>
-            <F N="../../ada_lib/ada_lib_tests/remote_build.txt"/>
+            <F N="../../ada_lib/ada_lib_tests/project_paths.cfg"/>
             <F N="../../ada_lib/ada_lib_tests/suites"/>
-            <F N="../../ada_lib/ada_lib_tests/test-macosx"/>
+            <F N="../../ada_lib/ada_lib_tests/TRACE.txt"/>
         </Folder>
     </Files>
     <List Name="RTE">

@@ -26,7 +26,16 @@
                 ClearProcessBuffer="1"
                 Beep="1"
                 Verbose="1">
-                <Exec CmdLine="./build.sh"/>
+                <Exec CmdLine="./build.sh execute"/>
+            </Target>
+            <Target
+                Name="build all"
+                MenuCaption="build all"
+                RunFromDir="%rw"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveAll"
+                ClearProcessBuffer="1">
+                <Exec CmdLine="./build.sh all"/>
             </Target>
             <Target
                 Name="Install"
@@ -152,7 +161,8 @@
                 L="1"/>
             <F N="../../ada_lib/.gitignore"/>
             <F N="../../ada_lib/ada_lib.gpr"/>
-            <F N="../../ada_lib/alire.toml"/>
+            <F N="../../ada_lib/config/ada_lib_config.gpr"/>
+            <F N="../../ada_lib/alire.toml.source"/>
         </Folder>
     </Files>
     <List Name="RTE">

@@ -28,6 +28,7 @@
             L="1"/>
         <F N="../../ada_lib/ada_lib_gnoga/.gitignore"/>
         <F N="../../ada_lib/ada_lib_gnoga/ada_lib_gnoga.gpr"/>
+        <F N="../../ada_lib/ada_lib_gnoga/config/ada_lib_gnoga_config.gpr"/>
         <F N="../../ada_lib/ada_lib_gnoga/alire.toml"/>
         <F N="../../ada_lib/ada_lib_gnoga/build.sh"/>
     </Files>
@@ -48,7 +49,7 @@
                 ClearProcessBuffer="1"
                 Verbose="1"
                 Beep="1">
-                <Exec CmdLine="./build.sh"/>
+                <Exec CmdLine="./build.sh execute"/>
             </Target>
             <Target
                 Name="Compile"
@@ -145,7 +146,7 @@
                 ClearProcessBuffer="1"
                 Verbose="1"
                 Beep="1">
-                <Exec CmdLine="./build.sh"/>
+                <Exec CmdLine="./build.sh execute"/>
             </Target>
             <Target
                 Name="Compile"

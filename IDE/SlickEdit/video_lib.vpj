@@ -1,6 +1,6 @@
 <!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
 <Project
-    WorkingDir="../../video/lib"
+    WorkingDir="../../applications/video/lib/"
     Version="10.0"
     VendorName="SlickEdit"
     TemplateName="Ada - GNU Ada Compiler"
@@ -26,14 +26,13 @@
             Filters="*.*"
             GUID="{4D724095-9BAA-49C8-AD32-DF363D2F179D}"/>
         <F
-            N="../../video/lib/src/*.ad?"
+            N="../../applications/video/lib/src/*.ad?"
             Recurse="0"
             Excludes=""
             L="1"/>
-        <F N="../../video/lib/.gitignore"/>
-        <F N="../../video/lib/alire.toml"/>
-        <F N="../../video/lib/build.sh"/>
-        <F N="../../video/lib/video_lib.gpr"/>
+        <F N="../../applications/video/lib/alire.toml"/>
+        <F N="../../applications/video/lib/build.sh"/>
+        <F N="../../applications/video/lib/video_lib.gpr"/>
     </Files>
     <Config
         Name="Debug"
@@ -42,6 +41,19 @@
         OutputFile="video_lib"
         CompilerConfigName="Latest Version">
         <Menu>
+            <Target
+                Name="Build"
+                MenuCaption="&amp;Build"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw"
+                Verbose="1"
+                ClearProcessBuffer="1"
+                Beep="1"
+                TimeBuild="1">
+                <Exec CmdLine="./build.sh execute"/>
+            </Target>
             <Target
                 Name="Compile"
                 MenuCaption="&amp;Compile"
@@ -56,19 +68,6 @@
                 MenuCaption="&amp;Link"
                 Dialog="_gnuc_options_form Link">
                 <Exec CmdLine='gnat -g -o "%o" %f %libs'/>
-            </Target>
-            <Target
-                Name="Build"
-                MenuCaption="&amp;Build"
-                CaptureOutputWith="ProcessBuffer"
-                Deletable="0"
-                SaveOption="SaveWorkspaceFiles"
-                RunFromDir="%rw"
-                Verbose="1"
-                ClearProcessBuffer="1"
-                Beep="1"
-                TimeBuild="1">
-                <Exec CmdLine="./build.sh"/>
             </Target>
             <Target
                 Name="Rebuild"
@@ -149,6 +148,19 @@
         CompilerConfigName="Latest Version">
         <Menu>
             <Target
+                Name="Build"
+                MenuCaption="&amp;Build"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw"
+                Verbose="1"
+                ClearProcessBuffer="1"
+                Beep="1"
+                TimeBuild="1">
+                <Exec CmdLine="./build.sh execute"/>
+            </Target>
+            <Target
                 Name="Compile"
                 MenuCaption="&amp;Compile"
                 Dialog="_gnuc_options_form Compile"
@@ -162,19 +174,6 @@
                 MenuCaption="&amp;Link"
                 Dialog="_gnuc_options_form Link">
                 <Exec CmdLine='gnat -O -o "%o" %f %libs'/>
-            </Target>
-            <Target
-                Name="Build"
-                MenuCaption="&amp;Build"
-                CaptureOutputWith="ProcessBuffer"
-                Deletable="0"
-                SaveOption="SaveWorkspaceFiles"
-                RunFromDir="%rw"
-                Verbose="1"
-                ClearProcessBuffer="1"
-                Beep="1"
-                TimeBuild="1">
-                <Exec CmdLine="./build.sh"/>
             </Target>
             <Target
                 Name="Rebuild"

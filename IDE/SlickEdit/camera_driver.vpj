@@ -1,6 +1,6 @@
 <!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
 <Project
-    WorkingDir="../../video/camera/driver"
+    WorkingDir="../../applications/video/camera/driver"
     Version="10.0"
     VendorName="SlickEdit"
     TemplateName="Ada - GNU Ada Compiler"
@@ -23,17 +23,17 @@
             Filters="*.*"
             GUID="{1C2466D7-9FB6-439C-AF77-2F4C74FAA5D7}"/>
         <F
-            N="../../video/camera/driver/src/*.ad?"
+            N="../../applications/video/camera/driver/src/*.ad?"
             Recurse="0"
             Excludes=""
             L="1"/>
         <F
-            N="../../video/camera/driver/*.gpr"
+            N="../../applications/video/camera/driver/*.gpr"
             Recurse="0"
             Excludes=""
             L="1"/>
         <F
-            N="../../video/camera/driver/*.sh"
+            N="../../applications/video/camera/driver/*.sh"
             Recurse="0"
             Excludes=""
             L="1"/>

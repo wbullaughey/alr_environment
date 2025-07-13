@@ -1,9 +1,15 @@
 [submodule "ada_lib"]
-	path = ada_lib
-	url = git@github.com:wbullaughey/ada_lib
+   path = ada_lib
+   url = git@github.com:wbullaughey/ada_lib
+[submodule "applications"]
+   path = applications
+   url = git@github.com:wbullaughey/applications
 [submodule "aunit"]
-	path = aunit
-	url = git@github.com:wbullaughey/aunit
+   path = aunit
+   url = git@github.com:wbullaughey/aunit
+[submodule "gnoga_lib"]
+   path = gnoga_lib
+   url = git@github.com:wbullaughey/gnoga_lib
 [submodule "vendor/github.com/gnoga"]
 	path = vendor/github.com/gnoga
 	url = git@github.com:wbullaughey/gnoga

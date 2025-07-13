@@ -1,6 +1,6 @@
 <!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
 <Project
-    WorkingDir="../../video/camera/lib/"
+    WorkingDir="../../applications/video/camera/lib/"
     Version="10.0"
     VendorName="SlickEdit"
     TemplateName="Ada - GNU Ada Compiler"
@@ -26,14 +26,14 @@
             Filters="*.*"
             GUID="{937FED33-58F4-4B2E-BCAB-4EC60EBFABF8}"/>
         <F
-            N="../../video/camera/lib/src/*.ad?"
+            N="../../applications/video/camera/lib/src/*.ad?"
             Recurse="0"
             Excludes=""
             L="1"/>
-        <F N="../../video/camera/lib/.gitignore"/>
-        <F N="../../video/camera/lib/alire.toml"/>
-        <F N="../../video/camera/lib/build.sh"/>
-        <F N="../../video/camera/lib/camera_lib.gpr"/>
+        <F N="../../applications/video/camera/lib/.gitignore"/>
+        <F N="../../applications/video/camera/lib/alire.toml"/>
+        <F N="../../applications/video/camera/lib/build.sh"/>
+        <F N="../../applications/video/camera/lib/camera_lib.gpr"/>
     </Files>
     <Config
         Name="Debug"
@@ -52,7 +52,7 @@
                 ClearProcessBuffer="1"
                 Verbose="1"
                 Beep="1">
-                <Exec CmdLine="./build.sh"/>
+                <Exec CmdLine="./build.sh execute"/>
             </Target>
             <Target
                 Name="Compile"
@@ -157,7 +157,7 @@
                 ClearProcessBuffer="1"
                 Verbose="1"
                 Beep="1">
-                <Exec CmdLine="./build.sh"/>
+                <Exec CmdLine="./build.sh execute"/>
             </Target>
             <Target
                 Name="Compile"

@@ -1,6 +1,6 @@
 <!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
 <Project
-    WorkingDir="../../../video/camera/"
+    WorkingDir="../../../applications/video/camera/"
     Version="10.0"
     VendorName="SlickEdit"
     TemplateName="Ada - GNU Ada Compiler"
@@ -26,29 +26,32 @@
             Filters="*.*"
             GUID="{C8EAE42E-F7FA-49BC-9AFE-CD3CE7B474F9}"/>
         <F
-            N="../../../video/camera/src/*.ad?"
+            N="../../../applications/video/camera/src/*.ad?"
             Recurse="0"
             Excludes=""
             L="1"/>
         <F
-            N="../../../video/camera/*.sh"
+            N="../../../applications/video/camera/*.sh"
             Recurse="0"
             Excludes=""
             L="1"/>
         <F
-            N="../../../video/camera/doc/*.txt"
+            N="../../../applications/video/camera/doc/*.txt"
             Recurse="1"
             Excludes=""/>
-        <F N="../../../video/camera/.gitignore"/>
-        <F N="../../../video/camera/alire.toml"/>
-        <F N="../../../video/camera/gnoga-data/css/camera.css"/>
-        <F N="../../../video/camera/camera_control.gpr"/>
-        <F N="../../../video/camera/help"/>
-        <F N="../../../video/camera/list-camera.txt"/>
-        <F N="../../../video/camera/run.sh"/>
-        <F N="../../../video/camera/run_camera.sh"/>
-        <F N="../../../video/camera/setup.cfg"/>
-        <F N="../../../video/camera/state.cfg"/>
+        <F N="../../../applications/video/camera/.gitignore"/>
+        <F N="../../../applications/video/camera/alire.toml"/>
+        <F N="../../../applications/video/camera/gnoga-data/css/camera.css"/>
+        <F N="../../../applications/video/camera/camera_control.gpr"/>
+        <F N="../../../applications/video/camera/help"/>
+        <F N="../../../applications/video/camera/list-camera.txt"/>
+        <F N="../../../applications/video/camera/run.sh"/>
+        <F N="../../../applications/run_all_apps.sh"/>
+        <F N="../../../applications/video/camera/run_camera.sh"/>
+        <F N="../../../applications/video/camera/setup.cfg"/>
+        <F N="../../../applications/video/camera/state.cfg"/>
+        <F N="../../../applications/video/camera/TRACE.txt"/>
+        <F N="../../../applications/video/camera/types.note"/>
     </Files>
     <Config
         Name="Debug"
@@ -67,7 +70,25 @@
                 ClearProcessBuffer="1"
                 Verbose="1"
                 Beep="1">
-                <Exec CmdLine="./build.sh"/>
+                <Exec CmdLine="./build.sh execute"/>
+            </Target>
+            <Target
+                Name="Help_Test"
+                MenuCaption="Help_Test"
+                RunFromDir="%rw"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveWorkspaceFiles"
+                ClearProcessBuffer="1">
+                <Exec CmdLine="./build.sh help_test"/>
+            </Target>
+            <Target
+                Name="build all"
+                MenuCaption="build all"
+                RunFromDir="%rw"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveWorkspaceFiles"
+                ClearProcessBuffer="1">
+                <Exec CmdLine="./build.sh all"/>
             </Target>
             <Target
                 Name="Rebuild"
@@ -75,7 +96,7 @@
                 CaptureOutputWith="ProcessBuffer"
                 Deletable="0"
                 SaveOption="SaveWorkspaceFiles"
-                RunFromDir="/Users/wayne/Project/git/alr/applications/"
+                RunFromDir="/Users/wayne/Project/git/alr/alr_environment"
                 ClearProcessBuffer="1"
                 Verbose="1"
                 Beep="1">
@@ -175,7 +196,25 @@
                 ClearProcessBuffer="1"
                 Verbose="1"
                 Beep="1">
-                <Exec CmdLine="./build.sh"/>
+                <Exec CmdLine="./build.sh execute"/>
+            </Target>
+            <Target
+                Name="Help_Test"
+                MenuCaption="Help_Test"
+                RunFromDir="%rw"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveWorkspaceFiles"
+                ClearProcessBuffer="1">
+                <Exec CmdLine="./build.sh help_test"/>
+            </Target>
+            <Target
+                Name="build all"
+                MenuCaption="build all"
+                RunFromDir="%rw"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveWorkspaceFiles"
+                ClearProcessBuffer="1">
+                <Exec CmdLine="./build.sh all"/>
             </Target>
             <Target
                 Name="Rebuild"
@@ -183,7 +222,7 @@
                 CaptureOutputWith="ProcessBuffer"
                 Deletable="0"
                 SaveOption="SaveWorkspaceFiles"
-                RunFromDir="/Users/wayne/Project/git/alr/applications/"
+                RunFromDir="/Users/wayne/Project/git/alr/alr_environment"
                 ClearProcessBuffer="1"
                 Verbose="1"
                 Beep="1">

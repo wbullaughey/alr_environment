@@ -1,6 +1,6 @@
 <!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
 <Project
-    WorkingDir="../../../video/camera/test_lib/"
+    WorkingDir="../../../applications/video/camera/test_lib/"
     Version="10.0"
     VendorName="SlickEdit"
     TemplateName="Ada - GNU Ada Compiler"
@@ -26,18 +26,19 @@
             Filters="*.*"
             GUID="{167CB412-4576-4578-9EA4-4FFBCED58F0E}"/>
         <F
-            N="../../../video/camera/test_lib/src/*.ad?"
+            N="../../../applications/video/camera/test_lib/src/*.ad?"
             Recurse="0"
             Excludes=""
             L="1"/>
-        <F N="../../../video/camera/test_lib/alire.toml"/>
-        <F N="../../../video/camera/test_lib/build.sh"/>
-        <F N="../../../video/camera/unit_test/help"/>
-        <F N="../../../video/camera/unit_test/list-camera_aunit.txt"/>
-        <F N="../../../video/camera/unit_test/run.sh"/>
-        <F N="../../../video/camera/unit_test/suites"/>
-        <F N="../../../video/camera/test_lib/test_lib.gpr"/>
-        <F N="../../../video/camera/test_lib/config/test_lib_config.gpr"/>
+        <F N="../../../applications/video/camera/test_lib/alire.toml"/>
+        <F N="../../../ada_lib/ada_lib_test_lib/build.sh"/>
+        <F N="../../../applications/video/camera/test_lib/build.sh"/>
+        <F N="../../../applications/video/camera/test_lib/camera_test_lib.gpr"/>
+        <F N="../../../applications/video/camera/test_lib/config/camera_test_lib_config.gpr"/>
+        <F N="../../../applications/video/camera/unit_test/help"/>
+        <F N="../../../applications/video/camera/unit_test/list-camera_aunit.txt"/>
+        <F N="../../../applications/video/camera/unit_test/run.sh"/>
+        <F N="../../../applications/video/camera/unit_test/suites"/>
     </Files>
     <Config
         Name="Debug"
@@ -56,7 +57,15 @@
                 ClearProcessBuffer="1"
                 Verbose="1"
                 Beep="1">
-                <Exec CmdLine="./build.sh"/>
+                <Exec CmdLine="./build.sh execute"/>
+            </Target>
+            <Target
+                Name="Build All"
+                MenuCaption="Build All"
+                RunFromDir="%rw"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveWorkspaceFiles">
+                <Exec CmdLine="./build.sh all"/>
             </Target>
             <Target
                 Name="Compile"
@@ -161,7 +170,15 @@
                 ClearProcessBuffer="1"
                 Verbose="1"
                 Beep="1">
-                <Exec CmdLine="./build.sh"/>
+                <Exec CmdLine="./build.sh execute"/>
+            </Target>
+            <Target
+                Name="Build All"
+                MenuCaption="Build All"
+                RunFromDir="%rw"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveWorkspaceFiles">
+                <Exec CmdLine="./build.sh all"/>
             </Target>
             <Target
                 Name="Compile"
