@@ -162,6 +162,7 @@
             <F N="../../ada_lib/.gitignore"/>
             <F N="../../ada_lib/ada_lib.gpr"/>
             <F N="../../ada_lib/config/ada_lib_config.gpr"/>
+            <F N="../../ada_lib/alire.toml"/>
             <F N="../../ada_lib/alire.toml.source"/>
         </Folder>
     </Files>
