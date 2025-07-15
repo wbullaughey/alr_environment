@@ -1,5 +1,0 @@
-external:ALR_ENVIRONMENT_LIBRARY_TYPE=default
-external:LIBRARY_TYPE=default
-profile:alr_environment=RELEASE
-switches:alr_environment=-O3,-fdata-sections,-ffunction-sections,-gnatW8,-gnatn
-version:gnat_native=14.2.1
