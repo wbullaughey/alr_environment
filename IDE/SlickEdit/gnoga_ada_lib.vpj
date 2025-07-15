@@ -31,6 +31,7 @@
             Excludes=""/>
         <F N="../../gnoga_lib/gnoga_ada_lib/.gitignore"/>
         <F N="../../gnoga_lib/gnoga_ada_lib/alire.toml"/>
+        <F N="../../build.sh"/>
         <F N="../../gnoga_lib/gnoga_ada_lib/build.sh"/>
         <F N="../../gnoga_lib/gnoga_ada_lib/gnoga_ada_lib.gpr"/>
         <F N="../../gnoga_lib/gnoga_ada_lib/config/gnoga_ada_lib_config.gpr"/>
