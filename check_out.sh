@@ -1,9 +1,16 @@
 #!/bin/bash
+export BRANCH=$1
+
+if [ -z "$BRANCH" ]; then
+   echo "missing branch label"
+    exit
+fi
 
 function pull(){
    MODULE=$1
    if [[ -d "$MODULE" ]]; then
       pushd $MODULE >/dev/null 2>&1
+      git checkout $BRANCH
       if [[ $? -eq 0 ]]; then
          echo "pull $MODULE"
          git pull
