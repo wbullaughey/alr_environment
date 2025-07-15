@@ -42,6 +42,7 @@
         <F N="../../../build_all.sh"/>
         <F N="../../../check_in.sh"/>
         <F N="../../../check_out.sh"/>
+        <F N="../../../clone.sh"/>
         <F N="../../../default_config.gpr"/>
         <F N="../../../global_build.sh"/>
         <F N="../../../list-help_tests.txt"/>
