@@ -1,18 +1,12 @@
 #!/bin/bash
-export BRANCH=$1
 
-if [ -z "$BRANCH" ]; then
-   echo "missing branch label"
-    exit
-fi
-
-function checkout(){
+function pull(){
    MODULE=$1
    if [[ -d "$MODULE" ]]; then
       pushd $MODULE >/dev/null 2>&1
       if [[ $? -eq 0 ]]; then
-         echo "checkout $MODULE"
-         git checkout $BRANCH
+         echo "pull $MODULE"
+         git pull
          if [[ $? -eq 0 ]]; then
             echo $MODULE updated
          else
@@ -30,12 +24,12 @@ function checkout(){
    fi
 }
 
-checkout "ada_lib"
-checkout "ada_lib/ada_lib_test_lib"
-checkout "ada_lib/ada_lib_tests"
-checkout "applications"
-checkout "aunit"
-checkout "gnoga_lib"
-checkout "vendor/github.com/gnoga"
-checkout "."
+pull "ada_lib"
+pull "ada_lib/ada_lib_test_lib"
+pull "ada_lib/ada_lib_tests"
+pull "applications"
+pull "aunit"
+pull "gnoga_lib"
+pull "vendor/github.com/gnoga"
+pull "."
 
