@@ -6,6 +6,8 @@ export SCRIPT_DIR=$(dirname ${0:A})
 export DO_TRACE=TRUE
 SCRIPT_DIR=$(dirname "$0")
 export DEBUG_OPTIONS="-vv -d"
+export ALR_OPTIONS="$ALR_OPTIONS -aP $SCRIPT_DIR"
+echo ALR_OPTIONS $ALR_OPTIONS
 
 # WHICH values
 #   all     - build everything (help_tests, driver unit tests, applications)
