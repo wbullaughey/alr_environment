@@ -27,7 +27,6 @@ config/
 lib/
 obj/
 save/
-vendor/
 GNAT*
 list
 
