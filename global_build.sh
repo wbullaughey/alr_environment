@@ -5,7 +5,7 @@ export DIRECTORY=`pwd`
 export SCRIPT_DIR=$(dirname ${0:A})
 export DO_TRACE=TRUE
 SCRIPT_DIR=$(dirname "$0")
-export DEBUG_OPTIONS="-vv -d"
+#export DEBUG_OPTIONS="-vv -d"
 export ALR_OPTIONS="$ALR_OPTIONS -aP $SCRIPT_DIR"
 echo ALR_OPTIONS $ALR_OPTIONS
 
@@ -83,7 +83,7 @@ function build () {
       fi
    #  echo building `pwd` BUILD_MODE $BUILD_MODE
 #     $SCRIPT_DIR/fix_alire_toml.sh alire.toml.source
-      COMMAND="alr build -- -j10 -s -k -gnatE -vl -v $ALR_OPTIONS -XBUILD_MODE=$BUILD_MODE"
+      COMMAND="alr $DEBUG_OPTIONS build -- -j10 -s -k -gnatE -vl -v $ALR_OPTIONS -XBUILD_MODE=$BUILD_MODE"
 
       echo COMMAND $COMMAND
       $COMMAND
