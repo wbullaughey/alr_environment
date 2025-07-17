@@ -194,6 +194,7 @@
             <F N="../../ada_lib/ada_lib_tests/ada_lib_tests.gpr"/>
             <F N="../../ada_lib/ada_lib_tests/config/ada_lib_tests_config.gpr"/>
             <F N="../../ada_lib/ada_lib_tests/alire.toml"/>
+            <F N="../../ada_lib/ada_lib_test_lib/alire.toml.source"/>
             <F N="../../ada_lib/ada_lib_tests/file_copy_source"/>
             <F N="../../ada_lib/ada_lib_tests/help"/>
             <F N="../../ada_lib/ada_lib_tests/list-test_ada_lib.txt"/>
