@@ -66,6 +66,7 @@
         <F N="../../applications/video/camera/unit_test/list-camera_aunit.txt"/>
         <F N="../../applications/video/camera/unit_test/list-camera_driver.txt"/>
         <F N="../../applications/video/camera/unit_test/load_test_setup.cfg"/>
+        <F N="../../applications/video/camera/unit_test/merge.txt"/>
         <F N="../../applications/video/camera/unit_test/project_paths.cfg"/>
         <F N="../../applications/video/camera/unit_test/remote_build.txt"/>
         <F N="../../applications/video/camera/unit_test/run.sh"/>
