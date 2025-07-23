@@ -12,6 +12,7 @@ function checkout(){
       pushd $MODULE >/dev/null 2>&1
       if [[ $? -eq 0 ]]; then
          echo "checkout $MODULE"
+	 git pull
          git checkout $BRANCH
          if [[ $? -eq 0 ]]; then
             echo $MODULE updated
