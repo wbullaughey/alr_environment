@@ -8,7 +8,7 @@ export UNIT_TEST=$6     # FALSE | TRUE
 shift 6
 export RUN_PARAMETERS=$*
 
-export APPEND_OUTPUT=""  # first time so output erased
+export APPEND_OUTPUT=$APPEND_OUTPUT  # first time so output erased
 export BUILD_MODE=execute
 rm -f TRACE.txt
 
