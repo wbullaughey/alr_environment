@@ -159,8 +159,8 @@ case "$ACTION" in
 
    "suites")
       output  list suites
-      export COMMAND="-@l"
-      echo "command: $COMMAND"  | tee -a $OUTPUT
+      export COMMAND="$OPTIONS -@l"
+      output TRACE  "command: $COMMAND"  | tee -a $OUTPUT
       run
       ;;
 
