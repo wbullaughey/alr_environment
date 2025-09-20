@@ -85,7 +85,7 @@ function run() {
    exit;
 }
 
-output LIST Optional parameters: $RUN_PARAMETERS
+output TRACE Optional parameters: $RUN_PARAMETERS
 set -A WORDS ${=RUN_PARAMETERS}
 output TRACE words $WORDS
 

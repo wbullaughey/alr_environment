@@ -1,0 +1,1264 @@
+# Translations template for Dyn Updater.
+# Copyright (C) 2016 Dynamic Network Services
+# This file is distributed under the same license as the Dyn Updater
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dyn Updater 5.4.0-17-gfa21aec\n"
+"Report-Msgid-Bugs-To: wesleycrushers@dyn.com\n"
+"POT-Creation-Date: 2016-10-03 14:57+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 1.3\n"
+
+#: /vagrant/dyn_updater.py:36
+msgid "An exception occurred in the CLI interface."
+msgstr "[Ȧƞ ḗẋƈḗƥŧīǿƞ ǿƈƈŭřřḗḓ īƞ ŧħḗ ƇĿĪ īƞŧḗřƒȧƈḗ. ǅı 衋ϐϖǲıςϑ]"
+
+#: /vagrant/dyn_updater.py:54
+msgid "An exception occurred in the QT interface."
+msgstr "[Ȧƞ ḗẋƈḗƥŧīǿƞ ǿƈƈŭřřḗḓ īƞ ŧħḗ ɊŦ īƞŧḗřƒȧƈḗ. 鶱ς ǲϑϑς衋靐ǲ]"
+
+#: /vagrant/dyn_updater.py:69 /vagrant/dyn_updater.py:82
+#, python-format
+msgid "--daemon requires an argument: %s"
+msgstr "[--ḓȧḗḿǿƞ řḗɋŭīřḗş ȧƞ ȧřɠŭḿḗƞŧ: %s ǲϰϕϕǅϰ鶱ǅ ϖ]"
+
+#: /vagrant/dyn_updater.py:79
+msgid "An exception occurred in the client daemon."
+msgstr "[Ȧƞ ḗẋƈḗƥŧīǿƞ ǿƈƈŭřřḗḓ īƞ ŧħḗ ƈŀīḗƞŧ ḓȧḗḿǿƞ. ǲǋ ΰ靐ǲ鶱ςǈǋ]"
+
+#: /vagrant/dyn_updater_dns.py:51
+msgid "Disabling recursive DNS setting"
+msgstr "[Ḓīşȧƀŀīƞɠ řḗƈŭřşīṽḗ ḒȠŞ şḗŧŧīƞɠ ǈǋſẛϱ衋ςſǈ]"
+
+#: /vagrant/dyn_updater_dns.py:58
+msgid "Failed to disable RDNS, giving up"
+msgstr "[Ƒȧīŀḗḓ ŧǿ ḓīşȧƀŀḗ ŘḒȠŞ, ɠīṽīƞɠ ŭƥ ϰϱϱϱǅϰ ǅǋ]"
+
+#: /vagrant/dyn_updater_dns.py:70
+msgid "Trying to repair setuid without root privileges"
+msgstr "[Ŧřẏīƞɠ ŧǿ řḗƥȧīř şḗŧŭīḓ ẇīŧħǿŭŧ řǿǿŧ ƥřīṽīŀḗɠḗş ϖ鶱ϱǋΰϱ ϰϱ]"
+
+#: /vagrant/dyn_updater_dns.py:78
+msgid "Unable to set root ownership on file"
+msgstr "[Ŭƞȧƀŀḗ ŧǿ şḗŧ řǿǿŧ ǿẇƞḗřşħīƥ ǿƞ ƒīŀḗ ϵǲϱıΐϑ ϐı]"
+
+#: /vagrant/dyn_updater_dns.py:86
+msgid "Unable to set setuid on file"
+msgstr "[Ŭƞȧƀŀḗ ŧǿ şḗŧ şḗŧŭīḓ ǿƞ ƒīŀḗ ϕϰΰϵǅΐ 鶱ϱ]"
+
+#: /vagrant/dyn_updater_dns.py:124
+#, python-format
+msgid "%s trying to repair permissions on itself."
+msgstr "[%s ŧřẏīƞɠ ŧǿ řḗƥȧīř ƥḗřḿīşşīǿƞş ǿƞ īŧşḗŀƒ. ΰϕ 衋鶱ϐϐẛϑ]"
+
+#: /vagrant/dyn_updater_dns.py:134
+msgid "Error launching helper executable as admin"
+msgstr "[Ḗřřǿř ŀȧŭƞƈħīƞɠ ħḗŀƥḗř ḗẋḗƈŭŧȧƀŀḗ ȧş ȧḓḿīƞ ϰϵıϵǅ ǋΰ鶱ı]"
+
+#: /vagrant/dyn_updater_dns.py:135
+#, python-format
+msgid "Reason: %sNSAppleScriptErrorMessage"
+msgstr "[Řḗȧşǿƞ: %sȠŞȦƥƥŀḗŞƈřīƥŧḖřřǿřḾḗşşȧɠḗ ẛẛẛϑϱϵϑ ϰǅ]"
+
+#: /vagrant/setup.py:60
+msgid "A fully-featured cross platform DDNS update client."
+msgstr "[Ȧ ƒŭŀŀẏ-ƒḗȧŧŭřḗḓ ƈřǿşş ƥŀȧŧƒǿřḿ ḒḒȠŞ ŭƥḓȧŧḗ ƈŀīḗƞŧ. 衋 ǋςϱ靐ϵ]"
+
+#: /vagrant/setup.py:141
+msgid ""
+"The DDNS update client keeps your Dyn dynamic hostname up to date with the "
+"current public IP of the network your machine is on."
+msgstr ""
+"[Ŧħḗ ḒḒȠŞ ŭƥḓȧŧḗ ƈŀīḗƞŧ ķḗḗƥş ẏǿŭř Ḓẏƞ ḓẏƞȧḿīƈ ħǿşŧƞȧḿḗ ŭƥ ŧǿ ḓȧŧḗ ẇīŧħ ŧħḗ "
+"ƈŭřřḗƞŧ ƥŭƀŀīƈ ĪƤ ǿƒ ŧħḗ ƞḗŧẇǿřķ ẏǿŭř ḿȧƈħīƞḗ īş ǿƞ. ΐϵǋ ǈǋ靐ẛ ǋϰϰſǅς ΰϐſ衋ϖǈ]"
+
+#: /vagrant/lib/daemon/common.py:36
+msgid "Unable to load bundled libraries as expected, exiting."
+msgstr "[Ŭƞȧƀŀḗ ŧǿ ŀǿȧḓ ƀŭƞḓŀḗḓ ŀīƀřȧřīḗş ȧş ḗẋƥḗƈŧḗḓ, ḗẋīŧīƞɠ. ϵΰϵǋ衋衋]"
+
+#: /vagrant/lib/daemon/common.py:144
+#, python-format
+msgid "Sent RUM beacon using %s for DNS."
+msgstr "[Şḗƞŧ ŘŬḾ ƀḗȧƈǿƞ ŭşīƞɠ %s ƒǿř ḒȠŞ. ẛ靐ϕ鶱 ςϕ鶱 ǈ]"
+
+#: /vagrant/lib/daemon/common.py:147
+msgid "There was a problem sending the RUM beacon."
+msgstr "[Ŧħḗřḗ ẇȧş ȧ ƥřǿƀŀḗḿ şḗƞḓīƞɠ ŧħḗ ŘŬḾ ƀḗȧƈǿƞ. ϰǅ鶱ǋϑ ǈſϵ]"
+
+#: /vagrant/lib/daemon/common.py:165
+msgid "EULA updated since last version, resetting."
+msgstr "[ḖŬĿȦ ŭƥḓȧŧḗḓ şīƞƈḗ ŀȧşŧ ṽḗřşīǿƞ, řḗşḗŧŧīƞɠ. ẛǈϵǅ 衋ΰϖǅı]"
+
+#: /vagrant/lib/daemon/common.py:233
+msgid "Got END in ZMQ queue thread"
+msgstr "[Ɠǿŧ ḖȠḒ īƞ ẐḾɊ ɋŭḗŭḗ ŧħřḗȧḓ ςϰı ǲıı 衋ϰ]"
+
+#: /vagrant/lib/daemon/common.py:255
+#, python-format
+msgid "Attempting to stop worker thread %s"
+msgstr "[Ȧŧŧḗḿƥŧīƞɠ ŧǿ şŧǿƥ ẇǿřķḗř ŧħřḗȧḓ %s ſǋϕϐǈſςǲΰϖ]"
+
+#: /vagrant/lib/daemon/common.py:265
+#, python-format
+msgid "RuntimeError raised joining worker thread %s"
+msgstr "[ŘŭƞŧīḿḗḖřřǿř řȧīşḗḓ ĵǿīƞīƞɠ ẇǿřķḗř ŧħřḗȧḓ %s ΐϑςΐ鶱ΐſςıϰ]"
+
+#: /vagrant/lib/daemon/common.py:269
+#, python-format
+msgid "Worker thread %s stopped"
+msgstr "[Ẇǿřķḗř ŧħřḗȧḓ %s şŧǿƥƥḗḓ ϕϕϐϖ鶱ẛ 靐鶱ǅ]"
+
+#: /vagrant/lib/daemon/common.py:273
+#, python-format
+msgid "Worker thread %s not alive, skipping."
+msgstr "[Ẇǿřķḗř ŧħřḗȧḓ %s ƞǿŧ ȧŀīṽḗ, şķīƥƥīƞɠ. 靐ϵǅϵ衋ϖ ϖϰẛ]"
+
+#: /vagrant/lib/daemon/common.py:293
+msgid "Joining queue thread."
+msgstr "[Ĵǿīƞīƞɠ ɋŭḗŭḗ ŧħřḗȧḓ. ſϑϰϑǅẛǈ ϖϕ]"
+
+#: /vagrant/lib/daemon/common.py:295
+msgid "Terminating ZMQ context."
+msgstr "[Ŧḗřḿīƞȧŧīƞɠ ẐḾɊ ƈǿƞŧḗẋŧ. ıϕǲ衋ϐ衋ǅı鶱ϑ]"
+
+#: /vagrant/lib/daemon/common.py:297
+msgid "Terminated ZMQ context."
+msgstr "[Ŧḗřḿīƞȧŧḗḓ ẐḾɊ ƈǿƞŧḗẋŧ. ς鶱ΐǈςϖẛϰϐǅ]"
+
+#: /vagrant/lib/daemon/common.py:300
+msgid "AttributeError when trying to terminate ZMQ context."
+msgstr "[ȦŧŧřīƀŭŧḗḖřřǿř ẇħḗƞ ŧřẏīƞɠ ŧǿ ŧḗřḿīƞȧŧḗ ẐḾɊ ƈǿƞŧḗẋŧ. ΐϵΰſǋϵǋ]"
+
+#: /vagrant/lib/daemon/common.py:304
+msgid "ZMQ error while shutting down, ignoring."
+msgstr "[ẐḾɊ ḗřřǿř ẇħīŀḗ şħŭŧŧīƞɠ ḓǿẇƞ, īɠƞǿřīƞɠ. ϰϐϑ ϕẛϰΐ衋]"
+
+#: /vagrant/lib/daemon/common.py:312 /vagrant/lib/daemon/windows.py:441
+#, python-format
+msgid "%s is not a supported command."
+msgstr "[%s īş ƞǿŧ ȧ şŭƥƥǿřŧḗḓ ƈǿḿḿȧƞḓ. ςϑ ǲϖ 靐ϖı]"
+
+#: /vagrant/lib/daemon/nicupdate.py:39 /vagrant/lib/daemon/nicupdate.py:503
+msgid "An exception occurred while performing an update."
+msgstr "[Ȧƞ ḗẋƈḗƥŧīǿƞ ǿƈƈŭřřḗḓ ẇħīŀḗ ƥḗřƒǿřḿīƞɠ ȧƞ ŭƥḓȧŧḗ. ϰΐ ϰϱ衋ΐǲϰϵ]"
+
+#: /vagrant/lib/daemon/nicupdate.py:46
+msgid "This client is blocked from updating, try again later."
+msgstr "[Ŧħīş ƈŀīḗƞŧ īş ƀŀǿƈķḗḓ ƒřǿḿ ŭƥḓȧŧīƞɠ, ŧřẏ ȧɠȧīƞ ŀȧŧḗř. ΰǅẛϱ ǋϖ]"
+
+#: /vagrant/lib/daemon/nicupdate.py:48
+#, python-format
+msgid "Received badagent response for account %s"
+msgstr "[Řḗƈḗīṽḗḓ ƀȧḓȧɠḗƞŧ řḗşƥǿƞşḗ ƒǿř ȧƈƈǿŭƞŧ %s 鶱ς靐ϵϵǲ鶱鶱 ǋ]"
+
+#: /vagrant/lib/daemon/nicupdate.py:56
+#: /vagrant/lib/daemon/api/exceptions.py:78
+msgid "Login failed. Please check your username and password."
+msgstr "[Ŀǿɠīƞ ƒȧīŀḗḓ. Ƥŀḗȧşḗ ƈħḗƈķ ẏǿŭř ŭşḗřƞȧḿḗ ȧƞḓ ƥȧşşẇǿřḓ. ϐı靐靐ǈ 鶱]"
+
+#: /vagrant/lib/daemon/nicupdate.py:58
+#: /vagrant/lib/daemon/api/exceptions.py:80
+#, python-format
+msgid "Received badauth response for account %s"
+msgstr "[Řḗƈḗīṽḗḓ ƀȧḓȧŭŧħ řḗşƥǿƞşḗ ƒǿř ȧƈƈǿŭƞŧ %s ΰ衋ςΐΐı衋ǈ ǈ]"
+
+#: /vagrant/lib/daemon/nicupdate.py:66 /vagrant/lib/daemon/nicupdate.py:76
+msgid ""
+"A server-side error occurred when performing an update. Will retry on the "
+"next update interval."
+msgstr ""
+"[Ȧ şḗřṽḗř-şīḓḗ ḗřřǿř ǿƈƈŭřřḗḓ ẇħḗƞ ƥḗřƒǿřḿīƞɠ ȧƞ ŭƥḓȧŧḗ. Ẇīŀŀ řḗŧřẏ ǿƞ ŧħḗ "
+"ƞḗẋŧ ŭƥḓȧŧḗ īƞŧḗřṽȧŀ. 衋 ϐǈǋǋϐǈǲϐϕıϰ ſϕ]"
+
+#: /vagrant/lib/daemon/nicupdate.py:68
+#, python-format
+msgid "Received dnserr response for account %s"
+msgstr "[Řḗƈḗīṽḗḓ ḓƞşḗřř řḗşƥǿƞşḗ ƒǿř ȧƈƈǿŭƞŧ %s ǲϖϱϕϖẛſΐ ǈ]"
+
+#: /vagrant/lib/daemon/nicupdate.py:78
+#, python-format
+msgid "Received 911 response for account %s"
+msgstr "[Řḗƈḗīṽḗḓ 911 řḗşƥǿƞşḗ ƒǿř ȧƈƈǿŭƞŧ %s ϱǋϕǲǲΐǋϐ 衋]"
+
+#: /vagrant/lib/daemon/nicupdate.py:86
+msgid ""
+"Received !donator response when updating. Please upgrade to a paid account "
+"to use this feature."
+msgstr ""
+"[Řḗƈḗīṽḗḓ !ḓǿƞȧŧǿř řḗşƥǿƞşḗ ẇħḗƞ ŭƥḓȧŧīƞɠ. Ƥŀḗȧşḗ ŭƥɠřȧḓḗ ŧǿ ȧ ƥȧīḓ ȧƈƈǿŭƞŧ "
+"ŧǿ ŭşḗ ŧħīş ƒḗȧŧŭřḗ. ς鶱衋ſıϖ鶱ẛ ǅ衋ϵſẛϕǋ]"
+
+#: /vagrant/lib/daemon/nicupdate.py:88
+#, python-format
+msgid "Received !donator response for account %s"
+msgstr "[Řḗƈḗīṽḗḓ !ḓǿƞȧŧǿř řḗşƥǿƞşḗ ƒǿř ȧƈƈǿŭƞŧ %s ẛϑϐ靐ϵςϵǈ ΐ]"
+
+#: /vagrant/lib/daemon/nicupdate.py:96
+msgid "Received a 404 response from API"
+msgstr "[Řḗƈḗīṽḗḓ ȧ 404 řḗşƥǿƞşḗ ƒřǿḿ ȦƤĪ ϑϐ衋ǅǈſϑ衋 ǋ]"
+
+#: /vagrant/lib/daemon/nicupdate.py:98
+#, python-format
+msgid "This server does not support update key for account %s"
+msgstr "[Ŧħīş şḗřṽḗř ḓǿḗş ƞǿŧ şŭƥƥǿřŧ ŭƥḓȧŧḗ ķḗẏ ƒǿř ȧƈƈǿŭƞŧ %s ıϑϕı ϕϰ]"
+
+#: /vagrant/lib/daemon/nicupdate.py:101
+#, python-format
+msgid "Received 404 response from API while accessing path %s for account %s"
+msgstr ""
+"[Řḗƈḗīṽḗḓ 404 řḗşƥǿƞşḗ ƒřǿḿ ȦƤĪ ẇħīŀḗ ȧƈƈḗşşīƞɠ ƥȧŧħ %s ƒǿř ȧƈƈǿŭƞŧ %s "
+"ΰϖ靐ıẛϐ靐ϕ ſ]"
+
+#: /vagrant/lib/daemon/nicupdate.py:109
+#, python-format
+msgid "Received abuse status for host %s"
+msgstr "[Řḗƈḗīṽḗḓ ȧƀŭşḗ şŧȧŧŭş ƒǿř ħǿşŧ %s ϰ衋鶱ıΰǈϵẛ ǈ]"
+
+#: /vagrant/lib/daemon/nicupdate.py:114
+#, python-format
+msgid "Updated host %s successfully."
+msgstr "[Ŭƥḓȧŧḗḓ ħǿşŧ %s şŭƈƈḗşşƒŭŀŀẏ. ǋ衋ǈıẛǋſ ıς]"
+
+#: /vagrant/lib/daemon/nicupdate.py:119
+#, python-format
+msgid "Received nochg status for host %s"
+msgstr "[Řḗƈḗīṽḗḓ ƞǿƈħɠ şŧȧŧŭş ƒǿř ħǿşŧ %s ϵǋ靐ϵΐϐſϰ ϐ]"
+
+#: /vagrant/lib/daemon/nicupdate.py:124
+#, python-format
+msgid "Received nohost status for host %s"
+msgstr "[Řḗƈḗīṽḗḓ ƞǿħǿşŧ şŧȧŧŭş ƒǿř ħǿşŧ %s 靐ϑ鶱ẛϐϖǋſ ΰ]"
+
+#: /vagrant/lib/daemon/nicupdate.py:129
+#, python-format
+msgid "Received numhost status for host %s"
+msgstr "[Řḗƈḗīṽḗḓ ƞŭḿħǿşŧ şŧȧŧŭş ƒǿř ħǿşŧ %s ϕǅΐϐǋϵǈǅ ǋ]"
+
+#: /vagrant/lib/daemon/nicupdate.py:134
+#, python-format
+msgid "Received notfqdn status for host %s"
+msgstr "[Řḗƈḗīṽḗḓ ƞǿŧƒɋḓƞ şŧȧŧŭş ƒǿř ħǿşŧ %s 衋ǈǲẛϑϕΰϱ ϐ]"
+
+#: /vagrant/lib/daemon/nicupdate.py:176
+#, python-format
+msgid "Migrated account %s to secure update key"
+msgstr "[Ḿīɠřȧŧḗḓ ȧƈƈǿŭƞŧ %s ŧǿ şḗƈŭřḗ ŭƥḓȧŧḗ ķḗẏ ϱϵǲϵϕϰǋϐ ϵ]"
+
+#: /vagrant/lib/daemon/nicupdate.py:256
+#, python-format
+msgid "Failed to find IP address at %s"
+msgstr "[Ƒȧīŀḗḓ ŧǿ ƒīƞḓ ĪƤ ȧḓḓřḗşş ȧŧ %s ΐǋΐϵϵſ ǅẛ]"
+
+#: /vagrant/lib/daemon/nicupdate.py:287
+#, python-format
+msgid "Failed to connect to %s"
+msgstr "[Ƒȧīŀḗḓ ŧǿ ƈǿƞƞḗƈŧ ŧǿ %s 靐ϑſǈ鶱ϱ ΐϑ]"
+
+#: /vagrant/lib/daemon/nicupdate.py:390
+#, python-format
+msgid "Host owner account %s missing, skipping host %s"
+msgstr "[Ħǿşŧ ǿẇƞḗř ȧƈƈǿŭƞŧ %s ḿīşşīƞɠ, şķīƥƥīƞɠ ħǿşŧ %s ıϱǈǅ ϕ衋ǲϐΰ]"
+
+#: /vagrant/lib/daemon/nicupdate.py:424
+#, python-format
+msgid "Unable to get IP addresses for %s, will retry later."
+msgstr "[Ŭƞȧƀŀḗ ŧǿ ɠḗŧ ĪƤ ȧḓḓřḗşşḗş ƒǿř %s, ẇīŀŀ řḗŧřẏ ŀȧŧḗř. ϰΰϱςϱΐ]"
+
+#: /vagrant/lib/daemon/nicupdate.py:476
+#, python-format
+msgid "Unknown %s value for %s, setting to none."
+msgstr "[Ŭƞķƞǿẇƞ %s ṽȧŀŭḗ ƒǿř %s, şḗŧŧīƞɠ ŧǿ ƞǿƞḗ. 靐衋ϱǲϖǋſ ϰ鶱]"
+
+#: /vagrant/lib/daemon/recursivedns.py:72
+#: /vagrant/lib/daemon/recursivedns.py:79
+#: /vagrant/lib/daemon/recursivedns.py:97
+#: /vagrant/lib/daemon/recursivedns.py:115
+#, python-format
+msgid "No response from nameserver %s"
+msgstr "[Ƞǿ řḗşƥǿƞşḗ ƒřǿḿ ƞȧḿḗşḗřṽḗř %s ϰϑ 鶱ſǋϵϕſǅ]"
+
+#: /vagrant/lib/daemon/recursivedns.py:102
+#: /vagrant/lib/daemon/recursivedns.py:120
+#, python-format
+msgid "Invalid response from nameserver %s"
+msgstr "[Īƞṽȧŀīḓ řḗşƥǿƞşḗ ƒřǿḿ ƞȧḿḗşḗřṽḗř %s ǲϑ衋鶱鶱ςς ſẛ]"
+
+#: /vagrant/lib/daemon/recursivedns.py:129
+#, python-format
+msgid "Nameserver %s responses appear to be hijacked"
+msgstr "[Ƞȧḿḗşḗřṽḗř %s řḗşƥǿƞşḗş ȧƥƥḗȧř ŧǿ ƀḗ ħīĵȧƈķḗḓ ǅẛΐςϑ靐鶱ϑǈϱ]"
+
+#: /vagrant/lib/daemon/recursivedns.py:147
+msgid "DNS traffic appears to be hijacked from this network."
+msgstr "[ḒȠŞ ŧřȧƒƒīƈ ȧƥƥḗȧřş ŧǿ ƀḗ ħīĵȧƈķḗḓ ƒřǿḿ ŧħīş ƞḗŧẇǿřķ. ſǲ衋 ΰςǋ]"
+
+#: /vagrant/lib/daemon/recursivedns.py:154
+#: /vagrant/lib/daemon/recursivedns.py:746
+msgid "Issues reaching RDNS servers, not setting RDNS."
+msgstr "[Īşşŭḗş řḗȧƈħīƞɠ ŘḒȠŞ şḗřṽḗřş, ƞǿŧ şḗŧŧīƞɠ ŘḒȠŞ. 衋ςΐϱΐı ǈϖ衋]"
+
+#: /vagrant/lib/daemon/recursivedns.py:247
+#, python-format
+msgid "Looking at interface: %s (%s)"
+msgstr "[Ŀǿǿķīƞɠ ȧŧ īƞŧḗřƒȧƈḗ: %s (%s) ǈſϖǅϵϐΰ ς衋]"
+
+#: /vagrant/lib/daemon/recursivedns.py:252
+#, python-format
+msgid "DNS is currently set to: %s"
+msgstr "[ḒȠŞ īş ƈŭřřḗƞŧŀẏ şḗŧ ŧǿ: %s ẛϕϖ ϕΐ ϕςǅ]"
+
+#: /vagrant/lib/daemon/recursivedns.py:256
+msgid "DNS matches, resetting..."
+msgstr "[ḒȠŞ ḿȧŧƈħḗş, řḗşḗŧŧīƞɠ... ϑϕ衋 ẛϖϖǲẛϵ]"
+
+#: /vagrant/lib/daemon/recursivedns.py:263
+msgid "Resetting DNS to DHCP."
+msgstr "[Řḗşḗŧŧīƞɠ ḒȠŞ ŧǿ ḒĦƇƤ. ſſϱſıϱϱΐı]"
+
+#: /vagrant/lib/daemon/recursivedns.py:271
+msgid "Resetting DNS to static."
+msgstr "[Řḗşḗŧŧīƞɠ ḒȠŞ ŧǿ şŧȧŧīƈ. ϰϱǲϱ靐ẛϐϱǲ]"
+
+#: /vagrant/lib/daemon/recursivedns.py:276
+#, python-format
+msgid "Setting DNS to %s"
+msgstr "[Şḗŧŧīƞɠ ḒȠŞ ŧǿ %s ϱ鶱ϱϑ衋ϕ衋 衋ΰ]"
+
+#: /vagrant/lib/daemon/recursivedns.py:280
+msgid "Not setting empty DNS on static interface."
+msgstr "[Ƞǿŧ şḗŧŧīƞɠ ḗḿƥŧẏ ḒȠŞ ǿƞ şŧȧŧīƈ īƞŧḗřƒȧƈḗ. 衋ϐ靐 靐ǋǅǋǲſ]"
+
+#: /vagrant/lib/daemon/recursivedns.py:290
+#, python-format
+msgid "Couldn't reset DNS for %s interface"
+msgstr "[Ƈǿŭŀḓƞ'ŧ řḗşḗŧ ḒȠŞ ƒǿř %s īƞŧḗřƒȧƈḗ ϖΐϰǈϑẛ鶱ϐ 鶱]"
+
+#: /vagrant/lib/daemon/recursivedns.py:293
+#: /vagrant/lib/daemon/recursivedns.py:674
+#: /vagrant/lib/daemon/recursivedns.py:686
+#, python-format
+msgid "DNS reset on %s."
+msgstr "[ḒȠŞ řḗşḗŧ ǿƞ %s. ıǈ靐 ϐǈϐϕς]"
+
+#: /vagrant/lib/daemon/recursivedns.py:319
+msgid "RDNS already set but should not be, resetting."
+msgstr "[ŘḒȠŞ ȧŀřḗȧḓẏ şḗŧ ƀŭŧ şħǿŭŀḓ ƞǿŧ ƀḗ, řḗşḗŧŧīƞɠ. ΰǈ鶱靐 ϕϵẛ鶱ΰ]"
+
+#: /vagrant/lib/daemon/recursivedns.py:339
+#, python-format
+msgid "Couldn't set DNS for %s interface"
+msgstr "[Ƈǿŭŀḓƞ'ŧ şḗŧ ḒȠŞ ƒǿř %s īƞŧḗřƒȧƈḗ 靐靐鶱ǅ靐ǲϖǈ ϕ]"
+
+#: /vagrant/lib/daemon/recursivedns.py:349
+#: /vagrant/lib/daemon/recursivedns.py:768
+#, python-format
+msgid "DNS set on %s."
+msgstr "[ḒȠŞ şḗŧ ǿƞ %s. ϕϖΐ ϖϖΰ ſ衋]"
+
+#: /vagrant/lib/daemon/recursivedns.py:353
+#: /vagrant/lib/daemon/recursivedns.py:770
+#, python-format
+msgid "DNS is already set correctly on %s."
+msgstr "[ḒȠŞ īş ȧŀřḗȧḓẏ şḗŧ ƈǿřřḗƈŧŀẏ ǿƞ %s. ϕǲ靐 ϖ衋 ẛ衋ς]"
+
+#: /vagrant/lib/daemon/recursivedns.py:373
+msgid "Detected active VPN."
+msgstr "[Ḓḗŧḗƈŧḗḓ ȧƈŧīṽḗ ṼƤȠ. ǈ衋ſǈǋϖϱı 鶱]"
+
+#: /vagrant/lib/daemon/recursivedns.py:415
+#, python-format
+msgid "Couldn't get DNS for %s interface"
+msgstr "[Ƈǿŭŀḓƞ'ŧ ɠḗŧ ḒȠŞ ƒǿř %s īƞŧḗřƒȧƈḗ ı鶱衋ǲϑϵϰϑ ϵ]"
+
+#: /vagrant/lib/daemon/recursivedns.py:441
+#: /vagrant/lib/daemon/recursivedns.py:455
+msgid "Couldn't call helper executable to set DNS"
+msgstr "[Ƈǿŭŀḓƞ'ŧ ƈȧŀŀ ħḗŀƥḗř ḗẋḗƈŭŧȧƀŀḗ ŧǿ şḗŧ ḒȠŞ ǈıΰϰϱϑϐǋ ǅ]"
+
+#: /vagrant/lib/daemon/recursivedns.py:491
+msgid "Checking if blacklisted..."
+msgstr "[Ƈħḗƈķīƞɠ īƒ ƀŀȧƈķŀīşŧḗḓ... ǋϱςǅǈϰϕϐ ſ]"
+
+#: /vagrant/lib/daemon/recursivedns.py:495
+#, python-format
+msgid "Skipping MAC blacklisted interface %s"
+msgstr "[Şķīƥƥīƞɠ ḾȦƇ ƀŀȧƈķŀīşŧḗḓ īƞŧḗřƒȧƈḗ %s ΐϖςǋǲǅςǅ ſ]"
+
+#: /vagrant/lib/daemon/recursivedns.py:503
+#, python-format
+msgid "Skipping description blacklisted interface %s"
+msgstr "[Şķīƥƥīƞɠ ḓḗşƈřīƥŧīǿƞ ƀŀȧƈķŀīşŧḗḓ īƞŧḗřƒȧƈḗ %s ϖıǲǅſǅ靐ΐ 鶱]"
+
+#: /vagrant/lib/daemon/recursivedns.py:529
+#, python-format
+msgid "Interface %s is DHCP, checking DNS..."
+msgstr "[Īƞŧḗřƒȧƈḗ %s īş ḒĦƇƤ, ƈħḗƈķīƞɠ ḒȠŞ... ϑǈϱϑǈǈǋſẛ]"
+
+#: /vagrant/lib/daemon/recursivedns.py:536
+#, python-format
+msgid "DHCP DNS: %s"
+msgstr "[ḒĦƇƤ ḒȠŞ: %s ẛǋſς ϰıςς]"
+
+#: /vagrant/lib/daemon/recursivedns.py:537
+#, python-format
+msgid "Interface DNS: %s"
+msgstr "[Īƞŧḗřƒȧƈḗ ḒȠŞ: %s 鶱ǅςϰẛẛǅıǈ]"
+
+#: /vagrant/lib/daemon/recursivedns.py:542
+#, python-format
+msgid "Interface %s DNS matches DHCP"
+msgstr "[Īƞŧḗřƒȧƈḗ %s ḒȠŞ ḿȧŧƈħḗş ḒĦƇƤ ΐ靐ϑςıǋǈǅϕ]"
+
+#: /vagrant/lib/daemon/recursivedns.py:554
+msgid "Searching NICs..."
+msgstr "[Şḗȧřƈħīƞɠ ȠĪƇş... ẛϱϕǈǲϕϖ衋衋]"
+
+#: /vagrant/lib/daemon/recursivedns.py:559
+#, python-format
+msgid "Looking at NIC %s"
+msgstr "[Ŀǿǿķīƞɠ ȧŧ ȠĪƇ %s ǅ靐鶱ϱϐǋǋ ſǅ]"
+
+#: /vagrant/lib/daemon/recursivedns.py:574
+#, python-format
+msgid "Found default route for %s"
+msgstr "[Ƒǿŭƞḓ ḓḗƒȧŭŀŧ řǿŭŧḗ ƒǿř %s 鶱ẛϖſǲ ǅΰϖǲ]"
+
+#: /vagrant/lib/daemon/recursivedns.py:606
+#, python-format
+msgid "Inspecting interface %s in registry."
+msgstr "[Īƞşƥḗƈŧīƞɠ īƞŧḗřƒȧƈḗ %s īƞ řḗɠīşŧřẏ. ǋǈϰϱıſ衋ϖςς]"
+
+#: /vagrant/lib/daemon/recursivedns.py:619
+msgid "Checking nameservers..."
+msgstr "[Ƈħḗƈķīƞɠ ƞȧḿḗşḗřṽḗřş... 衋ſǋςΐ鶱ϱ靐 ϕ]"
+
+#: /vagrant/lib/daemon/recursivedns.py:630
+#, python-format
+msgid "Found nameservers: %s"
+msgstr "[Ƒǿŭƞḓ ƞȧḿḗşḗřṽḗřş: %s ϑẛϖǲΰ ϐẛ鶱ϐ]"
+
+#: /vagrant/lib/daemon/recursivedns.py:637
+msgid "Refusing to set empty nameservers"
+msgstr "[Řḗƒŭşīƞɠ ŧǿ şḗŧ ḗḿƥŧẏ ƞȧḿḗşḗřṽḗřş ϕϖϕ靐ΐǋϵǈ ΰ]"
+
+#: /vagrant/lib/daemon/recursivedns.py:643
+#, python-format
+msgid "Comparing nameservers %s to DHCP DNS %s"
+msgstr "[Ƈǿḿƥȧřīƞɠ ƞȧḿḗşḗřṽḗřş %s ŧǿ ḒĦƇƤ ḒȠŞ %s ς靐ϵǲ衋ǲǈǈ鶱]"
+
+#: /vagrant/lib/daemon/recursivedns.py:647
+msgid "Setting nameservers to DHCP."
+msgstr "[Şḗŧŧīƞɠ ƞȧḿḗşḗřṽḗřş ŧǿ ḒĦƇƤ. ϕǲſϕϱϱẛ ϑǋ]"
+
+#: /vagrant/lib/daemon/recursivedns.py:654
+#, python-format
+msgid "Nameservers set on interface %s via registry."
+msgstr "[Ƞȧḿḗşḗřṽḗřş şḗŧ ǿƞ īƞŧḗřƒȧƈḗ %s ṽīȧ řḗɠīşŧřẏ. 衋ϖſϱ衋ǋǈΰǋΰ]"
+
+#: /vagrant/lib/daemon/recursivedns.py:691
+#, python-format
+msgid "Not setting DNS servers to empty on static interface %s."
+msgstr "[Ƞǿŧ şḗŧŧīƞɠ ḒȠŞ şḗřṽḗřş ŧǿ ḗḿƥŧẏ ǿƞ şŧȧŧīƈ īƞŧḗřƒȧƈḗ %s. ϵẛϑ ϵſǅ衋]"
+
+#: /vagrant/lib/daemon/recursivedns.py:698
+#, python-format
+msgid "DNS reset statically on %s."
+msgstr "[ḒȠŞ řḗşḗŧ şŧȧŧīƈȧŀŀẏ ǿƞ %s. ςǈς ǋϵϖϐǈ]"
+
+#: /vagrant/lib/daemon/recursivedns.py:727
+msgid "DHCP nameserver changed, updating..."
+msgstr "[ḒĦƇƤ ƞȧḿḗşḗřṽḗř ƈħȧƞɠḗḓ, ŭƥḓȧŧīƞɠ... 衋ϰϰϱ ſϑǋϕ鶱]"
+
+#: /vagrant/lib/daemon/recursivedns.py:730
+msgid "Not DHCP or DHCP nameserver hasn't changed"
+msgstr "[Ƞǿŧ ḒĦƇƤ ǿř ḒĦƇƤ ƞȧḿḗşḗřṽḗř ħȧşƞ'ŧ ƈħȧƞɠḗḓ ϑẛǅ ıϱ衋ǈ ϐ]"
+
+#: /vagrant/lib/daemon/recursivedns.py:734
+#, python-format
+msgid "Preparing to set DNS on %s"
+msgstr "[Ƥřḗƥȧřīƞɠ ŧǿ şḗŧ ḒȠŞ ǿƞ %s ǈǅϵΰǋϐϵǋſ]"
+
+#: /vagrant/lib/daemon/recursivedns.py:740
+#, python-format
+msgid "DNS to set is: %s"
+msgstr "[ḒȠŞ ŧǿ şḗŧ īş: %s ϖϖ靐 ςϵ ǅǋǈ]"
+
+#: /vagrant/lib/daemon/recursivedns.py:741
+#, python-format
+msgid "Comparing with current DNS: %s"
+msgstr "[Ƈǿḿƥȧřīƞɠ ẇīŧħ ƈŭřřḗƞŧ ḒȠŞ: %s ǋ衋ϵǋǅẛıϐǋ]"
+
+#: /vagrant/lib/daemon/recursivedns.py:753
+msgid "RDNS already set but now unreachable, resetting."
+msgstr "[ŘḒȠŞ ȧŀřḗȧḓẏ şḗŧ ƀŭŧ ƞǿẇ ŭƞřḗȧƈħȧƀŀḗ, řḗşḗŧŧīƞɠ. ǈıΰϱ 衋ǋǅΐϖ]"
+
+#: /vagrant/lib/daemon/unix.py:61
+msgid "Got SystemConfiguration event."
+msgstr "[Ɠǿŧ ŞẏşŧḗḿƇǿƞƒīɠŭřȧŧīǿƞ ḗṽḗƞŧ. ſſϑ ϐϵϖΐſϱ]"
+
+#: /vagrant/lib/daemon/unix.py:65
+msgid "RDNS enabled, running set_recursive_dns."
+msgstr "[ŘḒȠŞ ḗƞȧƀŀḗḓ, řŭƞƞīƞɠ şḗŧ_řḗƈŭřşīṽḗ_ḓƞş. ΐẛϖǋ ıſẛςϖ]"
+
+#: /vagrant/lib/daemon/unix.py:92
+msgid "RDNS thread exiting..."
+msgstr "[ŘḒȠŞ ŧħřḗȧḓ ḗẋīŧīƞɠ... ΰϵǋϐ ϱϱϑǋϐ]"
+
+#: /vagrant/lib/daemon/unix.py:99
+msgid "RDNS disabled, stopping event watcher."
+msgstr "[ŘḒȠŞ ḓīşȧƀŀḗḓ, şŧǿƥƥīƞɠ ḗṽḗƞŧ ẇȧŧƈħḗř. ΐẛǋΰ ǅẛǲϐǋ]"
+
+#: /vagrant/lib/daemon/unix.py:129 /vagrant/lib/daemon/unix.py:352
+msgid "Cleaning up stale daemon PID file."
+msgstr "[Ƈŀḗȧƞīƞɠ ŭƥ şŧȧŀḗ ḓȧḗḿǿƞ ƤĪḒ ƒīŀḗ. ϐǋΰẛǋΰı鶱 ǋ]"
+
+#: /vagrant/lib/daemon/unix.py:132
+msgid "Already running"
+msgstr "[Ȧŀřḗȧḓẏ řŭƞƞīƞɠ ǋǋ靐鶱ǅΐǲ ϖǈ]"
+
+#: /vagrant/lib/daemon/unix.py:139
+msgid "fork #1 failed."
+msgstr "[ƒǿřķ #1 ƒȧīŀḗḓ. 鶱ǈϵϑ ς靐 ΰϰ]"
+
+#: /vagrant/lib/daemon/unix.py:150
+msgid "fork #2 failed."
+msgstr "[ƒǿřķ #2 ƒȧīŀḗḓ. ϵǋ靐ΰ ΰϵ ǋǋ]"
+
+#: /vagrant/lib/daemon/unix.py:180 /vagrant/lib/daemon/unix.py:360
+msgid "{} Daemon version {} started with PID {}"
+msgstr "[{} Ḓȧḗḿǿƞ ṽḗřşīǿƞ {} şŧȧřŧḗḓ ẇīŧħ ƤĪḒ {} ǲǋ ϕſϱǋΰΰ]"
+
+#: /vagrant/lib/daemon/unix.py:205
+msgid "Event watcher thread not running, starting..."
+msgstr "[Ḗṽḗƞŧ ẇȧŧƈħḗř ŧħřḗȧḓ ƞǿŧ řŭƞƞīƞɠ, şŧȧřŧīƞɠ... 靐ẛǈǅı ςϱΰϱ]"
+
+#: /vagrant/lib/daemon/unix.py:227
+msgid "Daemon stopped."
+msgstr "[Ḓȧḗḿǿƞ şŧǿƥƥḗḓ. ϵς靐ϑ靐鶱 ΰǅϵ]"
+
+#: /vagrant/lib/daemon/unix.py:319
+msgid "Stopping {} Daemon version {} with PID {}"
+msgstr "[Şŧǿƥƥīƞɠ {} Ḓȧḗḿǿƞ ṽḗřşīǿƞ {} ẇīŧħ ƤĪḒ {} ǅΐϐϰϱϱẛϕ ϑ]"
+
+#: /vagrant/lib/daemon/unix.py:330 /vagrant/lib/daemon/unix.py:338
+msgid "Not running"
+msgstr "[Ƞǿŧ řŭƞƞīƞɠ ǋϖϵ ϕς衋ςıϕ]"
+
+#: /vagrant/lib/daemon/unix.py:356 /vagrant/lib/daemon/unix.py:367
+msgid "Daemon not running"
+msgstr "[Ḓȧḗḿǿƞ ƞǿŧ řŭƞƞīƞɠ 靐鶱ΐϵΰǈ 衋ϑ衋]"
+
+#: /vagrant/lib/daemon/windows.py:131
+msgid "Failed to download new version, will try again later."
+msgstr "[Ƒȧīŀḗḓ ŧǿ ḓǿẇƞŀǿȧḓ ƞḗẇ ṽḗřşīǿƞ, ẇīŀŀ ŧřẏ ȧɠȧīƞ ŀȧŧḗř. ǈϰ衋靐ǅǅ]"
+
+#: /vagrant/lib/daemon/windows.py:152
+msgid "Downloaded upgrade did not have a valid signature, skipping."
+msgstr ""
+"[Ḓǿẇƞŀǿȧḓḗḓ ŭƥɠřȧḓḗ ḓīḓ ƞǿŧ ħȧṽḗ ȧ ṽȧŀīḓ şīɠƞȧŧŭřḗ, şķīƥƥīƞɠ. ıΐϖϕǲ靐ſΐ衋]"
+
+#: /vagrant/lib/daemon/windows.py:233 /vagrant/lib/daemon/windows.py:460
+msgid "An exception occurred when starting the service."
+msgstr "[Ȧƞ ḗẋƈḗƥŧīǿƞ ǿƈƈŭřřḗḓ ẇħḗƞ şŧȧřŧīƞɠ ŧħḗ şḗřṽīƈḗ. ΰϰ ϑϕǋϐς衋ǋ]"
+
+#: /vagrant/lib/daemon/windows.py:254
+msgid "Failed to check for new version, will try again later."
+msgstr "[Ƒȧīŀḗḓ ŧǿ ƈħḗƈķ ƒǿř ƞḗẇ ṽḗřşīǿƞ, ẇīŀŀ ŧřẏ ȧɠȧīƞ ŀȧŧḗř. ϕſϐϖΐϖ]"
+
+#: /vagrant/lib/daemon/windows.py:270
+msgid "Failed to download and verify upgrade, skipping."
+msgstr "[Ƒȧīŀḗḓ ŧǿ ḓǿẇƞŀǿȧḓ ȧƞḓ ṽḗřīƒẏ ŭƥɠřȧḓḗ, şķīƥƥīƞɠ. ϱςǅǅẛ衋 ϕϕ]"
+
+#: /vagrant/lib/daemon/windows.py:282
+msgid "Windows service started."
+msgstr "[Ẇīƞḓǿẇş şḗřṽīƈḗ şŧȧřŧḗḓ. ϐǲϱΰϐς衋 ſı]"
+
+#: /vagrant/lib/daemon/windows.py:307 /vagrant/lib/daemon/windows.py:325
+msgid "Stopped event watcher thread."
+msgstr "[Şŧǿƥƥḗḓ ḗṽḗƞŧ ẇȧŧƈħḗř ŧħřḗȧḓ. ıẛǋſΐ衋ǅ ϖϖ]"
+
+#: /vagrant/lib/daemon/windows.py:318
+msgid "Got signal to stop service."
+msgstr "[Ɠǿŧ şīɠƞȧŀ ŧǿ şŧǿƥ şḗřṽīƈḗ. 鶱ǅ衋 ǲϱẛ鶱ϱϕ]"
+
+#: /vagrant/lib/daemon/windows.py:333
+msgid "Windows service stopped."
+msgstr "[Ẇīƞḓǿẇş şḗřṽīƈḗ şŧǿƥƥḗḓ. ΐıϑϐϖϰ鶱 ǲ鶱]"
+
+#: /vagrant/lib/daemon/windows.py:408 /vagrant/lib/daemon/windows.py:473
+#, python-format
+msgid "An exception occurred when running the service %s command."
+msgstr "[Ȧƞ ḗẋƈḗƥŧīǿƞ ǿƈƈŭřřḗḓ ẇħḗƞ řŭƞƞīƞɠ ŧħḗ şḗřṽīƈḗ %s ƈǿḿḿȧƞḓ. ǋΐ 鶱ǲ靐ϱǲ]"
+
+#: /vagrant/lib/daemon/windows.py:424
+msgid "Insufficient privileges, relaunching as admin."
+msgstr "[Īƞşŭƒƒīƈīḗƞŧ ƥřīṽīŀḗɠḗş, řḗŀȧŭƞƈħīƞɠ ȧş ȧḓḿīƞ. ϖϐΰǲ鶱ΰ衋ẛΐϖ]"
+
+#: /vagrant/lib/daemon/windows.py:454
+msgid "Launching Windows service..."
+msgstr "[Ŀȧŭƞƈħīƞɠ Ẇīƞḓǿẇş şḗřṽīƈḗ... 靐ϰϑϐǈϱϑǅΐ]"
+
+#: /vagrant/lib/daemon/windows.py:467
+#, python-format
+msgid "Running command %s for Windows service."
+msgstr "[Řŭƞƞīƞɠ ƈǿḿḿȧƞḓ %s ƒǿř Ẇīƞḓǿẇş şḗřṽīƈḗ. ϰǈẛǲϱ鶱ΐ ſϕ]"
+
+#: /vagrant/lib/daemon/windows.py:499
+#, python-format
+msgid "%s service is running."
+msgstr "[%s şḗřṽīƈḗ īş řŭƞƞīƞɠ. ϱϐ ϐϑıϱıǅϐ]"
+
+#: /vagrant/lib/daemon/windows.py:504
+#, python-format
+msgid "%s service is not running."
+msgstr "[%s şḗřṽīƈḗ īş ƞǿŧ řŭƞƞīƞɠ. ǅ衋 ΐıǋΰΰϕϵ]"
+
+#: /vagrant/lib/daemon/windows.py:508
+#, python-format
+msgid "Unable to get status for %s service."
+msgstr "[Ŭƞȧƀŀḗ ŧǿ ɠḗŧ şŧȧŧŭş ƒǿř %s şḗřṽīƈḗ. ϱǋẛ衋ıϖ 鶱ϱ]"
+
+#: /vagrant/lib/daemon/api/commands.py:462
+#, python-format
+msgid "Found action for %s"
+msgstr "[Ƒǿŭƞḓ ȧƈŧīǿƞ ƒǿř %s 靐衋ǈϖ衋 ǅẛϑ靐]"
+
+#: /vagrant/lib/daemon/api/exceptions.py:22
+#, python-format
+msgid "Unknown property %s"
+msgstr "[Ŭƞķƞǿẇƞ ƥřǿƥḗřŧẏ %s ϕϱſϰǈϑǅ 衋ϕ]"
+
+#: /vagrant/lib/daemon/api/exceptions.py:28
+#, python-format
+msgid "Missing required property %s"
+msgstr "[Ḿīşşīƞɠ řḗɋŭīřḗḓ ƥřǿƥḗřŧẏ %s ǅϵǲϱǈϖϑ ǲϱ]"
+
+#: /vagrant/lib/daemon/api/exceptions.py:34
+#, python-format
+msgid "Missing required field %s"
+msgstr "[Ḿīşşīƞɠ řḗɋŭīřḗḓ ƒīḗŀḓ %s ẛ衋ΰϖϐẛς 衋ı]"
+
+#: /vagrant/lib/daemon/api/exceptions.py:40
+#, python-format
+msgid "Incorrect type for %s property"
+msgstr "[Īƞƈǿřřḗƈŧ ŧẏƥḗ ƒǿř %s ƥřǿƥḗřŧẏ ϕǅΐϐΰǋϕϵı]"
+
+#: /vagrant/lib/daemon/api/exceptions.py:46
+msgid "Invalid request format"
+msgstr "[Īƞṽȧŀīḓ řḗɋŭḗşŧ ƒǿřḿȧŧ ǅǲϰϰǅſǲ ϵς]"
+
+#: /vagrant/lib/daemon/api/exceptions.py:52
+#, python-format
+msgid "\"%s\" is not a valid object"
+msgstr "[\"%s\" īş ƞǿŧ ȧ ṽȧŀīḓ ǿƀĵḗƈŧ 鶱ςẛς ΐΐ ſϖ]"
+
+#: /vagrant/lib/daemon/api/exceptions.py:58
+#, python-format
+msgid "\"%s\" is not a valid method for a %s object"
+msgstr "[\"%s\" īş ƞǿŧ ȧ ṽȧŀīḓ ḿḗŧħǿḓ ƒǿř ȧ %s ǿƀĵḗƈŧ ϵΐ靐ϕ ϵϑ ΰϵ]"
+
+#: /vagrant/lib/daemon/api/exceptions.py:65
+#, python-format
+msgid "Error connecting to %s. Please verify your "
+msgstr "[Ḗřřǿř ƈǿƞƞḗƈŧīƞɠ ŧǿ %s. Ƥŀḗȧşḗ ṽḗřīƒẏ ẏǿŭř  ϐǲ靐鶱ǲ ı鶱ǋϰ]"
+
+#: /vagrant/lib/daemon/api/exceptions.py:66
+msgid "internet connection and try again."
+msgstr "[īƞŧḗřƞḗŧ ƈǿƞƞḗƈŧīǿƞ ȧƞḓ ŧřẏ ȧɠȧīƞ. ϵϵΰſϰϖıı ϕ]"
+
+#: /vagrant/lib/daemon/api/exceptions.py:72
+#, python-format
+msgid "Unexpected response from %s"
+msgstr "[Ŭƞḗẋƥḗƈŧḗḓ řḗşƥǿƞşḗ ƒřǿḿ %s ǋ衋ΐϑϐϵΰǅΰϰ]"
+
+#: /vagrant/lib/daemon/api/exceptions.py:87
+msgid "The specified account does not exist."
+msgstr "[Ŧħḗ şƥḗƈīƒīḗḓ ȧƈƈǿŭƞŧ ḓǿḗş ƞǿŧ ḗẋīşŧ. ıϰϵ ΐϱϑς靐ΰ]"
+
+#: /vagrant/lib/daemon/api/exceptions.py:93
+msgid "The specified hostname does not exist."
+msgstr "[Ŧħḗ şƥḗƈīƒīḗḓ ħǿşŧƞȧḿḗ ḓǿḗş ƞǿŧ ḗẋīşŧ. 靐ϵϱ 衋鶱ϵı靐ϱ]"
+
+#: /vagrant/lib/daemon/api/exceptions.py:99
+#, python-format
+msgid "The account %s already exists."
+msgstr "[Ŧħḗ ȧƈƈǿŭƞŧ %s ȧŀřḗȧḓẏ ḗẋīşŧş. ΰıϱ 鶱靐衋鶱ς鶱]"
+
+#: /vagrant/lib/daemon/api/exceptions.py:105
+msgid "The specified host type is not valid."
+msgstr "[Ŧħḗ şƥḗƈīƒīḗḓ ħǿşŧ ŧẏƥḗ īş ƞǿŧ ṽȧŀīḓ. ſ衋ΰ ǋ衋ς鶱ǋ鶱]"
+
+#: /vagrant/lib/daemon/api/exceptions.py:111
+msgid "Please enter your username, not an email address."
+msgstr "[Ƥŀḗȧşḗ ḗƞŧḗř ẏǿŭř ŭşḗřƞȧḿḗ, ƞǿŧ ȧƞ ḗḿȧīŀ ȧḓḓřḗşş. ϱϐſıǲϱ ıϕϵ]"
+
+#: /vagrant/lib/daemon/api/exceptions.py:118
+#, python-format
+msgid "Username too long. Usernames must be %s characters or less."
+msgstr ""
+"[Ŭşḗřƞȧḿḗ ŧǿǿ ŀǿƞɠ. Ŭşḗřƞȧḿḗş ḿŭşŧ ƀḗ %s ƈħȧřȧƈŧḗřş ǿř ŀḗşş. ǲς鶱ΰΰΰ衋ẛ]"
+
+#: /vagrant/lib/daemon/api/exceptions.py:125
+msgid "Invalid username format."
+msgstr "[Īƞṽȧŀīḓ ŭşḗřƞȧḿḗ ƒǿřḿȧŧ. 衋ΰſϖΰϐı 鶱ſ]"
+
+#: /vagrant/lib/daemon/api/exceptions.py:131
+msgid "Invalid IPv4 parameter."
+msgstr "[Īƞṽȧŀīḓ ĪƤṽ4 ƥȧřȧḿḗŧḗř. ǈΰ鶱靐ΰǅϑ ǈẛ]"
+
+#: /vagrant/lib/daemon/api/exceptions.py:137
+msgid "Invalid IPv6 parameter."
+msgstr "[Īƞṽȧŀīḓ ĪƤṽ6 ƥȧřȧḿḗŧḗř. ϵϖẛǋẛϰϕ ẛϕ]"
+
+#: /vagrant/lib/daemon/api/exceptions.py:143
+msgid "Invalid interface specified."
+msgstr "[Īƞṽȧŀīḓ īƞŧḗřƒȧƈḗ şƥḗƈīƒīḗḓ. ǋ鶱ǲ鶱ΐϵ靐 ıϖ]"
+
+#: /vagrant/lib/daemon/api/exceptions.py:149
+msgid "Invalid MAC parameter."
+msgstr "[Īƞṽȧŀīḓ ḾȦƇ ƥȧřȧḿḗŧḗř. ǅϑϱϵıϱı 鶱鶱]"
+
+#: /vagrant/lib/daemon/api/exceptions.py:155
+msgid "Invalid name parameter."
+msgstr "[Īƞṽȧŀīḓ ƞȧḿḗ ƥȧřȧḿḗŧḗř. ϕςΐſǅςǲ ǲǲ]"
+
+#: /vagrant/lib/daemon/api/exceptions.py:161
+msgid "Invalid type parameter."
+msgstr "[Īƞṽȧŀīḓ ŧẏƥḗ ƥȧřȧḿḗŧḗř. ϰǋẛǈϖϱς ϕı]"
+
+#: /vagrant/lib/daemon/api/exceptions.py:167
+msgid "No interface found."
+msgstr "[Ƞǿ īƞŧḗřƒȧƈḗ ƒǿŭƞḓ. ǋǅ ϖſ衋ϕǅſẛ]"
+
+#: /vagrant/lib/daemon/api/exceptions.py:173
+msgid "No hosts found."
+msgstr "[Ƞǿ ħǿşŧş ƒǿŭƞḓ. ϐΐ ςςϑ靐ΰ ϱ]"
+
+#: /vagrant/lib/daemon/api/exceptions.py:179
+msgid "Invalid IP address returned from server."
+msgstr "[Īƞṽȧŀīḓ ĪƤ ȧḓḓřḗşş řḗŧŭřƞḗḓ ƒřǿḿ şḗřṽḗř. ΐϕϰǈı鶱ς ϖǅ]"
+
+#: /vagrant/lib/daemon/api/exceptions.py:185
+#, python-format
+msgid "Invalid value for %s"
+msgstr "[Īƞṽȧŀīḓ ṽȧŀŭḗ ƒǿř %s ϰſϕıϱϵΐ ǅΐ]"
+
+#: /vagrant/lib/daemon/api/response.py:63
+#, python-format
+msgid "Internal API verification failed: %s"
+msgstr "[Īƞŧḗřƞȧŀ ȦƤĪ ṽḗřīƒīƈȧŧīǿƞ ƒȧīŀḗḓ: %s ıϕẛẛϱẛϐ鶱 靐]"
+
+#: /vagrant/lib/daemon/api/response.py:70
+#, python-format
+msgid "Received internal API request %s.%s"
+msgstr "[Řḗƈḗīṽḗḓ īƞŧḗřƞȧŀ ȦƤĪ řḗɋŭḗşŧ %s.%s ΰςϱſΐǲǈϖ ǋ]"
+
+#: /vagrant/lib/daemon/api/response.py:82
+#, python-format
+msgid "API request returned status %s with error %s"
+msgstr "[ȦƤĪ řḗɋŭḗşŧ řḗŧŭřƞḗḓ şŧȧŧŭş %s ẇīŧħ ḗřřǿř %s ϖςς ſſςϑςı]"
+
+#: /vagrant/lib/daemon/api/response.py:87
+msgid "An error occurred processing the API request."
+msgstr "[Ȧƞ ḗřřǿř ǿƈƈŭřřḗḓ ƥřǿƈḗşşīƞɠ ŧħḗ ȦƤĪ řḗɋŭḗşŧ. ſ鶱 ſϵǅẛΰ ı]"
+
+#: /vagrant/lib/daemon/api/response.py:92
+#, python-format
+msgid "API request succeeded with status %s data %s"
+msgstr "[ȦƤĪ řḗɋŭḗşŧ şŭƈƈḗḗḓḗḓ ẇīŧħ şŧȧŧŭş %s ḓȧŧȧ %s 衋ΐϕ ϕϕϖ鶱鶱ϵ]"
+
+#: /vagrant/lib/frontend/cli.py:35
+msgid "Daemon not running, exiting..."
+msgstr "[Ḓȧḗḿǿƞ ƞǿŧ řŭƞƞīƞɠ, ḗẋīŧīƞɠ... ςϑſςΐſ ϑſǅ]"
+
+#: /vagrant/lib/frontend/cli.py:40
+msgid "Arguments must be in the form of name:value."
+msgstr "[Ȧřɠŭḿḗƞŧş ḿŭşŧ ƀḗ īƞ ŧħḗ ƒǿřḿ ǿƒ ƞȧḿḗ:ṽȧŀŭḗ. ςΐǲϕϖǲϕǋϖ]"
+
+#: /vagrant/lib/frontend/cli.py:52
+#, python-format
+msgid "Status: %s"
+msgstr "[Şŧȧŧŭş: %s ϕϑǈıϰẛϐ ϵ]"
+
+#: /vagrant/lib/frontend/cli.py:68
+#, python-format
+msgid "Errors: %s"
+msgstr "[Ḗřřǿřş: %s ϱϖϕıǅǈϰ ϖ]"
+
+#: /vagrant/lib/frontend/qt.py:94
+#, python-format
+msgid "Running API method %s"
+msgstr "[Řŭƞƞīƞɠ ȦƤĪ ḿḗŧħǿḓ %s ǲΰϵϰϑẛΐ ςΰ]"
+
+#: /vagrant/lib/frontend/qt.py:101
+#, python-format
+msgid "Finished API method %s"
+msgstr "[Ƒīƞīşħḗḓ ȦƤĪ ḿḗŧħǿḓ %s ϰΐΐ鶱ΐ靐衋ς ǋ]"
+
+#: /vagrant/lib/frontend/qt.py:106
+msgid ""
+"Failed to receive API response from backend. Attempting to restart daemon."
+msgstr ""
+"[Ƒȧīŀḗḓ ŧǿ řḗƈḗīṽḗ ȦƤĪ řḗşƥǿƞşḗ ƒřǿḿ ƀȧƈķḗƞḓ. Ȧŧŧḗḿƥŧīƞɠ ŧǿ řḗşŧȧřŧ ḓȧḗḿǿƞ. "
+"ǅΐϖΰϐǈ 靐ϕ ǈ]"
+
+#: /vagrant/lib/frontend/qt.py:116
+msgid "Unable to connect to backend daemon, giving up."
+msgstr "[Ŭƞȧƀŀḗ ŧǿ ƈǿƞƞḗƈŧ ŧǿ ƀȧƈķḗƞḓ ḓȧḗḿǿƞ, ɠīṽīƞɠ ŭƥ. ΐϖςςǲǈ ǲ衋]"
+
+#: /vagrant/lib/frontend/qt.py:141 /vagrant/lib/frontend/qt.py:142
+msgid "Unknown"
+msgstr "[Ŭƞķƞǿẇƞ ϖ衋ǈϱſǋϵ]"
+
+#: /vagrant/lib/frontend/qt.py:229
+msgid "Waiting for threads to finish."
+msgstr "[Ẇȧīŧīƞɠ ƒǿř ŧħřḗȧḓş ŧǿ ƒīƞīşħ. ǲǲẛǅǲϵ靐 ΐǅ]"
+
+#: /vagrant/lib/frontend/qt.py:234
+msgid "Waiting on thread..."
+msgstr "[Ẇȧīŧīƞɠ ǿƞ ŧħřḗȧḓ... 鶱ſΐϰſǅϵ ΐ鶱]"
+
+#: /vagrant/lib/frontend/qt.py:237
+msgid "Thread finished."
+msgstr "[Ŧħřḗȧḓ ƒīƞīşħḗḓ. ſſǲ鶱ϐǲ ǅǅς]"
+
+#: /vagrant/lib/frontend/qt.py:247
+msgid "Pending quit, skipping API call."
+msgstr "[Ƥḗƞḓīƞɠ ɋŭīŧ, şķīƥƥīƞɠ ȦƤĪ ƈȧŀŀ. ǅ衋靐ǲΐǅϵ ςϱ]"
+
+#: /vagrant/lib/frontend/qt.py:313
+msgid "Starting the client..."
+msgstr "[Şŧȧřŧīƞɠ ŧħḗ ƈŀīḗƞŧ... ϰſǲẛϖǈϑſ ǲ]"
+
+#: /vagrant/lib/frontend/qt.py:322
+msgid "Backend daemon not running, starting..."
+msgstr "[Ɓȧƈķḗƞḓ ḓȧḗḿǿƞ ƞǿŧ řŭƞƞīƞɠ, şŧȧřŧīƞɠ... 靐ǲ鶱ςϖςϰ ϰ靐]"
+
+#: /vagrant/lib/frontend/qt.py:335
+msgid "Backend daemon not running matching version, restarting daemon..."
+msgstr ""
+"[Ɓȧƈķḗƞḓ ḓȧḗḿǿƞ ƞǿŧ řŭƞƞīƞɠ ḿȧŧƈħīƞɠ ṽḗřşīǿƞ, řḗşŧȧřŧīƞɠ ḓȧḗḿǿƞ... 靐ǋı鶱ıϖſ "
+"靐ϵ]"
+
+#: /vagrant/lib/frontend/qt.py:346
+msgid "Unable to start backend daemon, exiting."
+msgstr "[Ŭƞȧƀŀḗ ŧǿ şŧȧřŧ ƀȧƈķḗƞḓ ḓȧḗḿǿƞ, ḗẋīŧīƞɠ. 鶱鶱ϰΐϰ靐 ϰΐ]"
+
+#: /vagrant/lib/frontend/qt.py:349 /vagrant/lib/frontend/qt.py:459
+#, python-format
+msgid "Error starting %s"
+msgstr "[Ḗřřǿř şŧȧřŧīƞɠ %s ǲΐϰ靐ϱ ıǅϵς]"
+
+#: /vagrant/lib/frontend/qt.py:352
+msgid "Error starting backend daemon, exiting."
+msgstr "[Ḗřřǿř şŧȧřŧīƞɠ ƀȧƈķḗƞḓ ḓȧḗḿǿƞ, ḗẋīŧīƞɠ. ϰẛςϵǋ ϑϖϐſ]"
+
+#: /vagrant/lib/frontend/qt.py:360
+msgid "Starting the UI..."
+msgstr "[Şŧȧřŧīƞɠ ŧħḗ ŬĪ... ϵıϱıϵϐϐ靐 ẛ]"
+
+#: /vagrant/lib/frontend/qt.py:453
+msgid "Cleaned up stale socket from unclean exit."
+msgstr "[Ƈŀḗȧƞḗḓ ŭƥ şŧȧŀḗ şǿƈķḗŧ ƒřǿḿ ŭƞƈŀḗȧƞ ḗẋīŧ. ΰϕςſ衋ΐẛ ΐϕ]"
+
+#: /vagrant/lib/frontend/qt.py:457 /vagrant/lib/frontend/qt.py:462
+msgid "Error listening on local socket."
+msgstr "[Ḗřřǿř ŀīşŧḗƞīƞɠ ǿƞ ŀǿƈȧŀ şǿƈķḗŧ. ς靐ς鶱ǈ ϱΐςϑ]"
+
+#: /vagrant/lib/frontend/qt.py:488
+#, python-format
+msgid "About %s"
+msgstr "[Ȧƀǿŭŧ %s ǈıϰǈϵ 靐衋]"
+
+#: /vagrant/lib/frontend/qt.py:493
+#, python-format
+msgid "<h3>About %s</h3>"
+msgstr "[<h3>Ȧƀǿŭŧ %s</h3> ſ鶱ſϕıϕϐſǲ]"
+
+#: /vagrant/lib/frontend/qt.py:494
+#, python-format
+msgid ""
+"%s monitors your IP address for changes, keeping your Remote Access and "
+"Standard DNS hostnames up to date."
+msgstr ""
+"[%s ḿǿƞīŧǿřş ẏǿŭř ĪƤ ȧḓḓřḗşş ƒǿř ƈħȧƞɠḗş, ķḗḗƥīƞɠ ẏǿŭř Řḗḿǿŧḗ Ȧƈƈḗşş ȧƞḓ "
+"Şŧȧƞḓȧřḓ ḒȠŞ ħǿşŧƞȧḿḗş ŭƥ ŧǿ ḓȧŧḗ. ΰ鶱 ϖẛςϑΰς鶱靐 ϐϰϕǈ ǈ]"
+
+#: /vagrant/lib/frontend/qt.py:498
+#, python-format
+msgid "2007-%s %s, All rights reserved."
+msgstr "[2007-%s %s, Ȧŀŀ řīɠħŧş řḗşḗřṽḗḓ. ϐǅǅςǅẛı 鶱ı]"
+
+#: /vagrant/lib/frontend/qt.py:521
+msgid "Upgrade Available!"
+msgstr "[Ŭƥɠřȧḓḗ Ȧṽȧīŀȧƀŀḗ! ϐϰϱſϐ靐ϐ ϵϐ]"
+
+#: /vagrant/lib/frontend/qt.py:537
+msgid "Configure Hosts"
+msgstr "[Ƈǿƞƒīɠŭřḗ Ħǿşŧş 鶱ϱẛǅǈΰ鶱ΰϑ]"
+
+#: /vagrant/lib/frontend/qt.py:583 /vagrant/lib/frontend/qt.py:590
+#: /vagrant/lib/frontend/qt.py:691 /vagrant/lib/frontend/qt.py:1291
+msgid "Automatic"
+msgstr "[Ȧŭŧǿḿȧŧīƈ ẛΐϱſẛſϱıϰ]"
+
+#: /vagrant/lib/frontend/qt.py:584 /vagrant/lib/frontend/qt.py:591
+#: /vagrant/lib/frontend/qt.py:702 /vagrant/lib/frontend/qt.py:1290
+msgid "Disabled"
+msgstr "[Ḓīşȧƀŀḗḓ ϰΐϰϰϱǅǋϰ]"
+
+#: /vagrant/lib/frontend/qt.py:585 /vagrant/lib/frontend/qt.py:592
+#: /vagrant/lib/frontend/qt.py:710
+msgid "Local Interface"
+msgstr "[Ŀǿƈȧŀ Īƞŧḗřƒȧƈḗ ǋẛ衋ϰſ ϵ衋ϖϕ]"
+
+#: /vagrant/lib/frontend/qt.py:587 /vagrant/lib/frontend/qt.py:594
+#: /vagrant/lib/frontend/qt.py:706
+msgid "Static Address"
+msgstr "[Şŧȧŧīƈ Ȧḓḓřḗşş 靐鶱ẛϵϰẛ 衋ǲ鶱]"
+
+#: /vagrant/lib/frontend/qt.py:603
+msgid "Tried to configure hosts with no account selected, skipping"
+msgstr ""
+"[Ŧřīḗḓ ŧǿ ƈǿƞƒīɠŭřḗ ħǿşŧş ẇīŧħ ƞǿ ȧƈƈǿŭƞŧ şḗŀḗƈŧḗḓ, şķīƥƥīƞɠ 衋靐ΰ靐ς ϱſ]"
+
+#: /vagrant/lib/frontend/qt.py:648
+msgid "No hosts selected"
+msgstr "[Ƞǿ ħǿşŧş şḗŀḗƈŧḗḓ ẛς ϑΰΐςϐ ǋ]"
+
+#: /vagrant/lib/frontend/qt.py:650
+msgid "Please select one or more hosts to configure."
+msgstr "[Ƥŀḗȧşḗ şḗŀḗƈŧ ǿƞḗ ǿř ḿǿřḗ ħǿşŧş ŧǿ ƈǿƞƒīɠŭřḗ. ϖϱǅϕϖΰ 衋ϐẛ]"
+
+#: /vagrant/lib/frontend/qt.py:738
+#, python-format
+msgid "%s Login"
+msgstr "[%s Ŀǿɠīƞ ΐǅ ǋẛϵſǋ]"
+
+#: /vagrant/lib/frontend/qt.py:768
+#, python-format
+msgid "%s EULA"
+msgstr "[%s ḖŬĿȦ ϵϑ ϰϐǈı]"
+
+#: /vagrant/lib/frontend/qt.py:787
+msgid "EULA accepted"
+msgstr "[ḖŬĿȦ ȧƈƈḗƥŧḗḓ ẛΰǲϰ ǈϐıϕẛ]"
+
+#: /vagrant/lib/frontend/qt.py:795
+msgid "EULA not accepted, stopping daemon and closing."
+msgstr "[ḖŬĿȦ ƞǿŧ ȧƈƈḗƥŧḗḓ, şŧǿƥƥīƞɠ ḓȧḗḿǿƞ ȧƞḓ ƈŀǿşīƞɠ. ϑϖ衋ǅ ϱϰı ǲ]"
+
+#: /vagrant/lib/frontend/qt.py:807
+msgid "Showing Recursive Dns Dialog"
+msgstr "[Şħǿẇīƞɠ Řḗƈŭřşīṽḗ Ḓƞş Ḓīȧŀǿɠ ǈΐςςϑϵ靐 ϱſ]"
+
+#: /vagrant/lib/frontend/qt.py:817
+msgid "Showing Welcome Dialog"
+msgstr "[Şħǿẇīƞɠ Ẇḗŀƈǿḿḗ Ḓīȧŀǿɠ ıϖǲǋϱϵς ϐϐ]"
+
+#: /vagrant/lib/frontend/qt.py:831
+msgid "startOrShowEULA"
+msgstr "[şŧȧřŧǾřŞħǿẇḖŬĿȦ 鶱ǈǋϵϖϖ衋ϵς鶱]"
+
+#: /vagrant/lib/frontend/qt.py:835
+msgid "Showing EULA Dialog"
+msgstr "[Şħǿẇīƞɠ ḖŬĿȦ Ḓīȧŀǿɠ 鶱ΐẛı衋ϐς ϐϐ]"
+
+#: /vagrant/lib/frontend/qt.py:844
+msgid "Showing Main Window"
+msgstr "[Şħǿẇīƞɠ Ḿȧīƞ Ẇīƞḓǿẇ 靐ϐϐϱǲϵϑ ǈϑ]"
+
+#: /vagrant/lib/frontend/qt.py:871
+msgid "Host Update Status Legend"
+msgstr "[Ħǿşŧ Ŭƥḓȧŧḗ Şŧȧŧŭş Ŀḗɠḗƞḓ ϐΐΐϕ ΐ鶱ϐϱ衋]"
+
+#: /vagrant/lib/frontend/qt.py:927
+msgid "View Log Details"
+msgstr "[Ṽīḗẇ Ŀǿɠ Ḓḗŧȧīŀş ϑϐ鶱ϵ ǲǈϐ ς]"
+
+#: /vagrant/lib/frontend/qt.py:976 /vagrant/lib/frontend/qt.py:1071
+msgid "Error exporting logs"
+msgstr "[Ḗřřǿř ḗẋƥǿřŧīƞɠ ŀǿɠş ςϑſ鶱衋 ǲϕıı]"
+
+#: /vagrant/lib/frontend/qt.py:977
+msgid ""
+"An error occurred while writing to {}:\n"
+"\n"
+"{}"
+msgstr ""
+"[Ȧƞ ḗřřǿř ǿƈƈŭřřḗḓ ẇħīŀḗ ẇřīŧīƞɠ ŧǿ {}:\n"
+"\n"
+"{} ı靐 ǈǋϕǲϑ ǈ]"
+
+#: /vagrant/lib/frontend/qt.py:1009
+msgid "Confirm retry"
+msgstr "[Ƈǿƞƒīřḿ řḗŧřẏ ıςǅǅϖẛ衋 ϕΰ]"
+
+#: /vagrant/lib/frontend/qt.py:1011
+#, python-format
+msgid "Have you corrected the problem with account <b>%s</b>?"
+msgstr "[Ħȧṽḗ ẏǿŭ ƈǿřřḗƈŧḗḓ ŧħḗ ƥřǿƀŀḗḿ ẇīŧħ ȧƈƈǿŭƞŧ <b>%s</b>? ǋǅ鶱ϐ ǈ靐]"
+
+#: /vagrant/lib/frontend/qt.py:1072
+msgid ""
+"An error occurred while reading {}:\n"
+"\n"
+"{}"
+msgstr ""
+"[Ȧƞ ḗřřǿř ǿƈƈŭřřḗḓ ẇħīŀḗ řḗȧḓīƞɠ {}:\n"
+"\n"
+"{} ẛ衋 ςΐςϐǈ 靐]"
+
+#: /vagrant/lib/frontend/qt.py:1089
+msgid "Save ZIP file"
+msgstr "[Şȧṽḗ ẐĪƤ ƒīŀḗ ϵſϕς ϰǲϑ ẛ]"
+
+#: /vagrant/lib/frontend/qt.py:1091
+msgid "ZIP files (*.zip)"
+msgstr "[ẐĪƤ ƒīŀḗş (*.zīƥ) 衋ϕı ǲϑǲϵϰ]"
+
+#: /vagrant/lib/frontend/qt.py:1179
+msgid "Retry update"
+msgstr "[Řḗŧřẏ ŭƥḓȧŧḗ 鶱ǋΐϵǋ ǋΰϰ衋]"
+
+#: /vagrant/lib/frontend/qt.py:1302 /vagrant/lib/frontend/qt.py:1529
+#: /vagrant/lib/frontend/qt.py:1530 /vagrant/lib/frontend/qt.py:1549
+#: /vagrant/lib/frontend/qt.py:1550
+msgid "Never"
+msgstr "[Ƞḗṽḗř ϕ靐ΐıǋ]"
+
+#: /vagrant/lib/frontend/qt.py:1313 /vagrant/lib/frontend/qt.py:1316
+#, python-format
+msgid "Interface: %s"
+msgstr "[Īƞŧḗřƒȧƈḗ: %s ſΰϐǋǈǋΐǅϐϰ]"
+
+#: /vagrant/lib/frontend/qt.py:1326
+#, python-format
+msgid "Static: %s"
+msgstr "[Şŧȧŧīƈ: %s 靐ǅſ衋ϐΰϰ 衋]"
+
+#: /vagrant/lib/frontend/qt.py:1337
+msgid "Inactive"
+msgstr "[Īƞȧƈŧīṽḗ 鶱ſ衋ǋ鶱ǋϕϐ]"
+
+#: /vagrant/lib/frontend/qt.py:1340
+msgid "Active"
+msgstr "[Ȧƈŧīṽḗ 衋鶱ΐϱẛ靐]"
+
+#: /vagrant/lib/frontend/qt.py:1418
+msgid "free"
+msgstr "[ƒřḗḗ ǅΐǈı]"
+
+#: /vagrant/lib/frontend/qt.py:1419
+msgid "vip"
+msgstr "[ṽīƥ ǈΰẛ]"
+
+#. TRANSLATOR: This will say "Hi user123"
+#: /vagrant/lib/frontend/qt.py:1442
+#, python-format
+msgid "Hi <strong>%s</strong>"
+msgstr "[Ħī <strong>%s</strong> 靐ϑ ςǅϑẛϕǋϕ]"
+
+#: /vagrant/lib/frontend/qt.py:1484
+msgid "Failed to configure hosts."
+msgstr "[Ƒȧīŀḗḓ ŧǿ ƈǿƞƒīɠŭřḗ ħǿşŧş. ΰΰ鶱ǈǲ鶱 ǲǲ]"
+
+#: /vagrant/lib/frontend/qt.py:1560
+#, python-format
+msgid "Last IP Check: %s<br/>Last Host Update: %s"
+msgstr "[Ŀȧşŧ ĪƤ Ƈħḗƈķ: %s<br/>Ŀȧşŧ Ħǿşŧ Ŭƥḓȧŧḗ: %s ſſǋǈ 鶱ǋ ıΰ]"
+
+#: /vagrant/lib/frontend/qt.py:1578
+#, python-format
+msgid "%s Preferences"
+msgstr "[%s Ƥřḗƒḗřḗƞƈḗş ϱς ϰϐǈϕςϕ衋]"
+
+#: /vagrant/lib/frontend/qt.py:1598
+msgid "None"
+msgstr "[Ƞǿƞḗ ſϑϱ鶱]"
+
+#: /vagrant/lib/frontend/qt.py:1660
+msgid "Failed to add account"
+msgstr "[Ƒȧīŀḗḓ ŧǿ ȧḓḓ ȧƈƈǿŭƞŧ ϕϖıϵǅı ǲϖ]"
+
+#: /vagrant/lib/frontend/qt.py:1684
+msgid "Are you sure?"
+msgstr "[Ȧřḗ ẏǿŭ şŭřḗ? ΰϕΐ ǲſς ϐϑ]"
+
+#: /vagrant/lib/frontend/qt.py:1686
+#, python-format
+msgid "Are you sure you want to remove the account <b>%s</b>?"
+msgstr "[Ȧřḗ ẏǿŭ şŭřḗ ẏǿŭ ẇȧƞŧ ŧǿ řḗḿǿṽḗ ŧħḗ ȧƈƈǿŭƞŧ <b>%s</b>? ǈ鶱ϵ ϑϱẛ]"
+
+#: /vagrant/lib/frontend/qt.py:1736 /vagrant/lib/frontend/qt.py:1993
+msgid "Recursive DNS Settings"
+msgstr "[Řḗƈŭřşīṽḗ ḒȠŞ Şḗŧŧīƞɠş ϵ鶱ϱΰϖ衋ϵςϖ]"
+
+#: /vagrant/lib/frontend/qt.py:1738
+msgid ""
+"Experience a better, faster, and safer way to surf the Internet with our "
+"Recursive DNS service. By selecting the checkbox below, this machine will be"
+" set to use Dyn's Recursive DNS service instead of the ones provided by your"
+" Internet Service Provider (ISP). This will enable a faster Internet "
+"connection and in turn, provide Dyn with anonymized Internet usage "
+"information that may help some of your favorite websites run even better."
+msgstr ""
+"[Ḗẋƥḗřīḗƞƈḗ ȧ ƀḗŧŧḗř, ƒȧşŧḗř, ȧƞḓ şȧƒḗř ẇȧẏ ŧǿ şŭřƒ ŧħḗ Īƞŧḗřƞḗŧ ẇīŧħ ǿŭř "
+"Řḗƈŭřşīṽḗ ḒȠŞ şḗřṽīƈḗ. Ɓẏ şḗŀḗƈŧīƞɠ ŧħḗ ƈħḗƈķƀǿẋ ƀḗŀǿẇ, ŧħīş ḿȧƈħīƞḗ ẇīŀŀ ƀḗ"
+" şḗŧ ŧǿ ŭşḗ Ḓẏƞ'ş Řḗƈŭřşīṽḗ ḒȠŞ şḗřṽīƈḗ īƞşŧḗȧḓ ǿƒ ŧħḗ ǿƞḗş ƥřǿṽīḓḗḓ ƀẏ ẏǿŭř"
+" Īƞŧḗřƞḗŧ Şḗřṽīƈḗ Ƥřǿṽīḓḗř (ĪŞƤ). Ŧħīş ẇīŀŀ ḗƞȧƀŀḗ ȧ ƒȧşŧḗř Īƞŧḗřƞḗŧ "
+"ƈǿƞƞḗƈŧīǿƞ ȧƞḓ īƞ ŧŭřƞ, ƥřǿṽīḓḗ Ḓẏƞ ẇīŧħ ȧƞǿƞẏḿīzḗḓ Īƞŧḗřƞḗŧ ŭşȧɠḗ "
+"īƞƒǿřḿȧŧīǿƞ ŧħȧŧ ḿȧẏ ħḗŀƥ şǿḿḗ ǿƒ ẏǿŭř ƒȧṽǿřīŧḗ ẇḗƀşīŧḗş řŭƞ ḗṽḗƞ ƀḗŧŧḗř. "
+"ϕǈſ靐ϐϱ鶱ϱıſ ǅ ϕϖϑſϕϱς ΰ衋ẛ鶱ϐςΐ ǋǲς ǅϑ靐ǋ靐 ẛ衋ǲ 鶱ſ ǋϖǋϕ ſϑſ ΰΐϖǈϱϰϵΐ ǲςΰϰ ǈϰǅ "
+"ϐſǈϖςΐϑ靐ς]"
+
+#: /vagrant/lib/frontend/qt.py:1821
+#, python-format
+msgid "Current IPv4 Address: %s"
+msgstr "[Ƈŭřřḗƞŧ ĪƤṽ4 Ȧḓḓřḗşş: %s 鶱衋ıϕıϱǲ ſϐ]"
+
+#: /vagrant/lib/frontend/qt.py:1823
+#, python-format
+msgid "Current IPv6 Address: %s"
+msgstr "[Ƈŭřřḗƞŧ ĪƤṽ6 Ȧḓḓřḗşş: %s ϰϑǋ鶱ϖıı ϑı]"
+
+#: /vagrant/lib/frontend/qt.py:1869
+#, python-format
+msgid "New version %s available, fetching upgrade."
+msgstr "[Ƞḗẇ ṽḗřşīǿƞ %s ȧṽȧīŀȧƀŀḗ, ƒḗŧƈħīƞɠ ŭƥɠřȧḓḗ. ıΐϐ ſϑ衋ẛϰΐ]"
+
+#: /vagrant/lib/frontend/qt.py:1906
+#, python-format
+msgid "Launching upgrade installer %s"
+msgstr "[Ŀȧŭƞƈħīƞɠ ŭƥɠřȧḓḗ īƞşŧȧŀŀḗř %s ϱſ靐ǋẛ鶱ϖ鶱ϑ]"
+
+#: /vagrant/lib/frontend/qt.py:1915
+msgid "Show My Hosts"
+msgstr "[Şħǿẇ Ḿẏ Ħǿşŧş ǈẛϐ鶱 ǲẛ ϕ靐]"
+
+#: /vagrant/lib/frontend/qt.py:1918
+msgid "Preferences"
+msgstr "[Ƥřḗƒḗřḗƞƈḗş 衋ǲı鶱ϰǲϰſẛϖ]"
+
+#: /vagrant/lib/frontend/qt.py:1922
+msgid "Get Support"
+msgstr "[Ɠḗŧ Şŭƥƥǿřŧ ſǈϑ ϰϰςǅı靐]"
+
+#: /vagrant/lib/frontend/qt.py:1925
+msgid "About"
+msgstr "[Ȧƀǿŭŧ ẛ鶱ΐẛ鶱]"
+
+#: /vagrant/lib/frontend/qt.py:1929
+msgid "Quit"
+msgstr "[Ɋŭīŧ 靐ſϑǈ]"
+
+#: /vagrant/lib/frontend/qt.py:1946
+#, python-format
+msgid ""
+"%s v%s\n"
+"\n"
+"Current IPv4 address: %s\n"
+"Current IPv6 address: %s"
+msgstr ""
+"[%s ṽ%s\n"
+"\n"
+"Ƈŭřřḗƞŧ ĪƤṽ4 ȧḓḓřḗşş: %s\n"
+"Ƈŭřřḗƞŧ ĪƤṽ6 ȧḓḓřḗşş: %s ϰϵ ǈẛϑ]"
+
+#: /vagrant/lib/frontend/qt.py:1974
+msgid "All windows are hidden, launching upgrade installer."
+msgstr "[Ȧŀŀ ẇīƞḓǿẇş ȧřḗ ħīḓḓḗƞ, ŀȧŭƞƈħīƞɠ ŭƥɠřȧḓḗ īƞşŧȧŀŀḗř. ϕǲǅ ϑϱ鶱]"
+
+#: /vagrant/lib/frontend/qt.py:2043
+msgid "Welcome"
+msgstr "[Ẇḗŀƈǿḿḗ ǲı鶱鶱ϰϖı]"
+
+#: /vagrant/lib/shared/branding.py:121
+msgid "Manages background jobs for the Dyn Updater."
+msgstr "[Ḿȧƞȧɠḗş ƀȧƈķɠřǿŭƞḓ ĵǿƀş ƒǿř ŧħḗ Ḓẏƞ Ŭƥḓȧŧḗř. ǈϱǋẛǅϕǅ 鶱ϵ]"
+
+#: /vagrant/lib/shared/branding.py:213
+msgid ""
+"<p>The Dyn Updater allows you to configure the addresses for your Dyn Remote"
+" Access and Dyn Standard DNS hostnames, monitors your Internet connection "
+"for changes, and can automatically update your hostnames if your IP "
+"addresses change.</p><strong>What's Next</strong><ol><li>Click 'Add Account'"
+" to add your account information.</li><li>Select the hostnames you would "
+"like to update from this location.</li><li>Click 'Configure Selected Hosts' "
+"and select how you would like your addresses to be updated.</li></ol>"
+msgstr ""
+"[<p>Ŧħḗ Ḓẏƞ Ŭƥḓȧŧḗř ȧŀŀǿẇş ẏǿŭ ŧǿ ƈǿƞƒīɠŭřḗ ŧħḗ ȧḓḓřḗşşḗş ƒǿř ẏǿŭř Ḓẏƞ "
+"Řḗḿǿŧḗ Ȧƈƈḗşş ȧƞḓ Ḓẏƞ Şŧȧƞḓȧřḓ ḒȠŞ ħǿşŧƞȧḿḗş, ḿǿƞīŧǿřş ẏǿŭř Īƞŧḗřƞḗŧ "
+"ƈǿƞƞḗƈŧīǿƞ ƒǿř ƈħȧƞɠḗş, ȧƞḓ ƈȧƞ ȧŭŧǿḿȧŧīƈȧŀŀẏ ŭƥḓȧŧḗ ẏǿŭř ħǿşŧƞȧḿḗş īƒ ẏǿŭř "
+"ĪƤ ȧḓḓřḗşşḗş ƈħȧƞɠḗ.</p><strong>Ẇħȧŧ'ş Ƞḗẋŧ</strong><ol><li>Ƈŀīƈķ 'Ȧḓḓ "
+"Ȧƈƈǿŭƞŧ' ŧǿ ȧḓḓ ẏǿŭř ȧƈƈǿŭƞŧ īƞƒǿřḿȧŧīǿƞ.</li><li>Şḗŀḗƈŧ ŧħḗ ħǿşŧƞȧḿḗş ẏǿŭ "
+"ẇǿŭŀḓ ŀīķḗ ŧǿ ŭƥḓȧŧḗ ƒřǿḿ ŧħīş ŀǿƈȧŧīǿƞ.</li><li>Ƈŀīƈķ 'Ƈǿƞƒīɠŭřḗ Şḗŀḗƈŧḗḓ "
+"Ħǿşŧş' ȧƞḓ şḗŀḗƈŧ ħǿẇ ẏǿŭ ẇǿŭŀḓ ŀīķḗ ẏǿŭř ȧḓḓřḗşşḗş ŧǿ ƀḗ ŭƥḓȧŧḗḓ.</li></ol>"
+" ϵǅıǋ靐衋 ϖϐϑ ǲ衋ẛǋǋẛΰ ϱϰϵǈϵǲ ǅǲΰ ǋ鶱 ǅǲςΰϰϑǲϐΰ ǈϵς ςǋϕǈẛςǲΐẛ ǅǈǈ 靐ı衋ſ ΰ鶱ϑ "
+"衋ΰ衋ϵϐ靐 ϖǲẛſǋ衋 ΰǲϰ ϕǅ衋 ΰ靐ǅ鶱ςϕǈ]"
+
+#: /vagrant/lib/shared/branding.py:246
+msgid "Unknown: No accounts are currently configured in the updater."
+msgstr ""
+"[Ŭƞķƞǿẇƞ: Ƞǿ ȧƈƈǿŭƞŧş ȧřḗ ƈŭřřḗƞŧŀẏ ƈǿƞƒīɠŭřḗḓ īƞ ŧħḗ ŭƥḓȧŧḗř. ΐǋϵϕǋǲǋǈ]"
+
+#: /vagrant/lib/shared/branding.py:248
+msgid ""
+"Welcome: The updater has not yet attempted to send an update. Please check "
+"that hosts have been configured to be updated."
+msgstr ""
+"[Ẇḗŀƈǿḿḗ: Ŧħḗ ŭƥḓȧŧḗř ħȧş ƞǿŧ ẏḗŧ ȧŧŧḗḿƥŧḗḓ ŧǿ şḗƞḓ ȧƞ ŭƥḓȧŧḗ. Ƥŀḗȧşḗ ƈħḗƈķ "
+"ŧħȧŧ ħǿşŧş ħȧṽḗ ƀḗḗƞ ƈǿƞƒīɠŭřḗḓ ŧǿ ƀḗ ŭƥḓȧŧḗḓ. ϕſǈ鶱ϑ鶱ςǲ ϑıΰ ϑǋǋǲϱ鶱ǲ]"
+
+#: /vagrant/lib/shared/branding.py:251
+msgid ""
+"OK: The last update for all hosts configured in the updater was successful."
+msgstr ""
+"[ǾĶ: Ŧħḗ ŀȧşŧ ŭƥḓȧŧḗ ƒǿř ȧŀŀ ħǿşŧş ƈǿƞƒīɠŭřḗḓ īƞ ŧħḗ ŭƥḓȧŧḗř ẇȧş şŭƈƈḗşşƒŭŀ."
+" 衋ǋς ϵϵı ẛſϱ靐]"
+
+#: /vagrant/lib/shared/branding.py:253
+msgid ""
+"Warning: One of the hosts configured was already set to this IP address, "
+"resulting in an unnecessary update. Is there more than one updater "
+"configured to update this hostname?"
+msgstr ""
+"[Ẇȧřƞīƞɠ: Ǿƞḗ ǿƒ ŧħḗ ħǿşŧş ƈǿƞƒīɠŭřḗḓ ẇȧş ȧŀřḗȧḓẏ şḗŧ ŧǿ ŧħīş ĪƤ ȧḓḓřḗşş, "
+"řḗşŭŀŧīƞɠ īƞ ȧƞ ŭƞƞḗƈḗşşȧřẏ ŭƥḓȧŧḗ. Īş ŧħḗřḗ ḿǿřḗ ŧħȧƞ ǿƞḗ ŭƥḓȧŧḗř "
+"ƈǿƞƒīɠŭřḗḓ ŧǿ ŭƥḓȧŧḗ ŧħīş ħǿşŧƞȧḿḗ? ϵẛΐǲΰΐςſ 靐ı衋 ǅ靐 ϖΰϐ 鶱ϑΰϱǈ ǈǋϑϱςς]"
+
+#: /vagrant/lib/shared/branding.py:257
+msgid ""
+"Temporary Error: An error occurred while sending an update and the updater "
+"will retry later."
+msgstr ""
+"[Ŧḗḿƥǿřȧřẏ Ḗřřǿř: Ȧƞ ḗřřǿř ǿƈƈŭřřḗḓ ẇħīŀḗ şḗƞḓīƞɠ ȧƞ ŭƥḓȧŧḗ ȧƞḓ ŧħḗ ŭƥḓȧŧḗř "
+"ẇīŀŀ řḗŧřẏ ŀȧŧḗř. ΐςΐΰẛΰϰſ鶱 ǅϐǅ靐ς]"
+
+#: /vagrant/lib/shared/branding.py:259
+msgid ""
+"Error: An error occurred in sending this update. This can be caused by the "
+"login credentials being invalid, the hostname no longer existing, or the "
+"account being blocked due to abusive (repeated unnecessary) updates."
+msgstr ""
+"[Ḗřřǿř: Ȧƞ ḗřřǿř ǿƈƈŭřřḗḓ īƞ şḗƞḓīƞɠ ŧħīş ŭƥḓȧŧḗ. Ŧħīş ƈȧƞ ƀḗ ƈȧŭşḗḓ ƀẏ ŧħḗ "
+"ŀǿɠīƞ ƈřḗḓḗƞŧīȧŀş ƀḗīƞɠ īƞṽȧŀīḓ, ŧħḗ ħǿşŧƞȧḿḗ ƞǿ ŀǿƞɠḗř ḗẋīşŧīƞɠ, ǿř ŧħḗ "
+"ȧƈƈǿŭƞŧ ƀḗīƞɠ ƀŀǿƈķḗḓ ḓŭḗ ŧǿ ȧƀŭşīṽḗ (řḗƥḗȧŧḗḓ ŭƞƞḗƈḗşşȧřẏ) ŭƥḓȧŧḗş. ǈΐϐǈΰı "
+"ΐ鶱 ſǈΰ衋ı ǋϰǲ靐ẛϐϱı ǋϖ ϱϐı鶱ǋǋı ϖϕ衋ϐ]"
+
+#: /vagrant/lib/shared/config.py:88
+msgid "Error loading saved configuration, loading defaults."
+msgstr "[Ḗřřǿř ŀǿȧḓīƞɠ şȧṽḗḓ ƈǿƞƒīɠŭřȧŧīǿƞ, ŀǿȧḓīƞɠ ḓḗƒȧŭŀŧş. ǈſΰϰı ΐ]"
+
+#: /vagrant/lib/shared/logconfig.py:148
+msgid "Failed to use logging options, using defaults."
+msgstr "[Ƒȧīŀḗḓ ŧǿ ŭşḗ ŀǿɠɠīƞɠ ǿƥŧīǿƞş, ŭşīƞɠ ḓḗƒȧŭŀŧş. ǲΰϕΰϰϱ ǲΰ]"

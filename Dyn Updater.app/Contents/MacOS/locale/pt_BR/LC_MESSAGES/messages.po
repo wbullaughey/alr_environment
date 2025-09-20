@@ -1,0 +1,1292 @@
+
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2016-10-03 14:57+0000\n"
+"PO-Revision-Date: 2014-09-24 19:52+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: pt_BR <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=n>1\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 1.3\n"
+
+#: /vagrant/dyn_updater.py:36
+msgid "An exception occurred in the CLI interface."
+msgstr "Ocorreu uma exceção na interface CLI."
+
+#: /vagrant/dyn_updater.py:54
+msgid "An exception occurred in the QT interface."
+msgstr "Ocorreu uma exceção na interface QT."
+
+#: /vagrant/dyn_updater.py:69 /vagrant/dyn_updater.py:82
+#, python-format
+msgid "--daemon requires an argument: %s"
+msgstr "--daemon exige um argumento: %s"
+
+#: /vagrant/dyn_updater.py:79
+msgid "An exception occurred in the client daemon."
+msgstr "Ocorreu uma exceção no daemon do cliente."
+
+#: /vagrant/dyn_updater_dns.py:51
+msgid "Disabling recursive DNS setting"
+msgstr ""
+
+#: /vagrant/dyn_updater_dns.py:58
+msgid "Failed to disable RDNS, giving up"
+msgstr ""
+
+#: /vagrant/dyn_updater_dns.py:70
+msgid "Trying to repair setuid without root privileges"
+msgstr ""
+
+#: /vagrant/dyn_updater_dns.py:78
+msgid "Unable to set root ownership on file"
+msgstr ""
+
+#: /vagrant/dyn_updater_dns.py:86
+msgid "Unable to set setuid on file"
+msgstr ""
+
+#: /vagrant/dyn_updater_dns.py:124
+#, python-format
+msgid "%s trying to repair permissions on itself."
+msgstr ""
+
+#: /vagrant/dyn_updater_dns.py:134
+msgid "Error launching helper executable as admin"
+msgstr ""
+
+#: /vagrant/dyn_updater_dns.py:135
+#, python-format
+msgid "Reason: %sNSAppleScriptErrorMessage"
+msgstr ""
+
+#: /vagrant/setup.py:60
+msgid "A fully-featured cross platform DDNS update client."
+msgstr "Um cliente completo de atualização de DDNS multiplataforma."
+
+#: /vagrant/setup.py:141
+msgid ""
+"The DDNS update client keeps your Dyn dynamic hostname up to date with "
+"the current public IP of the network your machine is on."
+msgstr ""
+"O cliente de atualização DDNS mantém seu nome de host dinâmico da Dyn "
+"atualizado com o seu IP público atual da rede na qual sua máquina se "
+"encontra."
+
+#: /vagrant/lib/daemon/common.py:36
+msgid "Unable to load bundled libraries as expected, exiting."
+msgstr ""
+
+#: /vagrant/lib/daemon/common.py:144
+#, python-format
+msgid "Sent RUM beacon using %s for DNS."
+msgstr ""
+
+#: /vagrant/lib/daemon/common.py:147
+msgid "There was a problem sending the RUM beacon."
+msgstr ""
+
+#: /vagrant/lib/daemon/common.py:165
+msgid "EULA updated since last version, resetting."
+msgstr ""
+
+#: /vagrant/lib/daemon/common.py:233
+msgid "Got END in ZMQ queue thread"
+msgstr ""
+
+#: /vagrant/lib/daemon/common.py:255
+#, python-format
+msgid "Attempting to stop worker thread %s"
+msgstr ""
+
+#: /vagrant/lib/daemon/common.py:265
+#, python-format
+msgid "RuntimeError raised joining worker thread %s"
+msgstr ""
+
+#: /vagrant/lib/daemon/common.py:269
+#, python-format
+msgid "Worker thread %s stopped"
+msgstr ""
+
+#: /vagrant/lib/daemon/common.py:273
+#, python-format
+msgid "Worker thread %s not alive, skipping."
+msgstr ""
+
+#: /vagrant/lib/daemon/common.py:293
+msgid "Joining queue thread."
+msgstr ""
+
+#: /vagrant/lib/daemon/common.py:295
+msgid "Terminating ZMQ context."
+msgstr ""
+
+#: /vagrant/lib/daemon/common.py:297
+msgid "Terminated ZMQ context."
+msgstr ""
+
+#: /vagrant/lib/daemon/common.py:300
+msgid "AttributeError when trying to terminate ZMQ context."
+msgstr ""
+
+#: /vagrant/lib/daemon/common.py:304
+msgid "ZMQ error while shutting down, ignoring."
+msgstr ""
+
+#: /vagrant/lib/daemon/common.py:312 /vagrant/lib/daemon/windows.py:441
+#, python-format
+msgid "%s is not a supported command."
+msgstr "%s não é um comando compatível."
+
+#: /vagrant/lib/daemon/nicupdate.py:39 /vagrant/lib/daemon/nicupdate.py:503
+msgid "An exception occurred while performing an update."
+msgstr "Ocorreu uma exceção durante uma atualização."
+
+#: /vagrant/lib/daemon/nicupdate.py:46
+msgid "This client is blocked from updating, try again later."
+msgstr "O cliente está bloqueado para atualizações, tente novamente mais tarde."
+
+#: /vagrant/lib/daemon/nicupdate.py:48
+#, python-format
+msgid "Received badagent response for account %s"
+msgstr "Recebida resposta incorreta do agente para a conta %s"
+
+#: /vagrant/lib/daemon/nicupdate.py:56 /vagrant/lib/daemon/api/exceptions.py:78
+msgid "Login failed. Please check your username and password."
+msgstr "Falha de acesso. Verifique seu nome de usuário e senha."
+
+#: /vagrant/lib/daemon/nicupdate.py:58 /vagrant/lib/daemon/api/exceptions.py:80
+#, python-format
+msgid "Received badauth response for account %s"
+msgstr "Recebida resposta de autorização incorreta para a conta %s"
+
+#: /vagrant/lib/daemon/nicupdate.py:66 /vagrant/lib/daemon/nicupdate.py:76
+msgid ""
+"A server-side error occurred when performing an update. Will retry on the"
+" next update interval."
+msgstr ""
+"Ocorreu um erro do servidor ao realizar uma atualização. Ele será "
+"recuperado no próximo intervalo de atualização."
+
+#: /vagrant/lib/daemon/nicupdate.py:68
+#, python-format
+msgid "Received dnserr response for account %s"
+msgstr "Resposta de erro de DNS recebida para a conta %s"
+
+#: /vagrant/lib/daemon/nicupdate.py:78
+#, python-format
+msgid "Received 911 response for account %s"
+msgstr "Recebida resposta 911 para a conta %s"
+
+#: /vagrant/lib/daemon/nicupdate.py:86
+msgid ""
+"Received !donator response when updating. Please upgrade to a paid "
+"account to use this feature."
+msgstr ""
+"Recebida resposta \"doador\" ao fazer a atualização. Faça o upgrade para "
+"uma conta paga para utilizar este recurso."
+
+#: /vagrant/lib/daemon/nicupdate.py:88
+#, python-format
+msgid "Received !donator response for account %s"
+msgstr "Recebida resposta \"doador!\" para a conta %s"
+
+#: /vagrant/lib/daemon/nicupdate.py:96
+msgid "Received a 404 response from API"
+msgstr "Recebida uma resposta 404 do API"
+
+#: /vagrant/lib/daemon/nicupdate.py:98
+#, python-format
+msgid "This server does not support update key for account %s"
+msgstr ""
+"Este servidor não oferece suporte para a chave de atualização para a "
+"conta %s"
+
+#: /vagrant/lib/daemon/nicupdate.py:101
+#, python-format
+msgid "Received 404 response from API while accessing path %s for account %s"
+msgstr "Recebida a resposta 404 do API ao acessar o caminho %s para a conta %s"
+
+#: /vagrant/lib/daemon/nicupdate.py:109
+#, python-format
+msgid "Received abuse status for host %s"
+msgstr "Recebido status de abuso para o host %s"
+
+#: /vagrant/lib/daemon/nicupdate.py:114
+#, python-format
+msgid "Updated host %s successfully."
+msgstr "Host %s atualizado com sucesso."
+
+#: /vagrant/lib/daemon/nicupdate.py:119
+#, python-format
+msgid "Received nochg status for host %s"
+msgstr "Recebido status nochg (sem alteração) para o host %s"
+
+#: /vagrant/lib/daemon/nicupdate.py:124
+#, python-format
+msgid "Received nohost status for host %s"
+msgstr "Recebido status de ausência de host (nohost) para o host %s"
+
+#: /vagrant/lib/daemon/nicupdate.py:129
+#, python-format
+msgid "Received numhost status for host %s"
+msgstr "Recebido status de número de host (numhost) para o host %s"
+
+#: /vagrant/lib/daemon/nicupdate.py:134
+#, python-format
+msgid "Received notfqdn status for host %s"
+msgstr "Recebido status notfqdn para o host %s"
+
+#: /vagrant/lib/daemon/nicupdate.py:176
+#, python-format
+msgid "Migrated account %s to secure update key"
+msgstr "Conta %s migrada para a chave de atualização segura"
+
+#: /vagrant/lib/daemon/nicupdate.py:256
+#, python-format
+msgid "Failed to find IP address at %s"
+msgstr "Não foi encontrado o endereço IP em %s"
+
+#: /vagrant/lib/daemon/nicupdate.py:287
+#, python-format
+msgid "Failed to connect to %s"
+msgstr "Falha ao conectar-se a %s"
+
+#: /vagrant/lib/daemon/nicupdate.py:390
+#, python-format
+msgid "Host owner account %s missing, skipping host %s"
+msgstr "Conta de proprietário de host %s ausente; ignorando host %s"
+
+#: /vagrant/lib/daemon/nicupdate.py:424
+#, python-format
+msgid "Unable to get IP addresses for %s, will retry later."
+msgstr ""
+"Não é possível obter o endereço IP para %s; será realizada nova tentativa"
+" mais tarde."
+
+#: /vagrant/lib/daemon/nicupdate.py:476
+#, python-format
+msgid "Unknown %s value for %s, setting to none."
+msgstr "Valor %s desconhecido para %s; configurando para nenhum."
+
+#: /vagrant/lib/daemon/recursivedns.py:72
+#: /vagrant/lib/daemon/recursivedns.py:79
+#: /vagrant/lib/daemon/recursivedns.py:97
+#: /vagrant/lib/daemon/recursivedns.py:115
+#, python-format
+msgid "No response from nameserver %s"
+msgstr "Não há resposta do nameserver %s"
+
+#: /vagrant/lib/daemon/recursivedns.py:102
+#: /vagrant/lib/daemon/recursivedns.py:120
+#, python-format
+msgid "Invalid response from nameserver %s"
+msgstr "Resposta inválida do nameserver %s"
+
+#: /vagrant/lib/daemon/recursivedns.py:129
+#, python-format
+msgid "Nameserver %s responses appear to be hijacked"
+msgstr "Parece que as respostas do Nameserver %s foram sequestradas"
+
+#: /vagrant/lib/daemon/recursivedns.py:147
+msgid "DNS traffic appears to be hijacked from this network."
+msgstr ""
+
+#: /vagrant/lib/daemon/recursivedns.py:154
+#: /vagrant/lib/daemon/recursivedns.py:746
+msgid "Issues reaching RDNS servers, not setting RDNS."
+msgstr "Problemas para acessar os servidores RDNS não configurados."
+
+#: /vagrant/lib/daemon/recursivedns.py:247
+#, python-format
+msgid "Looking at interface: %s (%s)"
+msgstr ""
+
+#: /vagrant/lib/daemon/recursivedns.py:252
+#, python-format
+msgid "DNS is currently set to: %s"
+msgstr ""
+
+#: /vagrant/lib/daemon/recursivedns.py:256
+msgid "DNS matches, resetting..."
+msgstr ""
+
+#: /vagrant/lib/daemon/recursivedns.py:263
+msgid "Resetting DNS to DHCP."
+msgstr ""
+
+#: /vagrant/lib/daemon/recursivedns.py:271
+msgid "Resetting DNS to static."
+msgstr ""
+
+#: /vagrant/lib/daemon/recursivedns.py:276
+#, python-format
+msgid "Setting DNS to %s"
+msgstr ""
+
+#: /vagrant/lib/daemon/recursivedns.py:280
+msgid "Not setting empty DNS on static interface."
+msgstr ""
+
+#: /vagrant/lib/daemon/recursivedns.py:290
+#, python-format
+msgid "Couldn't reset DNS for %s interface"
+msgstr ""
+
+#: /vagrant/lib/daemon/recursivedns.py:293
+#: /vagrant/lib/daemon/recursivedns.py:674
+#: /vagrant/lib/daemon/recursivedns.py:686
+#, python-format
+msgid "DNS reset on %s."
+msgstr "DNS redefine em %s."
+
+#: /vagrant/lib/daemon/recursivedns.py:319
+msgid "RDNS already set but should not be, resetting."
+msgstr ""
+
+#: /vagrant/lib/daemon/recursivedns.py:339
+#, python-format
+msgid "Couldn't set DNS for %s interface"
+msgstr ""
+
+#: /vagrant/lib/daemon/recursivedns.py:349
+#: /vagrant/lib/daemon/recursivedns.py:768
+#, python-format
+msgid "DNS set on %s."
+msgstr "DNS definido em %s."
+
+#: /vagrant/lib/daemon/recursivedns.py:353
+#: /vagrant/lib/daemon/recursivedns.py:770
+#, python-format
+msgid "DNS is already set correctly on %s."
+msgstr "O DNS já está corretamente definido em %s."
+
+#: /vagrant/lib/daemon/recursivedns.py:373
+msgid "Detected active VPN."
+msgstr ""
+
+#: /vagrant/lib/daemon/recursivedns.py:415
+#, python-format
+msgid "Couldn't get DNS for %s interface"
+msgstr ""
+
+#: /vagrant/lib/daemon/recursivedns.py:441
+#: /vagrant/lib/daemon/recursivedns.py:455
+msgid "Couldn't call helper executable to set DNS"
+msgstr ""
+
+#: /vagrant/lib/daemon/recursivedns.py:491
+msgid "Checking if blacklisted..."
+msgstr "Verificando se não autorizado..."
+
+#: /vagrant/lib/daemon/recursivedns.py:495
+#, python-format
+msgid "Skipping MAC blacklisted interface %s"
+msgstr "Ignorando interface %s MAC não autorizada"
+
+#: /vagrant/lib/daemon/recursivedns.py:503
+#, python-format
+msgid "Skipping description blacklisted interface %s"
+msgstr "Ignorando descrição da interface %s não autorizada"
+
+#: /vagrant/lib/daemon/recursivedns.py:529
+#, python-format
+msgid "Interface %s is DHCP, checking DNS..."
+msgstr "A interface %s é DHCP, verificando DNS..."
+
+#: /vagrant/lib/daemon/recursivedns.py:536
+#, python-format
+msgid "DHCP DNS: %s"
+msgstr "DHCP DNS: %s"
+
+#: /vagrant/lib/daemon/recursivedns.py:537
+#, python-format
+msgid "Interface DNS: %s"
+msgstr "Interface DNS: %s"
+
+#: /vagrant/lib/daemon/recursivedns.py:542
+#, python-format
+msgid "Interface %s DNS matches DHCP"
+msgstr "A interface %s DNS corresponde com o DHCP"
+
+#: /vagrant/lib/daemon/recursivedns.py:554
+msgid "Searching NICs..."
+msgstr "Pesquisando NICs..."
+
+#: /vagrant/lib/daemon/recursivedns.py:559
+#, python-format
+msgid "Looking at NIC %s"
+msgstr "Procurando em NIC %s"
+
+#: /vagrant/lib/daemon/recursivedns.py:574
+#, python-format
+msgid "Found default route for %s"
+msgstr "Rota padrão encontrada para %s"
+
+#: /vagrant/lib/daemon/recursivedns.py:606
+#, python-format
+msgid "Inspecting interface %s in registry."
+msgstr "Inspecionando interface %s no registro."
+
+#: /vagrant/lib/daemon/recursivedns.py:619
+msgid "Checking nameservers..."
+msgstr "Verificando nameservers..."
+
+#: /vagrant/lib/daemon/recursivedns.py:630
+#, python-format
+msgid "Found nameservers: %s"
+msgstr "Nameservers encontrados: %s"
+
+#: /vagrant/lib/daemon/recursivedns.py:637
+msgid "Refusing to set empty nameservers"
+msgstr "Recusando a definição de nameservers vazios"
+
+#: /vagrant/lib/daemon/recursivedns.py:643
+#, python-format
+msgid "Comparing nameservers %s to DHCP DNS %s"
+msgstr "Comparando nameservers %s para DHCP DNS %s"
+
+#: /vagrant/lib/daemon/recursivedns.py:647
+msgid "Setting nameservers to DHCP."
+msgstr "Configurando nameservers para DHCP."
+
+#: /vagrant/lib/daemon/recursivedns.py:654
+#, python-format
+msgid "Nameservers set on interface %s via registry."
+msgstr "Nameservers definidos na interface %s por meio do registro."
+
+#: /vagrant/lib/daemon/recursivedns.py:691
+#, python-format
+msgid "Not setting DNS servers to empty on static interface %s."
+msgstr "Servidores DNS não configurados para esvaziar a interface estática %s."
+
+#: /vagrant/lib/daemon/recursivedns.py:698
+#, python-format
+msgid "DNS reset statically on %s."
+msgstr "O DNS redefine estaticamente em %s."
+
+#: /vagrant/lib/daemon/recursivedns.py:727
+msgid "DHCP nameserver changed, updating..."
+msgstr "Servidor DHCP alterado, atualizando..."
+
+#: /vagrant/lib/daemon/recursivedns.py:730
+msgid "Not DHCP or DHCP nameserver hasn't changed"
+msgstr "Nem o nameserver DHCP ou o DHCP foi alterado"
+
+#: /vagrant/lib/daemon/recursivedns.py:734
+#, python-format
+msgid "Preparing to set DNS on %s"
+msgstr "Preparando para definir o DNS em %s"
+
+#: /vagrant/lib/daemon/recursivedns.py:740
+#, python-format
+msgid "DNS to set is: %s"
+msgstr "O DNS para definição é: %s"
+
+#: /vagrant/lib/daemon/recursivedns.py:741
+#, python-format
+msgid "Comparing with current DNS: %s"
+msgstr "Comparando com o DNS atual: %s"
+
+#: /vagrant/lib/daemon/recursivedns.py:753
+msgid "RDNS already set but now unreachable, resetting."
+msgstr "RDNS já definido, mas inacessível no momento, em redefinição."
+
+#: /vagrant/lib/daemon/unix.py:61
+msgid "Got SystemConfiguration event."
+msgstr ""
+
+#: /vagrant/lib/daemon/unix.py:65
+msgid "RDNS enabled, running set_recursive_dns."
+msgstr ""
+
+#: /vagrant/lib/daemon/unix.py:92
+msgid "RDNS thread exiting..."
+msgstr ""
+
+#: /vagrant/lib/daemon/unix.py:99
+msgid "RDNS disabled, stopping event watcher."
+msgstr ""
+
+#: /vagrant/lib/daemon/unix.py:129 /vagrant/lib/daemon/unix.py:352
+msgid "Cleaning up stale daemon PID file."
+msgstr "Limpando arquivo PID de daemon travado."
+
+#: /vagrant/lib/daemon/unix.py:132
+msgid "Already running"
+msgstr "Já em execução"
+
+#: /vagrant/lib/daemon/unix.py:139
+msgid "fork #1 failed."
+msgstr "Falha no fork 1."
+
+#: /vagrant/lib/daemon/unix.py:150
+msgid "fork #2 failed."
+msgstr "Falha no fork 2."
+
+#: /vagrant/lib/daemon/unix.py:180 /vagrant/lib/daemon/unix.py:360
+msgid "{} Daemon version {} started with PID {}"
+msgstr "{} Versão de daemon {} iniciada com PID {}"
+
+#: /vagrant/lib/daemon/unix.py:205
+msgid "Event watcher thread not running, starting..."
+msgstr ""
+
+#: /vagrant/lib/daemon/unix.py:227
+msgid "Daemon stopped."
+msgstr "Daemon parado."
+
+#: /vagrant/lib/daemon/unix.py:319
+msgid "Stopping {} Daemon version {} with PID {}"
+msgstr "Interrompendo {} daemon versão {} com PID {}"
+
+#: /vagrant/lib/daemon/unix.py:330 /vagrant/lib/daemon/unix.py:338
+msgid "Not running"
+msgstr "Não está em execução"
+
+#: /vagrant/lib/daemon/unix.py:356 /vagrant/lib/daemon/unix.py:367
+msgid "Daemon not running"
+msgstr "O daemon não está em execução"
+
+#: /vagrant/lib/daemon/windows.py:131
+msgid "Failed to download new version, will try again later."
+msgstr ""
+"Não foi possível baixar a nova versão; será realizada nova tentativa mais"
+" tarde."
+
+#: /vagrant/lib/daemon/windows.py:152
+msgid "Downloaded upgrade did not have a valid signature, skipping."
+msgstr "A atualização baixada não possuía uma assinatura válida, ignorando."
+
+#: /vagrant/lib/daemon/windows.py:233 /vagrant/lib/daemon/windows.py:460
+msgid "An exception occurred when starting the service."
+msgstr "Ocorreu uma exceção ao iniciar o serviço."
+
+#: /vagrant/lib/daemon/windows.py:254
+msgid "Failed to check for new version, will try again later."
+msgstr ""
+"Não foi possível verificar se há uma nova versão; será realizada nova "
+"tentativa mais tarde."
+
+#: /vagrant/lib/daemon/windows.py:270
+msgid "Failed to download and verify upgrade, skipping."
+msgstr "Não foi possível baixar e verificar a atualização; ignorando."
+
+#: /vagrant/lib/daemon/windows.py:282
+msgid "Windows service started."
+msgstr "Serviço Windows iniciado."
+
+#: /vagrant/lib/daemon/windows.py:307 /vagrant/lib/daemon/windows.py:325
+msgid "Stopped event watcher thread."
+msgstr ""
+
+#: /vagrant/lib/daemon/windows.py:318
+msgid "Got signal to stop service."
+msgstr ""
+
+#: /vagrant/lib/daemon/windows.py:333
+msgid "Windows service stopped."
+msgstr "Serviço Windows interrompido."
+
+#: /vagrant/lib/daemon/windows.py:408 /vagrant/lib/daemon/windows.py:473
+#, python-format
+msgid "An exception occurred when running the service %s command."
+msgstr "Ocorreu uma exceção ao executar o comando %s de serviço."
+
+#: /vagrant/lib/daemon/windows.py:424
+msgid "Insufficient privileges, relaunching as admin."
+msgstr "Direitos insuficientes, reiniciando como administrador."
+
+#: /vagrant/lib/daemon/windows.py:454
+msgid "Launching Windows service..."
+msgstr "Iniciando serviço do Windows..."
+
+#: /vagrant/lib/daemon/windows.py:467
+#, python-format
+msgid "Running command %s for Windows service."
+msgstr "Executando comando %s para o serviço do Windows."
+
+#: /vagrant/lib/daemon/windows.py:499
+#, python-format
+msgid "%s service is running."
+msgstr "Serviço %s em execução."
+
+#: /vagrant/lib/daemon/windows.py:504
+#, python-format
+msgid "%s service is not running."
+msgstr "O serviço %s não está em execução."
+
+#: /vagrant/lib/daemon/windows.py:508
+#, python-format
+msgid "Unable to get status for %s service."
+msgstr "Não é possível obter o status do serviço %s."
+
+#: /vagrant/lib/daemon/api/commands.py:462
+#, python-format
+msgid "Found action for %s"
+msgstr "Ação encontrada para %s"
+
+#: /vagrant/lib/daemon/api/exceptions.py:22
+#, python-format
+msgid "Unknown property %s"
+msgstr "Propriedade %s desconhecida "
+
+#: /vagrant/lib/daemon/api/exceptions.py:28
+#, python-format
+msgid "Missing required property %s"
+msgstr "Falta propriedade %s necessária"
+
+#: /vagrant/lib/daemon/api/exceptions.py:34
+#, python-format
+msgid "Missing required field %s"
+msgstr "Falta campo %s necessário"
+
+#: /vagrant/lib/daemon/api/exceptions.py:40
+#, python-format
+msgid "Incorrect type for %s property"
+msgstr "Tipo incorreto da propriedade %s"
+
+#: /vagrant/lib/daemon/api/exceptions.py:46
+msgid "Invalid request format"
+msgstr "Formato de solicitação inválido"
+
+#: /vagrant/lib/daemon/api/exceptions.py:52
+#, python-format
+msgid "\"%s\" is not a valid object"
+msgstr "\"%s\" não é um objeto válido"
+
+#: /vagrant/lib/daemon/api/exceptions.py:58
+#, python-format
+msgid "\"%s\" is not a valid method for a %s object"
+msgstr "\"%s\" não é um método válido para um objeto %s"
+
+#: /vagrant/lib/daemon/api/exceptions.py:65
+#, python-format
+msgid "Error connecting to %s. Please verify your "
+msgstr "Erro de conexão a %s. Verifique sua "
+
+#: /vagrant/lib/daemon/api/exceptions.py:66
+msgid "internet connection and try again."
+msgstr "conexão com a Internet e tente novamente."
+
+#: /vagrant/lib/daemon/api/exceptions.py:72
+#, python-format
+msgid "Unexpected response from %s"
+msgstr "Resposta inesperada de %s"
+
+#: /vagrant/lib/daemon/api/exceptions.py:87
+msgid "The specified account does not exist."
+msgstr "A conta especificada não existe."
+
+#: /vagrant/lib/daemon/api/exceptions.py:93
+msgid "The specified hostname does not exist."
+msgstr "O nome de host especificado não existe."
+
+#: /vagrant/lib/daemon/api/exceptions.py:99
+#, python-format
+msgid "The account %s already exists."
+msgstr "A conta %s já existe."
+
+#: /vagrant/lib/daemon/api/exceptions.py:105
+msgid "The specified host type is not valid."
+msgstr "O tipo de host especificado não é válido."
+
+#: /vagrant/lib/daemon/api/exceptions.py:111
+msgid "Please enter your username, not an email address."
+msgstr "Digite seu nome de usuário e não seu endereço de e-mail."
+
+#: /vagrant/lib/daemon/api/exceptions.py:118
+#, python-format
+msgid "Username too long. Usernames must be %s characters or less."
+msgstr ""
+"O nome de usuário é muito longo. Os nomes de usuário devem ter %s "
+"caracteres ou menos."
+
+#: /vagrant/lib/daemon/api/exceptions.py:125
+msgid "Invalid username format."
+msgstr "Formato de nome de usuário inválido."
+
+#: /vagrant/lib/daemon/api/exceptions.py:131
+msgid "Invalid IPv4 parameter."
+msgstr "Parâmetro de IPv4 inválido."
+
+#: /vagrant/lib/daemon/api/exceptions.py:137
+msgid "Invalid IPv6 parameter."
+msgstr "Parâmetro de IPv6 inválido."
+
+#: /vagrant/lib/daemon/api/exceptions.py:143
+msgid "Invalid interface specified."
+msgstr "Foi especificada uma interface inválida."
+
+#: /vagrant/lib/daemon/api/exceptions.py:149
+msgid "Invalid MAC parameter."
+msgstr "Parâmetro de MAC inválido."
+
+#: /vagrant/lib/daemon/api/exceptions.py:155
+msgid "Invalid name parameter."
+msgstr "Parâmetro de nome inválido."
+
+#: /vagrant/lib/daemon/api/exceptions.py:161
+msgid "Invalid type parameter."
+msgstr "Parâmetro de tipo inválido."
+
+#: /vagrant/lib/daemon/api/exceptions.py:167
+msgid "No interface found."
+msgstr "Nenhuma interface encontrada."
+
+#: /vagrant/lib/daemon/api/exceptions.py:173
+msgid "No hosts found."
+msgstr "Nenhum host encontrado."
+
+#: /vagrant/lib/daemon/api/exceptions.py:179
+msgid "Invalid IP address returned from server."
+msgstr "Endereço IP inválido retornado pelo servidor."
+
+#: /vagrant/lib/daemon/api/exceptions.py:185
+#, python-format
+msgid "Invalid value for %s"
+msgstr "Valor inválido para %s"
+
+#: /vagrant/lib/daemon/api/response.py:63
+#, python-format
+msgid "Internal API verification failed: %s"
+msgstr "Falha na verificação da API interna: %s"
+
+#: /vagrant/lib/daemon/api/response.py:70
+#, python-format
+msgid "Received internal API request %s.%s"
+msgstr "Recebida solicitação da API interna %s.%s"
+
+#: /vagrant/lib/daemon/api/response.py:82
+#, python-format
+msgid "API request returned status %s with error %s"
+msgstr "A solicitação à API retornou o status %s com o erro %s"
+
+#: /vagrant/lib/daemon/api/response.py:87
+msgid "An error occurred processing the API request."
+msgstr "Ocorreu um erro ao processar a solicitação da API."
+
+#: /vagrant/lib/daemon/api/response.py:92
+#, python-format
+msgid "API request succeeded with status %s data %s"
+msgstr "Solicitação de API bem sucedida com status %s de dados %s"
+
+#: /vagrant/lib/frontend/cli.py:35
+msgid "Daemon not running, exiting..."
+msgstr "O daemon não está em execução, saindo..."
+
+#: /vagrant/lib/frontend/cli.py:40
+msgid "Arguments must be in the form of name:value."
+msgstr "Os argumentos devem seguir o formato nome:valor."
+
+#: /vagrant/lib/frontend/cli.py:52
+#, python-format
+msgid "Status: %s"
+msgstr "Status: %s"
+
+#: /vagrant/lib/frontend/cli.py:68
+#, python-format
+msgid "Errors: %s"
+msgstr "Erros: %s"
+
+#: /vagrant/lib/frontend/qt.py:94
+#, python-format
+msgid "Running API method %s"
+msgstr ""
+
+#: /vagrant/lib/frontend/qt.py:101
+#, python-format
+msgid "Finished API method %s"
+msgstr ""
+
+#: /vagrant/lib/frontend/qt.py:106
+msgid "Failed to receive API response from backend. Attempting to restart daemon."
+msgstr "Falha ao receber a resposta da API do backend. Tentando reiniciar daemon."
+
+#: /vagrant/lib/frontend/qt.py:116
+msgid "Unable to connect to backend daemon, giving up."
+msgstr "Não foi possível se conectar ao daemon do backend, desistindo."
+
+#: /vagrant/lib/frontend/qt.py:141 /vagrant/lib/frontend/qt.py:142
+msgid "Unknown"
+msgstr "Desconhecido"
+
+#: /vagrant/lib/frontend/qt.py:229
+msgid "Waiting for threads to finish."
+msgstr ""
+
+#: /vagrant/lib/frontend/qt.py:234
+msgid "Waiting on thread..."
+msgstr ""
+
+#: /vagrant/lib/frontend/qt.py:237
+msgid "Thread finished."
+msgstr ""
+
+#: /vagrant/lib/frontend/qt.py:247
+msgid "Pending quit, skipping API call."
+msgstr ""
+
+#: /vagrant/lib/frontend/qt.py:313
+msgid "Starting the client..."
+msgstr "Iniciando o cliente..."
+
+#: /vagrant/lib/frontend/qt.py:322
+msgid "Backend daemon not running, starting..."
+msgstr "O daemon do backend não está em execução, iniciando..."
+
+#: /vagrant/lib/frontend/qt.py:335
+msgid "Backend daemon not running matching version, restarting daemon..."
+msgstr ""
+"O daemon do backend não está executando a versão correspondente, "
+"reiniciando o daemon..."
+
+#: /vagrant/lib/frontend/qt.py:346
+msgid "Unable to start backend daemon, exiting."
+msgstr "Não foi possível iniciar o daemon do backend, saindo."
+
+#: /vagrant/lib/frontend/qt.py:349 /vagrant/lib/frontend/qt.py:459
+#, python-format
+msgid "Error starting %s"
+msgstr "Erro ao iniciar %s"
+
+#: /vagrant/lib/frontend/qt.py:352
+msgid "Error starting backend daemon, exiting."
+msgstr "Erro ao iniciar o daemon do backend, saindo."
+
+#: /vagrant/lib/frontend/qt.py:360
+msgid "Starting the UI..."
+msgstr "Inicianto a IU..."
+
+#: /vagrant/lib/frontend/qt.py:453
+msgid "Cleaned up stale socket from unclean exit."
+msgstr "Limpando dados de soquete travado devido a fechamento inesperado."
+
+#: /vagrant/lib/frontend/qt.py:457 /vagrant/lib/frontend/qt.py:462
+msgid "Error listening on local socket."
+msgstr "Erro ao obter dados do soquete local."
+
+#: /vagrant/lib/frontend/qt.py:488
+#, python-format
+msgid "About %s"
+msgstr "Sobre o %s"
+
+#: /vagrant/lib/frontend/qt.py:493
+#, python-format
+msgid "<h3>About %s</h3>"
+msgstr "<h3>Sobre o %s</h3>"
+
+#: /vagrant/lib/frontend/qt.py:494
+#, python-format
+msgid ""
+"%s monitors your IP address for changes, keeping your Remote Access and "
+"Standard DNS hostnames up to date."
+msgstr ""
+"%s monitora seu endereço IP em busca de mudanças, mantendo seus nomes de "
+"host de Remote Access e Standard DNS atualizados."
+
+#: /vagrant/lib/frontend/qt.py:498
+#, python-format
+msgid "2007-%s %s, All rights reserved."
+msgstr "2007-%s %s, All rights reserved."
+
+#: /vagrant/lib/frontend/qt.py:521
+msgid "Upgrade Available!"
+msgstr "Atualização disponível!"
+
+#: /vagrant/lib/frontend/qt.py:537
+msgid "Configure Hosts"
+msgstr "Configurar hosts"
+
+#: /vagrant/lib/frontend/qt.py:583 /vagrant/lib/frontend/qt.py:590
+#: /vagrant/lib/frontend/qt.py:691 /vagrant/lib/frontend/qt.py:1291
+msgid "Automatic"
+msgstr "Automático"
+
+#: /vagrant/lib/frontend/qt.py:584 /vagrant/lib/frontend/qt.py:591
+#: /vagrant/lib/frontend/qt.py:702 /vagrant/lib/frontend/qt.py:1290
+msgid "Disabled"
+msgstr "Desativado"
+
+#: /vagrant/lib/frontend/qt.py:585 /vagrant/lib/frontend/qt.py:592
+#: /vagrant/lib/frontend/qt.py:710
+msgid "Local Interface"
+msgstr "Interface local"
+
+#: /vagrant/lib/frontend/qt.py:587 /vagrant/lib/frontend/qt.py:594
+#: /vagrant/lib/frontend/qt.py:706
+msgid "Static Address"
+msgstr "Endereço estático"
+
+#: /vagrant/lib/frontend/qt.py:603
+msgid "Tried to configure hosts with no account selected, skipping"
+msgstr "Tentativa de configurar hosts sem conta selecionada; ignorando"
+
+#: /vagrant/lib/frontend/qt.py:648
+msgid "No hosts selected"
+msgstr "Nenhum host foi selecionado"
+
+#: /vagrant/lib/frontend/qt.py:650
+msgid "Please select one or more hosts to configure."
+msgstr "Selecione um ou mais hosts para configurar."
+
+#: /vagrant/lib/frontend/qt.py:738
+#, python-format
+msgid "%s Login"
+msgstr "Acesso %s"
+
+#: /vagrant/lib/frontend/qt.py:768
+#, python-format
+msgid "%s EULA"
+msgstr "Contrato de licença de usuário final do %s"
+
+#: /vagrant/lib/frontend/qt.py:787
+msgid "EULA accepted"
+msgstr "Contrato de licença de usuário final aceito"
+
+#: /vagrant/lib/frontend/qt.py:795
+msgid "EULA not accepted, stopping daemon and closing."
+msgstr ""
+"Contrato de licença de usuário não aceito, interrompendo o daemon e "
+"encerrando."
+
+#: /vagrant/lib/frontend/qt.py:807
+msgid "Showing Recursive Dns Dialog"
+msgstr "Exibindo diálogo DNS recursivo"
+
+#: /vagrant/lib/frontend/qt.py:817
+msgid "Showing Welcome Dialog"
+msgstr "Exibindo diálogo de boas-vindas"
+
+#: /vagrant/lib/frontend/qt.py:831
+msgid "startOrShowEULA"
+msgstr "Iniciar ou exibir Contrato de licença de usuário final"
+
+#: /vagrant/lib/frontend/qt.py:835
+msgid "Showing EULA Dialog"
+msgstr "Exibindo diálogo do Contrato de licença de usuário final"
+
+#: /vagrant/lib/frontend/qt.py:844
+msgid "Showing Main Window"
+msgstr "Exibindo janela principal"
+
+#: /vagrant/lib/frontend/qt.py:871
+msgid "Host Update Status Legend"
+msgstr "Legenda de status de atualização de host"
+
+#: /vagrant/lib/frontend/qt.py:927
+msgid "View Log Details"
+msgstr "Visualizar detalhes do registro"
+
+#: /vagrant/lib/frontend/qt.py:976 /vagrant/lib/frontend/qt.py:1071
+msgid "Error exporting logs"
+msgstr "Erro ao exportar registros"
+
+#: /vagrant/lib/frontend/qt.py:977
+msgid ""
+"An error occurred while writing to {}:\n"
+"\n"
+"{}"
+msgstr ""
+"Ocorreu um erro ao gravar em {}:\n"
+"\n"
+"{}"
+
+#: /vagrant/lib/frontend/qt.py:1009
+msgid "Confirm retry"
+msgstr "Confirmar nova tentativa"
+
+#: /vagrant/lib/frontend/qt.py:1011
+#, python-format
+msgid "Have you corrected the problem with account <b>%s</b>?"
+msgstr "Você já corrigiu o problema com a conta <b>%s</b>?"
+
+#: /vagrant/lib/frontend/qt.py:1072
+msgid ""
+"An error occurred while reading {}:\n"
+"\n"
+"{}"
+msgstr ""
+"Ocorreu um erro ao ler {}:\n"
+"\n"
+"{}"
+
+#: /vagrant/lib/frontend/qt.py:1089
+msgid "Save ZIP file"
+msgstr "Salvar arquivo ZIP"
+
+#: /vagrant/lib/frontend/qt.py:1091
+msgid "ZIP files (*.zip)"
+msgstr "Arquivos ZIP (*.zip)"
+
+#: /vagrant/lib/frontend/qt.py:1179
+msgid "Retry update"
+msgstr "Tentar a atualização novamente"
+
+#: /vagrant/lib/frontend/qt.py:1302 /vagrant/lib/frontend/qt.py:1529
+#: /vagrant/lib/frontend/qt.py:1530 /vagrant/lib/frontend/qt.py:1549
+#: /vagrant/lib/frontend/qt.py:1550
+msgid "Never"
+msgstr "Nunca"
+
+#: /vagrant/lib/frontend/qt.py:1313 /vagrant/lib/frontend/qt.py:1316
+#, python-format
+msgid "Interface: %s"
+msgstr "Interface: %s"
+
+#: /vagrant/lib/frontend/qt.py:1326
+#, python-format
+msgid "Static: %s"
+msgstr "Estático: %s"
+
+#: /vagrant/lib/frontend/qt.py:1337
+msgid "Inactive"
+msgstr "Inativo"
+
+#: /vagrant/lib/frontend/qt.py:1340
+msgid "Active"
+msgstr "Ativo"
+
+#: /vagrant/lib/frontend/qt.py:1418
+msgid "free"
+msgstr "grátis"
+
+#: /vagrant/lib/frontend/qt.py:1419
+msgid "vip"
+msgstr "vip"
+
+#. TRANSLATOR: This will say "Hi user123"
+#: /vagrant/lib/frontend/qt.py:1442
+#, python-format
+msgid "Hi <strong>%s</strong>"
+msgstr "Olá, <strong>%s</strong>"
+
+#: /vagrant/lib/frontend/qt.py:1484
+msgid "Failed to configure hosts."
+msgstr "Falha ao configurar hosts."
+
+#: /vagrant/lib/frontend/qt.py:1560
+#, python-format
+msgid "Last IP Check: %s<br/>Last Host Update: %s"
+msgstr "Última verificação de IP: %s<br/>Última atualização de host: %s"
+
+#: /vagrant/lib/frontend/qt.py:1578
+#, python-format
+msgid "%s Preferences"
+msgstr "Preferências do %s"
+
+#: /vagrant/lib/frontend/qt.py:1598
+msgid "None"
+msgstr "Nenhum"
+
+#: /vagrant/lib/frontend/qt.py:1660
+msgid "Failed to add account"
+msgstr "Falha ao adicionar conta"
+
+#: /vagrant/lib/frontend/qt.py:1684
+msgid "Are you sure?"
+msgstr "Tem certeza?"
+
+#: /vagrant/lib/frontend/qt.py:1686
+#, python-format
+msgid "Are you sure you want to remove the account <b>%s</b>?"
+msgstr "Tem certeza que deseja remover a conta <b>%s</b>?"
+
+#: /vagrant/lib/frontend/qt.py:1736 /vagrant/lib/frontend/qt.py:1993
+msgid "Recursive DNS Settings"
+msgstr "Configurações de DNS recursivo"
+
+#: /vagrant/lib/frontend/qt.py:1738
+msgid ""
+"Experience a better, faster, and safer way to surf the Internet with our "
+"Recursive DNS service. By selecting the checkbox below, this machine will"
+" be set to use Dyn's Recursive DNS service instead of the ones provided "
+"by your Internet Service Provider (ISP). This will enable a faster "
+"Internet connection and in turn, provide Dyn with anonymized Internet "
+"usage information that may help some of your favorite websites run even "
+"better."
+msgstr ""
+"Experimente uma forma mais rápida, segura e melhor para navegar na "
+"internet com nosso servidor de DNS Recursivo. Ao marcar a caixa de "
+"seleção abaixo, esta máquina será definida para utilizar o serviço DNS "
+"Recursivo Dynâ em vez de um outro fornecido pelo seu Provedor de Acesso à"
+" Internet. Isso habilitará uma conexão à internet mais rápida e "
+"sucessiva, proporcinando à Dyn informações de uso da internet mantidas em"
+" anonimato que podem ajudar alguns dos seus sites favoritos a serem "
+"executados de forma ainda melhor."
+
+#: /vagrant/lib/frontend/qt.py:1821
+#, python-format
+msgid "Current IPv4 Address: %s"
+msgstr "Endereço IPv4 atual: %s"
+
+#: /vagrant/lib/frontend/qt.py:1823
+#, python-format
+msgid "Current IPv6 Address: %s"
+msgstr "Endereço IPv6 atual: %s"
+
+#: /vagrant/lib/frontend/qt.py:1869
+#, python-format
+msgid "New version %s available, fetching upgrade."
+msgstr "Nova versão %s disponível, localizando e carregando atualização."
+
+#: /vagrant/lib/frontend/qt.py:1906
+#, python-format
+msgid "Launching upgrade installer %s"
+msgstr "Iniciando o instalador da atualização de %s"
+
+#: /vagrant/lib/frontend/qt.py:1915
+msgid "Show My Hosts"
+msgstr "Exibir meus hosts"
+
+#: /vagrant/lib/frontend/qt.py:1918
+msgid "Preferences"
+msgstr "Preferências"
+
+#: /vagrant/lib/frontend/qt.py:1922
+msgid "Get Support"
+msgstr "Obter suporte"
+
+#: /vagrant/lib/frontend/qt.py:1925
+msgid "About"
+msgstr "Sobre"
+
+#: /vagrant/lib/frontend/qt.py:1929
+msgid "Quit"
+msgstr "Sair"
+
+#: /vagrant/lib/frontend/qt.py:1946
+#, python-format
+msgid ""
+"%s v%s\n"
+"\n"
+"Current IPv4 address: %s\n"
+"Current IPv6 address: %s"
+msgstr ""
+"%s v%s\n"
+"\n"
+"Endereço IPv4 atual: %s\n"
+"Endereço IPv6 atual: %s"
+
+#: /vagrant/lib/frontend/qt.py:1974
+msgid "All windows are hidden, launching upgrade installer."
+msgstr "Todas as janelas estão ocultas, iniciando instalador de atualização."
+
+#: /vagrant/lib/frontend/qt.py:2043
+msgid "Welcome"
+msgstr "Seja bem-vindo"
+
+#: /vagrant/lib/shared/branding.py:121
+msgid "Manages background jobs for the Dyn Updater."
+msgstr "Gerencia trabalhos em segundo plano para o atualizador da Dyn."
+
+#: /vagrant/lib/shared/branding.py:213
+msgid ""
+"<p>The Dyn Updater allows you to configure the addresses for your Dyn "
+"Remote Access and Dyn Standard DNS hostnames, monitors your Internet "
+"connection for changes, and can automatically update your hostnames if "
+"your IP addresses change.</p><strong>What's Next</strong><ol><li>Click "
+"'Add Account' to add your account information.</li><li>Select the "
+"hostnames you would like to update from this location.</li><li>Click "
+"'Configure Selected Hosts' and select how you would like your addresses "
+"to be updated.</li></ol>"
+msgstr ""
+"<p>O atualizador da Dyn permite que você configure o endereço de seus "
+"nomes de host Dyn Remote Access e Dyn Standard DNS, monitore alterações "
+"na conexão com a Internet e pode atualizar automaticamente seus nomes de "
+"host, caso haja mudanças nos endereços IP.</p><strong>Próximos "
+"passos</strong><ol><li>Clique em 'Adicionar conta' para inserirs os dados"
+" da sua conta.</li><li>Selecione os nomes de host que você deseja "
+"atualizar a partir deste local.</li><li>Clique em 'Configurar hosts "
+"selecionados' e selecione como você deseja que seus endereços sejam "
+"atualizados.</li></ol>"
+
+#: /vagrant/lib/shared/branding.py:246
+msgid "Unknown: No accounts are currently configured in the updater."
+msgstr "Desconhecido: atualmente, não há nenhuma conta configurada no atualizador."
+
+#: /vagrant/lib/shared/branding.py:248
+msgid ""
+"Welcome: The updater has not yet attempted to send an update. Please "
+"check that hosts have been configured to be updated."
+msgstr ""
+"Seja bem-vindo: o atualizador ainda não tentou enviar uma atualização "
+"Verifique se os hosts foram configurados para atualização."
+
+#: /vagrant/lib/shared/branding.py:251
+msgid ""
+"OK: The last update for all hosts configured in the updater was "
+"successful."
+msgstr ""
+"OK: a última atualização de todos os hosts configurados no atualizador "
+"foi realizada com sucesso."
+
+#: /vagrant/lib/shared/branding.py:253
+msgid ""
+"Warning: One of the hosts configured was already set to this IP address, "
+"resulting in an unnecessary update. Is there more than one updater "
+"configured to update this hostname?"
+msgstr ""
+"Aviso: um dos hosts configurados já estava configurado com esse endereço "
+"IP, resultando em uma atualização desnecessária. Há mais de um "
+"atualizador configurado para atualizar esse nome de host?"
+
+#: /vagrant/lib/shared/branding.py:257
+msgid ""
+"Temporary Error: An error occurred while sending an update and the "
+"updater will retry later."
+msgstr ""
+"Erro temporário: ocorreu um erro ao enviar uma atualização e o "
+"atualizador realizará nova tentativa mais tarde."
+
+#: /vagrant/lib/shared/branding.py:259
+msgid ""
+"Error: An error occurred in sending this update. This can be caused by "
+"the login credentials being invalid, the hostname no longer existing, or "
+"the account being blocked due to abusive (repeated unnecessary) updates."
+msgstr ""
+"Erro: ocorreu um erro ao enviar essa atualização. Isso pode ser causado "
+"porque as credenciais de acesso são inválidas, ou porque o nome de host "
+"não existe mais ou porque a conta está sendo bloqueada devido a "
+"atualizações abusivas (repetidas desnecessariamente)."
+
+#: /vagrant/lib/shared/config.py:88
+msgid "Error loading saved configuration, loading defaults."
+msgstr "Erro ao carregar configuração salva, carregando padrões."
+
+#: /vagrant/lib/shared/logconfig.py:148
+msgid "Failed to use logging options, using defaults."
+msgstr "Falha ao usar opções de registro, usando padrões."
+
+#~ msgid "Â© 2007-%s %s, All rights reserved."
+#~ msgstr "Â© 2007-%s %s, All rights reserved."
+
+#~ msgid "DNS: %s Config: %s"
+#~ msgstr "DNS: %s Config: %s"
+
+#~ msgid "Comparing %s to %s"
+#~ msgstr "Comparando %s com %s"
+
+#~ msgid "Checking linked libraries of file: %s"
+#~ msgstr ""
+
+#~ msgid "Inspecting library: %s"
+#~ msgstr ""
+
+#~ msgid "Updating library path: %s"
+#~ msgstr ""
+
+#~ msgid "Something went wrong running install_name_tool on %s."
+#~ msgstr ""
+
+#~ msgid "Return code: %s"
+#~ msgstr ""
+
+#~ msgid "Unable to reset setuid on file"
+#~ msgstr ""
+
