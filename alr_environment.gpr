@@ -3,16 +3,16 @@ with "default_config.gpr";
 
 project Alr_Environment is
 
+   type Build_Mode_Type is ("aunit", "execute", "help_test");
+   Build_Mode : Build_Mode_Type := external ("BUILD_MODE", "execute");
+
    for Library_Name use "Alr_Environment";
    for Library_Version use Project'Library_Name & ".so." & Alr_Environment_Config.Crate_Version;
 
-   for Object_Dir use "obj/" & Alr_Environment_Config.Build_Profile;
+   for Object_Dir use "obj/" & Build_Mode;
    for Create_Missing_Dirs use "True";
    for Library_Dir use "lib/" & Alr_Environment_Config.Build_Profile;
    for Source_Dirs use ("src/");
-
-   type Build_Mode_Type is ("execute", "help_test");
-   Build_Mode : Build_Mode_Type := external ("BUILD_MODE", "execute");
 
    for Source_Dirs use ("src/", "config/", "src/"); -- & Build_Mode);
 

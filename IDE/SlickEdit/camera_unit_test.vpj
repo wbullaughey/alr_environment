@@ -40,7 +40,7 @@
         <F
             N="../../applications/video/camera/unit_test/*.cfg"
             Recurse="0"
-            Excludes=""
+            Excludes="b__*"
             L="1"/>
         <F
             N="../../applications/video/camera/unit_test/*.gpr"
@@ -90,7 +90,7 @@
                 Verbose="1"
                 Beep="1"
                 RunFromDir="%rw">
-                <Exec CmdLine="./build.sh execute"/>
+                <Exec CmdLine="./build.sh aunit"/>
             </Target>
             <Target
                 Name="build help_test"
@@ -216,7 +216,7 @@
                 Verbose="1"
                 Beep="1"
                 RunFromDir="%rw">
-                <Exec CmdLine="./build.sh execute"/>
+                <Exec CmdLine="./build.sh aunit"/>
             </Target>
             <Target
                 Name="build help_test"

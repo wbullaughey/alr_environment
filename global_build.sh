@@ -138,8 +138,8 @@ case $WHICH in
       build $DIRECTORY help_test
       ;;
 
-   execute)
-      echo build execute
+   aunit | execute)
+      echo build $WHICH
       build $DIRECTORY $WHICH
       ;;
 
