@@ -15,7 +15,8 @@ function branch(){
          git checkout -b "$BRANCH"
          if [[ $? -eq 0 ]]; then
             echo $MODULE checkout
-            git push
+            git push --set-upstream origin $BRANCH
+#           git push
             if [[ $? -eq 0 ]]; then
                echo $MODULE pushed
             else
