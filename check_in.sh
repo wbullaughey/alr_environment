@@ -8,15 +8,15 @@ else
       if [[ -d "$MODULE" ]]; then
          pushd $MODULE >/dev/null 2>&1
          if [[ $? -eq 0 ]]; then
-            if [[ -n $(git status --porcelain) ]]; then
+#           if [[ -n $(git status --porcelain) ]]; then
                echo "commit $MODULE with comment $COMMENT"
                git status
                git add .
                git commit -m "$COMMENT"
                git push
-            else
-               echo no modified files for $MODULE
-            fi
+#           else
+#              echo no modified files for $MODULE
+#           fi
             popd >/dev/null 2>&1
          else
              echo "pushd failed"
