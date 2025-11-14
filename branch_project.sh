@@ -19,7 +19,9 @@ die() { echo -e "${RED}ERROR: $*${NC}" >&2; exit 1; }
 NEW_BRANCH="$1"
 
 # ---- 1. Super-project ---------------------------------------
-CURRENT_SUPER=$(git rev-parse --abbrev-ref HEAD)
+SUPER_ROOT="$(git rev-parse --show-toplevel)"
+CURRENT_SUPER="$(git rev-parse --abbrev-ref HEAD)"
+
 echo -e "${YELLOW}Creating super-project branch '${NEW_BRANCH}' from '${CURRENT_SUPER}' …${NC}"
 git checkout -b "$NEW_BRANCH"
 echo -e "${GREEN}Super-project now on '${NEW_BRANCH}'${NC}"
@@ -27,51 +29,40 @@ echo -e "${GREEN}Super-project now on '${NEW_BRANCH}'${NC}"
 # ---- 2. Submodules ------------------------------------------
 echo -e "${YELLOW}Processing submodules…${NC}"
 
-# `git submodule foreach` guarantees these variables:
-#   $toplevel  – root of the super-project
-#   $name      – submodule name (as in .gitmodules)
-#   $sm_path   – path relative to $toplevel (may be empty if not checked-out)
-#   $sha1      – commit currently checked out
-git submodule foreach bash -c '
-    set -euo pipefail
+# Use a *single* command string; pass $SUPER_ROOT explicitly.
+git submodule foreach --quiet '
+    # $name  = submodule name (from .gitmodules)
+    # $path  = relative path (same as old $sm_path)
 
-    # If the submodule is not checked out, skip it
-    [[ -f "$toplevel/$sm_path/.git" ]] || {
+    # Skip if submodule is not checked out
+    if [ ! -f "$path/.git" ]; then
         echo -e "'${YELLOW}'Skipping $name (not checked out)${NC}"
         exit 0
-    }
-
-    echo -e "'${YELLOW}'Submodule: $sm_path${NC}"
-
-    # Switch/create the branch inside the submodule
-    if git show-ref --quiet --heads "'"$NEW_BRANCH"'"; then
-        echo -e "'${GREEN}'  → exists, switching…${NC}"
-        git checkout "'"$NEW_BRANCH"'"
-    else
-        echo -e "'${YELLOW}'  → creating from current HEAD…${NC}"
-        git checkout -b "'"$NEW_BRANCH"'"
     fi
+
+    echo -e "'${YELLOW}'Submodule: $path${NC}"
+
+    # Run git commands inside the submodule directory
+    (
+        cd "$path" || exit 1
+
+        if git show-ref --quiet --heads "'"$NEW_BRANCH"'"; then
+            echo -e "'${GREEN}'  → exists, switching…${NC}"
+            git checkout "'"$NEW_BRANCH"'"
+        else
+            echo -e "'${YELLOW}'  → creating from current HEAD…${NC}"
+            git checkout -b "'"$NEW_BRANCH"'"
+        fi
+    )
 '
 
 # ---- 3. (Optional) Record branch in .gitmodules -------------
 read -rp $'\n'"${YELLOW}Set '${NEW_BRANCH}' as default branch in .gitmodules? (y/N): ${NC}" -n1 REPLY
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    git submodule foreach bash -c '
-        git config -f "$toplevel/.gitmodules" \
-            submodule."$sm_path".branch "'"$NEW_BRANCH"'"
+    git submodule foreach --quiet '
+        git config -f "$SUPER_ROOT/.gitmodules" \
+            submodule."$path".branch "'"$NEW_BRANCH"'"
     '
     if git diff --quiet .gitmodules; then
-        echo -e "${YELLOW}.gitmodules unchanged${NC}"
-    else
-        git add .gitmodules
-        git commit -m "Set submodule branch to ${NEW_BRANCH}"
-        echo -e "${GREEN}.gitmodules updated${NC}"
-    fi
-fi
-
-# ---- 4. Summary ---------------------------------------------
-echo -e "\n${GREEN}All done! You are on '${NEW_BRANCH}' in the super-project and every checked-out submodule.${NC}"
-echo -e "${YELLOW}Next steps:${NC}"
-echo "   git push origin ${NEW_BRANCH}"
-echo "   git submodule foreach 'git push origin ${NEW_BRANCH} || true'"
+        echo -e "${YELLOW}.
