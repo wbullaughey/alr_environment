@@ -26,14 +26,10 @@
             Filters="*.*"
             GUID="{040AD204-2CA8-43D7-87F9-7650526B17A7}"/>
         <F
-            N="../../ada_lib/ada_lib_test_lib/src/*.ad?"
-            Recurse="1"
-            Excludes=""/>
-        <F N="../../ada_lib/ada_lib_test_lib/ada_lib_test_lib.gpr"/>
-        <F N="../../ada_lib/ada_lib_test_lib/config/ada_lib_test_lib_config.gpr"/>
-        <F N="../../ada_lib/ada_lib_test_lib/alire.toml"/>
-        <F N="../../ada_lib/ada_lib_test_lib/alire.toml.source"/>
-        <F N="../../ada_lib/ada_lib_test_lib/build.sh"/>
+            N="../../ada_lib/src/unit_test/*.ad?"
+            Recurse="0"
+            Excludes="*.a;*.o;*.ali"
+            L="1"/>
     </Files>
     <Config
         Name="Debug"

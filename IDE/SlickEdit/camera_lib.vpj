@@ -55,6 +55,18 @@
                 <Exec CmdLine="./build.sh execute"/>
             </Target>
             <Target
+                Name="Rebuild"
+                MenuCaption="&amp;Rebuild"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveAll"
+                RunFromDir="%rw"
+                ClearProcessBuffer="1"
+                Verbose="1"
+                Beep="1">
+                <Exec CmdLine="./build.sh execute no_warnings"/>
+            </Target>
+            <Target
                 Name="Compile"
                 MenuCaption="&amp;Compile"
                 Dialog="_gnuc_options_form Compile"
@@ -68,15 +80,6 @@
                 MenuCaption="&amp;Link"
                 Dialog="_gnuc_options_form Link">
                 <Exec CmdLine='gnat -g -o "%o" %f %libs'/>
-            </Target>
-            <Target
-                Name="Rebuild"
-                MenuCaption="&amp;Rebuild"
-                CaptureOutputWith="ProcessBuffer"
-                Deletable="0"
-                SaveOption="SaveWorkspaceFiles"
-                RunFromDir="%rw">
-                <Exec CmdLine=""/>
             </Target>
             <Target
                 Name="Debug"
@@ -160,6 +163,18 @@
                 <Exec CmdLine="./build.sh execute"/>
             </Target>
             <Target
+                Name="Rebuild"
+                MenuCaption="&amp;Rebuild"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveAll"
+                RunFromDir="%rw"
+                ClearProcessBuffer="1"
+                Verbose="1"
+                Beep="1">
+                <Exec CmdLine="./build.sh execute no_warnings"/>
+            </Target>
+            <Target
                 Name="Compile"
                 MenuCaption="&amp;Compile"
                 Dialog="_gnuc_options_form Compile"
@@ -173,15 +188,6 @@
                 MenuCaption="&amp;Link"
                 Dialog="_gnuc_options_form Link">
                 <Exec CmdLine='gnat -O -o "%o" %f %libs'/>
-            </Target>
-            <Target
-                Name="Rebuild"
-                MenuCaption="&amp;Rebuild"
-                CaptureOutputWith="ProcessBuffer"
-                Deletable="0"
-                SaveOption="SaveWorkspaceFiles"
-                RunFromDir="%rw">
-                <Exec CmdLine=""/>
             </Target>
             <Target
                 Name="Debug"

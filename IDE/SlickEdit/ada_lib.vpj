@@ -150,14 +150,14 @@
                 Excludes=""
                 L="1"/>
             <F
-                N="../../ada_lib/src/gnat/*.ad?"
+                N="../../ada_lib/src/macosx/*.ad?"
                 Recurse="0"
                 Excludes=""
                 L="1"/>
             <F
-                N="../../ada_lib/src/macosx/*.ad?"
+                N="../../ada_lib/src/unit_test/*.ad?"
                 Recurse="0"
-                Excludes=""
+                Excludes="*.a;*.o;*.ali"
                 L="1"/>
             <F N="../../ada_lib/.gitignore"/>
             <F N="../../ada_lib/ada_lib.gpr"/>

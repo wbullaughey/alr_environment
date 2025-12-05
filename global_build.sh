@@ -1,11 +1,13 @@
 source ~/.zshrc
 export WHICH=$1         # all | both | execute | help_test
 export KIND=$2
+export NO_WARNINGS=$3
 export DIRECTORY=`pwd`
 export SCRIPT_DIR=$(dirname ${0:A})
 export DO_TRACE=TRUE
 SCRIPT_DIR=$(dirname "$0")
 #export DEBUG_OPTIONS="-vv -d"
+export DEBUG_OPTIONS="-d"
 export ALR_OPTIONS="$ALR_OPTIONS -aP $SCRIPT_DIR"
 echo ALR_OPTIONS $ALR_OPTIONS
 
@@ -83,10 +85,15 @@ function build () {
       fi
    #  echo building `pwd` BUILD_MODE $BUILD_MODE
 #     $SCRIPT_DIR/fix_alire_toml.sh alire.toml.source
-      COMMAND="alr $DEBUG_OPTIONS build -- -j10 -s -k -gnatE -vl -v $ALR_OPTIONS -XBUILD_MODE=$BUILD_MODE"
+      COMMAND="alr $DEBUG_OPTIONS build -- -j1 -s -k -gnatE -vl -v $ALR_OPTIONS -XBUILD_MODE=$BUILD_MODE"
 
       echo COMMAND $COMMAND
-      $COMMAND
+      if [[ -n "$NO_WARNINGS" ]]; then
+         output TRACE NO WARNINGS $NO_WARNINGS
+         eval "$COMMAND" 2>&1 | grep -v -e "warning" -e "style"
+      else
+         eval $COMMAND
+      fi
 
       if [[ $? -ne 0 ]]; then
          echo "build failed"

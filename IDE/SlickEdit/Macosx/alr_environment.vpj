@@ -36,6 +36,7 @@
         <F N="../../../.gitmodules"/>
         <F N="../../../alire.toml"/>
         <F N="../../../alr_environment.gpr"/>
+        <F N="../../../alr_environment_config.gpr"/>
         <F N="../../../config/alr_environment_config.gpr"/>
         <F N="../../../build.sh"/>
         <F N="../../../ada_lib/build.sh"/>
@@ -43,6 +44,7 @@
         <F N="../../../check_in.sh"/>
         <F N="../../../check_out.sh"/>
         <F N="../../../clone.sh"/>
+        <F N="../../../alire/config.toml"/>
         <F N="../../../default_config.gpr"/>
         <F N="../../../global_build.sh"/>
         <F N="../../../list-help_tests.txt"/>

@@ -1,6 +1,6 @@
 <!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
 <Project
-    WorkingDir="../../../applications/video/camera/test_lib/"
+    WorkingDir="../../ada_lib/ada_lib_base/"
     Version="10.0"
     VendorName="SlickEdit"
     TemplateName="Ada - GNU Ada Compiler"
@@ -12,30 +12,34 @@
         <Folder
             Name="Source Files"
             Filters="*.ada;*.adb;*.c;*.cpp"
-            GUID="{8B54DDAA-A589-4E4C-AF8D-B8D3FF31CDBE}"/>
+            GUID="{9FE634AD-1391-404B-80F8-FC1185057C68}"/>
         <Folder
             Name="Header Files"
             Filters="*.h;*.ads"
-            GUID="{443FA70F-0C8B-48CE-BF2B-AE214E09FB5F}"/>
+            GUID="{B4FB3694-EC91-4DB8-A50E-F04454A60803}"/>
         <Folder
             Name="Resource Files"
             Filters="*.def;*.res"
-            GUID="{F83FCB8B-1A93-4E09-89ED-C17768FAE00C}"/>
+            GUID="{73CF8154-D24C-4A4D-BACA-D0E73B627CCA}"/>
         <Folder
             Name="Other Files"
             Filters="*.*"
-            GUID="{167CB412-4576-4578-9EA4-4FFBCED58F0E}"/>
+            GUID="{80DA5F88-1599-4700-BF63-F8734E0F2DF4}"/>
         <F
-            N="../../../applications/video/camera/lib/src/unit_test/*.ad?"
+            N="../../ada_lib/ada_lib_base/src/*.ad?"
             Recurse="0"
             Excludes="*.a;*.o;*.ali"
             L="1"/>
+        <F N="../../ada_lib/ada_lib_base/ada_lib_base.gpr"/>
+        <F N="../../ada_lib/ada_lib_base/config/ada_lib_base_config.gpr"/>
+        <F N="../../ada_lib/ada_lib_base/alire.toml"/>
+        <F N="../../ada_lib/ada_lib_base/build.sh"/>
     </Files>
     <Config
         Name="Debug"
         Type="gnuc"
         DebugCallbackName="gdb"
-        OutputFile="camera_test_lib"
+        OutputFile="ada_lib_base"
         CompilerConfigName="Latest Version">
         <Menu>
             <Target
@@ -43,20 +47,12 @@
                 MenuCaption="&amp;Build"
                 CaptureOutputWith="ProcessBuffer"
                 Deletable="0"
-                SaveOption="SaveWorkspaceFiles"
+                SaveOption="SaveAll"
                 RunFromDir="%rw"
-                ClearProcessBuffer="1"
                 Verbose="1"
+                ClearProcessBuffer="1"
                 Beep="1">
                 <Exec CmdLine="./build.sh execute"/>
-            </Target>
-            <Target
-                Name="Build All"
-                MenuCaption="Build All"
-                RunFromDir="%rw"
-                CaptureOutputWith="ProcessBuffer"
-                SaveOption="SaveWorkspaceFiles">
-                <Exec CmdLine="./build.sh all"/>
             </Target>
             <Target
                 Name="Compile"
@@ -121,12 +117,59 @@
                     Type="Slick-C"/>
             </Target>
             <Target
-                Name="Install"
-                MenuCaption="Install"
-                RunFromDir="/Users/wayne/vendor/gprbuild/"
+                Name="Help_Test"
+                MenuCaption="Help_Test"
+                RunFromDir="%rw"
                 CaptureOutputWith="ProcessBuffer"
                 SaveOption="SaveWorkspaceFiles">
-                <Exec CmdLine="./build.sh install"/>
+                <Exec CmdLine="./build.sh help_test"/>
+            </Target>
+            <Target
+                Name="build all"
+                MenuCaption="build all"
+                RunFromDir="%rw"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveWorkspaceFiles">
+                <Exec CmdLine="./build.sh all"/>
+            </Target>
+            <Target
+                Name="Build All"
+                MenuCaption="Build All"
+                RunFromDir="/Users/wayne/Project/git/alr/alr_environment/applications/video/camera/unit_test/"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveWorkspaceFiles">
+                <Exec CmdLine="./build.sh all"/>
+            </Target>
+            <Target
+                Name="build help_test"
+                MenuCaption="build help_test"
+                RunFromDir="/Users/wayne/Project/git/alr/alr_environment/applications/video/camera/unit_test/"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveWorkspaceFiles">
+                <Exec CmdLine="./build.sh execute help_test"/>
+            </Target>
+            <Target
+                Name="build help_test"
+                MenuCaption="build help_test"
+                RunFromDir="%rw"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveWorkspaceFiles">
+                <Exec CmdLine="./build.sh help_test"/>
+            </Target>
+            <Target
+                Name="build all"
+                MenuCaption="build all"
+                RunFromDir="%rw"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveWorkspaceFiles">
+                <Exec CmdLine="./build.sh all"/>
+            </Target>
+            <Target
+                Name="Compile_One"
+                MenuCaption="Compile_One"
+                RunFromDir="/Users/wayne/Project/git/alr/alr_environment/applications/video/camera/unit_test/"
+                SaveOption="SaveAll">
+                <Exec CmdLine="./build.sh execute %f"/>
             </Target>
         </Menu>
         <Rules Name="Compile">
@@ -148,7 +191,7 @@
         Name="Release"
         Type="gnuc"
         DebugCallbackName="gdb"
-        OutputFile="camera_test_lib"
+        OutputFile="ada_lib_base"
         CompilerConfigName="Latest Version">
         <Menu>
             <Target
@@ -156,20 +199,12 @@
                 MenuCaption="&amp;Build"
                 CaptureOutputWith="ProcessBuffer"
                 Deletable="0"
-                SaveOption="SaveWorkspaceFiles"
+                SaveOption="SaveAll"
                 RunFromDir="%rw"
-                ClearProcessBuffer="1"
                 Verbose="1"
+                ClearProcessBuffer="1"
                 Beep="1">
                 <Exec CmdLine="./build.sh execute"/>
-            </Target>
-            <Target
-                Name="Build All"
-                MenuCaption="Build All"
-                RunFromDir="%rw"
-                CaptureOutputWith="ProcessBuffer"
-                SaveOption="SaveWorkspaceFiles">
-                <Exec CmdLine="./build.sh all"/>
             </Target>
             <Target
                 Name="Compile"
@@ -234,12 +269,59 @@
                     Type="Slick-C"/>
             </Target>
             <Target
-                Name="Install"
-                MenuCaption="Install"
-                RunFromDir="/Users/wayne/vendor/gprbuild/"
+                Name="Help_Test"
+                MenuCaption="Help_Test"
+                RunFromDir="%rw"
                 CaptureOutputWith="ProcessBuffer"
                 SaveOption="SaveWorkspaceFiles">
-                <Exec CmdLine="./build.sh install"/>
+                <Exec CmdLine="./build.sh help_test"/>
+            </Target>
+            <Target
+                Name="build all"
+                MenuCaption="build all"
+                RunFromDir="%rw"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveWorkspaceFiles">
+                <Exec CmdLine="./build.sh all"/>
+            </Target>
+            <Target
+                Name="Build All"
+                MenuCaption="Build All"
+                RunFromDir="/Users/wayne/Project/git/alr/alr_environment/applications/video/camera/unit_test/"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveWorkspaceFiles">
+                <Exec CmdLine="./build.sh all"/>
+            </Target>
+            <Target
+                Name="build help_test"
+                MenuCaption="build help_test"
+                RunFromDir="/Users/wayne/Project/git/alr/alr_environment/applications/video/camera/unit_test/"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveWorkspaceFiles">
+                <Exec CmdLine="./build.sh execute help_test"/>
+            </Target>
+            <Target
+                Name="build help_test"
+                MenuCaption="build help_test"
+                RunFromDir="%rw"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveWorkspaceFiles">
+                <Exec CmdLine="./build.sh help_test"/>
+            </Target>
+            <Target
+                Name="build all"
+                MenuCaption="build all"
+                RunFromDir="%rw"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveWorkspaceFiles">
+                <Exec CmdLine="./build.sh all"/>
+            </Target>
+            <Target
+                Name="Compile_One"
+                MenuCaption="Compile_One"
+                RunFromDir="/Users/wayne/Project/git/alr/alr_environment/applications/video/camera/unit_test/"
+                SaveOption="SaveAll">
+                <Exec CmdLine="./build.sh execute %f"/>
             </Target>
         </Menu>
         <Rules Name="Compile">

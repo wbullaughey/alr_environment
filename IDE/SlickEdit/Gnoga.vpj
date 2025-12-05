@@ -37,10 +37,6 @@
             Recurse="1"
             Excludes=""/>
         <F
-            N="../../vendor/github.com/gnoga/deps/*.ad?"
-            Recurse="1"
-            Excludes=""/>
-        <F
             N="../../vendor/github.com/gnoga/src/*.ad?"
             Recurse="1"
             Excludes=""/>

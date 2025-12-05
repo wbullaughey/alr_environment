@@ -8,6 +8,7 @@ fi
 
 function branch(){
    MODULE=$1
+   echo branch module $MODULE
    if [[ -d "$MODULE" ]]; then
       pushd $MODULE >/dev/null 2>&1
       if [[ $? -eq 0 ]]; then
@@ -25,7 +26,7 @@ function branch(){
             fi
          else
             echo branch $MODULE failed
-            exit
+#            exit
          fi
          popd >/dev/null 2>&1
       else
