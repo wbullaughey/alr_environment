@@ -12,43 +12,10 @@ if [ -z "$COMMENT" ]; then
     exit
 fi
 
-function tag(){
-   MODULE=$1
-   if [[ -d "$MODULE" ]]; then
-      pushd $MODULE >/dev/null 2>&1
-      if [[ $? -eq 0 ]]; then
-         echo "tag $MODULE" with "$COMMENT"
-         git tag -a $TAG -m "$COMMENT"
-         if [[ $? -eq 0 ]]; then
-            echo $MODULE tagged
-            git push
-            if [[ $? -eq 0 ]]; then
-               echo $MODULE pushed
-            else
-               echo push $MODULE failed
-               exit
-            fi
-         else
-            echo tag $MODULE failed
-            exit
-         fi
-         popd >/dev/null 2>&1
-      else
-          echo "pushd failed"
-          exit
-      fi
-   else
-       echo "Directory $MODULE does not exist"
-       exit
-   fi
-}
+git tag -a $TAG -m $COMMENT
 
-tag "ada_lib"
-tag "ada_lib/ada_lib_test_lib"
-tag "ada_lib/ada_lib_tests"
-tag "applications"
-tag "aunit"
-tag "gnoga_lib"
-tag "vendor/github.com/gnoga"
-tag "."
+# 2. Push the branch first (this pushes all new commits + history)
+git push origin master
 
+# 3. Then push the tag
+git push origin $TAG

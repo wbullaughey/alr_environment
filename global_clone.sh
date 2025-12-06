@@ -12,5 +12,4 @@ if [ -z "$BRANCH" ]; then
     exit
 fi
 
-git clone --recurse-submodules git@github.com:wbullaughey/alr_environment $SUBDIRECTORY
-$SUBDIRECTORY/check_out.sh $BRANCH
+git clone --recurse-submodules -b $BRANCH git@github.com:wbullaughey/alr_environment $SUBDIRECTORY
