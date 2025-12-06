@@ -1,6 +1,6 @@
 <!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
 <Project
-    WorkingDir="."
+    WorkingDir="../../../ada_lib/ada_lib_options/"
     Version="10.0"
     VendorName="SlickEdit"
     TemplateName="Ada - GNU Ada Compiler"
@@ -45,8 +45,11 @@
                 MenuCaption="&amp;Build"
                 CaptureOutputWith="ProcessBuffer"
                 Deletable="0"
-                SaveOption="SaveWorkspaceFiles"
-                RunFromDir="%rw">
+                SaveOption="SaveAll"
+                RunFromDir="%rw"
+                ClearProcessBuffer="1"
+                Verbose="1"
+                Beep="1">
                 <Exec CmdLine="./build.sh execute"/>
             </Target>
             <Target
@@ -194,8 +197,11 @@
                 MenuCaption="&amp;Build"
                 CaptureOutputWith="ProcessBuffer"
                 Deletable="0"
-                SaveOption="SaveWorkspaceFiles"
-                RunFromDir="%rw">
+                SaveOption="SaveAll"
+                RunFromDir="%rw"
+                ClearProcessBuffer="1"
+                Verbose="1"
+                Beep="1">
                 <Exec CmdLine="./build.sh execute"/>
             </Target>
             <Target
