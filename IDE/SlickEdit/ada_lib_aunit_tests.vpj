@@ -156,19 +156,11 @@
         <Folder
             Name="Source Files"
             Filters="*.c;*.C;*.cc;*.cpp;*.cp;*.cxx;*.c++;*.prg;*.pas;*.dpr;*.asm;*.s;*.bas;*.java;*.cs;*.sc;*.scala;*.e;*.cob;*.html;*.rc;*.tcl;*.py;*.pl;*.d;*.m;*.mm;*.go;*.groovy;*.gsh"
-            GUID="{4FA67914-E68A-4E07-ACCA-7ADA86721E73}">
-            <F N="../../../../../../Sites/index.html"/>
-        </Folder>
+            GUID="{4FA67914-E68A-4E07-ACCA-7ADA86721E73}"></Folder>
         <Folder
             Name="Header Files"
             Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.h++;*.inc;*.sh;*.cpy;*.if"
-            GUID="{2925DF5B-3B71-415B-9F7E-6AAA44AC9CCD}">
-            <F N="../../ada_lib/ada_lib_tests/build.sh"/>
-            <F N="../../build_all.sh"/>
-            <F N="../../ada_lib/ada_lib_tests/loop.sh"/>
-            <F N="../../remote_build.sh"/>
-            <F N="../../ada_lib/ada_lib_tests/run.sh"/>
-        </Folder>
+            GUID="{2925DF5B-3B71-415B-9F7E-6AAA44AC9CCD}"></Folder>
         <Folder
             Name="Resource Files"
             Filters="*.ico;*.cur;*.dlg"
@@ -182,29 +174,10 @@
             Filters=""
             GUID="{C8415534-792A-4A39-8557-6C92C5FB222C}">
             <F
-                N="../../ada_lib/ada_lib_tests/src/*.ad?"
+                N="../../ada_lib/src/unit_test/*.ad?"
                 Recurse="0"
-                Excludes=""
+                Excludes="b__*"
                 L="1"/>
-            <F
-                N="../../ada_lib/ada_lib_tests/tests/data/*.cfg"
-                Recurse="1"
-                Excludes=""/>
-            <F N="../../ada_lib/ada_lib_tests/.gitignore"/>
-            <F N="../../ada_lib/ada_lib_tests/ada_lib_tests.gpr"/>
-            <F N="../../ada_lib/ada_lib_tests/config/ada_lib_tests_config.gpr"/>
-            <F N="../../ada_lib/ada_lib_tests/ada_lib_trace.ads"/>
-            <F N="../../ada_lib/ada_lib_tests/alire.toml"/>
-            <F N="../../ada_lib/ada_lib_test_lib/alire.toml.source"/>
-            <F N="../../ada_lib/ada_lib_tests/file_copy_source"/>
-            <F N="../../ada_lib/ada_lib_tests/help"/>
-            <F N="../../ada_lib/ada_lib_tests/list-test_ada_lib.txt"/>
-            <F N="../../ada_lib/ada_lib_tests/log.txt"/>
-            <F N="../../ada_lib/ada_lib_tests/notes.txt"/>
-            <F N="../../ada_lib/ada_lib_tests/project_paths.cfg"/>
-            <F N="../../../../../../tmp/sample.ads"/>
-            <F N="../../ada_lib/ada_lib_tests/suites"/>
-            <F N="../../ada_lib/ada_lib_tests/TRACE.txt"/>
         </Folder>
     </Files>
     <List Name="RTE">

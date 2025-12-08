@@ -48,7 +48,7 @@
                 CaptureOutputWith="ProcessBuffer"
                 Deletable="0"
                 SaveOption="SaveAll"
-                RunFromDir="%rw"
+                RunFromDir="/Users/wayne/Project/git/alr/alr_environment/ada_lib/ada_lib_gnoga/"
                 ClearProcessBuffer="1"
                 Verbose="1"
                 Beep="1">
@@ -200,7 +200,7 @@
                 CaptureOutputWith="ProcessBuffer"
                 Deletable="0"
                 SaveOption="SaveAll"
-                RunFromDir="%rw"
+                RunFromDir="/Users/wayne/Project/git/alr/alr_environment/ada_lib/ada_lib_gnoga/"
                 ClearProcessBuffer="1"
                 Verbose="1"
                 Beep="1">
