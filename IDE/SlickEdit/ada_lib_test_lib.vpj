@@ -26,6 +26,11 @@
             Filters="*.*"
             GUID="{040AD204-2CA8-43D7-87F9-7650526B17A7}"/>
         <F
+            N="../../ada_lib/ada_lib_test_lib/src/*.ad?"
+            Recurse="0"
+            Excludes="b__*"
+            L="1"/>
+        <F
             N="../../ada_lib/src/unit_test/*.ad?"
             Recurse="0"
             Excludes="*.a;*.o;*.ali"
