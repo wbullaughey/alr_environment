@@ -7,8 +7,9 @@ export SCRIPT_DIR=$(dirname ${0:A})
 export DO_TRACE=TRUE
 SCRIPT_DIR=$(dirname "$0")
 #export DEBUG_OPTIONS="-vv -d"
-export DEBUG_OPTIONS="-d"
+#export DEBUG_OPTIONS="-d"
 export ALR_OPTIONS="$ALR_OPTIONS -aP $SCRIPT_DIR"
+export ADAFLAGS=""
 echo ALR_OPTIONS $ALR_OPTIONS
 
 # WHICH values

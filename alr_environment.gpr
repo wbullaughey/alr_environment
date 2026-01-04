@@ -7,23 +7,42 @@ abstract project Alr_Environment is
 
    Alire_Host_Arch := "x86_64";
 
-   Alire_Host_Distro := "distro_unknown";
    Ada_Compiler_Switches := External_As_List ("ADAFLAGS", " ");
+
+   BUILD_LIBRARY := External ("BUILD_LIBRARY", "ADA_LIB_LIBRARY");
+
+   case BUILD_LIBRARY is
+      when "GNOGA_LIBRARY" =>
+         Ada_Compiler_Switches := Ada_Compiler_Switches &
+           ("-gnatyO" -- Check that overriding subprograms are explicitly marked as such
+         );
+
+      when others =>
+         Ada_Compiler_Switches := Ada_Compiler_Switches &
+            ("-gnatwa" -- Enable all warnings
+         );
+
+   end case;
+
+   Alire_Host_Distro := "distro_unknown";
    Ada_Compiler_Switches := Ada_Compiler_Switches &
-          (
-            "-U",  "-gnatu"
+                            External_As_List ("ADAFLAGS", " ") &
+           ("-U"
+           ,"-gnatu"
            ,"-gnat2022"
            ,"-Wl,-Map=output.map"
-           ,"-gnatE" -- dynamic elaboration
+--         ,"-gnatE" -- dynamic elaboration
 --         ,"-gnatel" -- elaboration info
 --         ,"-Og" -- Optimize for debug
 --         ,"-ffunction-sections" -- Separate ELF section for each function
 --         ,"-fdata-sections" -- Separate ELF section for each variable
            ,"-g" -- Generate debug info
+--         ,"-gnatd_F" -- legacy elaboration
            ,"-gnata"  -- Enable assert and pre,post conditions
            ,"-gnatn" -- limit inlining
-           ,"-gnatwa" -- Enable all warnings
            ,"-gnatw.X" -- Disable warnings for No_Exception_Propagation
+           ,"-gnatwa" -- enabled default warnings
+           ,"-gnatwl" -- elaboration warnings
            ,"-gnatVa" -- All validity checks
 --         ,"-gnaty3" -- Specify indentation level of 3
 --         ,"-gnatya" -- Check attribute casing
@@ -41,7 +60,6 @@ abstract project Alr_Environment is
 --         ,"-gnatyl" -- Check layout
 --         ,"-gnatym" -- Check maximum line length
 --         ,"-gnatyn" -- Check casing of entities in Standard
-           ,"-gnatyO" -- Check that overriding subprograms are explicitly marked as such
            ,"-gnatyp" -- Check pragma casing
 --         ,"-gnatyr" -- Check identifier references casing
            ,"-gnatyS" -- Check no statements after THEN/ELSE
@@ -57,4 +75,23 @@ abstract project Alr_Environment is
    type Build_Profile_Kind is ("release", "validation", "development");
    Build_Profile : Build_Profile_Kind := "development";
 
+   OS_VERSION := External ("OS_VERSION", "");
+
+   Ada_Binder_Switches := (
+      "-static",  -- Use static elaboration model (most conservative)
+      "-Es", --  Symbolic traceback
+      "-d_C",   -- diagnose all circularities
+      "-l" -- output elaboration order
+   );
+   -- OS_Major_Version := Filter_Out (Split (OS_VERSION), "\..*");
+   Linker_Options := ( );
+   case OS_Version is
+
+      when "12.7.6"=>
+         Linker_Options := ( );
+
+      when Others =>
+         Linker_Options := ( "-Wl,-ld_classic" );
+
+   end case;
 end Alr_Environment;
