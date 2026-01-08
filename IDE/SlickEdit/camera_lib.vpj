@@ -1,6 +1,6 @@
 <!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
 <Project
-    WorkingDir="../../applications/video/camera/lib/"
+    WorkingDir="../../applications/video/camera/library"
     Version="10.0"
     VendorName="SlickEdit"
     TemplateName="Ada - GNU Ada Compiler"
@@ -26,14 +26,14 @@
             Filters="*.*"
             GUID="{937FED33-58F4-4B2E-BCAB-4EC60EBFABF8}"/>
         <F
-            N="../../applications/video/camera/lib/src/*.ad?"
+            N="../../applications/video/camera/library/src/*.ad?"
             Recurse="0"
-            Excludes=""
+            Excludes="*.a;*.o;*.ali"
             L="1"/>
-        <F N="../../applications/video/camera/lib/.gitignore"/>
-        <F N="../../applications/video/camera/lib/alire.toml"/>
-        <F N="../../applications/video/camera/lib/build.sh"/>
-        <F N="../../applications/video/camera/lib/camera_lib.gpr"/>
+        <F N="../../applications/video/camera/library/.gitignore"/>
+        <F N="../../applications/video/camera/library/alire.toml"/>
+        <F N="../../applications/video/camera/library/build.sh"/>
+        <F N="../../applications/video/camera/library/camera_lib.gpr"/>
     </Files>
     <Config
         Name="Debug"

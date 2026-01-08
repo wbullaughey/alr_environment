@@ -97,10 +97,10 @@ function build () {
       fi
 
       if [[ $? -ne 0 ]]; then
-         echo "build failed"
-         exit
+         echo "build for $DIRECTORY failed"
+      else
+         echo "build for $DIRECTORY succeeded"
       fi
-      echo "build for $DIRECTORY succeeded"
       popd
    fi
 }
@@ -121,7 +121,6 @@ function build_all () {
    build "applications/video/camera" $BUILD_MODE program
    build "applications/video/camera/driver" $BUILD_MODE program
    build "applications/video/camera/driver/unit_test" $BUILD_MODE program
-   build "applications/video/camera/test_lib" $BUILD_MODE library
    build "applications/video/camera/unit_test" $BUILD_MODE program
    build "gnoga_lib/gnoga_ada_lib" $BUILD_MODE library
    build "gnoga_lib/gnoga_options" $BUILD_MODE library

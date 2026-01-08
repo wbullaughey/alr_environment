@@ -26,13 +26,13 @@
             Filters="*.*"
             GUID="{4D724095-9BAA-49C8-AD32-DF363D2F179D}"/>
         <F
-            N="../../applications/video/lib/src/*.ad?"
+            N="../../applications/video/library/src/*.ad?"
             Recurse="0"
-            Excludes=""
+            Excludes="*.a;*.o;*.ali"
             L="1"/>
-        <F N="../../applications/video/lib/alire.toml"/>
-        <F N="../../applications/video/lib/build.sh"/>
-        <F N="../../applications/video/lib/video_lib.gpr"/>
+        <F N="../../applications/video/library/alire.toml"/>
+        <F N="../../applications/video/library/build.sh"/>
+        <F N="../../applications/video/library/video_lib.gpr"/>
     </Files>
     <Config
         Name="Debug"

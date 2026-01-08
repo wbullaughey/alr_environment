@@ -22,7 +22,6 @@
         <Project File="../driver.vpj"/>
         <Project File="../Driver_Lib.vpj"/>
         <Project File="../driver_unit_test.vpj"/>
-        <Project File="dummy.vpj"/>
         <Project File="../gnat.vpj"/>
         <Project File="gnatcoll.13.vpj"/>
         <Project File="../gnatcoll.vpj"/>

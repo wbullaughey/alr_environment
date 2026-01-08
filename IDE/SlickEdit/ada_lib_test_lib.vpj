@@ -35,6 +35,9 @@
             Recurse="0"
             Excludes="*.a;*.o;*.ali"
             L="1"/>
+        <F N="../../ada_lib/ada_lib_test_lib/ada_lib_test_lib.gpr"/>
+        <F N="../../ada_lib/ada_lib_test_lib/alire.toml"/>
+        <F N="../../ada_lib/ada_lib_test_lib/build.sh"/>
     </Files>
     <Config
         Name="Debug"
@@ -60,7 +63,8 @@
                 MenuCaption="build all"
                 RunFromDir="%rw"
                 CaptureOutputWith="ProcessBuffer"
-                SaveOption="SaveWorkspaceFiles">
+                SaveOption="SaveWorkspaceFiles"
+                ClearProcessBuffer="1">
                 <Exec CmdLine="./build.sh all"/>
             </Target>
             <Target
@@ -173,7 +177,8 @@
                 MenuCaption="build all"
                 RunFromDir="%rw"
                 CaptureOutputWith="ProcessBuffer"
-                SaveOption="SaveWorkspaceFiles">
+                SaveOption="SaveWorkspaceFiles"
+                ClearProcessBuffer="1">
                 <Exec CmdLine="./build.sh all"/>
             </Target>
             <Target

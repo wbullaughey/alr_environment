@@ -1,6 +1,6 @@
 <!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
 <Project
-    WorkingDir="../../../applications/video/camera/test_lib/"
+    WorkingDir="../../../applications/video/camera/library/"
     Version="10.0"
     VendorName="SlickEdit"
     TemplateName="Ada - GNU Ada Compiler"
@@ -26,7 +26,7 @@
             Filters="*.*"
             GUID="{167CB412-4576-4578-9EA4-4FFBCED58F0E}"/>
         <F
-            N="../../../applications/video/camera/lib/src/unit_test/*.ad?"
+            N="../../../applications/video/camera/library/src/unit_test/*.ad?"
             Recurse="0"
             Excludes="*.a;*.o;*.ali"
             L="1"/>
