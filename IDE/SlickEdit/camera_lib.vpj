@@ -1,6 +1,6 @@
 <!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
 <Project
-    WorkingDir="../../applications/video/camera/library"
+    WorkingDir="../../applications/video/camera/lib/"
     Version="10.0"
     VendorName="SlickEdit"
     TemplateName="Ada - GNU Ada Compiler"
@@ -28,9 +28,8 @@
         <F
             N="../../applications/video/camera/library/src/*.ad?"
             Recurse="0"
-            Excludes="*.a;*.o;*.ali"
+            Excludes="b__*"
             L="1"/>
-        <F N="../../applications/video/camera/library/.gitignore"/>
         <F N="../../applications/video/camera/library/alire.toml"/>
         <F N="../../applications/video/camera/library/build.sh"/>
         <F N="../../applications/video/camera/library/camera_lib.gpr"/>

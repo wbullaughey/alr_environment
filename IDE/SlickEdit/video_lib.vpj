@@ -28,7 +28,7 @@
         <F
             N="../../applications/video/library/src/*.ad?"
             Recurse="0"
-            Excludes="*.a;*.o;*.ali"
+            Excludes="b__*"
             L="1"/>
         <F N="../../applications/video/library/alire.toml"/>
         <F N="../../applications/video/library/build.sh"/>

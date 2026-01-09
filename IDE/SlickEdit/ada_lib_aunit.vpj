@@ -59,7 +59,8 @@
                 MenuCaption="build all"
                 RunFromDir="%rw"
                 CaptureOutputWith="ProcessBuffer"
-                SaveOption="SaveWorkspaceFiles">
+                SaveOption="SaveWorkspaceFiles"
+                ClearProcessBuffer="1">
                 <Exec CmdLine="./build.sh all"/>
             </Target>
             <Target
@@ -172,7 +173,8 @@
                 MenuCaption="build all"
                 RunFromDir="%rw"
                 CaptureOutputWith="ProcessBuffer"
-                SaveOption="SaveWorkspaceFiles">
+                SaveOption="SaveWorkspaceFiles"
+                ClearProcessBuffer="1">
                 <Exec CmdLine="./build.sh all"/>
             </Target>
             <Target
