@@ -86,7 +86,7 @@ function build () {
       fi
    #  echo building `pwd` BUILD_MODE $BUILD_MODE
 #     $SCRIPT_DIR/fix_alire_toml.sh alire.toml.source
-      COMMAND="alr $DEBUG_OPTIONS build -- -j1 -s -k -gnatE -vl -v $ALR_OPTIONS -XBUILD_MODE=$BUILD_MODE"
+      COMMAND="alr $DEBUG_OPTIONS build -- -j1 -s -k -gnatE -vl -v $ALR_OPTIONS -XBUILD_MODE=$BUILD_MODE -largs"
 
       echo COMMAND $COMMAND
       if [[ -n "$NO_WARNINGS" ]]; then
