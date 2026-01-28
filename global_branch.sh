@@ -11,24 +11,46 @@ function branch(){
    echo branch module $MODULE
    if [[ -d "$MODULE" ]]; then
       pushd $MODULE >/dev/null 2>&1
+      echo pushd to `pwd`
       if [[ $? -eq 0 ]]; then
-         echo "checkout $MODULE" with "$BRANCH"
-         git checkout -b "$BRANCH"
+         echo "switch $MODULE" with "$BRANCH"
+         git switch -c "$BRANCH"
          if [[ $? -eq 0 ]]; then
-            echo $MODULE checkout
-            git push --set-upstream origin $BRANCH
-#           git push
-            if [[ $? -eq 0 ]]; then
-               echo $MODULE pushed
-            else
-               echo push $MODULE failed
-               exit
-            fi
+            echo module "$MODULE" switched to "$BRANCH"
          else
-            echo branch $MODULE failed
-#            exit
+            echo switch to $MODULE failed
+            exit
          fi
          popd >/dev/null 2>&1
+         echo poped to `pwd`
+      else
+          echo "pushd failed"
+          exit
+      fi
+   else
+       echo "Directory $MODULE does not exist"
+       exit
+   fi
+}
+function push (){
+   MODULE=$1
+   echo branch module $MODULE
+   if [[ -d "$MODULE" ]]; then
+      pushd $MODULE >/dev/null 2>&1
+      echo pushd to `pwd`
+      if [[ $? -eq 0 ]]; then
+         echo "push $MODULE" with "$BRANCH"
+         git add .
+         git commit -m "branch $BRANCH"
+         git push --set-upstream origin "$BRANCH"
+         if [[ $? -eq 0 ]]; then
+            echo module "$MODULE" pushed with "$BRANCH"
+         else
+            echo push $MODULE failed
+            exit
+         fi
+         popd >/dev/null 2>&1
+         echo poped to `pwd`
       else
           echo "pushd failed"
           exit
@@ -40,11 +62,16 @@ function branch(){
 }
 
 branch "ada_lib"
-branch "ada_lib/ada_lib_test_lib"
-branch "ada_lib/ada_lib_tests"
 branch "applications"
 branch "aunit"
 branch "gnoga_lib"
 branch "vendor/github.com/gnoga"
 branch "."
+
+push "ada_lib"
+push "applications"
+push "aunit"
+push "gnoga_lib"
+push "vendor/github.com/gnoga"
+push "."
 
