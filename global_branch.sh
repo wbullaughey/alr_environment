@@ -19,7 +19,7 @@ function branch(){
    pushd $MODULE >/dev/null 2>&1
    echo pushd to `pwd`
    if [[ $? -eq 0 ]]; then
-      echo pushd to `cmd`
+      echo pushd to `pwd`
    else
       echo pushd to $MODULE failed
       exit
@@ -28,12 +28,6 @@ function branch(){
    echo check in any changes for "$MODULE"
    git add .
    git commit -m "branch $BRANCH"
-   if [[ $? -eq 0 ]]; then
-      echo module $MODULE checked in
-   else
-      echo module $MODULE check in failed
-      exit
-   fi
 
    echo push module $MODULE
    git push
