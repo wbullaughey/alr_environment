@@ -32,8 +32,6 @@ function checkout(){
 }
 
 checkout "ada_lib"
-checkout "ada_lib/ada_lib_test_lib"
-checkout "ada_lib/ada_lib_tests"
 checkout "applications"
 checkout "aunit"
 checkout "gnoga_lib"
