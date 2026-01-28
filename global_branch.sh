@@ -17,7 +17,6 @@ function branch(){
    fi
 
    pushd $MODULE >/dev/null 2>&1
-   echo pushd to `pwd`
    if [[ $? -eq 0 ]]; then
       echo pushd to `pwd`
    else
