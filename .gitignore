@@ -27,6 +27,7 @@ config/
 lib/
 obj/
 save/
+.git/
 GNAT*
 list
 
