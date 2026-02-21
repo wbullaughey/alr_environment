@@ -62,18 +62,16 @@ function extract(){
 
 function run() {
    output TRACE run EXECUTE $EXECUTE PROGRAM $PROGRAM COMMAND $COMMAND DISPLAY $DISPLAY
+   export EXECUTE="$PROGRAM $COMMAND"
+   output TRACE EXECUTE $EXECUTE
 
    case "$DISPLAY" in
 
       true)
-         export EXECUTE="$PROGRAM $COMMAND"
-         output TRACE EXECUTE $EXECUTE
          ${=EXECUTE} 2>&1 | tee $APPEND_OUTPUT $OUTPUT
          ;;
 
       false)
-         export EXECUTE="$PROGRAM $COMMAND"
-         output TRACE EXECUTE $EXECUTE
          ${=EXECUTE} 2>&1| /dev/null
          ;;
 
@@ -139,7 +137,7 @@ esac
 
 parse
 export ACTION=$RESULT
-output TRACE ACTION $ACTION
+output TRACE parse RESULT $ RESULT ACTION $ACTION
 
 case "$ACTION" in
 
@@ -174,7 +172,6 @@ case $USE_DBDAEMON in
       case $ACTION in
 
          "local")
-            export DATABASE_OPTION="-l"
             extract
             parse
             ;;

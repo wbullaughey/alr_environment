@@ -1,11 +1,14 @@
 source ~/.zshrc
 export WHICH=$1         # all | both | execute | help_test
 export KIND=$2
-export NO_WARNINGS=$3
+export PROGRAM=$3
+export NO_WARNINGS=$4
 export DIRECTORY=`pwd`
 export SCRIPT_DIR=$(dirname ${0:A})
 export DO_TRACE=TRUE
+echo SCRIPT_DIR $SCRIPT_DIR
 SCRIPT_DIR=$(dirname "$0")
+echo SCRIPT_DIR $SCRIPT_DIR
 #export DEBUG_OPTIONS="-vv -d"
 #export DEBUG_OPTIONS="-d"
 export ALR_OPTIONS="$ALR_OPTIONS -aP $SCRIPT_DIR"
@@ -17,10 +20,10 @@ echo ALR_OPTIONS $ALR_OPTIONS
 #   execute    - build application or library for subdirectory level
 #   help_test  - builds help_test at level
 
-#if [[ -z "$DIRECTORY" ]]; then
-#   echo missing DIRECTORY
-#   exit
-#fi
+if [[ -z "$PROGRAM" ]]; then
+   echo PROGRAM not set in build.sh
+   exit
+fi
 
 function output() {
    TRACE=$1
@@ -53,7 +56,7 @@ WHICH_ALR=`which alr`
 #output TRACE PATH $PATH
 #output TRACE which alr $WHICH_ALR
 output LIST global build WHICH $WHICH DIRECTORY $DIRECTORY
-output TRACE global build SCRIPT_DIR $SCRIPT_DIR KIND $KIND DO_TRACE $DO_TRACE
+output TRACE global build PROGRAM $PROGRAM SCRIPT_DIR $SCRIPT_DIR KIND $KIND DO_TRACE $DO_TRACE
 
 case $KIND in
 
@@ -86,7 +89,7 @@ function build () {
       fi
    #  echo building `pwd` BUILD_MODE $BUILD_MODE
 #     $SCRIPT_DIR/fix_alire_toml.sh alire.toml.source
-      COMMAND="alr $DEBUG_OPTIONS build -- -j1 -s -k -gnatE -vl -v $ALR_OPTIONS -XBUILD_MODE=$BUILD_MODE -largs"
+      COMMAND="alr $DEBUG_OPTIONS build -- -j10 -s -k -gnatE -vl -v $ALR_OPTIONS -XBUILD_MODE=$BUILD_MODE -largs"
 
       echo COMMAND $COMMAND
       if [[ -n "$NO_WARNINGS" ]]; then
@@ -100,6 +103,12 @@ function build () {
          echo "build for $DIRECTORY failed"
       else
          echo "build for $DIRECTORY succeeded"
+      fi
+      install_name_tool -delete_rpath /Users/wayne/.local/share/alire/toolchains/gnat_native_14.2.1_cc5517d6/lib bin/$PROGRAM
+      if [[ $? -ne 0 ]]; then
+         echo "install_name_tool for $DIRECTORY failed"
+      else
+         echo "install_name_tool for $DIRECTORY succeeded"
       fi
       popd
    fi

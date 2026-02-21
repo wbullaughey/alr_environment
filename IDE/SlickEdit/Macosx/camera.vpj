@@ -44,6 +44,7 @@
         <F N="../../../branch_project.sh"/>
         <F N="../../../applications/video/camera/gnoga-data/css/camera.css"/>
         <F N="../../../applications/video/camera/camera_control.gpr"/>
+        <F N="../../../applications/video/camera/cameras.cfg"/>
         <F N="../../../applications/video/camera/help"/>
         <F N="../../../applications/video/camera/list-camera.txt"/>
         <F N="../../../applications/video/camera/run.sh"/>
@@ -71,7 +72,7 @@
                 ClearProcessBuffer="1"
                 Verbose="1"
                 Beep="1">
-                <Exec CmdLine="./build.sh execute"/>
+                <Exec CmdLine="./build.sh execute camera_control"/>
             </Target>
             <Target
                 Name="Rebuild"
@@ -197,7 +198,7 @@
                 ClearProcessBuffer="1"
                 Verbose="1"
                 Beep="1">
-                <Exec CmdLine="./build.sh execute"/>
+                <Exec CmdLine="./build.sh execute camera_control"/>
             </Target>
             <Target
                 Name="Rebuild"
