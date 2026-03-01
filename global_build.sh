@@ -94,23 +94,31 @@ function build () {
       echo COMMAND $COMMAND
       if [[ -n "$NO_WARNINGS" ]]; then
          output TRACE NO WARNINGS $NO_WARNINGS
-         eval "$COMMAND" 2>&1 | grep -v -e "warning" -e "style"
+         set LIST = `eval "$COMMAND"`
+         if [[ $? -ne 0 ]]; then
+            echo "build for $DIRECTORY failed"
+            grep -v -e "warning" -e "style" LIST
+            exit
+         else
+            echo "build for $DIRECTORY succeeded"
+         fi
       else
          eval $COMMAND
-      fi
 
-      if [[ $? -ne 0 ]]; then
-         echo "build for $DIRECTORY failed"
-      else
-         echo "build for $DIRECTORY succeeded"
+         if [[ $? -ne 0 ]]; then
+            echo "build for $DIRECTORY failed"
+         else
+            echo "build for $DIRECTORY succeeded"
+         fi
       fi
-      install_name_tool -delete_rpath /Users/wayne/.local/share/alire/toolchains/gnat_native_14.2.1_cc5517d6/lib bin/$PROGRAM
-      if [[ $? -ne 0 ]]; then
-         echo "install_name_tool for $DIRECTORY failed"
-      else
-         echo "install_name_tool for $DIRECTORY succeeded"
-      fi
-      popd
+#echo run install_name_tool
+#      install_name_tool -delete_rpath /Users/wayne/.local/share/alire/toolchains/gnat_native_14.2.1_cc5517d6/lib bin/$PROGRAM
+#      if [[ $? -ne 0 ]]; then
+#         echo "install_name_tool for $DIRECTORY failed"
+#      else
+#         echo "install_name_tool for $DIRECTORY succeeded"
+#      fi
+#      popd
    fi
 }
 
