@@ -86,7 +86,7 @@
                 Verbose="1"
                 Beep="1"
                 RunFromDir="%rw">
-                <Exec CmdLine="./build.sh execute camera_aunit"/>
+                <Exec CmdLine="./build.sh execute camera_aunit TRUE"/>
             </Target>
             <Target
                 Name="Compile_One"
@@ -221,7 +221,7 @@
                 Verbose="1"
                 Beep="1"
                 RunFromDir="%rw">
-                <Exec CmdLine="./build.sh execute camera_aunit"/>
+                <Exec CmdLine="./build.sh execute camera_aunit TRUE"/>
             </Target>
             <Target
                 Name="Compile_One"

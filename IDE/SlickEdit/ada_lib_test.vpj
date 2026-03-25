@@ -79,7 +79,7 @@
                 Deletable="0"
                 SaveOption="SaveWorkspaceFiles"
                 RunFromDir="%rw">
-                <Exec CmdLine=""/>
+                <Exec CmdLine="./build.sh clean test_ada_lib"/>
             </Target>
             <Target
                 Name="Debug"
@@ -231,7 +231,7 @@
                 Deletable="0"
                 SaveOption="SaveWorkspaceFiles"
                 RunFromDir="%rw">
-                <Exec CmdLine=""/>
+                <Exec CmdLine="./build.sh clean test_ada_lib"/>
             </Target>
             <Target
                 Name="Debug"

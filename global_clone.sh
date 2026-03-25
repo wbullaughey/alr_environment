@@ -13,4 +13,5 @@ if [ -z "$BRANCH" ]; then
 fi
 
 git clone --recurse-submodules git@github.com:wbullaughey/alr_environment $SUBDIRECTORY
+pushd $SUBDIRECTORY
 ./check_out.sh $BRANCH

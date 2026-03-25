@@ -1,6 +1,6 @@
 <!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
 <Project
-    WorkingDir="../../gnoga_lib/gnoga_ada_lib/"
+    WorkingDir="../../gnoga_lib/"
     Version="10.0"
     VendorName="SlickEdit"
     TemplateName="Ada - GNU Ada Compiler"
@@ -26,15 +26,13 @@
             Filters="*.*"
             GUID="{224074F5-C3A5-45DE-9CA0-05EB83208D57}"/>
         <F
-            N="../../gnoga_lib/gnoga_ada_lib/src/*.ad?"
-            Recurse="1"
-            Excludes=""/>
-        <F N="../../gnoga_lib/gnoga_ada_lib/.gitignore"/>
-        <F N="../../gnoga_lib/gnoga_ada_lib/alire.toml"/>
-        <F N="../../build.sh"/>
-        <F N="../../gnoga_lib/gnoga_ada_lib/build.sh"/>
-        <F N="../../gnoga_lib/gnoga_ada_lib/gnoga_ada_lib.gpr"/>
-        <F N="../../gnoga_lib/gnoga_ada_lib/config/gnoga_ada_lib_config.gpr"/>
+            N="../../gnoga_lib/src/*.ad?"
+            Recurse="0"
+            Excludes="b__*"
+            L="1"/>
+        <F N="../../gnoga_lib/alire.toml"/>
+        <F N="../../gnoga_lib/build.sh"/>
+        <F N="../../gnoga_lib/gnoga_ada_lib.gpr"/>
     </Files>
     <Config
         Name="Debug"
