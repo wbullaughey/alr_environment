@@ -78,9 +78,7 @@
         <Folder
             Name="Other Files"
             Filters=""
-            GUID="{EF53A324-51E4-4117-904F-3A17BCF8F7C1}">
-            <F N="../../../../../Library/CloudStorage/GoogleDrive-wbullaughey@gmail.com/My Drive/SlickEdit/SlickEdit Key Bindings"/>
-        </Folder>
+            GUID="{EF53A324-51E4-4117-904F-3A17BCF8F7C1}"></Folder>
     </Files>
     <List Name="RTE">
     </List>

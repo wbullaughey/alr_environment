@@ -4,16 +4,19 @@ export KIND=$2
 export PROGRAM=$3
 export NO_WARNINGS=$4
 export DIRECTORY=`pwd`
-export SCRIPT_DIR=$(dirname ${0:A})
-export DO_TRACE=TRUE
+export SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+export DO_TRACE=FALSE
 echo SCRIPT_DIR $SCRIPT_DIR
-SCRIPT_DIR=$(dirname "$0")
-echo SCRIPT_DIR $SCRIPT_DIR
+#SCRIPT_DIR=$(dirname "$0")
+#echo SCRIPT_DIR $SCRIPT_DIR
 #export DEBUG_OPTIONS="-vv -d"
 #export DEBUG_OPTIONS="-d"
-export ALR_OPTIONS="$ALR_OPTIONS -aP $SCRIPT_DIR"
+#export ALR_OPTIONS="$ALR_OPTIONS -aP $SCRIPT_DIR"
+#echo ALR_OPTIONS $ALR_OPTIONS
 export ADAFLAGS=""
-echo ALR_OPTIONS $ALR_OPTIONS
+#echo ALR_OPTIONS $ALR_OPTIONS
+
+#ls $SCRIPT_DIR
 
 # WHICH values
 #   all     - build everything (help_tests, driver unit tests, applications)
@@ -28,8 +31,8 @@ fi
 function output() {
    TRACE=$1
    shift 1
-   echo "output TRACE $TRACE DO_TRACE $DO_TRACE APPEND TRACE $APPEND_OUTPUT \
-      PARAMETERS $*" >> TRACE.txt
+#  echo "output TRACE $TRACE DO_TRACE $DO_TRACE APPEND TRACE $APPEND_OUTPUT \
+#     PARAMETERS $*" >> TRACE.txt
    case $TRACE in
 
       "LIST")
@@ -81,11 +84,6 @@ function build () {
    else
       output TRACE building $DIRECTORY BUILD_MODE $BUILD_MODE kind $KIND
 
-      if [ $BUILD_MODE = "clean" ]; then
-         BUILD_MODE=execute
-         ALR_OPTIONS="$ALR_OPTIONS -f"
-      fi
-
       pushd $DIRECTORY > /dev/null 2>&1
       if [[ $? -ne 0 ]]; then
          echo "pushd to $DIRECTORY failed"
@@ -95,16 +93,18 @@ function build () {
 #     $SCRIPT_DIR/fix_alire_toml.sh alire.toml.source
       COMMAND="alr $DEBUG_OPTIONS build -- -j10 -s -k -gnatE -vl -v $ALR_OPTIONS -XBUILD_MODE=$BUILD_MODE -largs"
 
-      echo COMMAND $COMMAND
-pwd
+      output TRACE COMMAND $COMMAND
+#     echo pwd `pwd`
       RESULT=$(eval "$COMMAND")
       STATUS=$?
+      popd
 
       if [ "$STATUS" -eq 0 ]; then
           echo "build for $DIRECTORY succeeded"
           echo "RESULT $RESULT STATUS $STATUS"
       else
           echo "build Failed with STATUS $STATUS for $DIRECTORY"
+          echo "RESULT $RESULT STATUS $STATUS"
           exit
       fi
 
@@ -135,33 +135,31 @@ pwd
 #      else
 #         echo "install_name_tool for $DIRECTORY succeeded"
 #      fi
-#      popd
    fi
 }
 
 function build_all () {
    BUILD_MODE=$1
    echo build_all for BUILD_MODE $BUILD_MODE
-   pushd $SCRIPT_DIR > /dev/null 2>&1
-   if [[ $? -ne 0 ]]; then
-      echo "pushd to $SCRIPT_DIR failed"
+   CURRENT_DIR=`pwd`
+   if [[ $SCRIPT_DIR != $CURRENT_DIR ]]; then
+      echo "not building from global_build.sh directory"
       exit
    fi
-   build "aunit" $BUILD_MODE library
-   build "ada_lib" $BUILD_MODE  library
-   build "ada_lib/aunit" $BUILD_MODE library
-   build "ada_lib/ada_lib_test_lib" $BUILD_MODE library
-   build "ada_lib/ada_lib_tests" $BUILD_MODE program
-   build "applications/video/camera" $BUILD_MODE program
-   build "applications/video/camera/driver" $BUILD_MODE program
-   build "applications/video/camera/driver/unit_test" $BUILD_MODE program
-   build "applications/video/camera/unit_test" $BUILD_MODE program
-   build "gnoga_lib/gnoga_ada_lib" $BUILD_MODE library
-   build "gnoga_lib/gnoga_options" $BUILD_MODE library
-   build "vendor/github.com/gnoga" $BUILD_MODE library
-   build ".    " $BUILD_MODE library
+   build "aunit" $BUILD_MODE
+   build "ada_lib" $BUILD_MODE
+   build "ada_lib/aunit" $BUILD_MODE
+   build "ada_lib/ada_lib_test_lib" $BUILD_MODE
+   build "ada_lib/ada_lib_tests" $BUILD_MODE
+   build "applications/video/camera" $BUILD_MODE
+   build "applications/video/camera/driver" $BUILD_MODE
+   build "applications/video/camera/driver/unit_test" $BUILD_MODE
+   build "applications/video/camera/unit_test" $BUILD_MODE
+   build "gnoga_lib/gnoga_ada_lib" $BUILD_MODE
+   build "gnoga_lib/gnoga_options" $BUILD_MODE
+   build "vendor/github.com/gnoga" $BUILD_MODE
+   build "." $BUILD_MODE
    echo all directories built for BUILD_MODE $BUILD_MODE
-   popd
 }
 
 case $WHICH in
@@ -179,7 +177,13 @@ case $WHICH in
       build $DIRECTORY help_test
       ;;
 
-   aunit | clean | execute)
+   clean)
+      ALR_OPTIONS="$ALR_OPTIONS -f"
+      echo build execute
+      build $DIRECTORY execute
+      ;;
+
+   aunit | execute)
       echo build $WHICH
       build $DIRECTORY $WHICH
       ;;

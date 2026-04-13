@@ -98,11 +98,11 @@
             <Target
                 Name="build all"
                 MenuCaption="build all"
-                RunFromDir="%rw"
+                RunFromDir="/Users/wayne/Project/git/alr/alr_environment/"
                 CaptureOutputWith="ProcessBuffer"
                 SaveOption="SaveWorkspaceFiles"
                 ClearProcessBuffer="1">
-                <Exec CmdLine="./test_build.sh all"/>
+                <Exec CmdLine="./ada_lib_build_all.sh"/>
             </Target>
             <Target
                 Name="Compile"
@@ -224,11 +224,11 @@
             <Target
                 Name="build all"
                 MenuCaption="build all"
-                RunFromDir="%rw"
+                RunFromDir="/Users/wayne/Project/git/alr/alr_environment/"
                 CaptureOutputWith="ProcessBuffer"
                 SaveOption="SaveWorkspaceFiles"
                 ClearProcessBuffer="1">
-                <Exec CmdLine="./test_build.sh all"/>
+                <Exec CmdLine="./ada_lib_build_all.sh"/>
             </Target>
             <Target
                 Name="Compile"

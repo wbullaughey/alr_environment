@@ -34,6 +34,7 @@
             L="1"/>
         <F N="../../../.gitignore"/>
         <F N="../../../.gitmodules"/>
+        <F N="../../../ada_lib_build_all.sh"/>
         <F N="../../../alire.toml"/>
         <F N="../../../alr_environment.gpr"/>
         <F N="../../../alr_environment_config.gpr"/>
@@ -73,7 +74,7 @@
                 Verbose="1"
                 ClearProcessBuffer="1"
                 Beep="1">
-                <Exec CmdLine="./build.sh execute"/>
+                <Exec CmdLine="./build.sh execute alr_environment"/>
             </Target>
             <Target
                 Name="Build All"
@@ -126,7 +127,7 @@
                 SaveOption="SaveWorkspaceFiles"
                 RunFromDir="/Users/wayne/Project/git/alr/alr_environment/"
                 ClearProcessBuffer="1">
-                <Exec CmdLine="./global_build.sh"/>
+                <Exec CmdLine="./ada_lib_build_all.sh"/>
             </Target>
             <Target
                 Name="Pretty Print"

@@ -51,7 +51,7 @@
                 ClearProcessBuffer="1"
                 Verbose="1"
                 Beep="1">
-                <Exec CmdLine="./build.sh execute library"/>
+                <Exec CmdLine="./build.sh execute camera_lib"/>
             </Target>
             <Target
                 Name="Rebuild"
@@ -159,7 +159,7 @@
                 ClearProcessBuffer="1"
                 Verbose="1"
                 Beep="1">
-                <Exec CmdLine="./build.sh execute library"/>
+                <Exec CmdLine="./build.sh execute camera_lib"/>
             </Target>
             <Target
                 Name="Rebuild"

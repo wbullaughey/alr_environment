@@ -23,14 +23,14 @@
             Filters="*.*"
             GUID="{49C949F5-78F7-4981-908F-2C449A246DF4}"/>
         <F
-            N="../../applications/video/camera/test_lib/src/*.ad?"
+            N="../../applications/video/camera/library/src/unit_test/*.ad?"
             Recurse="0"
-            Excludes=""
+            Excludes="*.a;*.o;*.ali"
             L="1"/>
         <F
             N="../../applications/video/camera/unit_test/src/*.ad?"
             Recurse="0"
-            Excludes=""
+            Excludes="*.a;*.o;*.ali"
             L="1"/>
         <F
             N="../../applications/video/camera/unit_test/*.cfg"
@@ -46,25 +46,21 @@
             N="../../applications/video/camera/unit_test/doc/*.txt"
             Recurse="1"
             Excludes=""/>
-        <F N="../../applications/video/camera/unit_test/.gitignore"/>
         <F N="../../applications/video/camera/unit_test/alire.toml"/>
         <F N="../../applications/video/camera/unit_test/alire.toml.source"/>
+        <F N="../../applications/video/camera/unit_test/build-camera-test.txt"/>
         <F N="../../applications/video/camera/unit_test/build.sh"/>
         <F N="../../applications/video/camera/unit_test/build.txt"/>
         <F N="../../applications/video/camera/unit_test/camera_tests.gpr"/>
         <F N="../../applications/video/camera/unit_test/config/camera_tests_config.gpr"/>
-        <F N="../../../../../../tmp/compile.txt"/>
-        <F N="../../../../../../bin/debugvs.sh"/>
         <F N="../../applications/video/camera/unit_test/driver_test.sh"/>
         <F N="../../applications/video/camera/driver/help"/>
         <F N="../../applications/video/camera/unit_test/help"/>
         <F N="../../applications/video/camera/unit_test/LC_RPATH.txt"/>
         <F N="../../applications/video/camera/unit_test/list-camera_aunit.txt"/>
-        <F N="../../applications/video/camera/unit_test/list-camera_driver.txt"/>
         <F N="../../applications/video/camera/unit_test/load_test_setup.cfg"/>
-        <F N="../../applications/video/camera/unit_test/merge.txt"/>
+        <F N="../../../../../../tmp/note.txt"/>
         <F N="../../applications/video/camera/unit_test/project_paths.cfg"/>
-        <F N="../../applications/video/camera/unit_test/remote_build.txt"/>
         <F N="../../applications/video/camera/unit_test/run.sh"/>
         <F N="../../applications/video/camera/unit_test/suites"/>
         <F N="../../applications/video/camera/unit_test/TRACE.txt"/>
@@ -86,7 +82,7 @@
                 Verbose="1"
                 Beep="1"
                 RunFromDir="%rw">
-                <Exec CmdLine="./build.sh execute camera_aunit TRUE"/>
+                <Exec CmdLine="./build.sh execute camera_aunit FALSE"/>
             </Target>
             <Target
                 Name="Compile_One"
@@ -221,7 +217,7 @@
                 Verbose="1"
                 Beep="1"
                 RunFromDir="%rw">
-                <Exec CmdLine="./build.sh execute camera_aunit TRUE"/>
+                <Exec CmdLine="./build.sh execute camera_aunit FALSE"/>
             </Target>
             <Target
                 Name="Compile_One"

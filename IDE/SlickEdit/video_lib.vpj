@@ -1,6 +1,6 @@
 <!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
 <Project
-    WorkingDir="../../applications/video/lib/"
+    WorkingDir="../../applications/video/library"
     Version="10.0"
     VendorName="SlickEdit"
     TemplateName="Ada - GNU Ada Compiler"
@@ -46,13 +46,13 @@
                 MenuCaption="&amp;Build"
                 CaptureOutputWith="ProcessBuffer"
                 Deletable="0"
-                SaveOption="SaveWorkspaceFiles"
+                SaveOption="SaveAll"
                 RunFromDir="%rw"
                 Verbose="1"
                 ClearProcessBuffer="1"
                 Beep="1"
                 TimeBuild="1">
-                <Exec CmdLine="./build.sh execute"/>
+                <Exec CmdLine="./build.sh execute video_lib"/>
             </Target>
             <Target
                 Name="Compile"
@@ -152,13 +152,13 @@
                 MenuCaption="&amp;Build"
                 CaptureOutputWith="ProcessBuffer"
                 Deletable="0"
-                SaveOption="SaveWorkspaceFiles"
+                SaveOption="SaveAll"
                 RunFromDir="%rw"
                 Verbose="1"
                 ClearProcessBuffer="1"
                 Beep="1"
                 TimeBuild="1">
-                <Exec CmdLine="./build.sh execute"/>
+                <Exec CmdLine="./build.sh execute video_lib"/>
             </Target>
             <Target
                 Name="Compile"

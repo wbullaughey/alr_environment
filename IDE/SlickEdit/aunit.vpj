@@ -57,7 +57,7 @@
                 ClearProcessBuffer="1"
                 Verbose="1"
                 Beep="1">
-                <Exec CmdLine="./build.sh execute"/>
+                <Exec CmdLine="./build.sh execute aunit"/>
             </Target>
             <Target
                 Name="build all"
@@ -162,7 +162,7 @@
                 ClearProcessBuffer="1"
                 Verbose="1"
                 Beep="1">
-                <Exec CmdLine="./build.sh execute"/>
+                <Exec CmdLine="./build.sh execute aunit"/>
             </Target>
             <Target
                 Name="build all"

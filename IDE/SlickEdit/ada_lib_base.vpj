@@ -52,7 +52,7 @@
                 Verbose="1"
                 ClearProcessBuffer="1"
                 Beep="1">
-                <Exec CmdLine="./build.sh execute"/>
+                <Exec CmdLine="./build.sh execute ada_lib_base"/>
             </Target>
             <Target
                 Name="Compile"
@@ -204,7 +204,7 @@
                 Verbose="1"
                 ClearProcessBuffer="1"
                 Beep="1">
-                <Exec CmdLine="./build.sh execute"/>
+                <Exec CmdLine="./build.sh execute ada_lib_base"/>
             </Target>
             <Target
                 Name="Compile"

@@ -16,7 +16,6 @@
         <Project File="camera.vpj"/>
         <Project File="../camera_lib.vpj"/>
         <Project File="../camera_test_driver.vpj"/>
-        <Project File="camera_test_lib.vpj"/>
         <Project File="../camera_unit_test.vpj"/>
         <Project File="../documentation.vpj"/>
         <Project File="../driver.vpj"/>
