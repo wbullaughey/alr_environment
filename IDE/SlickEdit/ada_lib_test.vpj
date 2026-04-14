@@ -16,7 +16,9 @@
         <Folder
             Name="Header Files"
             Filters="*.h;*.ads"
-            GUID="{C6DEBDDD-F32E-4A74-9468-F4DE83C7295F}"/>
+            GUID="{C6DEBDDD-F32E-4A74-9468-F4DE83C7295F}">
+            <F N="../../ada_lib/src/unit_test/ada_lib-trace-options.ads"/>
+        </Folder>
         <Folder
             Name="Resource Files"
             Filters="*.def;*.res"
