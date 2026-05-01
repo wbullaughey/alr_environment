@@ -1,0 +1,37 @@
+with "root.gpr";
+with "../ada_lib.gpr";
+
+project Test_Ada_Lib is
+
+   type Option_Type is ("all", "one");
+
+   Option   : Option_Type := external ("OPTION");
+   Program := external ("PROGRAM");
+
+   case Option is
+
+      when "all" =>
+         for Main use (
+            "test_idl",
+            "test_resource",
+            "test_smart_object",
+            "cac_set.adb",
+            "cac_smart_pointer.adb",
+            "factorable.adb",
+            "smart_heap_object.adb",
+            "smart_pointer.adb",
+            "template_test.adb",
+            "template_test_package.adb"
+         );
+
+      when "one" =>
+         for Main use (Program);
+
+   end case;
+
+   for Object_Dir use Ada_Lib.Build_Path & "/obj";
+   for Source_Dirs use (".");
+   for Exec_Dir use Ada_Lib.Build_Path & "/bin";
+
+   package Compiler renames Root.Compiler;
+end Test_Ada_Lib;

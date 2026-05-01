@@ -1,0 +1,35 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"command": "./build.sh",
+			"problemMatcher": [
+				"$ada"
+			],
+			"group": "build",
+			"label": "run build script"
+		},
+		{
+			"label": "AUnit test script",
+			"type": "shell",
+			"command": "./scripts/test-macosx",
+			"args": [
+				"",
+				"local",
+				"all",
+				"all",
+				"-Ao"
+		 	],
+			"group": "test",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": false,
+				"panel": "shared",
+				"showReuseMessage": true,
+				"clear": false
+			}
+		}
+	]
+}

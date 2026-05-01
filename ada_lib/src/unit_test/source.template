@@ -1,0 +1,381 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<!-- 
+--$Header$
+
+-----------------------------------------------------------------------------
+--  Copyright (c) 2003 - 2004  All rights reserved
+-- 
+--  This file is a product of Communication Automation & Control, Inc. (CAC)
+--  and is provided for unrestricted use WITH CAC PRODUCTS ONLY provided
+--  this legend is included on all media and as a part of the software
+--  program in whole or part.
+-- 
+--  Users may copy or modify this file without charge, but are not authorized
+--  to license or distribute it to anyone else except as part of a product or
+--  program developed by the user incorporating CAC products.
+-- 
+--  THIS FILE IS PROVIDED AS IS WITH NO WARRANTIES OF ANY KIND INCLUDING THE
+--  WARRANTIES OF DESIGN, MERCHANTIBILITY AND FITNESS FOR A PARTICULAR
+--  PURPOSE, OR ARISING FROM A COURSE OF DEALING, USAGE OR TRADE PRACTICE.
+-- 
+--  In no event will CAC be liable for any lost revenue or profits, or other
+--  special, indirect and consequential damages, which may arise from the use
+--  of this software.
+-- 
+--  Communication Automation & Control, Inc.
+--  1180 McDermott Drive, West Chester, PA (USA) 19380
+--  (877) 284-4804 (Toll Free)
+--  (610) 692-9526 (Outside the US)
+-----------------------------------------------------------------------------
+-->
+
+<!--
+Expected variables:
+
+*   configuration_date     - String, Date volume configured
+*   copy_count             - Integer, number of times disk copied
+*   copy_date              - String, Date volume copied
+*   description            - String, Description assigned by uset to a volume
+*   disk_capacity          - Integer, Space (in bytes) left on the volume
+*   label                  - String, Label assigned by user to a volume
+*   number_sessions        - Integer, Count of sessions on this volume
+*   redundancy             - Boolean, True if volume configured with redundancy
+*   raid_open              - Boolean, True if a valid volume is open
+*   raid_serial_number     - Array, Serial numbers of all drives in volume
+*   serial_number          - String, Serial number of disk drive
+*   stripe                 - Integer, Stripe number of disk drive in volume
+*   version                - String, Version number for recording format
+*   volume_number          - String, ID number of volume
+-->
+
+<HTML>
+    <HEAD>
+	<LINK REL=StyleSheet HREF="style.css" TYPE="text/css" MEDIA=screen>
+	<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<TITLE>LightRaid -- Disk Detail</TITLE>
+	<SCRIPT TYPE="text/JavaScript">
+	    function limit_string(choice)
+	    {
+		var hours
+		var minutes
+		var seconds
+		var per_hour
+		var per_minute
+		var per_second
+		var size
+		var remaining
+
+		/* STM-16 */
+		per_second = 311040000
+		per_minute = per_second * 60
+		per_hour = per_minute * 60
+
+		size = @_disk_capacity_@
+
+		if ( choice == 1 )
+		{
+		    /* STM-1 */
+		     per_hour = per_hour/16
+		     per_minute = per_minute/16
+		     per_second = per_second/16
+		}
+		else if ( choice == 2 )
+		{
+		    /* STM-4 */
+		     per_hour = per_hour/4
+		     per_minute = per_minute/4
+		     per_second = per_second/4
+		}
+
+
+		hours = size/per_hour
+		hours = Math.floor(hours);
+		remaining = size - (hours * per_hour)
+
+		minutes = remaining/per_minute
+		minutes = Math.floor(minutes);
+		if ( minutes < 10 )
+		{
+		    minutes = "0" + minutes;
+		}
+		remaining = remaining - (minutes * per_minute)
+
+		seconds = remaining/per_second
+		seconds = Math.floor(seconds);
+		if ( seconds < 10 )
+		{
+		    seconds = "0" + seconds;
+		}
+		return (hours + ":" + minutes + ":" + seconds);
+
+	    }
+	</SCRIPT>
+		<style type="text/css">
+			.good {
+				background-color: Green;
+				color: White;
+				font-weight: bolder;
+				text-align: center;
+			}
+			.invalid {
+				background-color: Orange;
+				color: Black;
+				font-weight: bolder;
+				text-align: center;
+			}
+			.missing {
+				background-color: Red;
+				color: White;
+				font-weight: bolder;
+				text-align: center;
+			}
+			.stripeheader{
+				text-align: center;
+				font-weight: bolder;
+			}
+			TD {
+				padding: 0 10px 1px 10px;
+			}
+		</style>	
+    </HEAD>
+
+    <BODY>
+	<TABLE cellspacing=0 cellpadding=2 class="diskstatus" width="100%">
+	    <TR>
+			<TH align=left colspan=4 class="pagetitle">Volume Detail</TH>
+	    </TR>
+@@IF@@ @_read_only_@
+		<TR>
+			<TD colspan="4" class="">
+			This volume was created by a different version of the LightRaid software and has been marked "read only."
+			Existing sessions in this volume can be played. New sessions cannot be recorded.
+			Details of the volume and sessions cannot be edited.<p>
+@@IF@@ @_can_convert_@
+			You may <a href="convert_format"><IMG valign="middle" alt="Convert" src="images/convert.png"></a>
+			this volume to the format supported by this version of the LightRaid software.
+@@ELSE@@
+			There is no mechanism in place to convert this volume to a writeable form.
+@@END_IF@@
+			</TD>
+		</TR>
+@@END_IF@@
+@@IF@@ @_formatted_@
+	    <TR>
+			<TD class="labels" width="150"> Number of Stripes</TD>
+			<TD width="100" class="values">@_stripes'LENGTH_@&nbsp;</TD>
+			<TD class="labels" width="150">Number of Sessions</TD>
+			<TD width="100" class="values">@_number_sessions_@&nbsp;</TD>
+	    </TR>
+	    <TR>
+			<td class="labels">Label</TD>
+			<TD class="values">@_label_@&nbsp;</TD>
+			<td class="labels">Control Number</TD>
+			<TD class="values">@_control_number_@&nbsp;</TD>
+	    </TR>
+	    <TR>
+			<td class="labels">Classification</TD>
+			<TD class="values">@_class_@&nbsp;</TD>
+			<td class="labels">Series</TD>
+			<TD class="values">@_series_@&nbsp;</TD>
+	    </TR>
+	    <TR>
+			<TD rowspan="2" class="labels" valign="top">Volume Description</TD>
+			<TD rowspan="2" class="values"><pre>@_description_@&nbsp;</pre></TD>
+			<td class="labels">Configuration Date</TD>
+			<TD class="values">@_configuration_date_@&nbsp;</TD>
+	    </TR>
+	    <TR>
+			<td class="labels">Redundancy</TD>
+			<TD class="values">@_redundancy_@&nbsp;</TD>
+	    </TR>
+        <TR>
+            <td class="labels">Copy Generation</TD>
+            <TD class="values">@_copy_count_@&nbsp;</TD>
+            <td class="labels">Copy Date</TD>
+            <TD class="values">@_copy_date_@&nbsp;</TD>
+	    </TR>
+	    <TR>
+			<td class="labels">Data Format Version</TD>
+			<TD class="values">@_version_@&nbsp;</TD>
+			<td class="labels" rowspan="3" valign="top">Remaining Volume Capacity</td>
+@@IF@@ @_raid_open_@
+		    <td rowspan="3" class="values">
+		    	<table>
+		    		<tr>
+						<td class="labels">Data Rate</td>
+						<td class="labels">Time Limit</td>
+				    </tr>
+				    <tr>
+						<td class="labels">STM-1</td>
+						<td>
+						    <SCRIPT TYPE="text/JavaScript">
+							document.write(limit_string(1));
+						    </SCRIPT>
+						</td>
+				    </tr>
+				    <tr>
+						<td class="labels">STM-4</td>
+						<td>
+						    <SCRIPT TYPE="text/JavaScript">
+							document.write(limit_string(2));
+						    </SCRIPT>
+						</td>
+				    </tr>
+				    <tr>
+						<td class="labels">STM-16</td>
+						<td>
+						    <SCRIPT TYPE="text/JavaScript">
+							document.write(limit_string(3));
+						    </SCRIPT>
+						</td>
+				    </tr>
+				</TABLE>
+			</td>
+@@ELSE@@
+            <td rowspan="3" class="values">No Valid Volume Mounted</td>
+@@END_IF@@
+	    </TR>
+	    <TR>
+			<td class="labels">Volume Serial Number</TD>
+			<TD class="values">@_volume_number_@&nbsp;</TD>
+	    </TR>
+	    <TR>
+			<td class="labels">Created by</TD>
+			<TD class="values">LightRaid SN: @_recorder_@</TD>
+	    </TR>
+	    <TR>
+	    <td colspan="4">&nbsp;</td>
+	    </TR>
+	    <TR>
+		<TD class="labels" valign="middle">Volume Stripe Serial Numbers</TD>
+		<TD colspan="3" class="values">
+		<table width="100%" cellpadding="2">
+                    <tr>
+                        <td class="stripeheader">Stripe</td>
+                        <td class="stripeheader">Disk S/N</td>
+                        <td class="stripeheader">Stripe</td>
+                        <td class="stripeheader">Disk S/N</td>
+                        <td class="stripeheader">Stripe</td>
+                        <td class="stripeheader">Disk S/N</td>
+                        <td class="stripeheader">Stripe</td>
+                        <td class="stripeheader">Disk S/N</td>
+                    </tr>
+@@TABLE@@
+@@IF@@ @_MOD(4):TABLE_LINE_@ = 1
+                    <tr>
+@@END_IF@@
+@@IF@@ @_stripe_status_@ = "MISSING"
+                        <td class="missing">@_stripes_@&nbsp;</td>
+                        <td class="missing">@_raid_serial_number_@&nbsp;</td>
+@@ELSIF@@ @_stripe_status_@ = "INVALID"
+                        <td class="invalid">@_stripes_@&nbsp;</td>
+                        <td class="invalid">@_raid_serial_number_@&nbsp;</td>
+@@ELSE@@
+                        <td class="good">@_stripes_@&nbsp;</td	>
+                        <td class="good">@_raid_serial_number_@&nbsp;</td>
+@@END_IF@@
+@@IF@@ @_mod_line_@ = 0
+                    </tr>
+@@END_IF@@
+@@END_TABLE@@
+					<tr>
+<!--						<td>&nbsp;</td>
+<						<td colspan="6">
+							Stripes shown in <span class="good">Green</span> are functioning normally.<br>
+							Stripes shown in <span class="missing">Red</span> are not present in the chassis.<br>
+							Stripes shown in <span class="invalid">Orange</span> are present, but are out of synch with the rest of the volume.
+						</td>
+						<td>&nbsp;</td> -->
+						<td colspan="8">
+							<span class="labels">Legend:</span>
+							<span class="good">Green</span> = functioning normally.
+							<span class="missing">Red</span> = drive not installed.
+							<span class="invalid">Orange</span> = out of synch with volume.
+						</td>
+					</tr>
+                </table>
+		</TD>
+	    </TR>
+@@ELSE@@
+	    <TR>
+			<TD class="labels" width="150"> Number of Stripes</TD>
+			<TD width="100" class="values">&nbsp;</TD>
+			<TD class="labels" width="150">Number of Sessions</TD>
+			<TD width="100" class="values">&nbsp;</TD>
+	    </TR>
+	    <TR>
+			<td class="labels">Label</TD>
+			<TD class="values">&nbsp;</TD>
+			<td class="labels">Control Number</TD>
+			<TD class="values">&nbsp;</TD>
+	    </TR>
+	    <TR>
+			<td class="labels">Classification</TD>
+			<TD class="values">&nbsp;</TD>
+			<td class="labels">Series</TD>
+			<TD class="values">&nbsp;</TD>
+	    </TR>
+	    <TR>
+			<TD rowspan="2" class="labels" valign="top">Volume Description</TD>
+			<TD rowspan="2" class="values"><pre>&nbsp;</pre></TD>
+			<td class="labels">Configuration Date</TD>
+			<TD class="values">&nbsp;</TD>
+	    </TR>
+	    <TR>
+			<td class="labels">Redundancy</TD>
+			<TD class="values">&nbsp;</TD>
+	    </TR>
+        <TR>
+            <td class="labels">Copy Generation</TD>
+            <TD class="values">&nbsp;</TD>
+            <td class="labels">Copy Date</TD>
+            <TD class="values">&nbsp;</TD>
+	    </TR>
+	    <TR>
+			<td class="labels">Data Format Version</TD>
+			<TD class="values">&nbsp;</TD>
+			<td class="labels" rowspan="3" valign="top">Remaining Volume Capacity</td>
+            <td rowspan="3" class="values">No Valid Volume Mounted</td>
+	    </TR>
+	    <TR>
+			<td class="labels">Volume Serial Number</TD>
+			<TD class="values">&nbsp;</TD>
+	    </TR>
+	    <TR>
+			<td class="labels">Created by</TD>
+			<TD class="values">&nbsp;</TD>
+	    </TR>
+	    <TR>
+	    <td colspan="4">&nbsp;</td>
+	    </TR>
+	    <TR>
+		<TD class="labels" valign="middle">Volume Stripe Serial Numbers</TD>
+		<TD colspan="3" class="values">
+		<table width="100%" cellpadding="2">
+                    <tr>
+                        <td class="stripeheader">Stripe</td>
+                        <td class="stripeheader">Disk S/N</td>
+                        <td class="stripeheader">Stripe</td>
+                        <td class="stripeheader">Disk S/N</td>
+                        <td class="stripeheader">Stripe</td>
+                        <td class="stripeheader">Disk S/N</td>
+                        <td class="stripeheader">Stripe</td>
+                        <td class="stripeheader">Disk S/N</td>
+                    </tr>
+					<tr>
+						<td colspan="8">
+							<span class="labels">Legend:</span>
+							<span class="good">Green</span> = functioning normally.
+							<span class="missing">Red</span> = drive not installed.
+							<span class="invalid">Orange</span> = out of synch with volume.
+						</td>
+					</tr>
+                </table>
+		</TD>
+	    </TR>
+@@END_IF@@
+	</TABLE>
+	<a href="#" onclick="javascript:history.go(-1);return false;"><img src="images/back.png"></a>
+    </BODY>
+</HTML>

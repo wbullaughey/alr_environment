@@ -1,0 +1,29 @@
+#alire.toml created from alire.toml.source
+
+name = "ada_lib"
+description = ""
+version = "0.1.0-dev"
+
+authors = ["Your Name"]
+maintainers = ["Your Name <example@example.com>"]
+maintainers-logins = ["github-username"]
+licenses = "MIT OR Apache-2.0 WITH LLVM-exception"
+website = ""
+tags = []
+
+#@[[depends-on]]
+#@gnatcoll = "^26.0.0"
+#@
+#@[[pins]]
+#@gnatcoll = { path='../vendor/github.com/gnatcoll-core' }
+
+%[[depends-on]]
+%gnatcoll = "^25.0.0"
+
+[[depends-on]]
+alr_environment = "*"
+
+[[pins]]
+alr_environment = { path='..' }
+
+

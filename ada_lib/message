@@ -1,0 +1,3 @@
+all default on ada_lib test suites run
+add default tests suites to disable
+add option to enable test suites

@@ -1,0 +1,36 @@
+with "../../root";
+
+project Test_Ada_Lib_Cross is
+
+	case Root.Option is
+
+		when "all" =>
+			for Main use (
+				"test_resource",
+				"cac_set.adb",
+				"cac_smart_pointer.adb",
+				"factorable.adb",
+				"smart_heap_object.adb",
+				"smart_pointer.adb",
+				"template_test.adb",
+				"template_test_package.adb"
+			);
+
+		when "one" =>
+			for Main use (Root.Program);
+
+	end case;
+
+	for Source_Dirs use (
+		".",
+		".."
+		);
+
+	for Object_Dir use Root.Root_Directory;
+	for Exec_Dir use Root.Root_Directory;
+
+	package Binder renames Root.Binder;
+	package Compiler renames Root.Compiler;
+	package Linker renames Root.Linker;
+
+end Test_Ada_Lib_Cross;

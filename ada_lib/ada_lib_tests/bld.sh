@@ -1,0 +1,18 @@
+export ADA_LIB_ALIRE_PREFIX="/Users/wayne/Project/git/alr/ada_lib"
+export ADA_LIB_TESTING_ALIRE_PREFIX="/Users/wayne/Project/git/alr/ada_lib/ada_lib_testing"
+export ADA_LIB_TESTS_ALIRE_PREFIX="/Users/wayne/Project/git/alr/ada_lib/ada_lib_tests"
+export ALIRE="True"
+export AUNIT_ALIRE_PREFIX="/Users/wayne/Project/git/alr/aunit"
+export GNATCOLL_ALIRE_PREFIX="/Users/wayne/Project/git/alr/ada_lib/ada_lib_tests/alire/cache/dependencies/gnatcoll_23.0.0_29478a20"
+export GNATCOLL_BUILD_MODE="PROD"
+export GNATCOLL_OS="osx"
+export GNATCOLL_VERSION="23.0.0"
+export GNAT_NATIVE_ALIRE_PREFIX="/Users/wayne/.config/alire/cache/dependencies/gnat_native_12.2.1_77267eb1"
+export GNOGA_ALIRE_PREFIX="/Users/wayne/Project/git/alr/gnoga"
+export GPRBUILD_ALIRE_PREFIX="/Users/wayne/.config/alire/cache/dependencies/gprbuild_22.0.1_b1220e2b"
+export GPR_PROJECT_PATH="/Users/wayne/.config/alire/cache/dependencies/gnat_native_12.2.1_77267eb1:/Users/wayne/.config/alire/cache/dependencies/gprbuild_22.0.1_b1220e2b:/Users/wayne/Project/git/alr/ada_lib:/Users/wayne/Project/git/alr/ada_lib/ada_lib_testing:/Users/wayne/Project/git/alr/ada_lib/ada_lib_tests:/Users/wayne/Project/git/alr/ada_lib/ada_lib_tests/alire/cache/dependencies/gnatcoll_23.0.0_29478a20:/Users/wayne/Project/git/alr/ada_lib/ada_lib_tests/alire/cache/dependencies/libgpr_23.0.0_34e332b9/gpr:/Users/wayne/Project/git/alr/ada_lib/ada_lib_tests/alire/cache/dependencies/xmlada_23.0.0_70494123/distrib:/Users/wayne/Project/git/alr/ada_lib/ada_lib_tests/alire/cache/dependencies/xmlada_23.0.0_70494123/dom:/Users/wayne/Project/git/alr/ada_lib/ada_lib_tests/alire/cache/dependencies/xmlada_23.0.0_70494123/input_sources:/Users/wayne/Project/git/alr/ada_lib/ada_lib_tests/alire/cache/dependencies/xmlada_23.0.0_70494123/sax:/Users/wayne/Project/git/alr/ada_lib/ada_lib_tests/alire/cache/dependencies/xmlada_23.0.0_70494123/schema:/Users/wayne/Project/git/alr/ada_lib/ada_lib_tests/alire/cache/dependencies/xmlada_23.0.0_70494123/unicode:/Users/wayne/Project/git/alr/aunit:/Users/wayne/Project/git/alr/gnoga"
+export LIBGPR_ALIRE_PREFIX="/Users/wayne/Project/git/alr/ada_lib/ada_lib_tests/alire/cache/dependencies/libgpr_23.0.0_34e332b9"
+export PATH="/Users/wayne/.config/alire/cache/dependencies/gprbuild_22.0.1_b1220e2b/bin:/Users/wayne/.config/alire/cache/dependencies/gnat_native_12.2.1_77267eb1/bin:/Users/wayne/alr/bin:/Users/wayne/GNAT/2020/bin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/usr/local/bin:/Users/wayne/bin"
+export XMLADA_ALIRE_PREFIX="/Users/wayne/Project/git/alr/ada_lib/ada_lib_tests/alire/cache/dependencies/xmlada_23.0.0_70494123"
+gnatmake -gnatu -c ../src/ada_lib-options.adb -aI../ada_lib_tests/alire/cache/dependencies/gnatcoll_23.0.0_29478a20/src/
+# gprbuild -l

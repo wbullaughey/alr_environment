@@ -1,0 +1,4 @@
+Simple variable template
+text variable '@_variable 1_@' after variable
+text variable '@_variable 2_@' after variable '@_variable 2_@' end of line
+number @_numeric_variable_@

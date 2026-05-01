@@ -1,0 +1,3 @@
+killall -9 dbdaemon
+build/linux/bin/aunit -si -ta | tee ~/tmp/list
+ps ax | grep dbdaemon

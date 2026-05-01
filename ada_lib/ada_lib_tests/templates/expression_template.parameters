@@ -1,0 +1,6 @@
+"variable 1" text "text variable 1 value"
+"variable 2" text "text variable 2 value"
+"numeric_variable 1" integer 123
+"numeric_variable 2" integer 99
+"numeric_variable 3" integer 222
+"numeric_variable" integer 222

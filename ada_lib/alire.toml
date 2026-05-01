@@ -1,0 +1,58 @@
+name = "ada_lib"
+description = ""
+version = "0.1.0-dev"
+
+authors = ["Your Name"]
+maintainers = ["Your Name <example@example.com>"]
+maintainers-logins = ["github-username"]
+licenses = "MIT OR Apache-2.0 WITH LLVM-exception"
+website = ""
+
+project-files = "ada_lib.gpr"
+
+tags = []
+
+[[depends-on]]
+alr_environment = "~0.1.0-dev"
+
+[[pins]]
+alr_environment = { path='..' }
+
+[[depends-on]]
+ada_lib_base = "~0.1.0-dev"
+
+[[pins]]
+ada_lib_base = { path='ada_lib_base' }
+
+[[depends-on]]
+ada_lib_options = "~0.1.0-dev"
+
+[[pins]]
+ada_lib_options = { path='ada_lib_options' }
+
+[[depends-on]]
+gnoga_ada_lib  = "~0.1.0-dev"
+
+[[pins]]
+gnoga_ada_lib = { path='../gnoga_lib' }
+
+[[depends-on]]
+aunit = "~0.1.0-dev"
+
+[[pins]]
+aunit = { path='../aunit' }
+
+[[depends-on]]
+ada_lib_aunit = "~0.1.0-dev"
+
+[[pins]]
+ada_lib_aunit = { path='aunit' }
+
+[[depends-on]]
+gnoga = "~0.1.0-dev"
+
+[[pins]]
+gnoga = { path='../vendor/github.com/gnoga' }
+
+[[depends-on]]
+gnatcoll_minimal = "*"

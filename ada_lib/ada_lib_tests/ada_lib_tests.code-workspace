@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../src"
+		},
+		{
+			"path": "../../gnoga/src"
+		},
+		{
+			"path": "../../aunit/src"
+		}
+	],
+	"settings": {}
+}

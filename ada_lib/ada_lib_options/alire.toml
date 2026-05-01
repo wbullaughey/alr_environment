@@ -1,0 +1,24 @@
+name = "ada_lib_options"
+description = "Shiny new project"
+version = "0.1.0-dev"
+
+authors = ["Wayne Bullaughey"]
+maintainers = ["Wayne Bullaughey <wlb122@verizon.net>"]
+maintainers-logins = ["wbullaughey"]
+
+project-files = "ada_lib_options.gpr"
+[[depends-on]]
+
+[[depends-on]]
+alr_environment = "~0.1.0-dev"
+
+[[pins]]
+alr_environment = { path='../..' }
+
+
+#ada_lib_base = "~0.1.0-dev"
+#
+#[[pins]]
+#ada_lib_base = { path='../ada_lib_base' }
+
+

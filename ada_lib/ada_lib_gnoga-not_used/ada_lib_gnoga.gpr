@@ -1,0 +1,37 @@
+with "alr_environment.gpr";
+--with "config/ada_lib_gnoga_config.gpr";
+with "ada_lib_base.gpr";
+with "ada_lib_options.gpr";
+with "aunit.gpr";
+with "gnoga.gpr";
+
+project Ada_Lib_Gnoga is
+
+   for Library_Name use "Ada_Lib_Gnoga";
+   for Library_Version use Project'Library_Name & ".so." &
+       Alr_Environment.Crate_Version;
+
+   for Source_Dirs use ("src/", "config/");
+   for Object_Dir use "obj/" & Alr_Environment.Build_Profile;
+   for Create_Missing_Dirs use "True";
+   for Library_Dir use "lib/" & ALR_Environment.Build_Mode;
+
+   type Library_Type_Type is ("relocatable", "static", "static-pic");
+   Library_Type : Library_Type_Type :=
+     external ("ADA_LIB_GNOGA_LIBRARY_TYPE", external ("LIBRARY_TYPE", "static"));
+   for Library_Kind use Library_Type;
+
+   package Compiler is
+      for Default_Switches ("Ada") use
+         Alr_Environment.Ada_Compiler_Switches;
+   end Compiler;
+
+   package Binder is
+      for Switches ("Ada") use ("-Es"); --  Symbolic traceback
+   end Binder;
+
+   package Install is
+      for Artifacts (".") use ("share");
+   end Install;
+
+end Ada_Lib_Gnoga;

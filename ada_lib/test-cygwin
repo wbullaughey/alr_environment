@@ -1,0 +1,3 @@
+killall -9 dbdaemon
+bin/aunit -sd -ta -e Is_Open_True | tee /cygdrive/c/temp/list
+ps ax | grep dbdaemon

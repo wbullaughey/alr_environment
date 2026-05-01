@@ -1,0 +1,5 @@
+expression template
+@_numeric_variable 1_@ @@+@@ @_numeric_variable 2_@
+@_numeric_variable 2_@ @@=@@ @_numeric_variable 1_@
+@_numeric_variable 3_@ @@=@@ @_numeric_variable 1_@ @@+@@ @_numeric_variable 2_@
+number @_numeric_variable_@

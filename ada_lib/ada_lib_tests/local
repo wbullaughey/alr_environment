@@ -1,0 +1,12 @@
+words Single_Event
+PARAMETER Single_Event
+add parameter Single_Event
+RUN_PARAMETERS Single_Event OPTIONS PARAMETERS Single_Event 
+parse PARAMETERS Single_Event  RESULT Single_Event fields Single_Event
+1st parameter Single_Event
+parse PARAMETERS Single_Event  RESULT Single_Event fields Single_Event
+parse PARAMETERS Single_Event  RESULT Single_Event fields Single_Event
+DATABASE Single_Event
+extract PARAMETERS fields Single_Event
+check database Single_Event
+unrecognize database option "Single_Event" allowed: local,remote,none

@@ -1,0 +1,94 @@
+with Ada.Calendar;
+with Ada.Finalization;
+
+package CAC.Timer is
+
+	Failed						: exception; 	-- invalid request
+	Overflow					: exception;	-- too many events
+
+	Maximum_Events				: constant := 100;
+	Null_Time					: constant Ada.Calendar.Time :=
+									Ada.Calendar.Time_Of (
+										Year	=> Ada.Calendar.Year_Number'last,
+										Month	=> Ada.Calendar.Month_Number'last,
+										Day		=> Ada.Calendar.Day_Number'last,
+										Seconds	=> 0.0);
+
+	-- one time event
+	-- caller must allocate event (can be statically allocated)
+	-- event can be reused
+	-- deallocation will cancel event
+	type Event_Type				is abstract new Ada.Finalization.Controlled
+									with private;
+	type Event_Access			is access all Event_Type'class;
+
+	-- called when event occurs
+	-- called from seperate task
+	procedure Callback (
+		Event					: in out Event_Type
+	) is abstract;
+
+	-- cancel a scheduled event
+	procedure Cancel (
+		Event					: in out Event_Type);
+
+	-- schedule a one time event Offset seconds from now
+	procedure Set (
+		Event					: in out Event_Type;
+		Offset					: in	 Duration);
+
+	-- event which will automatically repeat
+	-- caller must allocate event (can be statically allocated)
+	-- event can be reused
+	-- deallocation will cancel event
+	type Repeating_Type 		is abstract new Event_Type with private;
+
+	-- change the time between occurences, takes effect after current completes
+	procedure Adjust_Offset (
+		Event					: in out Repeating_Type;
+		Offset					: in	 Duration);
+
+	-- called when event occurs
+	-- called from seperate task
+	procedure Callback (
+		Event					: in out Repeating_Type
+	) is abstract;
+
+	function Offset (
+		Event					: in	 Repeating_Type
+	) return Duration;
+
+	-- schedules a repeating event Offset seconds between occurences
+	procedure Set (
+		Event					: in out Repeating_Type;
+		Offset					: in	 Duration);
+
+	procedure Set_Trace (
+		State					: in	 Boolean);
+
+	procedure Stop;				-- stop the timer task
+
+private
+	type Event_Type				is abstract new Ada.Finalization.Controlled
+									with record
+		Activated				: Boolean := False;
+ada_lib.gpr
+adasockets
+ask.adb
+ask.ads
+build.sh
+cac-auto_lock.adb
+cac-auto_lock.ads
+cac-crc.adb
+cac-crc.ads
+cac-database-poster.adb
+cac-database-poster.ads
+cac-database-subscriber.adb
+cac-database-subscriber.ads
+cac-database-wild.adb
+cac-database-wild.ads
+cac-database.adb
+cac-database.ads
+cac-delta_float.adb
+cac-delta_float.ads
+cac-factorable.adb

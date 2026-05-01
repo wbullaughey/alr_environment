@@ -1,0 +1,146 @@
+test_ada_lib
+test_ada_lib command line options:
+    -?                            : this message                    (Ada_Lib)
+    -a <trace options>            : Ada_Lib library trace options   (Ada_Lib)
+    -e <routine>                  : routine to test.                (test_ada_lib)
+    -g <trace options>            : GNOGA Unit Test traces          (Ada_Lib.GNOGA)
+    -h                            : this message                    (Ada_Lib)
+    -l                            : local dbdaemon.                 (Ada_Lib.Options.Database)
+    -L <path>                     : local dbdaemon path.            (Ada_Lib.Options.Database)
+    -n                            : no camera                       (test_ada_lib)
+    -p <port number>              : remote DBDaemon port number     (Ada_Lib.Options.Database)
+    -P                            : set pause flag                  (Ada_Lib)
+    -r <dbdaemon>                 : remote dbdaemon.                (Ada_Lib.Options.Database)
+    -R <path>                     : remote dbdaemon path.           (Ada_Lib.Options.Database)
+    -s <suite to test>            : select test suite to run.       (test_ada_lib)
+    -t <trace options>            : ada_lib trace options           (Ada_Lib Unit Test)
+    -u <user>                     : remote user.                    (Ada_Lib.Options.Database)
+    -U <unit test trace Ada_Lib>  : select trace                    (test_ada_lib)
+    -v                            : verbose                         (Ada_Lib)
+    -x                            : exit on tests complete          (test_ada_lib)
+    -@A <suites>                  : enable default disabled suites. (test_ada_lib)
+    -@c                           : trace test condition            (Ada_Lib)
+    -@d                           : driver suites                   (test_ada_lib)
+    -@G <<TRACE OPTIONS>>         : trace flags.                    (GNOGA_Ada_Lib)
+    -@i                           : indent trace                    (Ada_Lib)
+    -@l                           : List test suites                (test_ada_lib)
+    -@m                           : manual operations.              (test_ada_lib)
+    -@n <number of random seeds>  : number seeds.                   (test_ada_lib)
+    -@p                           : include program in trace        (Ada_Lib)
+    -@P                           : Print test suites.              (test_ada_lib)
+    -@R <seed>                    : set random seed                 (test_ada_lib)
+    -@S                           : report random seed              (test_ada_lib)
+    -@T                           : include task in trace           (Ada_Lib)
+    -@u                           : use random seed                 (test_ada_lib)
+    -@U <trace options>           : ada_lib unit test trace options (Ada_Lib Unit Test)
+    -@x                           : exclude time in trace           (Ada_Lib)
+
+Ada_Lib.Options.AUnit_Lib.Program_Help trace options (-t)
+      a               all
+      A               AUnit debug
+      c               configuration
+      C               command line iterator
+      d               directory compare and copy
+      h               help test
+      i               Socket_IO.Client trace
+      l               Lock Test
+      m               Mail Test
+      o               Ada_Lib.Options.AUnit_Lib options
+      R               Tester_Debug
+      s               Socket Stream Test
+      S               Database server Test
+      t               Template Test
+      T               Timer Test
+      #c              Camera Commands Unit Test
+      #d              Debug Test
+      #T              Debug Tests
+      #t              Debug Test routines
+
+Ada_Lib.Trace.Options.Program_Help trace options (-U)
+      a               all
+      u               ?
+
+Ada_Lib.Template.Tests (-T)
+      a               all
+      c               compile
+      e               evaluate
+      E               expand
+      l               load
+      o               optons
+      t               template test
+
+Ada_Lib GNOGA unit tests trace options (-g)
+      a               all
+      b               Ada_Lib.GNOGA.Unit_Test.Base_Debug
+      d               Ada_Lib.GNOGA.Unit_Test.Debug
+      e               Ada_Lib.GNOGA.Unit_Test.Event_Debug
+      g               Ada_Lib.GNOGA.GNOGA_Debug
+      u               GNOGA unit Test (main window)
+
+Ada_Lib unit test library trace options (-U)
+      a               all
+      A               all unit tests
+      d               Unit_Test Database
+      e               Ada_Lib.Trace.Trace_Exceptions
+      E               Ada_Lib.Evemt.Unit_Test.Debug
+      f               Fixtures Debug
+      g               Database Get,Put Debug
+      p               test programs
+      P               Parser Debug
+      r               Runtime_Options
+      R               Reporter Debug
+      s               Trace Set_Up Tear_Down
+      S               Database Server Tests
+      t               Ada_Lib.Test.Debug
+      T               Ada_Lib.Trace.Debug_Trace
+      u               Ada_Lib.Unit_Test.Debug Library
+      U               Ada_Lib.Unit_Test.Test_Cases.Debug Library
+      #a              AUnit.Ada_Lib.Debug
+      #s              Ada_Lib.Unit_Test.Test_States.Debug
+      #S              Database Server Debug
+      #u              Unit_Test Debug
+      #U              AUnit Debug
+
+Enable suites disabled by default (-S)
+      a               enable all
+      d               database server
+      t               text
+
+CAC ada_lib trace library options (-a)
+      a               all
+      b               database subscribe
+      c               Ada_Lib.Command_Line Trace
+      C               Ada_Lib.Configuration Trace
+      e               Event
+      h               Help
+      i               interrupt
+      I               Ada_Lib.interface
+      l               lock
+      m               timer
+      M               mail
+      o               os
+      O               Ada_Lib.Options
+      p               parser
+      P               database post
+      r               run remote, database connect
+      R               Ada_Lib.Options.Runstring.Debug
+      s               socket trace
+      S               socket Stream tracing
+      t               Ada_Lib.Trace
+      T               Ada_Lib.Trace_Tasks
+      v               Ada_Lib.Options.Verification.Debug
+      #c              Template Compile
+      #d              Template Detail
+      #D              Ada_Lib.Directory trace
+      #e              Template Evaluate
+      #E              Template Expand
+      #l              Template Load
+      #o              Trace_Options
+      #p              Trace Pre and Post Condtion functions
+      #P              Trace Pre and Post Condtion false
+      #s              Strings
+      #S              Socket_IO IO
+      #t              Ada_Lib.Text
+GNOGA_Ada_Lib trace options (-@G)
+      a               all
+      d               Ada_Lib_GNOGA.Debug
