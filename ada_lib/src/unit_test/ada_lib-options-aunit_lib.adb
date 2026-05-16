@@ -4,7 +4,7 @@ with Ada_Lib.Database.Server.Tests;
 with Ada_Lib.Directory.Test;
 with Ada_Lib.Help;
 with Ada_Lib.Mail.Tests;
-with Ada_Lib.Options.Create;
+--with Ada_Lib.Options.Create;
 with Ada_Lib.Options.Runstring;
 with Ada_Lib.Options.Verification;
 with Ada_Lib.OS;
@@ -24,13 +24,13 @@ package body Ada_Lib.Options.AUnit_Lib is
    Trace_Option                  : constant Character := 't';
    Options_With_Parameters       : aliased constant
                                     Flag_List_Type :=
-                                       Create.Create_One (
+                                       Initialize (
                                           Trace_Option, Unmodified_flag);
    Options_Without_Parameters    : aliased constant
                                     Flag_List_Type :=
-                                       Create.Create_One (
+                                       Initialize (
                                           't', Ada_Lib.Help.Modifier) &
-                                       Create.Create_Multiple (
+                                       Initialize (
                                           "dT", Ada_Lib.Help.Unmodified_Flag);
    Trace_Modifier             : character renames Ada_Lib.Help.Trace_Modifier;
 
@@ -51,11 +51,11 @@ package body Ada_Lib.Options.AUnit_Lib is
          " halt " & Halt'img);
       Tag_History (Log_It, "options", Aunit_Program_Options_Type'class (options)'tag);
 
-      for Help_Mode in Help_Mode_Type'range loop
-         Log_Here (Log_It, "Help_Mode " & Help_Mode'img &
-            " Options_Selection " & Options.Options_Selection'img);
-         Options.Program_Help (Help_Mode);
-log_here;
+--    for Help_Mode in Help_Mode_Type'range loop
+--       Log_Here (Log_It, "Help_Mode " & Help_Mode'img &
+--          " Options_Selection " & Options.Options_Selection'img);
+--       Options.Program_Help (Help_Mode);
+--log_here;
 --         Options.Get_Read_Only_Nested_Program_Options.Program_Help (Help_Mode);
 --log_here;
 --         Options.Nested_Unit_Test_Options.Program_Help (Help_Mode);
@@ -77,13 +77,17 @@ log_here;
 --               Options.Database_Options.Program_Help (Help_Mode);
 --
 --         end case;
+--
+--       if Help_Mode = Program_Mode then -- output the help
+--          Log_Here (Log_It);
+--          Program.Program_Options_Type (Options).Display_Help ("", False);
+--       end if;
+--
+--    end loop;
 
-         if Help_Mode = Program_Mode then -- output the help
-            Log_Here (Log_It);
-            Program.Program_Options_Type (Options).Display_Help ("", False);
-         end if;
-
-      end loop;
+      Program.Program_Options_Type (Options).Display_Help ("", False);
+--    Options.Program_Help (Trace_Mode);
+--    Options.Get_Read_Only_Nested_Program_Options.Program_Help (Trace_Mode);
 
       Log_Out (Log_It, "halt " & Halt'img);
       if Halt then
@@ -158,16 +162,16 @@ return false;
 --       "Options_Selection " & Options.Options_Selection'img);
    end Has_Database;
 
-   ----------------------------------------------------------------------------
-   function Image (
-     Options                     : in     Aunit_Program_Options_Type
-   ) return String is
-   ----------------------------------------------------------------------------
-
-   begin
-not_implemented;
-return "";
-   end Image;
+-- ----------------------------------------------------------------------------
+-- function Image (
+--   Options                     : in     Aunit_Program_Options_Type
+-- ) return String is
+-- ----------------------------------------------------------------------------
+--
+-- begin
+--    return "Ada_Lib_Trace_Options & "Options.Ada_Lib_Trace_Options'image &
+--
+-- end Image;
 
    ----------------------------------------------------------------------------
    overriding
@@ -179,7 +183,9 @@ return "";
 
    begin
       Log_In (Debug or Trace_Options,
-         "Options_Selection " & Options.Options_Selection'img);
+         Tag_Name ("options",
+            Aunit_Program_Options_Type'class (Options)'tag) &
+         " Options_Selection " & Options.Options_Selection'img);
 
       Runstring.Options.Register (
          Runstring.With_Parameters, Options_With_Parameters);
@@ -251,11 +257,12 @@ return "";
          begin
             if Iterator.Is_Option then
                declare
-                  Option         : constant Base_Flag_Option_Type'class :=
+                  Option         : constant Flag_Option_Type'class :=
                                     Iterator.Get_Option;
                   Message        : constant String := Option.Image & " not defined";
 
                begin
+tag_history ("options",Aunit_Program_Options_Type'class(options)'tag);
                   Log_Here (Debug or Trace_Options, Option.Image &
                      " Options_Selection " & Options.Options_Selection'img);
                   if    Options.GNOGA_Unit_Test_Options.Process_Option (
@@ -272,7 +279,7 @@ return "";
 
                            when Unit_Test_With_Database_And_Template =>
                               Options.Database_Options.Process_Option (
-                                 Iterator, Option) and then
+                                 Iterator, Option) or else
                               (if Ada_Lib.Options.Ada_Lib_Environment.Help_Test then
                                  Options.Template.Process_Option (
                                     Iterator, Option)
@@ -322,7 +329,9 @@ return "";
          end if;
       end loop;
 
-      return Log_Out (True, Debug or Trace_Options, "processed");
+      return Log_Out (Program.Program_Options_Type (Options).Process (
+         Iterator), Debug or Trace_Options, "processed");
+--    return Log_Out (True, Debug or Trace_Options, "processed");
 
    exception
 
@@ -337,7 +346,7 @@ return "";
    function Process_Option (
       Options                    : in out Aunit_Program_Options_Type;
       Iterator                   : in out Command_Line_Iterator_Interface'class;
-      Option                     : in     Base_Flag_Option_Type'class
+      Option                     : in     Flag_Option_Type'class
    ) return Boolean is
    ----------------------------------------------------------------------------
 
@@ -394,10 +403,10 @@ return "";
                Iterator, Option) or else
             Options.GNOGA_Unit_Test_Options.Process_Option (
                Iterator, Option) or else
-            Options.Nested_Unit_Test_Options.Process_Option (Iterator, Option) or else
-            Program.Program_Options_Type (Options).Process_Option (
-               Iterator, Option),
-            Trace_Options or Debug, Option.Image & " processed");
+            Options.Nested_Unit_Test_Options.Process_Option (Iterator, Option));
+--          Program.Program_Options_Type (Options).Process_Option (
+--               Iterator, Option),
+--             Trace_Options or Debug, Option.Image & " processed");
       end if;
    end Process_Option;
 
@@ -415,10 +424,11 @@ return "";
       case Help_Mode is
 
       when Program_Mode =>
-         Ada_Lib.Help.Create_Option (Trace_Option, "trace options",
+         Ada_Lib.Help.Create_Option (Trace_Option, True, "trace options",
             "ada_lib trace options", Component, Ada_Lib.Help.Unmodified_Flag);
 
       when Trace_Mode =>
+         Ada_Lib.Help.Set_Has_Trace (Trace_Option, Ada_Lib.Help.Unmodified_Flag);
          Put_Line (Ada_Lib.Trace.Who & " trace options (-" &
             Trace_Option & ")");
          Put_Line ("      a               all");
@@ -466,8 +476,7 @@ return "";
       end case;
       Options.GNOGA_Unit_Test_Options.Program_Help (Help_Mode);
       Options.Nested_Unit_Test_Options.Program_Help (Help_Mode);
-log_here;
-      Program.Program_Options_Type (Options).Program_Help (Help_Mode);
+--    Program.Program_Options_Type (Options).Program_Help (Help_Mode);
 
       Log_Out (Debug or Trace_Options);
    end Program_Help;

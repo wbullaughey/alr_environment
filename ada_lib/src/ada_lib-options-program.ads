@@ -61,7 +61,7 @@ package Ada_Lib.Options.Program is
    function Process_Option (  -- process one option
       Options                    : in out Nested_Program_Options_Type;
       Iterator                   : in out Command_Line_Iterator_Interface'class;
-      Option                     : in     Base_Flag_Option_Type'class
+      Option                     : in     Flag_Option_Type'class
    ) return Boolean
    with pre => Options.Verify_Step (Initialized);
 -- with Pre => not Verification.Have_Ada_Lib_Verification_Options;
@@ -106,7 +106,8 @@ package Ada_Lib.Options.Program is
 -- ) return Boolean;
 
    type Program_Options_Type
-         is limited new Verification.Verification_Program_Options_Type with private;
+         is abstract limited new
+            Verification.Verification_Program_Options_Type with private;
 
    type Program_Options_Access  is access all Program_Options_Type;
    type Program_Options_Class_Access
@@ -206,7 +207,7 @@ package Ada_Lib.Options.Program is
 --   function Process_Option (  -- process one option
 --      Options                    : in out Program_Options_Type;
 --      Iterator                   : in out Command_Line_Iterator_Interface'class;
---      Option                     : in     Base_Flag_Option_Type'class
+--      Option                     : in     Flag_Option_Type
 --   ) return Boolean
 --   with pre => Options.Verify_Step (Initialized);
 ---- with Pre => not Verification.Have_Ada_Lib_Verification_Options;
@@ -236,7 +237,7 @@ package Ada_Lib.Options.Program is
 private
 
    type Program_Options_Type
-         is limited new Verification.Verification_Program_Options_Type with record
+         is abstract limited new Verification.Verification_Program_Options_Type with record
       Program_Processed : Boolean := False;
    end record;
 

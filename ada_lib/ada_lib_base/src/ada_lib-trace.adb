@@ -526,7 +526,7 @@ package body Ada_Lib.Trace is
    -------------------------------------------------------------------
    procedure Log_Out_Checked (
       Recursed    : in out Boolean;
-      Enable      : in     Boolean := True;
+      Enable      : in     Boolean;
       Message     : in     String := "";
       Where       : in     String := GNAT.Source_Info.Source_Location;
       Who         : in     String := GNAT.Source_Info.Enclosing_Entity) is
@@ -545,7 +545,7 @@ package body Ada_Lib.Trace is
    function Log_Out_Checked (
       Recursed    : in out Boolean;
       Result      : in     Boolean;
-      Enable      : in     Boolean := True;
+      Enable      : in     Boolean;
       Message     : in     String := "";
       Where       : in     String := GNAT.Source_Info.Source_Location;
       Who         : in     String := GNAT.Source_Info.Enclosing_Entity
@@ -752,25 +752,23 @@ package body Ada_Lib.Trace is
       This_Tag    : Ada.Tags.Tag := Tag_Value;
 
    begin
-      if Trace_Tags then
-         Put_Line ("Tag history for " & Variable & ": " &
-            Ada.Tags.Expanded_Name (Tag_Value) &
-            " from " & From);
-         loop
-            declare
-               Parent: constant Ada.Tags.Tag :=
-                                       Ada.Tags.Parent_Tag (This_Tag);
-            begin
-               if Parent = Ada.Tags.No_Tag then
-                  Put_Line ("root " & Ada.Tags.Expanded_Name (This_Tag));
-                  exit;
-               else
-                  Put_Line ("Parent " & Ada.Tags.Expanded_Name (Parent));
-                  This_Tag := Parent;
-               end if;
-            end;
-         end loop;
-      end if;
+      Put_Line ("Tag history for " & Variable & ": " &
+         Ada.Tags.Expanded_Name (Tag_Value) &
+         " from " & From);
+      loop
+         declare
+            Parent: constant Ada.Tags.Tag :=
+                                    Ada.Tags.Parent_Tag (This_Tag);
+         begin
+            if Parent = Ada.Tags.No_Tag then
+               Put_Line ("root " & Ada.Tags.Expanded_Name (This_Tag));
+               exit;
+            else
+               Put_Line ("Parent " & Ada.Tags.Expanded_Name (Parent));
+               This_Tag := Parent;
+            end if;
+         end;
+      end loop;
    end Tag_History;
 
    --------------------------------------------------------------------
@@ -778,12 +776,11 @@ package body Ada_Lib.Trace is
       Enable      : in     Boolean;
       Variable    : in     String;
       Tag_Value   : in     Ada.Tags.Tag;
-      From        : in     String := GNAT.Source_Info.
-                                             Source_Location) is
+      From        : in     String := GNAT.Source_Info.Source_Location) is
    --------------------------------------------------------------------
 
    begin
-      if Enable then
+      if Enable and then Trace_Tag_History then
          Tag_History (Variable, Tag_Value, From);
       end if;
    end Tag_History;
@@ -851,6 +848,26 @@ package body Ada_Lib.Trace is
    begin
       Trace_Message_Exception (True, Fault, Message, Where, Who);
    end Trace_Message_Exception;
+
+   -------------------------------------------------------------------
+   function Trace_Return (
+      Debug       : in     Boolean;
+      Value       : in     Boolean;
+      Message     : in     String := "";
+      Where       : in     String := GNAT.Source_Info.Source_Location;
+      Who         : in     String := GNAT.Source_Info.Enclosing_Entity
+   ) return Boolean is
+   -------------------------------------------------------------------
+
+   begin
+      Put (
+         Enable      => Debug,
+         Context     => Same,
+         Text        => Message,
+         Where       => Where,
+         Who         => Who);
+      return Value;
+   end Trace_Return;
 
    -------------------------------------------------------------------
    package body Locked_Package is
@@ -1211,7 +1228,8 @@ package body Ada_Lib.Trace is
    begin
 --Debug_Trace := True;
 --Elaborate := True;
-Trace_Options := True;
+--Trace_Conversions := True;
+--Trace_Options := True;
 --Trace_Pre_Post_False := True;
 --Trace_Set_Up_Tear_Down := True;
 --Trace_Tests := True;

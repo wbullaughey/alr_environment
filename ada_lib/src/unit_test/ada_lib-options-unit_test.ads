@@ -1,5 +1,5 @@
 --with Ada_Lib.Options.Flags;
---with Ada_Lib.Options.Program;
+with Ada_Lib.Options.Program;
 with Ada_Lib.Options.Verification;
 with Ada_Lib.Strings.Unlimited;use Ada_Lib.Strings.Unlimited;
 with Ada_Lib.Trace;
@@ -34,8 +34,8 @@ package Ada_Lib.Options.Unit_Test is
    type Ada_Lib_Unit_Test_Nested_Options_Type (
       Multi_Test        : Boolean -- perform multiple tests in one
                                       -- execution of test program
-                           ) is new Verification.
-                              Verification_Nested_Options_Type with record
+                           ) is new Program.
+                              Nested_Program_Options_Type with record
       Debug             : Boolean := False;  -- debug unit test application
       Debug_Options     : Boolean := False;  -- debug unit test options
       Exit_On_Done      : Boolean := False;  -- exit test application after
@@ -99,7 +99,7 @@ package Ada_Lib.Options.Unit_Test is
    function Process_Option (  -- process one option
      Options                     : in out Ada_Lib_Unit_Test_Nested_Options_Type;
      Iterator                    : in out Ada_Lib.Options.Command_Line_Iterator_Interface'class;
-      Option                     : in     Ada_Lib.Options.Base_Flag_Option_Type'class
+      Option                     : in     Ada_Lib.Options.Flag_Option_Type'class
    ) return Boolean
    with pre => Options.Verify_Step (Initialized);
 

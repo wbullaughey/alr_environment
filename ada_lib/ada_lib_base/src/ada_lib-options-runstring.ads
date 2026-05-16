@@ -18,7 +18,7 @@ package Ada_Lib.Options.Runstring is
    type Element_Type          is tagged record
       From                    : Ada_Lib.Strings.Unlimited.String_Type;
       Kind                    : Kind_Type;
-      Option                  : Base_Flag_Option_Class_Access;
+      Option                  : Flag_Option_Class_Access;
    end record;
 
    type Element_Access        is access all Element_Type;
@@ -59,11 +59,11 @@ package Ada_Lib.Options.Runstring is
       ) return String;
 
       function Has_Parameter (
-         Option                  : in     Base_Flag_Option_Type'class
+         Option                  : in     Flag_Option_Type
       ) return Boolean;
 
       function Is_Registered (   -- tests if option was registered for the whole program
-         Option                  : in     Base_Flag_Option_Type'class
+         Option                  : in     Flag_Option_Type
       ) return Boolean;
 
       procedure Register (
@@ -72,7 +72,7 @@ package Ada_Lib.Options.Runstring is
          From                    : in     String := Ada_Lib.Trace.Here);
 
       function Registration (
-         Option                  : in     Base_Flag_Option_Type'class
+         Option                  : in     Flag_Option_Type
       ) return String;
 
       procedure Reset;                 -- clears sets if need different iterator sets

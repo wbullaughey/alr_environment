@@ -39,6 +39,8 @@ package Ada_Lib.Trace is
          Ada_Lib.Trace_Options_Package.Debug_Trace;
    Detail                        : Boolean  renames
          Ada_Lib.Trace_Options_Package.Detail;
+   Do_Trace_Checks               : Boolean  renames
+         Ada_Lib.Trace_Options_Package.Do_Trace_Checks;
    Elaborate                     : Boolean  renames
          Ada_Lib.Trace_Options_Package.Elaborate;
    Include_Hundreds              : Boolean  renames
@@ -67,6 +69,8 @@ package Ada_Lib.Trace is
          Ada_Lib.Trace_Options_Package.Trace_Pre_Post_False;
    Trace_Set_Up_Tear_Down        : Boolean  renames
          Ada_Lib.Trace_Options_Package.Trace_Set_Up_Tear_Down;
+   Trace_Tag_History                 : Boolean  renames
+         Ada_Lib.Trace_Options_Package.Trace_Exceptions;
    Trace_Tests                   : Boolean  renames
          Ada_Lib.Trace_Options_Package.Trace_Tests;
    Off                           : constant Priority_Type := Priority_Type'first;
@@ -176,7 +180,7 @@ package Ada_Lib.Trace is
 
    procedure Log_Out_Checked (
       Recursed : in out Boolean;
-      Enable   : in     Boolean := True;
+      Enable   : in     Boolean;
       Message  : in     String := "";
       Where    : in     String := GNAT.Source_Info.Source_Location;
       Who      : in     String := GNAT.Source_Info.Enclosing_Entity);
@@ -184,7 +188,7 @@ package Ada_Lib.Trace is
    function Log_Out_Checked (
       Recursed : in out Boolean;
       Result   : in     Boolean;
-      Enable   : in     Boolean := True;
+      Enable   : in     Boolean;
       Message  : in     String := "";
       Where    : in     String := GNAT.Source_Info.Source_Location;
       Who      : in     String := GNAT.Source_Info.Enclosing_Entity
@@ -236,21 +240,6 @@ package Ada_Lib.Trace is
       From        : in     String := GNAT.Source_Info.
                                              Source_Location);
 
-   generic
-
-      type Object_Type is tagged private;
-
-   package Tag_Package is
-
-      type Object_Class_Access   is access constant Object_Type'class;
-
-      procedure Generic_Tag_History (
-         Enable      : in     Boolean;
-         Object      : in     Object_Class_Access;
-         From        : in     String := GNAT.Source_Info.
-                                                Source_Location);
-   end Tag_Package;
-
    procedure Tag_History (
       Enable      : in     Boolean;
       Variable    : in     String;
@@ -286,6 +275,14 @@ package Ada_Lib.Trace is
       Where       : in   String := GNAT.Source_Info.Source_Location;
       Who         : in   String := GNAT.Source_Info.Enclosing_Entity);
 
+   function Trace_Return (
+      Debug       : in     Boolean;
+      Value       : in     Boolean;
+      Message     : in     String := "";
+      Where       : in     String := GNAT.Source_Info.Source_Location;
+      Who         : in     String := GNAT.Source_Info.Enclosing_Entity
+   ) return Boolean;
+
    function File
    return String renames GNAT.Source_Info.File;
 
@@ -297,6 +294,21 @@ package Ada_Lib.Trace is
       None,
       Finalization
    );
+
+   generic
+
+      type Object_Type is tagged private;
+
+   package Tag_Package is
+
+      type Object_Class_Access   is access constant Object_Type'class;
+
+      procedure Generic_Tag_History (
+         Enable      : in     Boolean;
+         Object      : in     Object_Class_Access;
+         From        : in     String := GNAT.Source_Info.
+                                                Source_Location);
+   end Tag_Package;
 
    package Selection_Package is new Ada_Lib.Specifications.Selection_Package (
       Priority_Type              => Priority_Type,

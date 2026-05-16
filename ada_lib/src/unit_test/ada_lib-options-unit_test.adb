@@ -6,7 +6,7 @@ with Ada_Lib.Help;
 --with GNOGA_Options;
 with Ada_Lib.OS;
 with Ada_Lib.Options.AUnit_Lib;
-with Ada_Lib.Options.Create;
+--with Ada_Lib.Options.Create;
 --with Ada_Lib.Options.Nested;
 with Ada_Lib.Options.Runstring;
 with Ada_Lib.String_Quote; use Ada_Lib.String_Quote;
@@ -28,16 +28,16 @@ package body Ada_Lib.Options.Unit_Test is
    Trace_Modifier             : character renames Ada_Lib.Help.Trace_Modifier;
    Options_With_Parameters    : aliased constant
                                  Ada_Lib.Options.Flag_List_Type :=
-                                    Ada_Lib.Options.Create.Create_Multiple (
+                                    Ada_Lib.Options.Initialize (
                                        "es" & Trace_Option,
                                        Ada_Lib.Options.Unmodified_flag) &
-                                 Ada_Lib.Options.Create.Create_Multiple (
+                                 Ada_Lib.Options.Initialize (
                                     "AnR", Ada_Lib.Help.Modifier);
    Options_Without_Parameters : aliased constant
                                  Flag_List_Type :=
-                                    Create.Create_Multiple (
+                                    Initialize (
                                        "nx", Unmodified_flag) &
-                                    Create.Create_Multiple (
+                                    Initialize (
                                        Driver_List_Option & "lmPsSu",
                                        Ada_Lib.Help.Modifier);
 
@@ -125,12 +125,21 @@ return "";
    ) return Boolean is
    ----------------------------------------------------------------------------
 
-      Message        : constant String := " from " & From &
+      Message        : constant String :=
+         Tag_Name ("options",
+            Ada_Lib_Unit_Test_Nested_Options_Type'class (Options)'tag) &
+         Tag_Name (" options parent",
+            Program.Nested_Program_Options_Type 'class (Options)'tag) &
+         " from " & From &
          " options with parameters " & Options_With_Parameters.Image &
          " with out " & Options_Without_Parameters.Image;
 
    begin
-     Log_In_Checked (Initialized_Recursed, Debug or Trace_Options, Message);
+     Log_In_Checked (Initialized_Recursed,
+     Debug or Trace_Options, Message);
+
+     Tag_History (Debug or Trace_Options, "Options",
+       Ada_Lib_Unit_Test_Nested_Options_Type'class (Options)'tag);
 
       Ada_Lib.Options.Runstring.Options.Register (
          Ada_Lib.Options.Runstring.With_Parameters,
@@ -141,7 +150,7 @@ return "";
 
       return Log_Out_Checked (Initialized_Recursed,
 --       Options.Library_Options.GNOGA_Options.Initialize and then
-            Verification.Verification_Nested_Options_Type (Options).Initialize,
+            Program.Nested_Program_Options_Type (Options).Initialize,
          Debug or Trace_Options, Message);
 
    end Initialize;
@@ -230,7 +239,7 @@ return "";
             end;
       end case;
 
-      Verification.Verification_Nested_Options_Type (Options).Post_Process   ;
+      Program.Nested_Program_Options_Type (Options).Post_Process   ;
       Log_Out (Debug or Trace_Options);
 
    end Post_Process;
@@ -241,7 +250,7 @@ return "";
    function Process_Option (
       Options  : in out Ada_Lib_Unit_Test_Nested_Options_Type;
       Iterator : in out Ada_Lib.Options.Command_Line_Iterator_Interface'class;
-      Option   : in     Ada_Lib.Options.Base_Flag_Option_Type'class
+      Option   : in     Ada_Lib.Options.Flag_Option_Type'class
    ) return Boolean is
    ----------------------------------------------------------------------------
 
@@ -434,14 +443,15 @@ return "";
 
          end case;
 
-         return Log_Out (True, Trace_Options or Debug,
+         return Log_Out (
+            Program.Nested_Program_Options_Type (
+               Options).Process_Option (Iterator, Option),
+            Trace_Options or Debug,
             " " & Option.Image & " handled mode " & Options.Mode'img);
       else
-         return Log_Out (False,
---          Options.Library_Options.GNOGA_Options.Process_Option (
---             Iterator, Option) or else
---          Verification.Verification_Nested_Options_Type'class (
---             Options).Process_Option (Iterator, Option),
+         return Log_Out (
+            Program.Nested_Program_Options_Type (Options).Process_Option (
+               Iterator, Option),
             Trace_Options or Debug,
             "other option" & " Option " & Option.Image);
       end if;
@@ -459,44 +469,47 @@ return "";
    begin
       Log_In (Debug or Trace_Options, "mode " & Help_Mode'img);
 --    Options.Library_Options.GNOGA_Options.Program_Help (Help_Mode);
---    Verification.Verification_Nested_Options_Type'class (
---       Options).Program_Help (Help_Mode);
+      Program.Nested_Program_Options_Type (
+         Options).Program_Help (Help_Mode);
 
       case Help_Mode is
 
       when Ada_Lib.Options.Program_Mode =>
          -- options without modifier
-         Ada_Lib.Help.Create_Option ('e', "routine", "routine to test.", Component, Ada_Lib.Help.Unmodified_Flag);
-         Ada_Lib.Help.Create_Option ('s', "suite to test", "select test suite to run.",
+         Ada_Lib.Help.Create_Option ('e', False, "routine", "routine to test.", Component, Ada_Lib.Help.Unmodified_Flag);
+         Ada_Lib.Help.Create_Option ('s', False, "suite to test", "select test suite to run.",
             Component, Ada_Lib.Help.Unmodified_Flag);
-         Ada_Lib.Help.Create_Option ('A', "suites", "enable default disabled suites.",
+         Ada_Lib.Help.Create_Option ('A', False, "suites", "enable default disabled suites.",
             Component, Ada_Lib.Help.Modifier);
-         Ada_Lib.Help.Create_Option ('U', "unit test trace Ada_Lib",
+         Ada_Lib.Help.Create_Option ('U', True, "unit test trace Ada_Lib",
             "select trace", Component, Ada_Lib.Help.Unmodified_Flag);
-         Ada_Lib.Help.Create_Option ('x', "", "exit on tests complete", Component,
+         Ada_Lib.Help.Create_Option ('x', False, "", "exit on tests complete", Component,
             Ada_Lib.Help.Unmodified_Flag);
          -- options with modifier
-         Ada_Lib.Help.Create_Option ('d', "", "driver suites", Component,
+         Ada_Lib.Help.Create_Option ('d', False, "", "driver suites", Component,
             Ada_Lib.Help.Modifier);
-         Ada_Lib.Help.Create_Option ('l', "", "List test suites", Component,
+         Ada_Lib.Help.Create_Option ('l', False, "", "List test suites", Component,
             Ada_Lib.Help.Modifier);
-         Ada_Lib.Help.Create_Option ('m', "", "manual operations.", Component,
+         Ada_Lib.Help.Create_Option ('m', False, "", "manual operations.", Component,
             Ada_Lib.Help.Modifier);
-         Ada_Lib.Help.Create_Option ('n', "", "no camera", Component,
+         Ada_Lib.Help.Create_Option ('n', False, "", "no camera", Component,
             Ada_Lib.Help.Unmodified_Flag);
-         Ada_Lib.Help.Create_Option ('n', "number of random seeds", "number seeds.",
+         Ada_Lib.Help.Create_Option ('S', False, "trace options", "trace flags",
+            Component, Ada_Lib.Help.Unmodified_Flag);
+         Ada_Lib.Help.Create_Option ('n', False, "number of random seeds", "number seeds.",
             Component,
             Ada_Lib.Help.Modifier);
-         Ada_Lib.Help.Create_Option ('P', "", "Print test suites.", Component,
+         Ada_Lib.Help.Create_Option ('P', False, "", "Print test suites.", Component,
             Ada_Lib.Help.Modifier);
-         Ada_Lib.Help.Create_Option ('S', "", "report random seed", Component,
+         Ada_Lib.Help.Create_Option ('S', False, "", "report random seed", Component,
             Ada_Lib.Help.Modifier);
-         Ada_Lib.Help.Create_Option ('R', "seed", "set random seed", Component,
+         Ada_Lib.Help.Create_Option ('R', False, "seed", "set random seed", Component,
             Ada_Lib.Help.Modifier);
-         Ada_Lib.Help.Create_Option ('u', "", "use random seed", Component,
+         Ada_Lib.Help.Create_Option ('u', False, "", "use random seed", Component,
             Ada_Lib.Help.Modifier);
 
       when Ada_Lib.Options.Trace_Mode =>
+         Ada_Lib.Help.Set_Has_Trace ('U', Ada_Lib.Help.Unmodified_Flag);
          Put_Line ("Ada_Lib unit test library trace options (-" &
             Trace_Option & ")");
          Put_Line ("      a               all");

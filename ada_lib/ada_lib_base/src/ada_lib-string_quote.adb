@@ -13,7 +13,9 @@ package body Ada_Lib.String_Quote is
       return (if Value = Ada.Characters.Latin_1.Nul then
             "NUL"
          else
-            String'(1 => Ada_Lib.Substiture_For_Non_Alpha.Mapper (Value)));
+            "'" &
+            String'(1 => Ada_Lib.Substiture_For_Non_Alpha.Mapper (Value)) &
+            "'");
    end Quote;
 
    -------------------------------------------------------------------

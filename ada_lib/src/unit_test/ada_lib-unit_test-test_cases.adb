@@ -57,6 +57,7 @@ package body Ada_Lib.Unit_Test.Test_Cases is
                         Program_Options.Nested_Unit_Test_Options);
       begin
          if Nested_Options.Mode = Ada_Lib.Options.Run_Tests then
+            Log_Here (Debug);
             AUnit.Test_Cases.Test_Case (Test).Add_Routine (Val);
          end if;
 
@@ -348,7 +349,7 @@ begin
    if Trace_Tests then
       Debug := Trace_Tests;
    end if;
---Debug := True;
+Debug := True;
    Log_Here (Debug or Trace_Options or Elaborate, "unit testing " &
       Ada_Lib.Options.Ada_Lib_Environment.Unit_Testing'img &
       " Ada_Lib.Options.Ada_Lib_Environment.Help_Test " &

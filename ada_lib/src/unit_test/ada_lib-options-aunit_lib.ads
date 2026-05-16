@@ -99,9 +99,9 @@ package Ada_Lib.Options.AUnit_Lib is
       From                       : in  String := Ada_Lib.Trace.Here
    ) return Unit_Test.Ada_Lib_Unit_Test_Nested_Options_Constant_Class_Access;
 
-   function Image (
-     Options                     : in     Aunit_Program_Options_Type
-   ) return String;
+-- function Image (
+--   Options                     : in     Aunit_Program_Options_Type
+-- ) return String;
 
    overriding
    function Initialize (
@@ -128,7 +128,7 @@ private
    function Process_Option (
       Options                    : in out Aunit_Program_Options_Type;
       Iterator                   : in out Ada_Lib.Options.Command_Line_Iterator_Interface'class;
-      Option                     : in     Base_Flag_Option_Type'class
+      Option                     : in     Flag_Option_Type'class
    ) return Boolean
    with pre => Options.Verify_Step (Initialized);
 

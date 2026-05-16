@@ -89,7 +89,7 @@ return "";
    function Process_Option (
       Options                    : in out Nested_Options_Type;
       Iterator                   : in out Command_Line_Iterator_Interface'class;
-      Option                     : in     Base_Flag_Option_Type'class
+      Option                     : in     Flag_Option_Type'class
    ) return Boolean is
    pragma Unreferenced (Iterator);
    ----------------------------------------------------------------------------

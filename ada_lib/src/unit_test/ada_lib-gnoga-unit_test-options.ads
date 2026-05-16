@@ -26,7 +26,7 @@ package Ada_Lib.GNOGA.Unit_Test.Options is
    function Process_Option (
       Options                    : in out GNOGA_Unit_Test_Options_Type;
       Iterator                   : in out Ada_Lib.Options.Command_Line_Iterator_Interface'class;
-      Option                     : in     Ada_Lib.Options.Base_Flag_Option_Type'class
+      Option                     : in     Ada_Lib.Options.Flag_Option_Type'class
    ) return Boolean
    with pre => Options.Verify_Step (Ada_Lib.Options.Initialized);
 

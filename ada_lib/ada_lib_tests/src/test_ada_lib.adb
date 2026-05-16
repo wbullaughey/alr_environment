@@ -29,17 +29,17 @@ begin
                                  Unit_Test_With_Database_And_Template);
       Debug          : Boolean renames
                         Ada_Lib.Options.Unit_Test.Ada_Lib_AUnit.Tester_Debug;
-      Nested_Program_Options
-                     : aliased Ada_Lib.Options.
-                        Program.Nested_Program_Options_Type;
+--    Nested_Program_Options
+--                   : aliased Ada_Lib.Options.
+--                      Unit_Test.Ada_Lib_Unit_Test_Nested_Options_Type;
    begin
---Debug := True;
+Debug := True;
       Log_Here (Debug);
       Ada_Lib.Options.Verification.Set_Ada_Lib_Program_Options (
          Ada_Lib.Options.Verification.Verification_Program_Options_Type'class (
             Aunit_Options)'unchecked_access,
-         Ada_Lib.Options.Verification.Nested_Program_Options_Type'class (
-            Nested_Program_Options)'unchecked_access);
+         Ada_Lib.Options.Program.Nested_Program_Options_Type'class (
+            Aunit_Options.Nested_Unit_Test_Options)'unchecked_access);
 
       if    Aunit_Options.Initialize then
          Log_Here (Debug);
@@ -64,7 +64,8 @@ begin
                Log_Here (Debug);
                Ada_Lib.Test.Run_Suite (Aunit_Options);
                Gnoga.Application.Multi_Connect.End_Application;
-               Log_Here (Debug);
+               Log_Here (Debug, "exit on done " &
+                  Aunit_Options.Nested_Unit_Test_Options.Exit_On_Done'img);
                if Aunit_Options.Nested_Unit_Test_Options.Exit_On_Done then
                   Ada_Lib.OS.Immediate_Halt (Ada_Lib.OS.No_Error);
                end if;

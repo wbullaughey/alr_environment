@@ -30,7 +30,7 @@ package Ada_Lib.Options.Verification is
       overriding
       procedure Bad_Option (        -- raises Failed exception
          Options                    : in     Verification_Options_Type;
-         Option                     : in     Base_Flag_Option_Type'class;
+         Option                     : in     Flag_Option_Type'class;
          Message                    : in     String := "";
          Where                      : in     String := Ada_Lib.Trace.Here);
 
@@ -49,6 +49,10 @@ package Ada_Lib.Options.Verification is
         Message                     : in     String := "";   -- leave blank no error help
         Halt                        : in     Boolean := True);
 
+      function Has_Trace (
+        Options                     : in     Verification_Options_Type
+      ) return Boolean;
+
       overriding
       function Initialize (
          Options                 : in out Verification_Options_Type;
@@ -60,12 +64,21 @@ package Ada_Lib.Options.Verification is
       overriding
       procedure Post_Process (      -- final post process
         Options                    : in out Verification_Options_Type
-      ) with Pre  => not Options.Post_Process_Completed,
-             Post => Options.Post_Process_Completed;
+      ) with Pre  => not Options.Verify_Step (Post_Processed),
+             Post => Options.Verify_Step (Post_Processed);
+
+--    overriding
+--    function Post_Process_Completed (      -- final post process
+--      Options                    : in out Verification_Options_Type
+--    ) return Boolean;
 
       overriding
-      function Post_Process_Completed (      -- final post process
-        Options                    : in out Verification_Options_Type
+      function Process (     -- processes whole command line calling Process_Option for each option
+        Options                     : in out Verification_Options_Type;
+        Include_Options             : in     Boolean;
+        Include_Non_Options         : in     Boolean;
+        Option_Prefix               : in     Character := '-';
+        Modifiers                   : in     String := ""
       ) return Boolean;
 
       overriding
@@ -100,7 +113,8 @@ package Ada_Lib.Options.Verification is
       function Verify_Step (
          Options  : in     Verification_Options_Type;
          Step     : in     Initialization_Step_Type;
-         From     : in     String := GNAT.Source_Info.Source_Location
+         From     : in     String := GNAT.Source_Info.Source_Location;
+         Who      : in     String := GNAT.Source_Info.Enclosing_Entity
       ) return Boolean;
 
       function Was_Initialized (
@@ -113,7 +127,8 @@ package Ada_Lib.Options.Verification is
 
       type Verification_Options_Type is abstract
             limited new Abstract_Runtime_Options_Type with record
-         Steps       : Steps_Array := (others => False);
+         Trace_Options  : Boolean := True; -- False; for testing
+         Steps          : Steps_Array := (others => False);
       end record;
 
    end Verification_Package;
@@ -177,18 +192,27 @@ package Ada_Lib.Options.Verification is
    with Pre    => not Options.Verify_Step (Initialized),
         Post   => Options.Verify_Step (Initialized);
 
-   overriding
-   function Process_Option (  -- process one option
-      Options                    : in out Verification_Program_Options_Type;
-      Iterator                   : in out Command_Line_Iterator_Interface'class;
-      Option                     : in     Base_Flag_Option_Type'class
-   ) return Boolean
-   with pre => Options.Verify_Step (Initialized);
+-- overriding
+-- function Process (     -- processes whole command line calling Process_Option for each option
+--   Options                     : in out Verification_Program_Options_Type;
+--   Include_Options             : in     Boolean;
+--   Include_Non_Options         : in     Boolean;
+--   Option_Prefix               : in     Character := '-';
+--   Modifiers                   : in     String := ""
+-- ) return Boolean;
 
-   overriding
-   procedure Program_Help (
-      Options                    : in      Verification_Program_Options_Type;
-      Help_Mode                  : in      Help_Mode_Type);
+-- overriding
+-- function Process_Option (  -- process one option
+--    Options                    : in out Verification_Program_Options_Type;
+--    Iterator                   : in out Command_Line_Iterator_Interface'class;
+--    Option                     : in     Flag_Option_Type'class
+-- ) return Boolean
+-- with pre => Options.Verify_Step (Initialized);
+
+-- overriding
+-- procedure Program_Help (
+--    Options                    : in      Verification_Program_Options_Type;
+--    Help_Mode                  : in      Help_Mode_Type);
 
    procedure Set_Ada_Lib_Program_Options (
       Options        : in     Verification_Program_Options_Class_Access;

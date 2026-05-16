@@ -1,9 +1,9 @@
 with Ada.Text_IO; use  Ada.Text_IO;
-with Ada_Lib.Options;
+--with Ada_Lib.Options;
 
 package body Ada_Lib.Specifications is
 
-   Debug : Boolean renames Ada_Lib.Options.Ada_Lib_Options.Specifications_Debug;
+-- Debug : Boolean renames Ada_Lib.Options.Ada_Lib_Options.Specifications_Debug;
 
    -------------------------------------------------------------------
    function Get_Option (

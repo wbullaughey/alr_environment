@@ -39,7 +39,7 @@ package body Ada_Lib.Test is
 -- end Set_All_Traces;
 
 begin
---Debug := True;
+Debug := True;
 --Trace_Options := True;
    Log_Here (Debug or Trace_Options or Elaborate);
 end Ada_Lib.Test;

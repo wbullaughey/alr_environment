@@ -1,7 +1,7 @@
 with Ada.Exceptions;
 --with Ada_Lib.Command_Line_Iterator;
 with Ada_Lib.Help;
-with Ada_Lib.Options.Create;
+--with Ada_Lib.Options.Create;
 --with Ada_Lib.Options.Nested;
 with Ada_Lib.Options.Runstring;
 with Ada_Lib.Trace; use Ada_Lib.Trace;
@@ -13,13 +13,13 @@ package body Ada_Lib.Options.Database is
    Remote_Daemon_Option          : constant Character := 'Q';
    Options_With_Parameters       : aliased constant
                                     Flag_List_Type :=
-                                       Create.Create_Multiple (
-                                          "LpRu", Unmodified_flag) &
-                                       Create.Create_One (
+                                       Initialize (
+                                          "LprRu", Unmodified_flag) &
+                                       Initialize (
                                           Remote_Daemon_Option, Help.Modifier);
    Options_Without_Parameters    : aliased constant
                                     Flag_List_Type :=
-                                       Create.Create_One (
+                                       Initialize (
                                           'l', Unmodified_flag);
 
    Debug                         : Boolean renames Ada_Lib_Database.Trace_All;
@@ -105,7 +105,9 @@ package body Ada_Lib.Options.Database is
    ----------------------------------------------------------------------------
 
    begin
-      Log_In (Debug or Trace_Options);
+      Log_In (Debug or Trace_Options,
+         Tag_Name ("options",
+            Database_Options_Type'class (Options)'tag));
       Ada_Lib.Options.Runstring.Options.Register (Ada_Lib.Options.Runstring.With_Parameters,
          Options_With_Parameters);
       Ada_Lib.Options.Runstring.Options.Register (Ada_Lib.Options.Runstring.Without_Parameters,
@@ -119,7 +121,7 @@ package body Ada_Lib.Options.Database is
    function Process_Option (
       Options                    : in out Database_Options_Type;
       Iterator                   : in out Command_Line_Iterator_Interface'class;
-      Option                     : in     Base_Flag_Option_Type'class
+      Option                     : in     Flag_Option_Type'class
    ) return Boolean is
    ----------------------------------------------------------------
 
@@ -244,14 +246,14 @@ package body Ada_Lib.Options.Database is
       case Help_Mode is
 
       when Ada_Lib.Options.Program_Mode =>
-         Ada_Lib.Help.Create_Option ('l', "", "local dbdaemon.", Component, Ada_Lib.Help.Unmodified_Flag);
-         Ada_Lib.Help.Create_Option ('L', "path", "local dbdaemon path.", Component, Ada_Lib.Help.Unmodified_Flag);
-         Ada_Lib.Help.Create_Option ('p', "port number", "remote DBDaemon port number", Component, Ada_Lib.Help.Unmodified_Flag);
---       Ada_Lib.Help.Create_Option ('P', "browser port", Component, Ada_Lib.Help.Unmodified_Flag);
-         Ada_Lib.Help.Create_Option (Remote_Daemon_Option, "dbdaemon", "remote dbdaemon.",
+         Ada_Lib.Help.Create_Option ('l', False, "", "local dbdaemon.", Component, Ada_Lib.Help.Unmodified_Flag);
+         Ada_Lib.Help.Create_Option ('L', False, "path", "local dbdaemon path.", Component, Ada_Lib.Help.Unmodified_Flag);
+         Ada_Lib.Help.Create_Option ('p', False, "port number", "remote DBDaemon port number", Component, Ada_Lib.Help.Unmodified_Flag);
+--       Ada_Lib.Help.Create_Option ('P', False, "browser port", Component, Ada_Lib.Help.Unmodified_Flag);
+         Ada_Lib.Help.Create_Option (Remote_Daemon_Option, False, "dbdaemon", "remote dbdaemon.",
             Component, Ada_Lib.Help.Modifier);
-         Ada_Lib.Help.Create_Option ('R', "path", "remote dbdaemon path.", Component, Ada_Lib.Help.Unmodified_Flag);
-         Ada_Lib.Help.Create_Option ('u', "user", "remote user.", Component, Ada_Lib.Help.Unmodified_Flag);
+         Ada_Lib.Help.Create_Option ('R', False, "path", "remote dbdaemon path.", Component, Ada_Lib.Help.Unmodified_Flag);
+         Ada_Lib.Help.Create_Option ('u', False, "user", "remote user.", Component, Ada_Lib.Help.Unmodified_Flag);
 
       when Ada_Lib.Options.Trace_Mode =>
          Null;

@@ -66,7 +66,11 @@ not_implemented;
    ----------------------------------------------------------------------------
 
    begin
-      Option_Log (Trace_Conversions, Who & " called from " & From);
+      Option_Log (Trace_Conversions,
+         Tag_Name ("Verification_Nested_Options ",
+               Modifialbe_Verification_Options.
+                  Verification_Nested_Options.all'tag) & " " &
+         Who & " called from " & From);
       Ada.Assertions.Assert (Modifialbe_Verification_Options /= Null,
          "Modifialbe_Verification_Options not set");
 
@@ -118,8 +122,10 @@ not_implemented;
 
    begin
       return Option_Log (Result,
-         Ada_Lib.Trace_Options_Package.Trace_Pre_Post_Conditions or
-            (Ada_Lib.Trace_Options_Package.Trace_Pre_Post_False and not Result));
+         Ada_Lib.Trace_Options_Package.Trace_Pre_Post_Conditions or else
+            (Ada_Lib.Trace_Options_Package.Trace_Pre_Post_False and
+             not Result),
+         " result " & Result'img);
    end Have_Ada_Lib_Verification_Options;
 
    ----------------------------------------------------------------
@@ -131,37 +137,41 @@ not_implemented;
    ----------------------------------------------------------------
 
    begin
-      Option_Log (Debug, "called from " & From);
+      Option_Log (Debug or else Trace_Options,
+         Tag_Name ("options",
+            Verification_Program_Options_Type'class (Options)'tag) &
+         " called from " & From);
       return Verification_Package.Verification_Options_Type (Options).Initialize;
 
    end Initialize;
 
-   ----------------------------------------------------------------
-   overriding
-   function Process_Option (  -- process one option
-      Options                    : in out Verification_Program_Options_Type;
-      Iterator                   : in out Command_Line_Iterator_Interface'class;
-      Option                     : in     Base_Flag_Option_Type'class
-   ) return Boolean is
-   ----------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- overriding
+-- function Process_Option (  -- process one option
+--    Options                    : in out Verification_Program_Options_Type;
+--    Iterator                   : in out Command_Line_Iterator_Interface'class;
+--    Option                     : in     Flag_Option_Type'class
+-- ) return Boolean is
+-- ----------------------------------------------------------------
+--
+-- begin
+--    Option_Log (Debug or else Trace_Options);
+--    return Options.Verification_Nested_Options.Process_Option (
+--       Iterator, Option);
+-- end Process_Option;
 
-   begin
-      Option_Log (Debug or else Trace_Options);
-      return Options.Verification_Nested_Options.Process_Option (
-         Iterator, Option);
-   end Process_Option;
-
-   ----------------------------------------------------------------
-   overriding
-   procedure Program_Help (
-      Options                    : in      Verification_Program_Options_Type;
-      Help_Mode                  : in      Help_Mode_Type) is
-   ----------------------------------------------------------------
-
-   begin
-      Option_Log (Debug);
-      Options.Verification_Nested_Options.Program_Help (Help_Mode);
-   end Program_Help;
+-- ----------------------------------------------------------------
+-- overriding
+-- procedure Program_Help (
+--    Options                    : in      Verification_Program_Options_Type;
+--    Help_Mode                  : in      Help_Mode_Type) is
+-- ----------------------------------------------------------------
+--
+-- begin
+--    Option_Log (Debug or else Trace_Options, "in");
+--    Options.Verification_Nested_Options.Program_Help (Help_Mode);
+--    Option_Log (Debug or else Trace_Options, "out");
+-- end Program_Help;
 
    ----------------------------------------------------------------
    procedure Set_Ada_Lib_Program_Options (
@@ -170,13 +180,14 @@ not_implemented;
    ----------------------------------------------------------------
 
    begin
-      Option_Log (Debug,
+      Option_Log (Debug, "in " &
          Tag_Name ("options", Options.all'tag) &
-         Tag_Name ("nested options", Nested_Options.all'tag) &
-         " called from " & Who);
+         Tag_Name (" nested options", Nested_Options.all'tag),
+         Who & " " & Here);
       Modifialbe_Verification_Options := Options;
       Modifialbe_Verification_Options.Verification_Nested_Options :=
          Nested_Options;
+      Option_Log (Debug, "out");
    end Set_Ada_Lib_Program_Options;
 
    package body Verification_Package is
@@ -229,7 +240,7 @@ not_implemented;
       overriding
       procedure Bad_Option (        -- raises Failed exception
          Options                    : in     Verification_Options_Type;
-         Option                     : in     Base_Flag_Option_Type'class;
+         Option                     : in     Flag_Option_Type'class;
          Message                    : in     String := "";
          Where                      : in     String := Ada_Lib.Trace.Here) is
       ----------------------------------------------------------------------------
@@ -296,6 +307,16 @@ not_implemented;
       end Display_Help;
 
       ---------------------------------------------------------------
+      function Has_Trace (
+        Options                     : in     Verification_Options_Type
+      ) return Boolean is
+      ---------------------------------------------------------------
+
+      begin
+         return Options.Trace_Options;
+      end Has_Trace;
+
+      ---------------------------------------------------------------
       overriding
       function Initialize (
          Options                 : in out Verification_Options_Type;
@@ -305,7 +326,9 @@ not_implemented;
 
       begin
          Log_In_Checked (Recursed, Debug or Trace_Options,
-            "from " & From & " options address " &
+         Tag_Name ("options",
+            Verification_Options_Type'class (Options)'tag) &
+            " from " & From & " options address " &
             Ada_Lib.Strings.Image (Options'address));
          Tag_History (Debug or Trace_Options, "Options",
             Verification_Options_Type'class (Options)'tag);
@@ -320,19 +343,39 @@ not_implemented;
       ----------------------------------------------------------------------------
 
       begin
+         Log_In (Debug or Trace_Options, Tag_Name ("options",
+            Verification_Options_Type'class (Options)'tag));
          Options.Steps (Post_Processed) := True;
       end Post_Process;
 
+--    ----------------------------------------------------------------------------
+--    overriding
+--    function Post_Process_Completed (      -- final post process
+--      Options                    : in out Verification_Options_Type
+--    ) return Boolean is
+--    ----------------------------------------------------------------------------
+--
+--    begin
+--       return Options.Steps (Post_Processed);
+--    end Post_Process_Completed;
+
       ----------------------------------------------------------------------------
       overriding
-      function Post_Process_Completed (      -- final post process
-        Options                    : in out Verification_Options_Type
+      function Process (     -- processes whole command line calling Process_Option for each option
+        Options                     : in out Verification_Options_Type;
+        Include_Options             : in     Boolean;
+        Include_Non_Options         : in     Boolean;
+        Option_Prefix               : in     Character := '-';
+        Modifiers                   : in     String := ""
       ) return Boolean is
       ----------------------------------------------------------------------------
 
       begin
-         return Options.Steps (Post_Processed);
-      end Post_Process_Completed;
+         Log_In (Debug or Trace_Options, Tag_Name ("options",
+            Verification_Options_Type'class (Options)'tag));
+         Options.Steps (Processed) := True;
+         return True;
+      end Process;
 
       ----------------------------------------------------------------------------
       overriding
@@ -493,9 +536,15 @@ not_implemented;
       function Verify_Step (
          Options  : in     Verification_Options_Type;
          Step     : in     Initialization_Step_Type;
-         From     : in     String := GNAT.Source_Info.Source_Location
+         From     : in     String := GNAT.Source_Info.Source_Location;
+         Who      : in     String := GNAT.Source_Info.Enclosing_Entity
       ) return Boolean is
       ----------------------------------------------------------------------------
+
+         function Log_Exit (
+            Result      : in     Boolean;
+            This_From   : in     String := Here
+         ) return Boolean;
 
          Log_It   : constant Boolean := Debug or Trace_Options or
                      Trace_Pre_Post_Conditions;
@@ -506,6 +555,23 @@ not_implemented;
                         Post_Processed    => new String'("post process"));
 
          -------------------------------------------------------------------------
+         function Log_Exit (
+            Result     : in     Boolean;
+            This_From  : in     String := Here
+         ) return Boolean is
+         -------------------------------------------------------------------------
+
+         begin
+            Tag_History (Log_It or else not Result, "options",
+               Verification_Options_Type'class (Options)'tag, From);
+            return Log_Out (Result, Log_It,
+               Tag_Name (" options",
+                  Verification_Options_Type'class (Options)'tag) &
+               " at " & This_From,
+               From, Who);
+         end Log_Exit;
+
+         -------------------------------------------------------------------------
          function Steps
          return String is
          -------------------------------------------------------------------------
@@ -513,18 +579,19 @@ not_implemented;
             Result   : Ada_Lib.Strings.Unlimited.String_Type;
 
          begin
-            Result.Append ("not completed ");
+            Result.Append ("not completed [");
             for Step in Options.Steps'range loop
                if not Options.Steps (Step) then
                   Result.Append (Labels (Step).all & ", ");
                end if;
             end loop;
-            Result.Append (" completed ");
+            Result.Append ("] completed [");
             for Step in Options.Steps'range loop
                if Options.Steps (Step) then
                   Result.Append (Labels (Step).all & ", ");
                end if;
             end loop;
+            Result.Append ("]");
             return Result.Coerce;
          end Steps;
 
@@ -533,27 +600,35 @@ not_implemented;
             Text                    : in     String) is
          ---------------------------------------------------------------
 
-            Message  : constant String := Text &  " called from " & From;
+            Message  : constant String := Text & " for " &
+               Tag_Name ("options",Verification_Options_Type'class (
+                  Options)'tag) &
+               " called from " & From;
 
          begin
-            Log_Here (Message);
-            Put_Line (Message);
+            if Log_It then
+               Log_Here (Message);
+               Put_Line (Message);
+            end if;
          end Failed;
          ---------------------------------------------------------------
 
       begin
          Log_In (Log_It,  "step " & Step'img & " " &
+            Tag_Name ("options",
+               Verification_Options_Type'class (Options)'tag) & " " &
             Steps & " called from " & From);
          Tag_History (Log_It, "options",
             Verification_Options_Type'class (Options)'tag);
 
          if not Have_Ada_Lib_Verification_Options then
             Failed ("Get_Modifiable_Program_Options not initialized at " & Here);
-            return Log_Out (False, Log_It);
+            return Log_Exit (False);
          else
             if not Options.Steps (Step) then
-               Put_Line (Step'img &" not set " & " called from " & From);
-               return Log_Out (False, Log_It);
+               Failed (Step'img &" not set " & " called from " & From &
+                  " at " & Here);
+               return Log_Exit (False);
             end if;
 
             if Step > Initialization_Step_Type'first then
@@ -565,7 +640,7 @@ not_implemented;
                   if not Options.Steps (Previous_Step) then
                      Put_Line (Previous_Step'img & " not set " &
                         " called from " & From);
-                     return Log_Out (False, Log_It);
+                     return Log_Exit (False);
                   end if;
                end;
             end if;
@@ -576,12 +651,12 @@ not_implemented;
                   if Options.Steps (Next_Step) then
                      Put_Line ("later step " & Next_Step'img & "  set " &
                         " called from " & From);
-                     return Log_Out (False, Log_It);
+                     return Log_Exit (False);
                   end if;
                end loop;
             end if;
 
-            return Log_Out (True, Log_It);
+            return Log_Exit (True);
          end if;
       end Verify_Step;
 
@@ -604,7 +679,8 @@ not_implemented;
    end Verification_Package;
 
 begin
-Debug := True;
+--Debug := True;
+--Trace_Tag_History := True;
    Log_Here (Debug or Elaborate);
 end Ada_Lib.Options.Verification;
 

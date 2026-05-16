@@ -3,7 +3,7 @@ with Ada.Text_IO;use Ada.Text_IO;
 --with GNOGA_Ada_Lib.Base;
 --with Ada_Lib.GNOGA.Unit_Test.Events;
 with Ada_Lib.Help;
-with Ada_Lib.Options.Create;
+--with Ada_Lib.Options.Create;
 with Ada_Lib.Options.Runstring;
 with Ada_Lib.Options.Unit_Test;
 with Ada_Lib.String_Quote; use Ada_Lib.String_Quote;
@@ -17,7 +17,7 @@ package body Ada_Lib.GNOGA.Unit_Test.Options is
    Trace_Option            : constant Character := 'g';
    Options_With_Parameters : aliased constant
                               Ada_Lib.Options.Flag_List_Type :=
-                                 Ada_Lib.Options.Create.Create_One (Trace_Option,
+                                 Ada_Lib.Options.Initialize (Trace_Option,
                                     Ada_Lib.Options.Unmodified_flag);
 
    -------------------------------------------------------------------
@@ -43,7 +43,7 @@ package body Ada_Lib.GNOGA.Unit_Test.Options is
    function Process_Option (
       Options                    : in out GNOGA_Unit_Test_Options_Type;
       Iterator                   : in out Ada_Lib.Options.Command_Line_Iterator_Interface'class;
-      Option                     : in     Ada_Lib.Options.Base_Flag_Option_Type'class
+      Option                     : in     Ada_Lib.Options.Flag_Option_Type'class
    ) return Boolean is
    ---------------------------------------------------------------
 
@@ -88,10 +88,11 @@ package body Ada_Lib.GNOGA.Unit_Test.Options is
       case Help_Mode is
 
       when Ada_Lib.Options.Program_Mode =>
-         Standard.Ada_Lib.Help.Create_Option ('g', "trace options",
+         Standard.Ada_Lib.Help.Create_Option ('g', True, "trace options",
             "GNOGA Unit Test traces", Component, Ada_Lib.Help.Unmodified_Flag);
 
       when Ada_Lib.Options.Trace_Mode =>
+         Ada_Lib.Help.Set_Has_Trace ('g', Ada_Lib.Help.Unmodified_Flag);
          Put_Line ("Ada_Lib GNOGA unit tests trace options (-" &
             Trace_Option & ")");
          Put_Line ("      a               all");

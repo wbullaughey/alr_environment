@@ -4,7 +4,7 @@ with Ada.Text_IO;use Ada.Text_IO;
 with Ada_Lib.Command_Line_Iterator;
 with Ada_Lib.Help;
 with Ada_Lib.Options.AUnit_Lib;
-with Ada_Lib.Options.Create;
+--with Ada_Lib.Options.Create;
 with Ada_Lib.Options.Runstring;
 with Ada_Lib.Options.Unit_Test;
 with Ada_Lib.OS;
@@ -25,13 +25,13 @@ package body Ada_Lib.Options.Program is
    Test_Condition_Flag           : constant Character := 'c';
    Options_With_Parameters       : aliased constant
                                     Flag_List_Type :=
-                                       Create.Create_One (
+                                       Initialize (
                                           'a', Unmodified_flag);
    Options_Without_Parameters    : aliased constant
                                     Flag_List_Type :=
-                                       Create.Create_Multiple (
-                                          "hPv", Unmodified_flag) &
-                                       Create.Create_Multiple (
+                                       Initialize (
+                                          "hPv#", Unmodified_flag) &
+                                       Initialize (
                                           "ipTx" & Test_Condition_Flag,
                                           Ada_Lib.Help.Modifier);
 
@@ -72,14 +72,14 @@ package body Ada_Lib.Options.Program is
 --log_here;
 --      Verification.Get_Ada_Lib_Read_Only_Nested_Options.
 --         Program_Help (Program_Mode);
-log_here;
 
 --    Options.Nested_Program_Options.Program_Help (Program_Mode);
       Ada_Lib.Options.Verification.Verification_Program_Options_Type'class (
          Options).Program_Help (Program_Mode);
-log_here;
       Ada_Lib.Help.Display (Print_Help'access);
       New_Line;
+      Ada_Lib.Options.Verification.Verification_Program_Options_Type'class (
+         Options).Program_Help (Trace_Mode);
 
       if Halt then
          Log_Out (Log);
@@ -299,9 +299,15 @@ return "";
 --       Image (Options_With_Parameters) &
 --       " with out " &
 --       Image (Options_Without_Parameters);
+      Log_It   : constant Boolean := Debug or Trace_Options;
 
    begin
-     Log_In_Checked (Initialize_Recursed, Debug or Trace_Options);
+     Log_In_Checked (Initialize_Recursed, Log_It,
+         Tag_Name ("options",
+            Nested_Program_Options_Type'class (Options)'tag));
+
+     Tag_History (Log_It, "Options",
+       Nested_Program_Options_Type'class (Options)'tag);
 
       Runstring.Options.Register (
          Runstring.With_Parameters,
@@ -312,8 +318,9 @@ return "";
 
       return Log_Out_Checked (Initialize_Recursed,
          Options.GNOGA_Ada_Lib_Option.Initialize and then
-         Verification.Verification_Nested_Options_Type (Options).Initialize,
-         Debug or Trace_Options);
+         Verification.Verification_Nested_Options_Type (
+            Options).Initialize,
+         Log_It);
    end Initialize;
 
    ----------------------------------------------------------------------------
@@ -327,7 +334,9 @@ return "";
    begin
       return Log_Here (
          Verification.Verification_Program_Options_Type (Options).Initialize,
-         Debug or Trace_Options);
+         Debug or Trace_Options,
+         Tag_Name ("options",
+            Program_Options_Type'class (Options)'tag));
    end Initialize;
 
    ----------------------------------------------------------------------------
@@ -357,7 +366,7 @@ return "";
          begin
             if Iterator.Is_Option then
                declare
-                  Option         : constant Base_Flag_Option_Type'class :=
+                  Option         : constant Flag_Option_Type'class :=
                                     Iterator.Get_Option;
                   Message        : constant String := Option.Image & " not defined";
 
@@ -485,12 +494,13 @@ return false;
          Log_Here (Debug or Trace_Options);
          Iterator.Initialize (Include_Options, Include_Non_Options,
             Option_Prefix, Modifiers);
-         if not Options.Process (Iterator) then
-            return Log_Out (False,Debug or Trace_Options);
-         end if;
---       if not Program_Options_Type'class (Options).Process (Iterator) then
+--       if not Options.Process (Iterator) then
 --          return Log_Out (False,Debug or Trace_Options);
 --       end if;
+         -- dispatch on class value
+         if not Program_Options_Type'class (Options).Process (Iterator) then
+            return Log_Out (False,Debug or Trace_Options);
+         end if;
 
       exception
          when Fault: others =>
@@ -501,7 +511,10 @@ return false;
       end;
 
       Options.Program_Processed := True;
-      return Log_Out (True, Debug or Trace_Options);
+      return Log_Out (Verification.Verification_Program_Options_Type (
+            Options).Process (Include_Options, Include_Non_Options,
+            Option_Prefix, Modifiers),
+         Debug or Trace_Options);
 
    exception
       when Fault: Ada_Lib.Options.Failed =>
@@ -520,12 +533,14 @@ return false;
    function Process_Option (
       Options                    : in out Nested_Program_Options_Type;
       Iterator                   : in out Command_Line_Iterator_Interface'class;
-      Option                     : in     Base_Flag_Option_Type'class
+      Option                     : in     Flag_Option_Type'class
    ) return Boolean is
    ----------------------------------------------------------------------------
 
+      Log_It   : constant Boolean := Trace_Options or Debug;
+
    begin
-      Log_In (Trace_Options or Debug, "option '" & Option.Image &
+      Log_In (Log_It, "option '" & Option.Image &
          " kind " & Option.Kind'img &
          " Help_Test " & Options.Help_Test'img);
 
@@ -545,9 +560,13 @@ return false;
                               Verification_Program_Options_Constant_Class_Access :=
                                  Verification.Get_Ada_Lib_Read_Only_Program_Options;
                      begin
-                        Tag_history (Trace_Options or Debug,
+                        Tag_history (Log_It,
                            "Program_Options", Program_Options.all'tag);
-                        Program_Options.Display_Help;
+                        Program_Options.Display_Help ("", False);
+                        Ada_Lib.Help.Check_Traces;
+                        Log_Out (Log_It);
+
+                        Ada_Lib.OS.Immediate_Halt (Ada_Lib.OS.No_Error);
                      end;
                   end if;
 
@@ -559,6 +578,9 @@ return false;
 
                when 'v' =>
                   Options.Verbose := True; -- Set_Verbose (True);
+
+               when '#' =>
+                  Do_Trace_Checks := False;
 
                when Others =>
                   Log_Exception (Debug or Trace_Options);
@@ -606,7 +628,7 @@ return false;
 --   function Process_Option (
 --      Options                    : in out Program_Options_Type;
 --      Iterator                   : in out Command_Line_Iterator_Interface'class;
---      Option                     : in     Base_Flag_Option_Type'class
+--      Option                     : in     Flag_Option_Type
 --   ) return Boolean is
 --   ----------------------------------------------------------------------------
 --
@@ -632,26 +654,34 @@ return false;
       case Help_Mode is
 
       when Ada_Lib.Options.Program_Mode =>
-         Ada_Lib.Help.Create_Option ('a', "trace options",
-            "Ada_Lib library trace options", Component, Ada_Lib.Help.Unmodified_Flag);
-         Ada_Lib.Help.Create_Option ('h', "", "this message", Component, Ada_Lib.Help.Unmodified_Flag);
-         Ada_Lib.Help.Create_Option ('P', "", "set pause flag", Component, Ada_Lib.Help.Unmodified_Flag);
---       Ada_Lib.Help.Create_Option ('s', "", "camera state path",
+         Ada_Lib.Help.Create_Option ('a', True, "trace options",
+            "Ada_Lib library trace options", Component,
+            Ada_Lib.Help.Unmodified_Flag);
+         Ada_Lib.Help.Create_Option ('h', False, "", "this message",
+            Component, Ada_Lib.Help.Unmodified_Flag);
+         Ada_Lib.Help.Create_Option ('P', False, "", "set pause flag",
+            Component, Ada_Lib.Help.Unmodified_Flag);
+--       Ada_Lib.Help.Create_Option ('s', False, "", "camera state path",
 --          Component, Ada_Lib.Help.Unmodified_Flag);
-         Ada_Lib.Help.Create_Option ('v', "", "verbose", Component, Ada_Lib.Help.Unmodified_Flag);
-         Ada_Lib.Help.Create_Option (Test_Condition_Flag, "", "trace test condition",
+         Ada_Lib.Help.Create_Option ('v', False, "", "verbose", Component,
+            Ada_Lib.Help.Unmodified_Flag);
+         Ada_Lib.Help.Create_Option (Test_Condition_Flag, False, "",
+            "trace test condition", Component, Ada_Lib.Help.Modifier);
+         Ada_Lib.Help.Create_Option ('i', False, "", "indent trace",
             Component, Ada_Lib.Help.Modifier);
-         Ada_Lib.Help.Create_Option ('i', "", "indent trace", Component,
-            Ada_Lib.Help.Modifier);
-         Ada_Lib.Help.Create_Option ('p', "", "include program in trace", Component,
-            Ada_Lib.Help.Modifier);
-         Ada_Lib.Help.Create_Option ('T', "", "include task in trace", Component,
-            Ada_Lib.Help.Modifier);
-         Ada_Lib.Help.Create_Option ('x', "", "exclude time in trace", Component,
-            Ada_Lib.Help.Modifier);
-         Ada_Lib.Help.Create_Option ('?', "", "this message", Component, Ada_Lib.Help.Unmodified_Flag);
+         Ada_Lib.Help.Create_Option ('p', False, "",
+            "include program in trace", Component, Ada_Lib.Help.Modifier);
+         Ada_Lib.Help.Create_Option ('T', False, "", "include task in trace",
+            Component, Ada_Lib.Help.Modifier);
+         Ada_Lib.Help.Create_Option ('x', False, "", "exclude time in trace",
+            Component,Ada_Lib.Help.Modifier);
+         Ada_Lib.Help.Create_Option ('#', False, "", "exclude trace checks",
+            Component, Ada_Lib.Help.Unmodified_Flag);
+         Ada_Lib.Help.Create_Option ('?', False, "", "this message",
+            Component, Ada_Lib.Help.Unmodified_Flag);
 
       when Ada_Lib.Options.Trace_Mode =>
+         Ada_Lib.Help.Set_Has_Trace ('a', Ada_Lib.Help.Unmodified_Flag);
          Put_Line ("CAC ada_lib trace library options (-a)");
          Put_Line ("      a               all");
          Put_Line ("      b               database subscribe");

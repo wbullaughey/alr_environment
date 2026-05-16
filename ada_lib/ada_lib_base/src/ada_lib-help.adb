@@ -17,21 +17,29 @@ with Command_Name;
 
 package body Ada_Lib.Help is
 
--- use type Ada_Lib.Options.Base_Flag_Option_Type;
-   use type Ada_Lib.Options.Flags.Flag_Option_Type;
+-- use type Ada_Lib.Options.Flag_Option_Type;
+   use type Ada_Lib.Options.Flag_Option_Type;
 
    subtype Line_Type             is String;
 
-   type Element_Type (
+   type Element_Contents_Type (
       Parameter_Length           : Natural;
       Description_Length         : Positive;
       Component_Length           : Natural;
       Source_Line_Length         : Positive) is record
-      Option                     : Ada_Lib.Options.Flags.Flag_Option_Type;
-      Parameter                  : Line_Type (1 .. Parameter_Length);
-      Description                : Line_Type (1 .. Description_Length);
       Component                  : Line_Type (1 .. Component_Length);
+      Description                : Line_Type (1 .. Description_Length);
+      Has_Trace                  : Boolean;
+      Options                    : Line_Type (1 .. Parameter_Length);
       Source_Line                : Line_Type (1 .. Source_Line_Length);
+      Trace_Option_Set           : Boolean;
+   end record;
+
+   type Element_Contents_Access  is access Element_Contents_Type;
+
+   type Element_Type is record
+      Contents                   : Element_Contents_Access := Null;
+      Option                     : Ada_Lib.Options.Flag_Option_Type;
    end record;
 
    function Equal (
@@ -43,13 +51,24 @@ package body Ada_Lib.Help is
    ) return Boolean;
 
    function Option_Image (
-      Element                    : in     Element_Type
+      Element                    : in     Element_Type;
+      Label                      : in     Boolean
    ) return String;
 
    package Line_Package is new Ada.Containers.Indefinite_Ordered_Sets (
       Element_Type   => Element_Type,
       "<"   => Less_Than,
       "="   => Equal);
+
+   procedure Add_Option (
+      Option                     : in     Ada_Lib.Options.Flag_Option_Type;
+      Trace_Option               : in     Boolean; -- needs to be true if
+                                                   -- option is for a trace
+      Parameter                  : in     String;
+      Description                : in     String;
+      Component                  : in     String := "";
+      Source_Line                : in     String := Ada_Lib.Trace.Here
+   ) with Pre => Description'length > 0;
 
    Debug                         : Boolean renames
                                     Ada_Lib.Options.Ada_Lib_Help.Debug;
@@ -58,15 +77,16 @@ package body Ada_Lib.Help is
    Maximum_Parameter_Length      : Natural := 0;
 
    procedure Find_Duplicate (
-      Option                     : in     Ada_Lib.Options.Flags.Flag_Option_Type;
-      Parameter                  : in     String;
+      Option                     : in     Ada_Lib.Options.Flag_Option_Type;
+      options                  : in     String;
       Description                : in     String;
       Component                  : in     String;
       From                       : in     String);
 
    ----------------------------------------------------------------------------
    procedure Add_Option (
-      Option                     : in     Ada_Lib.Options.Flags.Flag_Option_Type;
+      Option                     : in     Ada_Lib.Options.Flag_Option_Type;
+      Trace_Option               : in     Boolean;
       Parameter                  : in     String;
       Description                : in     String;
       Component                  : in     String := "";
@@ -75,6 +95,7 @@ package body Ada_Lib.Help is
 
    begin
       Log_In (Debug, Option.Image &
+         " trace option " & Trace_Option'img &
          Quote (" Parameter", Parameter) &
          Quote (" Description", Description) &
          Quote (" Component", Component) & " from " & Source_Line);
@@ -90,15 +111,18 @@ package body Ada_Lib.Help is
       end if;
 
       Line_Package.Insert (Lines, Element_Type'(
+         Contents    => new Element_Contents_Type'(
             Component         => Line_Type (Component),
             Component_Length  => Component'length,
             Description       => Line_Type (Description),
             Description_Length=> Description'length,
-            Option            => Option,
-            Parameter         => Line_Type (Parameter),
+            Has_Trace         => Trace_Option,
+            Options           => Line_Type (Parameter),
             Parameter_Length  => Parameter'length,
             Source_Line       => Line_Type (Source_Line),
-         Source_Line_Length=> Source_Line'length));
+            Source_Line_Length=> Source_Line'length,
+            Trace_Option_Set  => False),
+         Option            => Option));
       Log_Out (Debug);
 
    exception
@@ -111,20 +135,22 @@ package body Ada_Lib.Help is
                Cursor            : in     Line_Package.Cursor) is
             -------------------------------------------------------
 
-               Message           : constant String :=
-                                    Option.Image &
-                                    (if Description'length > 0 then
-                                          Quote (" parameter ", Description)
-                                       else
-                                          "") &
-                                    Quote (" already defined for ", Component) &
-                                    Quote (" at ", Line_Package.Element (Cursor).Source_Line) &
-                                    Quote (" set from", Source_Line);
+               Element  : Element_Type renames Line_Package.Element (Cursor);
+               Contents : constant Element_Contents_Access := Element.Contents;
+               Message  : constant String :=
+                           Option.Image &
+                           (if Description'length > 0 then
+                                 Quote (" Parameter ", Description)
+                              else
+                                 "") &
+                           Quote (" already defined for ", Component) &
+                           Quote (" at ", Contents.Source_Line) &
+                           Quote (" set from", Source_Line);
             begin
                Log_Here (Debug or Trace_Options, Quote ("Description", Description) &
                   Quote ("Component", Component) &
                   Quote ("Message", Message));
-               if Option = Line_Package.Element (Cursor).Option then
+               if Option = Element.Option then
                   Put_Line (Message);
                   Put_Line ("****** Halting *******");
                   Ada_Lib.OS.Immediate_Halt (Ada_Lib.OS.No_Error);
@@ -139,7 +165,7 @@ package body Ada_Lib.Help is
 
             Put_Line ("previous definition not found for" &
                Option.Image &
-               Quote (" parameter", Parameter) &
+               Quote (" Parameter", Parameter) &
                Quote (" description", Description) &
                Quote (" component", Component) &
                " from " & Source_Line);
@@ -155,8 +181,52 @@ package body Ada_Lib.Help is
    end Add_Option;
 
    ----------------------------------------------------------------------------
+   procedure Check_Traces is
+   ----------------------------------------------------------------------------
+
+      -------------------------------------------------------------------------
+      procedure Check (
+         Cursor                  : in    Line_Package.Cursor) is
+      -------------------------------------------------------------------------
+
+         Element     : Element_Type renames Line_Package.Element (Cursor);
+         Contents    : Element_Contents_Type renames Element.Contents.all;
+
+      begin
+         Log_Here (Debug,
+            " has trace " & Contents.Has_Trace'img &
+            " Trace_Option_Set " & Contents.Trace_Option_Set'img &
+            " kind " & Element.Option.Kind'img & " " &
+            (case Element.Option.Kind is
+               when Ada_Lib.Options.Nil_Option   => "",
+               when Ada_Lib.Options.Plain =>
+                  Quote (" option", Element.Option.Option),
+               when Ada_Lib.Options.Modified     =>
+                  Quote (" modifier", Element.Option.Modifier) &
+                  Quote (" option", Element.Option.Option)) &
+            Quote (" options", Contents.options) &
+            Quote (" description", Contents.Description));
+
+         if Contents.Has_Trace /= Contents.Trace_Option_Set then
+            raise Failed with "missing trace option for " &
+               Option_Image (Element, True) & " at " & Here;
+         end if;
+      end Check;
+      -------------------------------------------------------------------------
+
+
+   begin
+      Log_In (Debug);
+      if Do_Trace_Checks then
+         Line_Package.Iterate (Lines, Check'access);
+      end if;
+      Log_Out (Debug);
+   end Check_Traces;
+
+   ----------------------------------------------------------------------------
    procedure Create_Option (
       Option                     : in     Character;
+      Trace_Option               : in     Boolean;
       Parameter                  : in     String;
       Description                : in     String;
       Component                  : in     String;
@@ -164,14 +234,18 @@ package body Ada_Lib.Help is
       Source_Line                : in     String := Ada_Lib.Trace.Here) is
    ----------------------------------------------------------------------------
 
-      Flag                       : Ada_Lib.Options.Flags.Flag_Option_Type;
-
+      Flags          : constant Ada_Lib.Options.Flag_Option_Type :=
+                        Options.Initialize (Option, Modifier);
    begin
-      Log_In (Debug, Quote ("parameter", Parameter) &
-         Quote ("description", Description) & Quote ("component", Component) &
-         Quote ("modifier", Modifier) & " from " & Source_Line);
-      Ada_Lib.Options.Flags.Create_Option (Flag, Option, Modifier);
-      Add_Option (Flag, Parameter, Description, Component, Source_Line);
+      Log_In (Debug, Quote ("option", option) &
+         " trace option " & Trace_Option'img &
+         Quote (" parameter", Parameter) &
+         Quote (" description", Description) &
+         Quote (" component", Component) &
+         Quote ( "modifier", Modifier) & " from " & Source_Line);
+
+      Add_Option (Flags, Trace_Option, Parameter, Description, Component,
+         Source_Line);
       Log_Out (Debug);
    end Create_Option;
 
@@ -186,16 +260,19 @@ package body Ada_Lib.Help is
          Cursor                  : in    Line_Package.Cursor) is
       -------------------------------------------------------------------------
 
-         Element                 : Element_Type renames Line_Package.Element (
-                                    Cursor);
-         Line                    : Ada_Lib.Strings.Unlimited.String_Type;
-         Start_Description       : constant Natural := 7 +
-                                    Maximum_Parameter_Length;
-         Start_Component         : constant Natural := Start_Description +
-                                    Maximum_Description_Length + 3;
-
+         Element     : Element_Type renames Line_Package.Element (Cursor);
+         Contents    : Element_Contents_Type renames Element.Contents.all;
+         Line        : Ada_Lib.Strings.Unlimited.String_Type;
+         Start_Description
+                     : constant Natural := 7 + Maximum_Parameter_Length;
+         Start_Component
+                     : constant Natural := Start_Description +
+                        Maximum_Description_Length + 3;
       begin
-         Log_In (Debug, Quote ("option", Element.Option.Option) &
+         Log_In (Debug, -- Quote ("option", Element.Option.Option) &
+            " has trace " & Contents.Has_Trace'img &
+            " Trace_Option_Set " & Contents.Trace_Option_Set'img &
+            " kind " & Element.Option.Kind'img & " " &
             (case Element.Option.Kind is
                when Ada_Lib.Options.Nil_Option   => "",
                when Ada_Lib.Options.Plain =>
@@ -203,14 +280,19 @@ package body Ada_Lib.Help is
                when Ada_Lib.Options.Modified     =>
                   Quote (" modifier", Element.Option.Modifier) &
                   Quote (" option", Element.Option.Option)) &
-            Quote (" parameter", Element.Parameter) &
-            Quote (" description", Element.Description));
+            Quote (" options", Contents.options) &
+            Quote (" description", Contents.Description));
+
+--       if Contents.Has_Trace /= Contents.Trace_Option_Set then
+--          raise Failed with "missing trace option for " &
+--             Element.Option.Image & " at " & Here;
+--       end if;
          Line.Append ("-");
-         Line.Append (Option_Image (Element));
+         Line.Append (Option_Image (Element, False));
          Line.Append (" ");
 
-         if Element.Parameter'length > 0 then
-            Line.Append ("<" & String (Element.Parameter) & ">");
+         if Contents.options'length > 0 then
+            Line.Append ("<" & String (Contents.options) & ">");
          end if;
 
          while Line.Length < Start_Description loop
@@ -218,14 +300,14 @@ package body Ada_Lib.Help is
          end loop;
 
          Line.Append (": ");
-         Line.Append (String (Element.Description));
+         Line.Append (String (Contents.Description));
 
-         if Element.Component'Length > 0 then
+         if Contents.Component'Length > 0 then
             while Line.Length < Start_Component loop
                Line.Append (" ");
             end loop;
 
-            Line.Append ("(" & String (Element.Component) & ")");
+            Line.Append ("(" & String (Contents.Component) & ")");
          end if;
 
          Log_Here (Debug, Ada_Lib.Strings.Unlimited.Quote ("line", Line));
@@ -253,8 +335,8 @@ package body Ada_Lib.Help is
 
    ----------------------------------------------------------------------------
    procedure Find_Duplicate (
-      Option         : in     Ada_Lib.Options.Flags.Flag_Option_Type;
-      Parameter      : in     String;
+      Option         : in     Ada_Lib.Options.Flag_Option_Type;
+      options      : in     String;
       Description    : in     String;
       Component      : in     String;
       From           : in     String) is
@@ -269,22 +351,30 @@ package body Ada_Lib.Help is
                                     Cursor);
 
       begin
-         Log_Here (Debug, Option_Image (Element));
+         Log_Here (Debug, Option_Image (Element, True));
          if Element.Option = Option then
-            Put_Line ("duplicate options for help. Previous " &
-               Option_Image (Element) &
-               Quote (" parameter", Parameter) &
-               Quote (" description", Description) &
-               Quote (" component", Component) &
-               Quote (" from", From));
-            raise Failed with "duplicate options for help. Previous " &
-               Option_Image (Element);
+            declare
+               Message  : constant String :=
+                  "duplicate options for help. Existing " &
+                  Option_Image (Element, True) &
+                  Quote (" options", options) &
+                  Quote (" description", Description) &
+                  Quote (" component", Component) &
+                  Quote (" from", From);
+
+            begin
+               Put_Line (Message);
+
+               raise Failed with Message;
+            end;
          end if;
       end Check;
       -------------------------------------------------------------------------
 
    begin
+      Log_In (Debug);
       Line_Package.Iterate (Lines, Check'access);
+      Log_Out (Debug);
    end Find_Duplicate;
 
    ----------------------------------------------------------------------------
@@ -299,15 +389,21 @@ package body Ada_Lib.Help is
 
    ----------------------------------------------------------------------------
    function Option_Image (
-      Element                    : in     Element_Type
+      Element                    : in     Element_Type;
+      Label                      : in     Boolean
    ) return String is
    ----------------------------------------------------------------------------
 
+      Contents    : Element_Contents_Type renames Element.Contents.all;
+
    begin
-      return Element.Option.Image (False) &
-         Quote (" parameter", Element.Parameter) &
-         Quote (" component", Element.Component) &
-         Quote (" description", Element.Description);
+      return Element.Option.Image (Label, False) & (
+         if Label then
+            Quote (" component", Contents.Component) &
+            Quote (" description", Contents.Description) &
+            Quote (" options", Contents.options)
+         else
+            "");
    end Option_Image;
 
    ----------------------------------------------------------------------------
@@ -319,6 +415,33 @@ package body Ada_Lib.Help is
       Lines.Clear;
    end Reset;
 
+   ----------------------------------------------------------------------------
+   procedure Set_Has_Trace (
+      Option                     : in     Character;
+      Modifier                   : in     Character) is
+   ----------------------------------------------------------------------------
+
+      -------------------------------------------------------------------------
+      procedure Set (
+         Cursor                  : in     Line_Package.Cursor) is
+      -------------------------------------------------------------------------
+
+         Element     : Element_Type renames Line_Package.Element (Cursor);
+         Contents    : Element_Contents_Type renames Element.Contents.all;
+
+      begin
+         if Element.Option = Ada_Lib.Options.Initialize (Option, Modifier) then
+            Log_Here (Debug, Option_Image (Element, True) & " set");
+            Contents.Trace_Option_Set := True;
+         end if;
+      end Set;
+      -------------------------------------------------------------------------
+
+   begin
+      Log_In (Debug, Quote ("option", Option) & Quote (" modifier", Modifier));
+      Line_Package.Iterate (Lines, Set'access);
+      Log_Out (Debug);
+   end Set_Has_Trace;
    ----------------------------------------------------------------------------
 begin
      Debug := Debug or Ada_Lib.Options.Ada_Lib_Options.Debug_All;

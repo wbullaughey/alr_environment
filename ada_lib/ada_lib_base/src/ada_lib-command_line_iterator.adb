@@ -239,7 +239,7 @@ package body Ada_Lib.Command_Line_Iterator is
 
       begin
          Log_In (Debug);
-         Iterator.Option := Ada_Lib.Options.Flags.Null_Flag_Option;
+         Iterator.Option := Ada_Lib.Options.Null_Flag_Option;
          Abstract_Iterator_Type'class (Iterator).Dump_Iterator ("Advance in");
          Iterate;
          Iterator.Dump_Iterator ("Advance out");
@@ -394,7 +394,7 @@ package body Ada_Lib.Command_Line_Iterator is
       overriding
       function Get_Option (
          Iterator          : in   Abstract_Iterator_Type
-      ) return Options.Base_Flag_Option_Type'class is
+      ) return Options.Flag_Option_Type'class is
       -------------------------------------------------------------------
 
       begin
@@ -514,7 +514,7 @@ package body Ada_Lib.Command_Line_Iterator is
          Iterator.Include_Options         := Include_Options;
          Iterator.Include_Non_Options     := Include_Non_Options;
          Iterator.Modifiers               := Ada.Strings.Maps.To_Set (Modifiers);
-         Iterator.Option                  := Ada_Lib.Options.Flags.Null_Flag_Option;
+         Iterator.Option                  := Ada_Lib.Options.Null_Flag_Option;
          Iterator.Option_Prefix           := Option_Prefix;
          Iterator.Parameter_Index         := 1;
          Iterator.State                   := Initial;

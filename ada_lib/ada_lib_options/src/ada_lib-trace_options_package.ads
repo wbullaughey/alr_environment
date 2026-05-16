@@ -8,6 +8,7 @@ package Ada_Lib.Trace_Options_Package is
    Debug_All                     : Boolean := False;
    Debug_Trace                   : Boolean := False;
    Detail                        : Boolean := False;
+   Do_Trace_Checks               : Boolean := True;
    Elaborate                     : Boolean := False;
    Include_Hundreds              : Boolean := False;
    Include_Program               : Boolean := False;
@@ -17,6 +18,7 @@ package Ada_Lib.Trace_Options_Package is
    Test_Condition                : Boolean := False;
    Trace_Conversions             : Boolean := False;
    Trace_Exceptions              : Boolean := False;
+   Trace_Tag_History             : Boolean := False;
    Trace_Levels                  : Boolean := False;
    Trace_Options                 : Boolean := False;
    Trace_Pre_Post_Conditions     : Boolean := False;

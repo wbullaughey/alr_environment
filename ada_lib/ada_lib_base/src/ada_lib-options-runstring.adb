@@ -1,5 +1,5 @@
 with Ada.Characters.Latin_1;
-with Ada_Lib.Options.Flags;
+--with Ada_Lib.Options;
 with Ada_Lib.String_Quote; use Ada_Lib.String_Quote;
 --with Ada_Lib.Strings.Unlimited;use Ada_Lib.Strings.Unlimited;
 with Ada_Lib.Trace; use Ada_Lib.Trace;
@@ -11,7 +11,7 @@ package body Ada_Lib.Options.Runstring is
 
    function Find_Registration (
       Registrations           : in     Registrations_Type;
-      Option                  : in     Base_Flag_Option_Type'class
+      Option                  : in     Flag_Option_Type
    ) return Constant_Reference_Type;
 
    Debug       : Boolean renames Ada_Lib_Options_Runstring.Debug;
@@ -74,7 +74,7 @@ package body Ada_Lib.Options.Runstring is
    -------------------------------------------------------------------
    function Find_Registration (
       Registrations              : in     Registrations_Type;
-      Option                     : in     Base_Flag_Option_Type'class
+      Option                     : in     Flag_Option_Type
    ) return Constant_Reference_Type is
    -------------------------------------------------------------------
 
@@ -118,6 +118,7 @@ package body Ada_Lib.Options.Runstring is
          for Registration of Registrations loop
             Result := Result & Registration.Option.Image (Quote);
          end Loop;
+         Result := Resullt & " ";
          Log_Out (Debug, Result.Coerce);
          return Result.Coerce;
       end All_Options;
@@ -142,7 +143,7 @@ package body Ada_Lib.Options.Runstring is
 
       -------------------------------------------------------------------
       function Has_Parameter (
-         Option                  : in     Base_Flag_Option_Type'class
+         Option                  : in     Flag_Option_Type
       ) return Boolean is
       -------------------------------------------------------------------
 
@@ -161,7 +162,7 @@ package body Ada_Lib.Options.Runstring is
 
       -------------------------------------------------------------------
       function Is_Registered (
-         Option                  : in     Base_Flag_Option_Type'class
+         Option                  : in     Flag_Option_Type
       ) return Boolean is
       -------------------------------------------------------------------
 
@@ -195,7 +196,7 @@ package body Ada_Lib.Options.Runstring is
 
          ------------------------------------------------------------
          procedure Check_Duplicates (
-            Option      :     Base_Flag_Option_Type'class) is
+            Option      :     Flag_Option_Type) is
          ------------------------------------------------------------
 
          begin
@@ -213,7 +214,7 @@ package body Ada_Lib.Options.Runstring is
 
          ------------------------------------------------------------
          procedure Register_Option (
-            Option      :     Base_Flag_Option_Type'class) is
+            Option      :     Flag_Option_Type) is
          ------------------------------------------------------------
 
             Element           : Element_Type;
@@ -222,8 +223,8 @@ package body Ada_Lib.Options.Runstring is
             Log_Here (Debug or Trace_Options, Option.Image & " kind " & Kind'img);
             Element.From.Construct (From);
             Element.Kind := Kind;
-            Element.Option := new Flags.Flag_Option_Type'(
-               Flags.Flag_Option_Type (Option));
+            Element.Option := new Flag_Option_Type'(
+               Flag_Option_Type (Option));
             Registrations.Append (Element);
          end Register_Option;
 
@@ -245,7 +246,7 @@ package body Ada_Lib.Options.Runstring is
 
       -------------------------------------------------------------------
       function Registration (
-         Option                  : in     Base_Flag_Option_Type'class
+         Option                  : in     Flag_Option_Type
       ) return String is
       -------------------------------------------------------------------
 
