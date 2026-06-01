@@ -53,19 +53,17 @@ package body Ada_Lib.Time is
    --------------------------------------------------------------------
    function From_Start (
       Time                 : in   Ada.Calendar.Time;
-      Hundreds            : in   Boolean := False;
+      Hundreds             : in   Boolean := False;
       Show_Days            : in   Boolean := False;
       From                 : in     String := GNAT.Source_Info.Source_Location
    ) return String is
    pragma Unreferenced (From);
    --------------------------------------------------------------------
 
---offset : constant duration := Time - Start_Time;
    begin
       if Time = Ada_Lib.Time.No_Time then
          return "no time";
       else
---put_line ("time " & time'img & " start time " & Start_Time'img & " from start " & offset'img);
          return Image ((
             if Start_Time = Ada_Lib.Time.No_Time then
                0.0

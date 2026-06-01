@@ -2,40 +2,85 @@ with Ada.Characters.Latin_1;
 with Ada.Command_Line;
 with Ada.Task_Identification;
 with Ada.Text_IO; use  Ada.Text_IO;
+--with Ada_Lib.Maps.Element;
 with Ada_Lib.Options;
 with Ada_Lib.OS;
---with Ada_Lib.Substiture_For_Non_Alpha;
+--with Ada_Lib.Specifications;
+--with Ada_Lib.Strings;
 with Ada_Lib.String_Quote; use Ada_Lib.String_Quote;
+--with Ada_Lib.Maps.Table;
 with Ada_Lib.Time;
 with Ask;
 with Hex_IO;
 with Interfaces;
---with System.Address_Image;
-
---pragma Elaborate_All (Ada_Lib.Time);
 
 package body Ada_Lib.Trace is
 
--- use type Ada.Calendar.Time;
    use type Ada.Task_Identification.Task_Id;
    use type System.Address;
 
-   Maximum_Tasks  : constant := 100;
+   Maximum_Tasks           : constant := 100;
+   Undefined_Task_Index    : constant := -1;
+   type Context_Type       is (Decrement, Report_Exception, Increment,
+                              Raise_Exception, Same);
 
-   type Context_Type             is (Decrement, Report_Exception, Increment,
-                                       Raise_Exception, Same);
 
+   type Task_Index_Type    is new Integer range
+                              Undefined_Task_Index .. Maximum_Tasks;
+   subtype Task_Count_Type is Task_Index_Type range 0 .. Maximum_Tasks;
 
-   type Task_Count_Type          is range 0 .. Maximum_Tasks;
-   subtype Task_Index_Type       is Task_Count_Type range 1 .. Maximum_Tasks;
-
-   type Task_Type is record
-      Buffer      : Ada.Strings.Unbounded.Unbounded_String;
-      Level       : Level_Type := Level_Type'first;
-      Task_ID     : Ada.Task_Identification.Task_ID;
+   type Task_Type    is record
+      Buffer         : Ada.Strings.Unbounded.Unbounded_String;
+      Level          : Level_Type := Lowest_Level;
+      Task_ID        : Ada.Task_Identification.Task_ID;
    end record;
 
-   type Tasks_Type               is array (Task_Index_Type) of Task_Type;
+   type Task_Access  is access all Task_Type;
+
+   type Tasks_Type   is array (Task_Index_Type) of aliased Task_Type;
+
+   protected type Protected_State_Type is
+
+      procedure Dump (
+         Address              : in     System.Address;
+         Length: in     Natural;
+         Width : in     Positive;
+         Dump_Width           : in     Dump_Width_Type;
+         Description          : in     String;
+         From  : in     String);
+
+      procedure Find_Task (
+         Result:    out Task_Index_Type);
+
+      procedure Get_Task (
+         Task_Index           : in     Task_Index_Type;
+         Task_Pointer         :    out Task_Access);
+
+      procedure Override_Level (
+         Level    : in     Level_Type);
+
+      procedure Put (
+         Enable: in     Boolean;
+         Context              : in     Context_Type;
+         Text  : in     String;
+         Where : in     String;
+         Who   : in     String);
+
+      procedure Pause (
+         Prompt: in     String;
+         From  : in     String;
+         Trace : in     Boolean);
+
+      procedure Trace_Message_Exception (
+         Fault    : in     Ada.Exceptions.Exception_Occurrence;
+         Message  : in     String;
+         From     : in     String;
+         Who      : in     String);
+
+   private
+      Tasks    : aliased Tasks_Type;
+
+   end Protected_State_Type;
 
    package Locked_Package is
 
@@ -72,54 +117,25 @@ package body Ada_Lib.Trace is
          From        : in     String;
          Who         : in     String);
 
-      protected type Protected_Type is
-
-         procedure Dump (
-            Address              : in     System.Address;
-            Length: in     Natural;
-            Width : in     Positive;
-            Dump_Width           : in     Dump_Width_Type;
-            Description          : in     String;
-            From  : in     String);
-
-         procedure Override_Level (
-            Level    : in     Level_Type);
-
-         procedure Put (
-            Enable: in     Boolean;
-            Context              : in     Context_Type;
-            Text  : in     String;
-            Where : in     String;
-            Who   : in     String);
-
-         procedure Pause (
-            Prompt: in     String;
-            From  : in     String;
-            Trace : in     Boolean);
-
-         procedure Trace_Message_Exception (
-            Fault    : in     Ada.Exceptions.Exception_Occurrence;
-            Message  : in     String;
-            From     : in     String;
-            Who      : in     String);
-
-      private
-         Tasks    : Tasks_Type;
-
-      end Protected_Type;
 
    end Locked_Package;
 
    Check_Address        : System.Address := System.Null_Address;
+   Global_Context_Level : Natural := 0;
    Include_Task         : Boolean renames Ada_Lib.Options.Trace.Include_Task;
    Include_Time         : Boolean renames
                            Ada_Lib.Options.Trace.Include_Time;
    Indent_Amount        : constant := 2; -- spaces per level
    LF    : Character renames Ada.Characters.Latin_1.LF;
+   Output_File          : File_Class_Access :=
+                           new Default_File_Type'(
+                              File  => Ada.Text_IO.Standard_Output);
    Next_Free_Task       : Task_Index_Type := Task_Index_Type'first;
+   Protected_State      : Protected_State_Type;
+   State_Lock_Count     : Natural := 0;
 -- Trace_Preoptions_Complete
 --       : constant Boolean := False;
-   Trace_Tags           : constant Boolean := True;
+-- Trace_Tags           : constant Boolean := True;
 
    procedure Format_Output (    -- only call from within locked object
       Output_File             : in     File_Class_Access;
@@ -129,15 +145,19 @@ package body Ada_Lib.Trace is
       Task_Data: in out Task_Type;
       Indent   : in     Boolean);
 
--- function Get_Start_Time
--- return Ada.Calendar.Time;
-
    procedure Put (
       Enable      : in     Boolean;
       Context     : in     Context_Type;
       Text        : in     String;
       Where       : in     String;
       Who         : in     String);
+
+   procedure Unlocked_Put (
+      Enable   : in     Boolean;
+      Context  : in     Context_Type;
+      Text     : in     String;
+      Where    : in     String;
+      Who      : in     String);
 
    ---------------------------------------------------------------
    function Ask_Pause (
@@ -246,14 +266,13 @@ package body Ada_Lib.Trace is
    --------------------------------------------------------------------
 
    begin
-      T (Debug_Trace, "indent " & Indent'img &
-         " level" & Task_Data.Level'img & Quote (" text", Text));
+      Log_Here_Non_Locking("in indent " & Indent'img &
+         " level" & Task_Data.Level'img & Quote (" text", Text), Debug_Trace);
 
       if Include_Program then
          Ada.Strings.Unbounded.Append (Task_Data.Buffer,
             Ada.Command_Line.Command_Name & "=> ");
       end if;
-
       if Include_Task then
          declare
             Current_Task_ID      : constant Ada.Task_Identification.Task_ID :=
@@ -275,14 +294,14 @@ package body Ada_Lib.Trace is
          Where & " " & Who & " (" &
          Ada_Lib.Strings.Trim (Task_Data.Level'img) & ") " & Text);
 
-      T(Debug_Trace, "length" &
-         Ada.Strings.Unbounded.Length (Task_Data.Buffer)'img);
+      Log_Here_Non_Locking("length" &
+         Ada.Strings.Unbounded.Length (Task_Data.Buffer)'img, Debug_Trace);
       if Ada.Strings.Unbounded.Length (Task_Data.Buffer) > 0 then
          declare
             Has_LF   : constant Boolean :=
                         Ada.Strings.Unbounded.To_String (Task_Data.Buffer)(1) = LF;
          begin
-            T (Debug_Trace, "has lf " & Has_LF'img);
+            Log_Here_Non_Locking("has lf " & Has_LF'img, Debug_Trace);
             if not Has_LF then
                Ada.Strings.Unbounded.Append (Task_Data.Buffer, LF);
             end if;
@@ -293,9 +312,7 @@ package body Ada_Lib.Trace is
                                        Task_Data.Level * Indent_Amount)) := (
                                           others => ' ');
                begin
---ada.Text_io.put_line (here & Quote (" buffer", Task_Data.Buffer));
                   Ada.Strings.Unbounded.Insert (Task_Data.Buffer, 1, Padding);
---ada.Text_io.put_line (here & Quote (" buffer", Task_Data.Buffer) & Quote (" padding", padding));
 
                exception
                   when Fault: others =>
@@ -307,8 +324,7 @@ package body Ada_Lib.Trace is
                end;
             end if;
 
-            T (Debug_Trace, Quote ("buffer", Task_Data.Buffer));
---ada.Text_io.put_line (here & " indent " & Indent'img & " Indent_Trace " & Indent_Trace'img & " level " & Task_Data.Level'img & Quote (" buffer", Task_Data.Buffer));
+            Log_Here_Non_Locking(Quote ("buffer", Task_Data.Buffer), Debug_Trace);
             Output_File.Output (Ada.Strings.Unbounded.To_String (Task_Data.Buffer));
             Output_File.Flush;
             Ada.Strings.Unbounded.Set_Unbounded_String (Task_Data.Buffer, "");
@@ -338,6 +354,7 @@ package body Ada_Lib.Trace is
 
          end;
       end if;
+      Log_Here_Non_Locking("out", Debug_Trace);
 
    exception
 
@@ -348,6 +365,17 @@ package body Ada_Lib.Trace is
          Ada_Lib.OS.Immediate_Halt (Ada_Lib.OS.Exception_Exit);
 
    end Format_Output;
+
+   -------------------------------------------------------------------
+   function Get_Level (
+      From     : in     String :=  GNAT.Source_Info.Source_Location
+   ) return Level_Type is
+   -------------------------------------------------------------------
+
+   begin
+      Log_Here_Non_Locking("return from " & From & " Global_Context_Level " & Global_Context_Level'img, Debug_Trace);
+      return Global_Context_Level;
+   end Get_Level;
 
    -------------------------------------------------------------------
    procedure Log (
@@ -459,6 +487,8 @@ package body Ada_Lib.Trace is
    -------------------------------------------------------------------
 
    begin
+      Log_Here_Non_Locking ("enable " & enable'img & " message " & message,
+         Debug_Trace);
       Put (
          Enable      => Enable,
          Context     => Increment,
@@ -498,10 +528,10 @@ package body Ada_Lib.Trace is
    -------------------------------------------------------------------
 
    begin
-      Locked_Package.Put (
+      Put (
          Enable      => Enable,
          Context     => Decrement,
-         Message     => "out " & Message, -- & LF,
+         Text        => "out " & Message, -- & LF,
          Where       => Where,
          Who         => Who);
    end Log_Out;
@@ -573,10 +603,11 @@ package body Ada_Lib.Trace is
    -------------------------------------------------------------------
 
    begin
+--Log_Here_Non_Locking (here);
       Put (
          Enable      => True,
          Context     => Same,
-         Text        => Why & " not implemented" & LF,
+         Text        => Why & " not implemented from " & Here & LF,
          Where       => Here,
          Who         => Who);
       Pause_On_Flag ("not implemented called from " & Here);
@@ -591,9 +622,9 @@ package body Ada_Lib.Trace is
    --------------------------------------------------------------------
 
    begin
---ada.Text_io.put_line (here);
+--Log_Here_Non_Locking("in");
       Put (File.File, Data);
---ada.Text_io.put_line (here);
+--Log_Here_Non_Locking("out");
    end Output;
 
    -------------------------------------------------------------------
@@ -602,8 +633,31 @@ package body Ada_Lib.Trace is
    -------------------------------------------------------------------
 
    begin
+--Log_Here_Non_Locking;
       Locked_Package.Override_Level (Level);
    end Override_Level;
+
+   -------------------------------------------------------------------
+   procedure Log_Here_Non_Locking(
+      Message     : in     String := "";
+      Enable      : in     Boolean := True;
+      Who         : in     String := GNAT.Source_Info.Enclosing_Entity;
+      From        : in     String :=  GNAT.Source_Info.Source_Location) is
+   -------------------------------------------------------------------
+
+   begin
+--Put_Line ("here " & here & " from " & from & " enable " & Enable'img);
+      if enable then
+         Put_Line ("non blocking " &
+            Ada.Task_Identification.Image (
+               Ada.Task_Identification.Current_Task) & ": " &
+            From & " from package " & Who & (
+               if Message'length > 0 then
+                  " message " & Message
+               else
+                  ""));
+      end if;
+   end Log_Here_Non_Locking;
 
    -------------------------------------------------------------------
    function Pad (
@@ -676,13 +730,20 @@ package body Ada_Lib.Trace is
    --------------------------------------------------------------------
 
    begin
---ada.Text_io.put_line (here);
-      T (Debug_Trace, "enable " & Enable'img &
+      Log_Here_Non_Locking("in enable " & Enable'img &
          Quote (" text", Text) & Quote (" where", Where) &
-         Quote (" who", Who));
---ada.Text_io.put_line (here);
-      Locked_Package.Put (Enable, Context, Text, Where, Who);
---ada.Text_io.put_line (here);
+         Quote (" who", Who) &
+         " lock count " & State_Lock_Count'img,
+         Debug_Trace);
+
+      if Enable then
+         if State_Lock_Count > 0 then
+            Unlocked_Put (Enable, Context, Text, Where, Who);
+         else
+            Locked_Package.Put (Enable, Context, Text, Where, Who);
+         end if;
+      end if;
+      Log_Here_Non_Locking("out", Debug_Trace);
    end Put;
 
    ---------------------------------------------------------------
@@ -692,7 +753,9 @@ package body Ada_Lib.Trace is
    ---------------------------------------------------------------
 
    begin
+--Log_Here_Non_Locking;
       Locked_Package.Replace_Output_File (New_File, Previous_File);
+--Log_Here_Non_Locking;
    end Replace_Output_File;
 
    --------------------------------------------------------------------
@@ -714,14 +777,6 @@ package body Ada_Lib.Trace is
       end;
    end Set_Check_Address;
 
--- -------------------------------------------------------------------
--- procedure Set_Options_Completed is
--- -------------------------------------------------------------------
---
--- begin
---    Options_Completed := True;
--- end Set_Options_Completed;
-
    --------------------------------------------------------------------
    procedure T (
       Enable      : in     Boolean := True;
@@ -731,12 +786,18 @@ package body Ada_Lib.Trace is
    --------------------------------------------------------------------
 
    begin
---ada.Text_io.put_line (here & " enable " & enable'img);
+--Log_Here_Non_Locking("in enable " & enable'img & " what " & What & " who " & Who  & " where " & Where);
       if Enable then
-         Put_Line ("------> " & Where & " " & Who & " " & Current_Task &
+         Put_Line ("------> (" & Get_Level'img & ")" & Where & " " &
+            Who & " " & (
+               if Ada_Lib.Is_Elaborated then
+                  Current_Task
+               else
+                  "current task not elaborated") &
             (if What'length = 0 then "" else " " & What) &
             " <-------");
       end if;
+--Log_Here_Non_Locking("out");
    end T;
 
    --------------------------------------------------------------------
@@ -863,7 +924,7 @@ package body Ada_Lib.Trace is
       Put (
          Enable      => Debug,
          Context     => Same,
-         Text        => Message,
+         Text        => "Trace_Return " & Value'img & " message " &Message,
          Where       => Where,
          Who         => Who);
       return Value;
@@ -871,11 +932,6 @@ package body Ada_Lib.Trace is
 
    -------------------------------------------------------------------
    package body Locked_Package is
-
-      Output_File : File_Class_Access :=
-                                    new Default_File_Type'(
-                                       File  => Ada.Text_IO.Standard_Output);
-      State       : Protected_Type;
 
       ---------------------------------------------------------------
       procedure Dump (
@@ -887,9 +943,8 @@ package body Ada_Lib.Trace is
          From     : in     String) is
       ---------------------------------------------------------------
 
-
       begin
-         State.Dump (Address, Length, Width, Dump_Width,
+         Protected_State.Dump (Address, Length, Width, Dump_Width,
             Description, From);
       end Dump;
 
@@ -899,7 +954,7 @@ package body Ada_Lib.Trace is
       -------------------------------------------------------------------
 
       begin
-         State.Override_Level (Level);
+         Protected_State.Override_Level (Level);
       end Override_Level;
 
       ---------------------------------------------------------------
@@ -910,7 +965,7 @@ package body Ada_Lib.Trace is
       ---------------------------------------------------------------
 
       begin
-         State.Pause (Prompt, From, Trace);
+         Protected_State.Pause (Prompt, From, Trace);
       end Pause;
 
       ---------------------------------------------------------------
@@ -923,22 +978,30 @@ package body Ada_Lib.Trace is
       ---------------------------------------------------------------
 
       begin
---ada.Text_io.put_line (here);
-         State.Put (Enable, Context, Message, Where, Who);
---ada.Text_io.put_line (here);
+         Log_Here_Non_Locking("enable " & Enable'img &
+            " lock count " & State_Lock_Count'img &
+            " message " & Message, Debug_Trace);
+         if Enable then
+            if State_Lock_Count > 0 then
+               Put_Line (Message);
+            else
+               Protected_State.Put (Enable, Context, Message, Where, Who);
+            end if;
+         end if;
+         Log_Here_Non_Locking("out", Debug_Trace);
       end Put;
 
       ---------------------------------------------------------------
       procedure Replace_Output_File (
-         New_File    : in     File_Class_Access;
-         Previous_File              :    out File_Class_Access) is
+         New_File       : in     File_Class_Access;
+         Previous_File  :    out File_Class_Access) is
       ---------------------------------------------------------------
 
       begin
---ada.Text_io.put_line (here & " new file " & Image (New_File.all'address));
+--Log_Here_Non_Locking (here & " new file " & Ada_Lib.Strings.Image (New_File.all'address));
          Previous_File := Output_File;
          Output_File := New_File;
---ada.Text_io.put_line (here & " Previous_File " & Image (Previous_File.all'address));
+--Log_Here_Non_Locking (here & " Previous_File " & Ada_Lib.Strings.Image (Previous_File.all'address));
       end Replace_Output_File;
 
       ------------------------------------------------------------------
@@ -951,259 +1014,8 @@ package body Ada_Lib.Trace is
 
       begin
          Ada_Lib.Exception_Occured := True;
-         State.Trace_Message_Exception (Fault, Message, From, Who);
+         Protected_State.Trace_Message_Exception (Fault, Message, From, Who);
       end Trace_Message_Exception;
-
-      ---------------------------------------------------------------
-      protected body Protected_Type is
-
-         ---------------------------------------------------------------
-         procedure Dump (
-            Address  : in     System.Address;
-            Length   : in     Natural;          -- in bytes
-            Width    : in     Positive;         -- line to print
-            Dump_Width              : in     Dump_Width_Type;  -- format
-            Description             : in     String;
-            From     : in     String) is
-         ---------------------------------------------------------------
-
-            Routine  : constant array (Dump_Width_Type) of
-                                          access procedure (
-                                          Source  : in     System.Address;
-                                          Size    : in     Positive;        -- size in bits
-                                          Width   : in     Positive;
-                                          Message : in     String) := (
-                  Hex_IO.Dump_8'access,
-                  Hex_IO.Dump_16'access,
-                  Hex_IO.Dump_32'access,
-                  Hex_IO.Dump_64'access);
-
-         begin
---T(true, "in");
-            if Length = 0 then
-               Put_Line ("dump for " & Description &
-                  " for 0 bytes called from " & From);
-            else
-               Routine (Dump_Width) (Address, Length * 8, Width,
-                  "dump for " & Description & " called from " & From);
-            end if;
---T(true, "out");
-         end Dump;
-
-         ---------------------------------------------------------------
-         procedure Find_Task (
-            Result:    out Task_Index_Type) is
-         ---------------------------------------------------------------
-
-            Current_Task_ID            : constant Ada.Task_Identification.Task_ID :=
-                                          Ada.Task_Identification.Current_Task;
-            Free_Task_Index            : Task_Count_Type := 0;
-
-         begin
-            for Index in Tasks'first .. Next_Free_Task - 1 loop
-               declare
-                  Item  : Task_Type renames Tasks (Index);
-
-               begin
-                  if Item.Task_ID = Current_Task_ID then
-                     T(Debug_Trace, "task" & Index'img);
-                     Result := Index;
-                     return;
-                  elsif Free_Task_Index = 0 and then
-                        Ada.Task_Identification.Is_Terminated (
-                           Item.Task_ID) then
-                     Free_Task_Index := Index;
-                     T (Debug_Trace, "free index " & Free_Task_Index'img);
-                  end if;
-               end;
-            end loop;
-
-            if Free_Task_Index /= 0 then
-               Result := Free_Task_Index;
-               T(Debug_Trace, "use free task index" & Result'img);
-            else
-               declare
-                  Task_Index  : constant Task_Index_Type := Next_Free_Task;
-
-               begin
-                  Next_Free_Task := Next_Free_Task + 1;
-                  Result := Task_Index;
-                  T(Debug_Trace, "new task index" & Result'img);
-               end;
-            end if;
-
-            Tasks (Result).Task_ID := Current_Task_ID;
-         end Find_Task;
-
-         -------------------------------------------------------------------
-         procedure Override_Level (
-            Level       : in     Level_Type) is
-         -------------------------------------------------------------------
-
-            Task_Index              : Task_Index_Type;
-
-         begin
-            Find_Task (Task_Index);
-
-            declare
-               Task_Entry           : Task_Type renames
-                                       Tasks (Task_Index);
-
-            begin
-               Task_Entry.Level := Level;
-            end;
-         end Override_Level;
-
-         ------------------------------------------------------------------
-         procedure Trace_Message_Exception (
-            Fault       : in     Ada.Exceptions.Exception_Occurrence;
-            Message     : in     String;
-            From        : in     String;
-            Who         : in     String) is
-         -------------------------------------------------------------------
-
-            Task_Index              : Task_Index_Type;
-
-         begin
-            Ada_Lib.Exception_Occured := True;
-            Find_Task (Task_Index);
-
-            declare
-               Task_Entry           : Task_Type renames
-                                       Tasks (Task_Index);
-
-            begin
-               Output_File.Output ("----------- exception --------------"& LF);
-               Output_File.Output ("Exception name:" &
-                  Ada.Exceptions.Exception_Name (Fault)& LF);
-               Output_File.Output ("Exception message:" &
-                  Ada.Exceptions.Exception_Message (Fault)& LF);
-               if Message'length > 0 then
-                  Output_File.Output ("handler message:" & Quote (Message) & LF);
-               end if;
-               Format_Output (Output_File, "caught at " & From &
-                  " who " & Who, "", "",
-                  Task_Entry, True);
-               Output_File.Output ("------------------------------------"& LF);
-            end;
-
-         exception
-
-            when Fault: others =>
-               Output_File.Output  (Ada.Exceptions.Exception_Name (Fault) &
-                  "Exception message:" & Ada.Exceptions.Exception_Message (Fault));
-               Ada_Lib.OS.Immediate_Halt(Ada_Lib.OS.Exception_Exit);
-         end Trace_Message_Exception;
-
-         ------------------------------------------------------------
-         procedure Pause (
-            Prompt   : in     String;
-            From     : in     String;
-            Trace    : in     Boolean) is
-         pragma Unreferenced (Trace);
-         ------------------------------------------------------------
-
-            Task_Index              : Task_Index_Type;
-
-         begin
-            Find_Task (Task_Index);
-
-            declare
-               Task_Entry           : Task_Type renames
-                                       Tasks (Task_Index);
-            begin
-               Format_Output (Output_File, Prompt & " pause called from " &
-                  From, Here, Who, Task_Entry, False);
-
-               declare
-                  Answer: constant Character :=
-                                          Ask.Ask_Character (Prompt);
-                  pragma Unreferenced (Answer);
-               begin
-                  New_Line;
-               end;
-            end;
-         end Pause;
-
-         ------------------------------------------------------------
-         procedure Put (
-            Enable   : in     Boolean;
-            Context  : in     Context_Type;
-            Text     : in     String;
-            Where    : in     String;
-            Who      : in     String) is
-         ------------------------------------------------------------
-
-            Task_Index              : Task_Index_Type;
-
-         begin
---ada.Text_io.put_line (here & " enable " & Enable'img & " Trace_Preoptions_Complete " & Trace_Preoptions_Complete'img & " Options_Completed " & Options_Completed'img) ;
-            Find_Task (Task_Index);
---ada.Text_io.put_line (here);
-
-            declare
-               Task_Entry           : Task_Type renames
-                                       Tasks (Task_Index);
-            begin
---ada.Text_io.put_line (here);
-               T (Debug_Trace, "in enable " & Enable'img &
---                " Options_Completed " & Options_Completed'img &
-                  " context " & Context'img &
-                  " level" & Task_Entry.Level'img & Quote (" text", Text) &
-                  " where " & Where & " who " & Who);
---ada.Text_io.put_line (here & " emab;e " & enable'img & " Options_Completed " & Options_Completed'img);
-               if    Enable then
---                   (Trace_Preoptions_Complete and not Options_Completed) then
-                  case Context is
-
-                     when Report_Exception =>
-                        Ada_Lib.Exception_Occured := True;
-                        Output_File.Output (
-                           "-------------------- exception ----------------" & LF);
-
-                     when Increment =>
-                        Task_Entry.Level := Task_Entry.Level + 1;
---ada.Text_io.put_line (here & " level " & Task_Entry.Level'img);
-
-                     when others =>
-                        null;
-
-                  end case;
-
---ada.Text_io.put_line (here & " emab;e " & enable'img);
-                  Format_Output (Output_File, Text, Where, Who, Task_Entry, True);
---ada.Text_io.put_line (here & " emab;e " & enable'img);
-                  case Context is
-
-                     when Decrement =>
-                        null;
-
-                     when Report_Exception =>
-                        Output_File.Output (
-                           "-----------------------------------------------" & LF);
-
-                     when others =>
-                        return;
-
-                  end case;
-
-                  if Task_Entry.Level = 0 then
-                     Output_File.Output ("missing log in from " &
-                        Where & ":" & Who & LF);
-                  else
-                     Task_Entry.Level := Task_Entry.Level - 1;
---ada.Text_io.put_line (here & " level " & Task_Entry.Level'img);
-                  end if;
-               end if;
---ada.Text_io.put_line (here);
-               T (Debug_Trace, "out enable " & Enable'img & " context " & Context'img &
-                  " level" & Task_Entry.Level'img & Quote (" text", Text));
---ada.Text_io.put_line (here);
-            end;
---ada.Text_io.put_line (here);
-         end Put;
-
-      end Protected_Type;
 
    end Locked_Package;
 
@@ -1223,28 +1035,453 @@ package body Ada_Lib.Trace is
       end Generic_Tag_History;
 
    end Tag_Package;
+
+   ---------------------------------------------------------------
+   protected body Protected_State_Type is
+
+      ---------------------------------------------------------------
+      procedure Dump (
+         Address  : in     System.Address;
+         Length   : in     Natural;          -- in bytes
+         Width    : in     Positive;         -- line to print
+         Dump_Width              : in     Dump_Width_Type;  -- format
+         Description             : in     String;
+         From     : in     String) is
+      ---------------------------------------------------------------
+
+         Routine  : constant array (Dump_Width_Type) of
+                                       access procedure (
+                                       Source  : in     System.Address;
+                                       Size    : in     Positive;        -- size in bits
+                                       Width   : in     Positive;
+                                       Message : in     String) := (
+               Hex_IO.Dump_8'access,
+               Hex_IO.Dump_16'access,
+               Hex_IO.Dump_32'access,
+               Hex_IO.Dump_64'access);
+
+      begin
+         Log_Here_Non_Locking("in", Debug_Trace);
+         State_Lock_Count := State_Lock_Count + 1;
+--            Lock_State.Lock;
+         if Length = 0 then
+            Put_Line ("dump for " & Description &
+               " for 0 bytes called from " & From);
+         else
+            Routine (Dump_Width) (Address, Length * 8, Width,
+               "dump for " & Description & " called from " & From);
+         end if;
+--            Lock_State.Unlock;
+         State_Lock_Count := State_Lock_Count - 1;
+         Log_Here_Non_Locking("out", Debug_Trace);
+      end Dump;
+
+      ---------------------------------------------------------------
+      procedure Find_Task (
+         Result:    out Task_Index_Type) is
+      ---------------------------------------------------------------
+
+         Current_Task_ID            : constant Ada.Task_Identification.Task_ID :=
+                                       Ada.Task_Identification.Current_Task;
+         Free_Task_Index            : Task_Count_Type := 0;
+
+      begin
+         Log_Here_Non_Locking("in current task id " &
+            Current_Task_ID'img, Debug_Trace);
+         State_Lock_Count := State_Lock_Count + 1;
+--            Lock_State.Lock;
+--Log_Here_Non_Locking;
+         for Index in Tasks'first .. Next_Free_Task - 1 loop
+            declare
+               Item  : Task_Type renames Tasks (Index);
+
+            begin
+               if Item.Task_ID = Current_Task_ID then
+                  Result := Index;
+--                     Lock_State.Unlock;
+                  State_Lock_Count := State_Lock_Count - 1;
+                  Log_Here_Non_Locking("out task index result " &
+                     Result'img, Debug_Trace);
+                  return;
+               elsif Free_Task_Index = 0 and then
+                     Ada.Task_Identification.Is_Terminated (
+                        Item.Task_ID) then
+                  Free_Task_Index := Index;
+                  Log_Here_Non_Locking("free index " & Free_Task_Index'img, Debug_Trace);
+               end if;
+            end;
+         end loop;
+
+         if Free_Task_Index /= 0 then
+            Result := Free_Task_Index;
+            Log_Here_Non_Locking("use free task index" & Result'img, Debug_Trace);
+         else
+            declare
+               Task_Index  : constant Task_Index_Type := Next_Free_Task;
+
+            begin
+               Next_Free_Task := Next_Free_Task + 1;
+               Result := Task_Index;
+               Log_Here_Non_Locking("new task index" & Result'img, Debug_Trace);
+            end;
+         end if;
+
+         Tasks (Result).Task_ID := Current_Task_ID;
+--Log_Here_Non_Locking;
+--            Lock_State.Unlock;
+         State_Lock_Count := State_Lock_Count - 1;
+         Log_Here_Non_Locking("out result " & Result'img, Debug_Trace);
+      end Find_Task;
+
+      -------------------------------------------------------------------
+      procedure Get_Task (
+         Task_Index           : in     Task_Index_Type;
+         Task_Pointer         :    out Task_Access) is
+      -------------------------------------------------------------------
+
+      begin
+         Task_Pointer := Tasks (Task_Index)'unchecked_access;
+      end Get_Task;
+
+      -------------------------------------------------------------------
+      procedure Override_Level (
+         Level       : in     Level_Type) is
+      -------------------------------------------------------------------
+
+         Task_Index              : Task_Index_Type;
+
+      begin
+         Log_Here_Non_Locking("in", Debug_Trace);
+         State_Lock_Count := State_Lock_Count + 1;
+--            Lock_State.Lock;
+--          T(Debug_Trace, "in level " & Level'img);
+         Find_Task (Task_Index);
+
+         declare
+            Task_Entry           : Task_Type renames
+                                    Tasks (Task_Index);
+
+         begin
+            Task_Entry.Level := Level;
+         end;
+--            Lock_State.Unlock;
+         State_Lock_Count := State_Lock_Count - 1;
+         Log_Here_Non_Locking("out", Debug_Trace);
+--          T(Debug_Trace, "Out");
+      end Override_Level;
+
+      ------------------------------------------------------------
+      procedure Pause (
+         Prompt   : in     String;
+         From     : in     String;
+         Trace    : in     Boolean) is
+      pragma Unreferenced (Trace);
+      ------------------------------------------------------------
+
+         Task_Index              : Task_Index_Type;
+
+      begin
+         Log_Here_Non_Locking("in", Debug_Trace);
+--            Lock_State.Lock;
+         State_Lock_Count := State_Lock_Count + 1;
+         Find_Task (Task_Index);
+
+         declare
+            Task_Entry           : Task_Type renames
+                                    Tasks (Task_Index);
+         begin
+            Format_Output (Output_File, Prompt & " pause called from " &
+               From, Here, Who, Task_Entry, False);
+
+            declare
+               Answer: constant Character :=
+                                       Ask.Ask_Character (Prompt);
+               pragma Unreferenced (Answer);
+            begin
+               New_Line;
+            end;
+         end;
+--            Lock_State.Unlock;
+         State_Lock_Count := State_Lock_Count - 1;
+         Log_Here_Non_Locking("out", Debug_Trace);
+      end Pause;
+
+      ------------------------------------------------------------
+      procedure Put (
+         Enable   : in     Boolean;
+         Context  : in     Context_Type;
+         Text     : in     String;
+         Where    : in     String;
+         Who      : in     String) is
+      ------------------------------------------------------------
+
+         Task_Index              : Task_Index_Type;
+
+      begin
+         Log_Here_Non_Locking("in", Debug_Trace);
+         State_Lock_Count := State_Lock_Count + 1;
+--            Lock_State.Lock;
+--Log_Here_Non_Locking;
+         Find_Task (Task_Index);
+--Log_Here_Non_Locking;
+         declare
+            Task_Entry           : Task_Type renames
+                                    Tasks (Task_Index);
+         begin
+--               T (Debug_Trace, "in enable " & Enable'img &
+----                " Options_Completed " & Options_Completed'img &
+--                  " context " & Context'img &
+--                  " level" & Task_Entry.Level'img & Quote (" text", Text) &
+--                  " where " & Where & " who " & Who);
+            if    Enable then
+--                   (Trace_Preoptions_Complete and not Options_Completed) then
+               case Context is
+
+                  when Report_Exception =>
+                     Ada_Lib.Exception_Occured := True;
+--Log_Here_Non_Locking;
+                     Output_File.Output (
+                        "-------------------- exception ----------------" & LF);
+
+                  when Increment =>
+                     Task_Entry.Level := Task_Entry.Level + 1;
+                     Global_Context_Level := Task_Entry.Level;
+
+                  when others =>
+                     null;
+--Log_Here_Non_Locking;
+
+               end case;
+
+--Log_Here_Non_Locking;
+               Format_Output (Output_File, Text, Where, Who, Task_Entry, True);
+--Log_Here_Non_Locking;
+               case Context is
+
+                  when Decrement =>
+                     Global_Context_Level := Task_Entry.Level;
+--Log_Here_Non_Locking;
+
+                  when Report_Exception =>
+                     Output_File.Output (
+                        "-----------------------------------------------" & LF);
+
+                  when others =>
+--                      T (Debug_Trace, "out enable " & Enable'img &
+--                         " context " & Context'img &
+--                         " level" & Task_Entry.Level'img & Quote (" text", Text));
+--                        Lock_State.Unlock;
+                     State_Lock_Count := State_Lock_Count + 1;
+                     return;
+
+               end case;
+
+--Log_Here_Non_Locking;
+               if Task_Entry.Level = 0 then
+                  Output_File.Output ("missing log in from " &
+                     Where & ":" & Who & LF);
+               else
+                  Task_Entry.Level := Task_Entry.Level - 1;
+               end if;
+            end if;
+--             T (Debug_Trace, "out enable " & Enable'img & " context " & Context'img &
+--                " level" & Task_Entry.Level'img & Quote (" text", Text));
+         end;
+--            Lock_State.Unlock;
+         State_Lock_Count := State_Lock_Count - 1;
+         Log_Here_Non_Locking("out", Debug_Trace);
+      end Put;
+
+      ------------------------------------------------------------------
+      procedure Trace_Message_Exception (
+         Fault       : in     Ada.Exceptions.Exception_Occurrence;
+         Message     : in     String;
+         From        : in     String;
+         Who         : in     String) is
+      -------------------------------------------------------------------
+
+         Task_Index              : Task_Index_Type;
+
+      begin
+         State_Lock_Count := State_Lock_Count + 1;
+--Log_Here_Non_Locking("in");
+--            Lock_State.Lock;
+         Ada_Lib.Exception_Occured := True;
+         Find_Task (Task_Index);
+
+         declare
+            Task_Entry           : Task_Type renames
+                                    Tasks (Task_Index);
+
+         begin
+            Output_File.Output ("----------- exception --------------"& LF);
+            Output_File.Output ("Exception name:" &
+               Ada.Exceptions.Exception_Name (Fault)& LF);
+            Output_File.Output ("Exception message:" &
+               Ada.Exceptions.Exception_Message (Fault)& LF);
+            if Message'length > 0 then
+               Output_File.Output ("handler message:" & Quote (Message) & LF);
+            end if;
+            Format_Output (Output_File, "caught at " & From &
+               " who " & Who, "", "",
+               Task_Entry, True);
+            Output_File.Output ("------------------------------------"& LF);
+         end;
+         State_Lock_Count := State_Lock_Count - 1;
+--            Lock_State.Unlock;
+--Log_Here_Non_Locking("out");
+
+      exception
+
+         when Fault: others =>
+            Output_File.Output  (Ada.Exceptions.Exception_Name (Fault) &
+               "Exception message:" & Ada.Exceptions.Exception_Message (Fault));
+            State_Lock_Count := State_Lock_Count - 1;
+            Ada_Lib.OS.Immediate_Halt(Ada_Lib.OS.Exception_Exit);
+      end Trace_Message_Exception;
+
+   end Protected_State_Type;
+
+   ---------------------------------------------------------------
+   function Test (
+      Which                : in   String;
+      Priority             : in   Priority_Type := Priority_Type'first;
+      From                 : in   String := Here
+   ) return Boolean is
+   ---------------------------------------------------------------
+
+      Result   : constant Boolean := Integer (Priority_Type'pos (Priority)) = Trace_Value;
+
+   begin
+      Log_Here_Non_Locking ("from " & From & " which " & Which &
+         " priority " & Priority'img &
+         " result " & (
+            if Result then
+               "true"
+            else
+               "false"),
+         Debug_Trace);
+      return Result;
+   end Test;
+
+   ---------------------------------------------------------------
+   procedure Set (
+      Which                : in   String;
+      Priority             : in   Priority_Type := Priority_Type'first) is
+   pragma Unreferenced (Which, Priority);
    ---------------------------------------------------------------
 
    begin
+not_implemented;
+   end Set;
+
+   ---------------------------------------------------------------
+   procedure Set (
+      Options              : in   String) is
+   pragma Unreferenced (Options);
+   ---------------------------------------------------------------
+
+   begin
+not_implemented;
+   end Set;
+
+   procedure Unlocked_Put (
+      Enable   : in     Boolean;
+      Context  : in     Context_Type;
+      Text     : in     String;
+      Where    : in     String;
+      Who      : in     String) is
+   ------------------------------------------------------------
+
+      Task_Index              : Task_Index_Type;
+
+   begin
+      Log_Here_Non_Locking("in enable " & Enable'img &
+         " context " & Context'img &
+         " text '" & Text &
+         " ' where " & Where &
+         " who " & Who, Debug_Trace);
+      if Enable then
+         State_Lock_Count := State_Lock_Count + 1;
+         Protected_State.Find_Task (Task_Index);
+         declare
+            Task_Entry           : Task_Access := Null;
+
+         begin
+            Protected_State.Get_Task (Task_Index, Task_Entry);
+            case Context is
+
+               when Report_Exception =>
+                  Ada_Lib.Exception_Occured := True;
+                  Output_File.Output (
+                     "-------------------- exception ----------------" & LF);
+
+               when Increment =>
+                  Task_Entry.Level := Task_Entry.Level + 1;
+                  Global_Context_Level := Task_Entry.Level;
+
+               when others =>
+                  null;
+
+            end case;
+
+            Format_Output (Output_File, Text, Where, Who, Task_Entry.all, True);
+            case Context is
+
+               when Decrement =>
+                  Global_Context_Level := Task_Entry.Level;
+
+               when Report_Exception =>
+                  Output_File.Output (
+                     "-----------------------------------------------" & LF);
+
+               when others =>
+                  State_Lock_Count := State_Lock_Count + 1;
+                  return;
+
+            end case;
+
+            if Task_Entry.Level = 0 then
+               Output_File.Output ("missing log in from " &
+                  Where & ":" & Who & LF);
+            else
+               Task_Entry.Level := Task_Entry.Level - 1;
+            end if;
+         end;
+         State_Lock_Count := State_Lock_Count - 1;
+      end if;
+      Log_Here_Non_Locking("out", Debug_Trace);
+   end Unlocked_Put;
+
+   begin
+--Log_Here_Non_Locking (here);
+--Debug_All := True;
 --Debug_Trace := True;
+-- := True;
 --Elaborate := True;
 --Trace_Conversions := True;
 --Trace_Options := True;
 --Trace_Pre_Post_False := True;
 --Trace_Set_Up_Tear_Down := True;
 --Trace_Tests := True;
-   Include_Hundreds := True;
+-- Include_Hundreds := True;
 -- Include_Program := True;
 -- Include_Task := True;
 -- Include_Time := True;
-   Indent_Trace := True;
-   Log_Here (Debug_Trace or Elaborate or Trace_Options or Trace_Tests,
-      "start time " & Time.Image (Time.Get_Start_Time) &
-      " debug trace " & Debug_Trace'img &
-      " elaborate " & Elaborate'img &
-      " trace options " & Trace_Options'img &
-      " trace tests " & Trace_Tests'img);
+-- Indent_Trace := True;
+--Log_Here_Non_Locking("elaborate Debug_Trace " & Debug_Trace'img & " Elaborate " & Elaborate'img & " Trace_Tests " & Trace_Tests'img);
+   Log_Here_Non_Locking("elaborate " &
+      " Debug_Trace " & Debug_Trace'img &
+      " Elaborate " & Elaborate'img &
+      " Trace_Tests " & Trace_Tests'img,
+      Debug_Trace or Elaborate or Trace_Tests);
+--    "start time " & Time.Image (Time.Get_Start_Time) &
+--    " debug trace " & Debug_Trace'img &
+--    " elaborate " & Elaborate'img &
+--    " trace options " & Trace_Options'img &
+--    " trace tests " & Trace_Tests'img);
 --put_line ("clock" & Ada.Calendar.Clock'img);
 --Put_Line("Formatted: " &
 --    Ada.Calendar.Formatting.Image(Start_Time));
+--Log_Here_Non_Locking;
 end Ada_Lib.Trace;

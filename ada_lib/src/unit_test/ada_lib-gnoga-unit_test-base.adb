@@ -246,6 +246,7 @@ exception
    procedure Start_Test (
       Handler                    : in     Standard.Gnoga.Application.Multi_Connect.Application_Connect_Event;
       Window_Name                : in     String) is
+   pragma Unreferenced (Handler, Window_Name);
    ---------------------------------------------------------------
 
 --    Options     : Ada_Lib.Options.Unit_Test.

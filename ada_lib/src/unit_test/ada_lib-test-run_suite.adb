@@ -15,6 +15,7 @@ with Ada_Lib.Event.Unit_Test;
 with Ada_Lib.GNOGA.Unit_Test.Events;
 with Ada_Lib.GNOGA.Unit_Test.Window_Events;
 with Ada_Lib.Help.Tests;
+--with Ada_Lib.ICON.Unit_Test;
 with Ada_Lib.Lock.Tests;
 with Ada_Lib.Mail.Tests;
 with Ada_Lib.Options.Unit_Test;
@@ -116,6 +117,8 @@ begin
          Ada_Lib.OS.Tests.Suite);
       Non_DBDaemon_Test_Suite.Add_Test (
          Ada_Lib.Template.Tests.Suite);
+--    Non_DBDaemon_Test_Suite.Add_Test (
+--       Ada_Lib.ICON.Unit_Test.Suite);
       Test_Suite.Add_Test (Non_DBDaemon_Test_Suite);
 
       for Host_Kind in Ada_Lib.Database.Valid_Hosts_Type loop

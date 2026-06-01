@@ -83,9 +83,9 @@ package Ada_Lib.Strings is
    function Index (
       Source               : in   String;
       Pattern              : in   String;
-      Going             : in   Ada.Strings.Direction :=
-                           Ada.Strings.Forward;
-        Mapping            : in   Ada.Strings.Maps.Character_Mapping :=
+      Going                : in   Ada.Strings.Direction :=
+                                    Ada.Strings.Forward;
+      Mapping              : in   Ada.Strings.Maps.Character_Mapping :=
                                     Ada.Strings.Maps.Identity
    ) return Natural renames Ada.Strings.Fixed.Index;
 

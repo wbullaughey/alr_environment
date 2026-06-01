@@ -8,6 +8,7 @@ with Ada_Lib.Options.AUnit_Lib;
 with Ada_Lib.Options.Runstring;
 with Ada_Lib.Options.Unit_Test;
 with Ada_Lib.OS;
+--with Ada_Lib.Specifications;
 with Ada_Lib.String_Quote; use Ada_Lib.String_Quote;
 with Ada_Lib.Trace; use Ada_Lib.Trace;
 

@@ -91,7 +91,7 @@ package body Ada_Lib.Options.Runstring is
          begin
             Log_Here (Debug, Element.Option.Image);
             if Element.Option.all = Option then
-               Log_Out (Debug, Element.Option.Image);
+               Log_Out (Debug, "found " & Element.Option.Image);
                return Element;
             end if;
          end;
@@ -116,9 +116,14 @@ package body Ada_Lib.Options.Runstring is
       begin
          Log_In (Debug, "registrations" & Registrations.Length'img);
          for Registration of Registrations loop
-            Result := Result & Registration.Option.Image (Quote);
+            Result := Result &
+               Registration.Option.Image (Quote, Kind => False) &
+               (if Quote then
+                  " "
+               else
+                  "");
          end Loop;
-         Result := Resullt & " ";
+--       Result := Result & " ";
          Log_Out (Debug, Result.Coerce);
          return Result.Coerce;
       end All_Options;
@@ -223,8 +228,7 @@ package body Ada_Lib.Options.Runstring is
             Log_Here (Debug or Trace_Options, Option.Image & " kind " & Kind'img);
             Element.From.Construct (From);
             Element.Kind := Kind;
-            Element.Option := new Flag_Option_Type'(
-               Flag_Option_Type (Option));
+            Element.Option := new Flag_Option_Type'(Option);
             Registrations.Append (Element);
          end Register_Option;
 
@@ -250,8 +254,11 @@ package body Ada_Lib.Options.Runstring is
       ) return String is
       -------------------------------------------------------------------
 
+         Result : constant String := Find_Registration (
+                     Registrations, Option).From.Coerce;
       begin
-         return Find_Registration (Registrations, Option).From.Coerce;
+         Log_Here (Debug, Quote ("result", Result));
+         return Result;
 
       exception
          when Fault: others =>

@@ -1,7 +1,9 @@
 with Ada.Text_IO; use  Ada.Text_IO;
---with Ada_Lib.Options;
+with Ada_Lib.Trace;
 
 package body Ada_Lib.Specifications is
+
+-- use type Ada_Lib.Trace.Priority_Type;
 
 -- Debug : Boolean renames Ada_Lib.Options.Ada_Lib_Options.Specifications_Debug;
 
@@ -49,7 +51,7 @@ package body Ada_Lib.Specifications is
       -------------------------------------------------------------------
 
       begin
-         put_line ("Not_Implemented");
+         put_line ("Not_Implemented " & Here);
 --       for Trace in Selection_Type'succ (Selection_Type'first) .. Selection_Type'last loop
 --          declare
 --             Specification  : Specification_Type renames Specifications (Trace);
@@ -64,16 +66,16 @@ package body Ada_Lib.Specifications is
 
       --------------------------------------------------------------------
       function Test (
-         Which             : in   String;
-         Priority             : in   Priority_Type := Priority_Type'first
+         Which                : in   String;
+         Priority             : in   Priority_Type := Priority_Type'first;
+         From                 : in   String := Here
       ) return Boolean is
-      pragma Unreferenced (Which, Priority);
+      pragma Unreferenced (Which);
       --------------------------------------------------------------------
 
       begin
-         put_line ("Not_Implemented");
-         return false;
---       return Settings (Which) >= Priority;
+Ada_Lib.Trace.Log_Here_Non_Locking (here & " from " & From);
+         return Integer (Priority_Type'pos (Priority)) = Ada_Lib.Trace.Trace_Value;
       end Test;
 
       --------------------------------------------------------------------
@@ -84,7 +86,7 @@ package body Ada_Lib.Specifications is
       --------------------------------------------------------------------
 
       begin
-         put_line ("Not_Implemented");
+         put_line ("Not_Implemented " & Here);
 --       Settings (Which) := Priority;
       end Set;
 
@@ -97,7 +99,7 @@ package body Ada_Lib.Specifications is
 --       Index                   : Positive := Options'first;
 
       begin
-put_line ("Not_Implemented");
+Ada_Lib.Trace.Log_Here_Non_Locking ("Not_Implemented " & Here);
 --       Not_Implemented;
 --       while Index <= Options'last loop
 --          declare

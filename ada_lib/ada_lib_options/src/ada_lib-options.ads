@@ -385,6 +385,10 @@ package Ada_Lib.Options is
       Debug                      : Boolean := False;
    end Ada_Lib_Help;
 
+   package Ada_Lib_ICON is
+      Debug                      : Boolean := False;
+   end Ada_Lib_ICON;
+
    package Ada_Lib_Interrupt is
       Debug                      : Boolean := False;
    end Ada_Lib_Interrupt;
@@ -477,6 +481,10 @@ package Ada_Lib.Options is
 --    GNOGA_Trace             : aliased Boolean := False;
                                  -- GNOGA Unit Test app
    end GNOGA;
+
+   package ICON is
+      Debug             : Boolean := False;
+   end ICON;
 
    package Trace is
       Include_Hundreds              : Boolean := False;

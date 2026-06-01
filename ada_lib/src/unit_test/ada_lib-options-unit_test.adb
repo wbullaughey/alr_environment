@@ -365,11 +365,14 @@ return "";
                      end;
 
                   when 'l' =>
+log_here;
                      if Options.Routine.Length > 0 or else
                            Options.Suite_Name.Length > 0 then
+log_here;
                         Bad_Options;
                      end if;
                      Options.Mode := List_Suites;
+log_here;
 
                   when 'm' =>    -- manual operation
                      Options.Manual := True;
@@ -443,9 +446,9 @@ return "";
 
          end case;
 
-         return Log_Out (
-            Program.Nested_Program_Options_Type (
-               Options).Process_Option (Iterator, Option),
+         return Log_Out (True,
+--          Program.Nested_Program_Options_Type (
+--             Options).Process_Option (Iterator, Option),
             Trace_Options or Debug,
             " " & Option.Image & " handled mode " & Options.Mode'img);
       else
@@ -519,6 +522,7 @@ return "";
          Put_Line ("      E               Ada_Lib.Evemt.Unit_Test.Debug");
          Put_Line ("      f               Fixtures Debug");
          Put_Line ("      g               Database Get,Put Debug");
+         Put_Line ("      i               ICON Unit Test Debug");
          Put_Line ("      p               test programs");
          Put_Line ("      P               Parser Debug");
          Put_Line ("      r               Runtime_Options");
@@ -650,6 +654,7 @@ return "";
                      Ada_Lib_Database_Unit_Test.Server_Tests_Trace := True;
                      Ada_Lib_Database_Unit_Test.Subscribe_Debug := True;
                      Ada_Lib_Event_Unit_Test.Debug := True;
+                     Ada_Lib_ICON_Unit_Test.Debug := True;
                      Ada_Lib_Options_Unit_Test.Client_Debug := True;
                      Ada_Lib_Options_Unit_Test.Debug := True;
                      Ada_Lib_Unit_Test.Fixtures_Debug := True;
@@ -677,6 +682,9 @@ return "";
 
                   when 'g' =>
                      Ada_Lib_Database_Unit_Test.Get_Put_Debug := True;
+
+                  when 'i' =>
+                     Ada_Lib_ICON_Unit_Test.Debug := True;
 
                   when 'p' =>
                      Options.Debug := True;

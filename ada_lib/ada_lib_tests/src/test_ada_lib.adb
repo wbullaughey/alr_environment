@@ -33,7 +33,7 @@ begin
 --                   : aliased Ada_Lib.Options.
 --                      Unit_Test.Ada_Lib_Unit_Test_Nested_Options_Type;
    begin
-Debug := True;
+--Debug := True;
       Log_Here (Debug);
       Ada_Lib.Options.Verification.Set_Ada_Lib_Program_Options (
          Ada_Lib.Options.Verification.Verification_Program_Options_Type'class (
@@ -87,6 +87,10 @@ exception
          Trace_Exception (True, Fault, Here);
          Put_Line ("could not process command line options");
          Ada_Lib.OS.Immediate_Halt (Ada_Lib.OS.Exception_Exit);
+
+   when Deadlock =>
+      Put_Line ("Deadlock in trace at " &Here);
+      Ada_Lib.OS.Immediate_Halt (Ada_Lib.OS.Exception_Exit);
 
    when Fault: others =>
       Trace_Exception (True, Fault, Here);

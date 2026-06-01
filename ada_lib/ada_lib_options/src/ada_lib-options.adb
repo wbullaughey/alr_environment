@@ -156,6 +156,7 @@ package body Ada_Lib.Options is
      Who          : in     String := Options_Who;
      From         : in     String := Options_Here
    ) return Flag_Option_Type is
+   pragma Unreferenced (Who, From);
    ----------------------------------------------------------------------------
 
       Result      : Flag_Option_Type;
@@ -413,11 +414,21 @@ package body Ada_Lib.Options is
 
 begin
    declare
+      use Trace;
+
+   begin
+      Include_Hundreds := False;
+      Include_Task     := False;
+      Include_Time     := False;
+      Inhibit_Trace    := True;
+   end;
+   declare
       use Ada_Lib.Trace_Options_Package;
 
    begin
 --Debug := True;
---Trace.Include_Task := True;
+Trace.Include_Task := True;
+Trace.Include_Time := True;
       Option_Log (Debug_Trace or Elaborate or Trace_Options or Debug);
    end;
 end Ada_Lib.Options;

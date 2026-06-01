@@ -349,7 +349,7 @@ begin
    if Trace_Tests then
       Debug := Trace_Tests;
    end if;
-Debug := True;
+--Debug := True;
    Log_Here (Debug or Trace_Options or Elaborate, "unit testing " &
       Ada_Lib.Options.Ada_Lib_Environment.Unit_Testing'img &
       " Ada_Lib.Options.Ada_Lib_Environment.Help_Test " &

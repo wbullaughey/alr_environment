@@ -156,6 +156,10 @@ package Ada_Lib.Options.Unit_Test is
       Debug                         : Boolean := False;
    end Ada_Lib_Help_Unit_Test;
 
+   package Ada_Lib_ICON_Unit_Test is
+      Debug                         : Boolean := False;
+   end Ada_Lib_ICON_Unit_Test;
+
    package Ada_Lib_Lock_Unit_Test is
       Debug                         : Boolean := False;
    end Ada_Lib_Lock_Unit_Test;
@@ -166,9 +170,9 @@ package Ada_Lib.Options.Unit_Test is
    end Ada_Lib_Options_Unit_Test;
 
    package Ada_Lib_Options_Trace_Tests is
-      Debug_Unit_Test               : Boolean := False;
+      Debug_Detail                  : Boolean := False;
       Debug_Test                    : Boolean := False;
-      Debug_Tests                   : Boolean := False;
+      Debug_All_Tests               : Boolean := False;
    end Ada_Lib_Options_Trace_Tests;
 
    package Ada_Lib_Strings is

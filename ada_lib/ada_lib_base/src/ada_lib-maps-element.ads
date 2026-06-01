@@ -63,7 +63,7 @@ private
 
    type Element_Type       is abstract new Ada.Finalization.Controlled with record
       Allocated            : Boolean := False;
-      Key                  : Key_Access;
+      Key                  : Key_Access := Null;
    end record;
 
 end Ada_Lib.Maps.Element;

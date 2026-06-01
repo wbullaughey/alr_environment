@@ -1,4 +1,5 @@
 with Ada.Exceptions;
+with Ada.Text_IO; use  Ada.Text_IO;
 with Ada.Unchecked_Deallocation;
 --with Ada_Lib.Trace;
 with Ada_Lib.Trace;use Ada_Lib.Trace;
@@ -135,21 +136,25 @@ package body Ada_Lib.Maps.Table is
 
    ---------------------------------------------------------------------------
    function Is_In (
-      Table             : in   Map_Type;
-      Key               : in   String
+      Table       : in   Map_Type;
+      Key         : in   String
    ) return Boolean is
    ---------------------------------------------------------------------------
 
-      Local_Name           : aliased String := Key;
-      Result               : constant Boolean := Table_Package.Contains (Table.Map,
-                           Local_Name'Unchecked_Access);
-
    begin
-      if Test ("Containers", High) then
-         Log_Here ("'" & Local_Name & "' result " & Result'img);
-      end if;
+--Log_Here_Non_Locking ("in key " & Key);
+      declare
+         Local_Name  : aliased String := Key;
+         Result      : constant Boolean := Table_Package.Contains (Table.Map,
+                        Local_Name'Unchecked_Access);
+      begin
+--       if Test ("Containers", High) then
+--          Put_Line (Here & " '" & Local_Name & "' result " & Result'img);
+--       end if;
 
-      return Result;
+--Log_Here_Non_Locking ("out result " & Result'img);
+         return Result;
+      end;
    end Is_In;
 
    ---------------------------------------------------------------------------

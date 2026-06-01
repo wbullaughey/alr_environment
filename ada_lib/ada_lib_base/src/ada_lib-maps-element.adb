@@ -54,7 +54,8 @@ package body Ada_Lib.Maps.Element is
 
    begin
       if Test ("Containers", High) then
-         Log_Here (Ada_Lib.Trace.Who & " " &Left.all & " " & Right.all &
+         Log_Here_Non_Locking (Ada_Lib.Trace.Who & " " & Left.all & " " &
+            Right.all &
             " result " & Result'img);
       end if;
 
@@ -69,15 +70,15 @@ package body Ada_Lib.Maps.Element is
 
    begin
       if Object.Key = Null then
-         Log_Here ("finalize null key");
+         Log_Here_Non_Locking ("finalize null key");
       else
          if Test ("Finalization", Low) then
-            Log_Here ("finalize " & Object.Key.all);
+            Log_Here_Non_Locking ("finalize " & Object.Key.all);
          end if;
 
          Free (Object.Key);
          if Test ("Finalization", Low) then
-            Log_Here (" exit ");
+            Log_Here_Non_Locking (" exit ");
          end if;
       end if;
 --    Object_Type (Object).Finalize;
@@ -91,15 +92,15 @@ package body Ada_Lib.Maps.Element is
 
    begin
       if Object.Key = Null then
-         Log_Here ("finalize null key");
+         Log_Here_Non_Locking ("finalize null key");
       else
          if Test ("Finalization", Low) then
-            Log_Here ("finalize " & Object.Key.all);
+            Log_Here_Non_Locking ("finalize " & Object.Key.all);
          end if;
 
          Free (Object.Key);
          if Test ("Finalization", Low) then
-            Log_Here (" exit ");
+            Log_Here_Non_Locking (" exit ");
          end if;
       end if;
 --    Object_Type (Object).Finalize;

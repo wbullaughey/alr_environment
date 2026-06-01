@@ -1,6 +1,10 @@
+with GNAT.Source_Info;
 with Ada_Lib.Strings;
 
 package Ada_Lib.Specifications is
+
+   function Here
+   return String renames GNAT.Source_Info.Source_Location;
 
    type Specification_Type       is tagged record
       Option                     : Character;
@@ -16,7 +20,7 @@ package Ada_Lib.Specifications is
    ) return Ada_Lib.Strings.String_Constant_Access;
 
    generic
-      type Priority_Type               is ( <> );
+      type Priority_Type            is ( <> );
       type Selection_Type           is ( <> );
 
    package Selection_Package is
@@ -36,12 +40,12 @@ package Ada_Lib.Specifications is
 
    generic     -- body commented out so parameters not referenced
 
-      type Priority_Type            is ( <> );
+      type Priority_Type         is ( <> );
       type Selection_Type        is ( <> );
       type Specification_Type    is tagged private;
---    type Specifications_Array  is array (Selection_Type) of Specification_Type;
 
---    Specifications             : in Specifications_Array;
+      High                       : Priority_Type;
+
    pragma Unreferenced (Selection_Type, Specification_Type);
 
    package Specification_Package is
@@ -52,7 +56,8 @@ package Ada_Lib.Specifications is
 
       function Test (
          Which                   : in   String;
-         Priority                : in   Priority_Type := Priority_Type'first
+         Priority                : in   Priority_Type := Priority_Type'first;
+         From                    : in   String := Here
       ) return Boolean;
 
       procedure Set (

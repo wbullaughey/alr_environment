@@ -247,7 +247,7 @@ package body Ada_Lib.Strings.Unlimited is
    ---------------------------------------------------------------
 
    begin
-      return Variable & "'" & Coerce (Value) & "'";
+      return Variable & " '" & Coerce (Value) & "'";
    end Quote;
 
    ---------------------------------------------------------------

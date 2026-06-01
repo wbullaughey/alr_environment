@@ -12,6 +12,7 @@ package Ada_Lib is
 
    Bits_Per_Byte        : constant := 8;
    Exception_Occured    : Boolean := False;
+   Is_Elaborated        : Boolean := False;
    No_Time              : constant Ada.Calendar.Time :=
                            Ada.Calendar.Time_Of (
                               Year => Ada.Calendar.Year_Number'last,

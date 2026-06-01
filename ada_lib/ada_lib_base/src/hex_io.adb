@@ -395,6 +395,16 @@ package body Hex_IO is
 
    -------------------------------------------------------------------
    function Hex (
+      Value             : in   character
+   ) return String is
+   -------------------------------------------------------------------
+
+   begin
+      return Hex (Interfaces.Unsigned_8 (Character'Pos (Value)), 8);
+   end Hex;
+
+   -------------------------------------------------------------------
+   function Hex (
       Value             : in   Integer;
       Width             : in   Positive := 8
    ) return String is

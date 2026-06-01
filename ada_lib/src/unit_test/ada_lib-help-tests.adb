@@ -253,7 +253,7 @@ package body Ada_Lib.Help.Tests is
    end Test_Prefix_Help;
 
 begin
-debug := True;
+--debug := True;
 --Trace_Options := True;
    Log_Here (Trace_Options or Debug);
 end Ada_Lib.Help.Tests;

@@ -1,3 +1,5 @@
+test_ada_lib
+
 test_ada_lib command line options:
     -#                            : exclude trace checks              (Ada_Lib)
     -?                            : this message                      (Ada_Lib)
@@ -53,9 +55,9 @@ Ada_Lib.Options.AUnit_Lib.Program_Help trace options (-t)
       t               Template Test
       T               Timer Test
       #c              Camera Commands Unit Test
-      #d              Debug Test
-      #T              Debug Tests
-      #t              Debug Test routines
+      #d              Debug Trace Unit Test
+      #T              Debug all Trace Unit Tests
+      #t              Debug Trace Unit Test detail
 
 Ada_Lib.Template.Tests (-T)
       a               all
@@ -120,6 +122,7 @@ Ada_Lib unit test library trace options (-U)
       E               Ada_Lib.Evemt.Unit_Test.Debug
       f               Fixtures Debug
       g               Database Get,Put Debug
+      i               ICON Unit Test Debug
       p               test programs
       P               Parser Debug
       r               Runtime_Options

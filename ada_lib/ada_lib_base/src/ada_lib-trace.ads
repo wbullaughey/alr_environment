@@ -5,7 +5,6 @@ with Ada.Tags;
 with Ada.Exceptions;
 with Ada.Strings.Unbounded;
 with Ada.Text_IO;
-with Ada_Lib.Specifications;
 with Ada_Lib.Strings;
 with Ada_Lib.Trace_Options_Package;
 with GNAT.Source_Info;
@@ -14,15 +13,20 @@ with System;
 package Ada_Lib.Trace is
 
    Recursive_Failure             : exception;
+   Bad_Lock_State                : exception;
+   Deadlock                      : exception;
+
+   Lowest_Level                  : constant := 0;
+   Undefined_Level               : constant := -1;
 
    type Dump_Width_Type          is (Width_8, Width_16, Width_32, Width_64);
 
    type Priority_Type            is range 0 .. 5;
-   subtype Level_Type            is Natural;
+   subtype Level_Type            is Integer range Undefined_Level .. Integer'last;
    type Task_Data_Type           is record
       Buffer                     : Ada.Strings.Unbounded.Unbounded_String;
-      Last_level                 : Level_Type := 0;
-      Priority                      : Level_Type := 0;
+      Last_level                 : Level_Type := Lowest_Level;
+      Priority                   : Level_Type := Lowest_Level;
       Locked                     : Boolean := False;
       Task_Name                  : Ada.Strings.Unbounded.Unbounded_String;
    end record;
@@ -73,6 +77,7 @@ package Ada_Lib.Trace is
          Ada_Lib.Trace_Options_Package.Trace_Exceptions;
    Trace_Tests                   : Boolean  renames
          Ada_Lib.Trace_Options_Package.Trace_Tests;
+   Trace_Value                   : Integer := 0;
    Off                           : constant Priority_Type := Priority_Type'first;
    Low                           : constant Priority_Type := Off + 1;
    High                          : constant Priority_Type := Priority_Type'last;
@@ -102,6 +107,7 @@ package Ada_Lib.Trace is
       Seconds              : in   Integer;
       Show_Days            : in   Boolean := False
    ) return String;
+
    function Here
    return String renames GNAT.Source_Info.Source_Location;
 
@@ -150,6 +156,12 @@ package Ada_Lib.Trace is
       Where       : in     String := GNAT.Source_Info.Source_Location;
       Who         : in     String := GNAT.Source_Info.Enclosing_Entity
    ) return Boolean;
+
+   procedure Log_Here_Non_Locking (
+      Message     : in     String := "";
+      Enable      : in     Boolean := True;
+      Who         : in     String := GNAT.Source_Info.Enclosing_Entity;
+      From        : in     String := GNAT.Source_Info.Source_Location);
 
    procedure Log_In (
       Enable      : in     Boolean := True;
@@ -310,45 +322,21 @@ package Ada_Lib.Trace is
                                                 Source_Location);
    end Tag_Package;
 
-   package Selection_Package is new Ada_Lib.Specifications.Selection_Package (
-      Priority_Type              => Priority_Type,
-      Selection_Type             => Traces_Type);
-
-   Specification           : constant Selection_Package.Specification_Array := (
-      (
-         Priority       => Off,
-         Option      => ' ',
-         Prompt      => Null ),
-      (
-         Priority       => Medium,
-         Option      => 'c',
-         Prompt      => new String'("containers") ),
-      (
-         Priority       => High,
-         Option      => 'f',
-         Prompt      => new String'("finalization") )
-   );
-
-   package Specification_Package is new Ada_Lib.Specifications.Specification_Package (
-      Priority_Type           => Priority_Type,
-      Selection_Type       => Traces_Type,
-      Specification_Type   => Selection_Package.Specification_Level_Type);
---    Specifications_Array => Selection_Package.Specification_Array);
---    Specifications       => Specification);
-
    function Test (
-      Which             : in   String;
-      Priority             : in   Priority_Type := Priority_Type'first
-   ) return Boolean renames Specification_Package.Test;
+      Which                : in   String;
+      Priority             : in   Priority_Type := Priority_Type'first;
+      From                 : in   String := Here
+   ) return Boolean;
+-- ) return Boolean renames Specification_Package.Test;
 
    procedure Set (
       Which             : in   String;
-      Priority             : in   Priority_Type := Priority_Type'first
-   ) renames Specification_Package.Set;
+      Priority             : in   Priority_Type := Priority_Type'first);
+-- ) renames Specification_Package.Set;
 
    procedure Set (
-      Options              : in   String
-   ) renames Specification_Package.Set;
+      Options              : in   String);
+-- ) renames Specification_Package.Set;
 
 private
 

@@ -59,12 +59,20 @@ package body Ada_Lib.Command_Line_Iterator.Tests is
          Test_Result             : constant Boolean :=
                                     Expected_All_Options = Got_Without_Parameters;
       begin
-         Log_Here (Debug, Quote ("all registered parameters",
-            Got_Without_Parameters));
+         Log_Here (Debug, "Test_Result " & Test_Result'img &
+            Quote (" Expected_All_Options", Expected_All_Options) &
+            Quote (" Got_Without_Parameters", Got_Without_Parameters));
          Assert (Test_Result, "wrong options with parameters '" &
             Got_Without_Parameters & "' expected '" & Expected_All_Options & "'");
       end;
       Log_Out (Debug);
+
+   exception
+
+      when Fault: others =>
+         Trace_Exception (Fault);
+         raise;
+
    end Options;
 
    ---------------------------------------------------------------

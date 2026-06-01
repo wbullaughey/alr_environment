@@ -567,8 +567,7 @@ not_implemented;
             return Log_Out (Result, Log_It,
                Tag_Name (" options",
                   Verification_Options_Type'class (Options)'tag) &
-               " at " & This_From,
-               From, Who);
+               " at " & This_From & " from " & From & " who " & Who);
          end Log_Exit;
 
          -------------------------------------------------------------------------

@@ -26,12 +26,12 @@ package body Ada_Lib.Options.AUnit_Lib is
                                     Flag_List_Type :=
                                        Initialize (
                                           Trace_Option, Unmodified_flag);
-   Options_Without_Parameters    : aliased constant
-                                    Flag_List_Type :=
-                                       Initialize (
-                                          't', Ada_Lib.Help.Modifier) &
-                                       Initialize (
-                                          "dT", Ada_Lib.Help.Unmodified_Flag);
+-- Options_Without_Parameters    : aliased constant
+--                                  Flag_List_Type :=
+--                                     Initialize (
+--                                        'tT', Ada_Lib.Help.Modifier) &
+--                                     Initialize (
+--                                        "d", Ada_Lib.Help.Unmodified_Flag);
    Trace_Modifier             : character renames Ada_Lib.Help.Trace_Modifier;
 
    ----------------------------------------------------------------------------
@@ -181,39 +181,52 @@ return false;
    ) return Boolean is
    ----------------------------------------------------------------------------
 
+      Log_It   : constant Boolean := Debug or Trace_Options;
+
    begin
-      Log_In (Debug or Trace_Options,
+      Log_In (Log_It,
          Tag_Name ("options",
             Aunit_Program_Options_Type'class (Options)'tag) &
          " Options_Selection " & Options.Options_Selection'img);
 
       Runstring.Options.Register (
          Runstring.With_Parameters, Options_With_Parameters);
-      Runstring.Options.Register (
-         Runstring.Without_Parameters, Options_Without_Parameters);
+--    Runstring.Options.Register (
+--       Runstring.Without_Parameters, Options_Without_Parameters);
 
       return Log_Out (
          (case Options.Options_Selection is
 
             when Unit_Test_With_Template_Only =>
-               Options.Template_Only.Initialize,
+               Trace_Return (Log_It, Options.Template_Only.Initialize,
+                  "Template_Only"),
 
             when Unit_Test_With_No_Database_Or_Template =>
-               True,
+               Trace_Return (Log_It, True, "constant"),
 
             when Unit_Test_With_Database_And_Template =>
-               Options.Database_Options.Initialize and then
-               Options.Template.Initialize,
+               Trace_Return (Log_It,
+                  Options.Database_Options.Initialize,
+                  "Database_Options") and then
+               Trace_Return (Log_It,
+                  Options.Template.Initialize, "Template"),
 
             when Unit_Test_With_Database_Only =>
-               Options.Database_Only.Initialize
+               Trace_Return (Log_It,
+                  Options.Database_Only.Initialize,
+                  "Database_Only")
 
          ) and then
-         Options.GNOGA_Unit_Test_Options.Initialize and then
-         Options.Nested_Unit_Test_Options.Initialize and then
-         Program.Program_Options_Type (Options).Initialize,
-         Debug or Trace_Options,
-            "Options_Selection " & Options.Options_Selection'img);
+         Trace_Return (Log_It,
+            Options.GNOGA_Unit_Test_Options.Initialize,
+             "GNOGA_Unit_Test_Options") and then
+         Trace_Return (Log_It,
+            Options.Nested_Unit_Test_Options.Initialize,
+            "Nested_Unit_Test_Options") and then
+         Trace_Return (Log_It,
+            Program.Program_Options_Type (Options).Initialize,
+            "Program.Program_Options_Type"),
+      Log_It, "Options_Selection " & Options.Options_Selection'img);
 
    exception
       when Fault: others =>
@@ -249,8 +262,10 @@ return false;
    ) return Boolean is
    ----------------------------------------------------------------------------
 
+      Log_It   : constant Boolean := Debug or Trace_Options;
+
    begin
-      Log_In (Debug or Trace_Options);
+      Log_In (Log_It);
 --       Tag_Name (Nested_Program_Options_Type'class (Options)'tag));
 
       while not Iterator.At_End loop
@@ -262,42 +277,56 @@ return false;
                   Message        : constant String := Option.Image & " not defined";
 
                begin
-tag_history ("options",Aunit_Program_Options_Type'class(options)'tag);
-                  Log_Here (Debug or Trace_Options, Option.Image &
+--tag_history ("options",Aunit_Program_Options_Type'class(options)'tag);
+                  Log_Here (Log_It, Option.Image &
                      " Options_Selection " & Options.Options_Selection'img);
-                  if    Options.GNOGA_Unit_Test_Options.Process_Option (
-                           Iterator, Option) or else
-                        Options.Nested_Unit_Test_Options.Process_Option (
-                           Iterator, Option) or else
---                      Options.Nested_Program_Options.Process_Option (
---                         Iterator, Option) or else
+                  if    Trace_Return (Log_It,
+                           Options.GNOGA_Unit_Test_Options.Process_Option (
+                              Iterator, Option),
+                           "GNOGA_Unit_Test_Options " & Option.Image) or else
+                        Trace_Return (Log_It,
+                           Options.Nested_Unit_Test_Options.Process_Option (
+                                 Iterator, Option),
+                              "Nested_Unit_Test_Options" & Option.Image) or else
                         (case Options.Options_Selection is
 
                            when Unit_Test_With_Template_Only =>
-                              Options.Template_Only.Process_Option (
-                                 Iterator, Option),
+                              Trace_Return (Log_It,
+                                 Options.Template_Only.Process_Option (
+                                       Iterator, Option),
+                                    "Template_Only " & Option.Image),
 
                            when Unit_Test_With_Database_And_Template =>
-                              Options.Database_Options.Process_Option (
-                                 Iterator, Option) or else
+                              Trace_Return (Log_It,
+                                 Options.Database_Options.Process_Option (
+                                       Iterator, Option),
+                                    "Database_Options") or else
                               (if Ada_Lib.Options.Ada_Lib_Environment.Help_Test then
-                                 Options.Template.Process_Option (
-                                    Iterator, Option)
+                                 Trace_Return (Log_It,
+                                    Options.Template.Process_Option (
+                                          Iterator, Option),
+                                       "Template")
                               else
-                                 True),
+                                 Trace_Return (Log_It, False, "Help_Test false")),
 
                            when Unit_Test_With_No_Database_Or_Template =>
-                              True,
+                              Trace_Return (Log_It, False,
+                              "Unit_Test_With_No_Database_Or_Template"),
 
                            when Unit_Test_With_Database_Only =>
-                              Options.Database_Only.Process_Option (
-                                 Iterator, Option)
-                        ) then
-                     Log_Here (Debug or Trace_Options, Option.Image, "processed");
+                              Trace_Return (Log_It,
+                                 Options.Database_Only.Process_Option (
+                                       Iterator, Option),
+                                    "Database_Only")
+                        ) or else
+                           Trace_Return (Log_It,
+                              Options.Process_Option (Iterator, Option),
+                              "options") then
+                        Log_Here (Log_It, Option.Image, "processed");
                   else
-                     Log_Here (Debug or Trace_Options, Message);
+                     Log_Here (Log_It, Message);
                      Options.Bad_Option (Option, Message);     -- aborts program
-                     return Log_Out (False, Debug or Trace_Options);
+                     return Log_Out (False, Log_It);
                   end if;
                end;
             else
@@ -307,7 +336,7 @@ tag_history ("options",Aunit_Program_Options_Type'class(options)'tag);
                begin
 --                if not Options.Nested_Program_Options.Process_Argument (
 --                      Iterator, Argument) then
-                     Log_Out (Debug or Trace_Options);
+                     Log_Out (Log_It);
                      Options.Bad_Option ("unexpected '" & Argument & "' on run string" &
                         " from " & Here);
                         -- raises exception
@@ -318,7 +347,7 @@ tag_history ("options",Aunit_Program_Options_Type'class(options)'tag);
 --       exception
 --
 --          when Fault: others =>
---             Trace_Exception (Debug or Trace_Options, Fault);
+--             Trace_Exception (Log_It, Fault);
 --             if not Options.Nested_Program_Options.Help_Test then
 --                raise;
 --             end if;
@@ -330,13 +359,13 @@ tag_history ("options",Aunit_Program_Options_Type'class(options)'tag);
       end loop;
 
       return Log_Out (Program.Program_Options_Type (Options).Process (
-         Iterator), Debug or Trace_Options, "processed");
---    return Log_Out (True, Debug or Trace_Options, "processed");
+         Iterator), Log_It, "processed");
+--    return Log_Out (True, Log_It, "processed");
 
    exception
 
       when Fault: others =>
-         Trace_Exception (Debug or Trace_Options, Fault);
+         Trace_Exception (Log_It, Fault);
          raise;
 
    end Process;
@@ -353,7 +382,7 @@ tag_history ("options",Aunit_Program_Options_Type'class(options)'tag);
       Has_It                     : constant Boolean :=
                                     Has_Option (Option,
                                        Options_With_Parameters,
-                                       Options_Without_Parameters);
+                                       Null_Flag_List);
    begin
       Log_In (Trace_Options or Debug, Option.Image &
          " has options " & Has_It'img &
@@ -367,8 +396,8 @@ tag_history ("options",Aunit_Program_Options_Type'class(options)'tag);
 
          case Option.Option is
 
-            when 'A' => -- ada_lib trace options
-                Options.Trace_Parse (Iterator);
+--          when 'A' => -- ada_lib trace options
+--              Options.Trace_Parse (Iterator);
 
             when Trace_Option =>    -- t
                Options.Trace_Parse (Iterator);
@@ -450,11 +479,11 @@ tag_history ("options",Aunit_Program_Options_Type'class(options)'tag);
          Put_Line ("      " & Trace_Modifier &
                           "c              Camera Commands Unit Test");
          Put_Line ("      " & Trace_Modifier &
-                          "d              Debug Test");
+                          "d              Debug Trace Unit Test");
          Put_Line ("      " & Trace_Modifier &
-                          "T              Debug Tests");
+                          "T              Debug all Trace Unit Tests");
          Put_Line ("      " & Trace_Modifier &
-                          "t              Debug Test routines");
+                          "t              Debug Trace Unit Test detail");
          New_Line;
 
       end case;
@@ -514,14 +543,8 @@ tag_history ("options",Aunit_Program_Options_Type'class(options)'tag);
       Iterator    : in out Command_Line_Iterator_Interface'class) is
    ----------------------------------------------------------------------------
 
-      Trace_Tests_Debug       : Boolean renames
-                                 Unit_Test.Ada_Lib_Options_Trace_Tests.Debug_Unit_Test;
-      Trace_Tests_Debug_Test  : Boolean renames
-                                 Unit_Test.Ada_Lib_Options_Trace_Tests.Debug_Test;
-      Trace_Tests_Debug_Tests : Boolean renames
-                                 Unit_Test.Ada_Lib_Options_Trace_Tests.Debug_Tests;
-      Extended                : Boolean := False;
-      Parameter               : constant String := Iterator.Get_Parameter;
+      Extended    : Boolean := False;
+      Parameter   : constant String := Iterator.Get_Parameter;
 
    begin
       Log (Trace_Options or Debug, Here, Who & Quote (" Parameter", Parameter));
@@ -549,9 +572,9 @@ tag_history ("options",Aunit_Program_Options_Type'class(options)'tag);
                         Ada_Lib.Template.Trace_Expand := True;
                         Ada_Lib.Template.Trace_Load := True;
                         Ada_Lib.Template.Trace_Test := True;
-                        Trace_Tests_Debug := True;
-                        Trace_Tests_Debug_Test := True;
-                        Trace_Tests_Debug_Tests := True;
+                        Unit_Test.Ada_Lib_Options_Trace_Tests.Debug_Detail := True;
+                        Unit_Test.Ada_Lib_Options_Trace_Tests.Debug_Test := True;
+                        Unit_Test.Ada_Lib_Options_Trace_Tests.Debug_All_Tests := True;
                         Debug := True;
                         Unit_Test.Ada_Lib_AUnit.Tester_Debug := True;
                         Unit_Test.Ada_Lib_Help_Unit_Test.Debug := True;
@@ -600,12 +623,6 @@ tag_history ("options",Aunit_Program_Options_Type'class(options)'tag);
                      when 't' =>
                         Ada_Lib.Template.Trace_Test := True;
 
-                     when 'T' =>
-                        Trace_Tests_Debug := True;
-
-      --             when 'u' =>
-      --                Ada_Lib.Unit_Test.Debug := True;
-
                      when Trace_Modifier =>
                         Extended := True;
 
@@ -618,13 +635,13 @@ tag_history ("options",Aunit_Program_Options_Type'class(options)'tag);
                   case Trace is
 
                      when 'd' =>
-                        Trace_Tests_Debug_Test := True;
+                        Unit_Test.Ada_Lib_Options_Trace_Tests.Debug_Test := True;
 
                      when 't' =>
-                        Trace_Tests_Debug := True;
+                        Unit_Test.Ada_Lib_Options_Trace_Tests.Debug_Detail := True;
 
                      when 'T' =>
-                        Trace_Tests_Debug_Tests := True;
+                        Unit_Test.Ada_Lib_Options_Trace_Tests.Debug_All_Tests := True;
 
                      when others =>
                         Options.Bad_Trace_Option (Trace_Option, Trace,

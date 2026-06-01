@@ -66,6 +66,10 @@ package Hex_IO is
    ) return Interfaces.Unsigned_64;
 
    function Hex (
+      Value             : in   character
+   ) return String;
+
+   function Hex (
       Value             : in   Integer;
       Width             : in   Positive := 8
    ) return String;
