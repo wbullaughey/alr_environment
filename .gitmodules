@@ -14,4 +14,4 @@
 	path = vendor/github.com/gnoga
 	url = git@github.com:wbullaughey/gnoga
 [submodule "vendor/github.com/aws"]
-   url = git@github.com:wbullaughey/aws
+	url = git@github.com:wbullaughey/aws
