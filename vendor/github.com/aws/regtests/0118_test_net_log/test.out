@@ -1,0 +1,46 @@
+
+
+@@@ SENT ( 189/ 189 buffer usage) @@@
+
+Connection: Close
+Host:
+Accept: text/html, */*
+Accept-Encoding: gzip, deflate
+Accept-Language: fr, ru, us
+User-Agent:
+
+
+
+
+@@@ SENT ( 172/ 172 buffer usage) @@@
+
+Date:
+Server:
+Connection: close
+Content-Length: 16
+Content-Type: text/html
+
+<p>Hello world !
+
+
+@@@ RECEIVED ( 189/ 4096 buffer usage) @@@
+
+Connection: Close
+Host:
+Accept: text/html, */*
+Accept-Encoding: gzip, deflate
+Accept-Language: fr, ru, us
+User-Agent:
+
+
+
+
+@@@ RECEIVED ( 172/ 4096 buffer usage) @@@
+
+Date:
+Server:
+Connection: close
+Content-Length: 16
+Content-Type: text/html
+
+<p>Hello world !

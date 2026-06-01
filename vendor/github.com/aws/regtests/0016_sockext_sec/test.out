@@ -1,0 +1,5 @@
+Server start.
+Client start.
+Expected: INPUT timeout 1.0
+Client done.
+Server done.

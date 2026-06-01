@@ -1,0 +1,209 @@
+
+====================
+Notes for developers
+====================
+
+-----
+setup
+-----
+
+First of all, it is very important to properly set your name and email into
+the repository. These information will be used for every commits.
+
+   $ git config user.name "John Doe"
+   $ git config user.email john.doe@whatever.com
+
+-----------------
+local style check
+-----------------
+
+To enable local style check, first get and compile style_checker:
+
+   $ git clone git://github.com/TurboGit/style_checker.git
+   $ cd style_checker
+   $ make
+   $ cp style_checker /path/to/bin
+
+Then get the git-scripts repository:
+
+   $ git clone git://github.com/TurboGit/git-scripts.git
+
+Use the pre-commit script from git-scripts, on UNIX you can just use a
+soft link:
+
+   $ cd AWS/.git/hooks
+   $ ln -s /path/to/git-scripts/pre-commit .
+
+Finaly create a configuration into $HOME/.git-pre-commit, just copy paste
+the following lines into your shell:
+
+$ cd $HOME
+$ cat > .git-pre-commit << EOF
+REPOSIT_NAME=$1
+OWEB="-H -cP -cY -l256"
+
+case "$REPOSIT_NAME" in
+   aws) CPYR="[[:space:]]Copyright[[:space:]]\(C\)[[:space:]]([12]\d\d\d-)?2\d\d\d,[[:space:]]AdaCore[[:space:]]"
+        SC_OPTS="-ign out -ign tmplt -ign sed -ign txt \
+        -lang TXML $OWEB -lang XML $OWEB -lang HTML $OWEB -lang XSD $OWEB \
+        -lang CSS $OWEB -lang Ada -d -cp -cy -sp -gnat05 -sp -gnatyI -cf $CPYR \
+        -lang makefile -cp -cy -cf $CPYR -lang Python -H"
+        EXCLUDE="\(features\)"
+        PSTATUS=true
+        ;;
+     *) PSTATUS=""
+        ;;
+esac
+EOF
+
+------
+commit
+------
+
+The main working branch is named master. Releases are taken from this
+branch. All the commits are to be done or merged there at some point.
+
+Simple commits like a minor reformatting, a style fix can be made directly
+on master branch:
+
+   $ git checkout master
+   $ git commit -m "..."
+   $ git push origin
+
+New features or fixes must be prepared on separate branches even if there
+is a single commit. The naming convention for those branches are:
+
+   topic/<developer_initials>/<name> (referred as branch_name in this document)
+
+   e.g. topic/po/improve-build-procedure
+
+   Branch name should be all lower case and use dash as word separator.
+
+A patch-set must follow the following properties:
+
+   - The first line of the commit log message must be a summary of the
+     change. This first line is what is viewed in many Git output (log
+     --oneline, cherry -v, etc...) and should be restricted to 80
+     characters.
+
+   - Actual work must be separated from minor reformating or style fixes
+     which should be done on separate commits.
+
+   - A work must be done on small and incremental commits. This is generally
+     far easier to review than a large commit. For example if the
+     implementation of a given feature required a new API, it required
+     to have a commit adding the new API and then a commit implementing
+     the feature and using this new API.
+
+-------
+merging
+-------
+
+When the branch is ready it is pushed to AWS repository for review:
+
+   $ git push origin <branch_name>
+
+When reviewed and accepted the branch is merged back (no fast forward)
+into master:
+
+   $ git checkout master
+   $ git merge --log --no-ff <branch_name>
+
+Merging is done by the AWS project manager. The topic/ prefix is to be
+removed from the merge commit log.
+
+Note that for a branch with a single commit a fast forward is allowed.
+
+This work/review cycle will help having proper patch set (code,
+documentation work, test and possibly feature or known-problem entries)
+before merging. This is especially important to make it easier to merge
+fixes in release branches.
+
+When such branches are not needed anymore they are removed from the central
+repository:
+
+   $ git push origin :<branch_name>
+
+----------------------
+external contributions
+----------------------
+
+For developers without commit access to the main AWS repository the
+contribution can be made by sending patches to the AWS-patches mailing-list.
+For example to send the last three commits on the current branch:
+
+   $ git send-email --to aws-patches@lists.forge.open-do.org HEAD~3
+
+It is also possible to add a cover-letter to explain the goal of a
+patch-set:
+
+   $ git format-patch --cover-letter -3 -o tobesent
+   $ edit tobesent/0000-cover-letter.patch
+   $ git send-email --to aws-patches@lists.forge.open-do.org tobesent/*
+
+Contributed code must follow the style described into style-guide document.
+
+==============================
+Notes on the releases handling
+==============================
+
+------
+naming
+------
+
+AWS version number : X.Y
+Release branch     : X
+Tags               : X.Y
+
+Where: X = <2-DIGITS-YEAR>
+       Y = 0w on master
+       Y = 0 for preview
+       Y = 1,2 for minor releases
+
+---------
+branching
+---------
+
+When a release is about to be ready a branch is created (X):
+
+   $ git branch 17 master
+
+At this point some adjustments are needed:
+
+   * on master
+
+      $ git checkout master
+      $ edit src/core/aws.ads (set proper version number X+1.0w)
+      $ edit readme.txt (likewise + clean-up "Changes",
+        "Non upward compatible changes" and "Obsolescent features" sections)
+      $ clean docs/known-problems
+
+   * on the branch
+
+      $ git checkout 17
+      $ git tag -a X.0
+      $ edit src/core/aws.ads (set proper version number: X.0)
+      $ edit readme.txt (likewise)
+
+-------------
+stabilization
+-------------
+
+If important fixes are made (committed on master) they are merged into this
+branch:
+
+   $ git merge --log --no-ff <branch_name>
+
+For this, <branch_name> may have to be rebased on release branch:
+
+   $ git rebase --onto 17 <branch_name>^ <branch_name>
+   (if there is a single commit to be merged from <branch_name>)
+
+When the release is fully ready a corresponding tag is created (X.1):
+
+   $ git tag -a X.1
+   $ git push --tags
+
+If interim releases are needed to fix some important bugs, as before fixes
+are committed to master and merged into the branch. The tags numbering will
+then be 2.0.2, then 2.0.3 and so on.

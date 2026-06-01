@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<soapenv:Envelope soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<soapenv:Body>
+<awsns:Workorder xmlns:awsns="http://soapaws/">
+<Workorder xsi:type="Workorder">
+   <Woid xsi:type="xsd:string">Wo1</Woid>
+   <Updated xsi:type="xsd:timeInstant">XXXX-XX-XXTXX:XX:XXZ</Updated>
+   <State xsi:type="xsd:string">idle</State>
+   <Package xsi:type="xsd:string">sot23</Package>
+   <Recipe xsi:type="xsd:string">bc847</Recipe>
+   <Orderline soapenc:arrayType="Orderline[2]" xsi:type="soapenc:Array">
+      <Orderline xsi:type="Orderline">
+         <State xsi:type="xsd:string">idle</State>
+         <Woid xsi:type="xsd:string">Wo1</Woid>
+         <Twelvenc xsi:type="xsd:string">123456781234</Twelvenc>
+         <Type xsi:type="xsd:int">2</Type>
+         <Priority xsi:type="xsd:int">1</Priority>
+         <Label xsi:type="xsd:string">E6</Label>
+         <Quantity xsi:type="xsd:int">18000</Quantity>
+         <Packing xsi:type="xsd:int">3000</Packing>
+         <Marking xsi:type="xsd:string">3kl</Marking>
+         <Orientation xsi:type="xsd:string">1</Orientation>
+         <Produced xsi:type="xsd:int">0</Produced>
+      </Orderline>
+      <Orderline xsi:type="Orderline">
+         <State xsi:type="xsd:string">idle</State>
+         <Woid xsi:type="xsd:string">Wo1</Woid>
+         <Twelvenc xsi:type="xsd:string">123456781235</Twelvenc>
+         <Type xsi:type="xsd:int">1</Type>
+         <Priority xsi:type="xsd:int">2</Priority>
+         <Label xsi:type="xsd:string">E6</Label>
+         <Quantity xsi:type="xsd:int">18000</Quantity>
+         <Packing xsi:type="xsd:int">3000</Packing>
+         <Marking xsi:type="xsd:string">3kl</Marking>
+         <Orientation xsi:type="xsd:string">1</Orientation>
+         <Produced xsi:type="xsd:int">0</Produced>
+      </Orderline>
+   </Orderline>
+</Workorder>
+</awsns:Workorder>
+</soapenv:Body>
+</soapenv:Envelope>
+
+
+Payload coding/decoding is ok

@@ -1,0 +1,151 @@
+------------------------------------------------------------------------------
+--                              Ada Web Server                              --
+--                                                                          --
+--                     Copyright (C) 2003-2020, AdaCore                     --
+--                                                                          --
+--  This is free software;  you can redistribute it  and/or modify it       --
+--  under terms of the  GNU General Public License as published  by the     --
+--  Free Software  Foundation;  either version 3,  or (at your option) any  --
+--  later version.  This software is distributed in the hope  that it will  --
+--  be useful, but WITHOUT ANY WARRANTY;  without even the implied warranty --
+--  of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU     --
+--  General Public License for  more details.                               --
+--                                                                          --
+--  You should have  received  a copy of the GNU General  Public  License   --
+--  distributed  with  this  software;   see  file COPYING3.  If not, go    --
+--  to http://www.gnu.org/licenses for a complete copy of the license.      --
+------------------------------------------------------------------------------
+
+with "aws_lal";
+with "../shared";
+with "../aws";
+with "../win32/win32";
+
+project Tools is
+
+   TO_BUILD := external("TO_BUILD", "ALL");
+
+   for Languages use ("Ada", "Project file");
+
+   for Source_Dirs use (".", "../templates_parser/tools",
+                        Shared.Build_Target_Dir & "/common/src");
+
+   case TO_BUILD is
+      when "ALL" =>
+         for Main use ("awsres.adb", "aws_password.adb", "templates2ada.adb",
+                       "webxref.adb", "templatespp.adb");
+
+         case Shared.XMLAda is
+            when "Installed" =>
+               for Main use project'Main & ("wsdl2aws-main.adb");
+            when "Disabled" =>
+               for Locally_Removed_Files use Project'Locally_Removed_Files &
+                 ("wsdl2aws.ads", "wsdl2aws-generator.adb",
+                  "wsdl2aws-generator.ads",  "wsdl2aws-generator-cb.adb",
+                  "wsdl2aws-generator-name_set.adb",
+                  "wsdl2aws-generator-skel.adb", "wsdl2aws-generator-stub.adb",
+                  "wsdl2aws-main.adb", "wsdl2aws-wsdl-parameters.adb",
+                  "wsdl2aws-wsdl-parameters.ads", "wsdl2aws-wsdl-parser.adb",
+                  "wsdl2aws-wsdl-parser.ads", "wsdl2aws-wsdl-types.adb",
+                  "wsdl2aws-wsdl-types.ads");
+         end case;
+
+         case Shared.LAL is
+            when "Installed" =>
+               for Main use project'Main & ("ada2wsdl-main.adb");
+            when "Disabled" =>
+               for Locally_Removed_Files use Project'Locally_Removed_Files &
+                 ("ada2wsdl.ads", "ada2wsdl.adb",
+                  "ada2wsdl-generator.ads", "ada2wsdl-generator.adb",
+                  "ada2wsdl-main.ads", "ada2wsdl-main.adb",
+                  "ada2wsdl-options.ads",
+                  "ada2wsdl-parser.ads", "ada2wsdl-parser.adb");
+         end case;
+
+      when others =>
+         for Main use (TO_BUILD);
+   end case;
+
+   for Object_Dir use "../" & Shared'Object_Dir & "/tools";
+   for Exec_Dir use "../" & Shared'Exec_Dir & "/tools";
+
+   --------------
+   -- Compiler --
+   --------------
+
+   package Compiler renames Shared.Compiler;
+
+   ------------
+   -- Naming --
+   ------------
+
+   package Naming renames Shared.Naming;
+
+   ------------
+   -- Binder --
+   ------------
+
+   package Binder is
+      for Default_Switches ("Ada")
+         use Shared.Binder'Default_Switches ("Ada") & ("-static", "-Es");
+   end Binder;
+
+   -------------
+   -- Builder --
+   -------------
+
+   package Builder is
+      for Switches (others) use Shared.Builder'Switches (others);
+      for Executable ("ada2wsdl-main.adb") use "ada2wsdl";
+      for Executable ("wsdl2aws-main.adb") use "wsdl2aws";
+   end Builder;
+
+   ---------
+   -- Ide --
+   ---------
+
+   package Ide renames Shared.Ide;
+
+   ------------
+   -- Linker --
+   ------------
+
+   package Linker is
+
+      for Default_Switches ("Ada") use Shared.Linker'Default_Switches ("Ada");
+
+      case Shared.Build is
+         when "Release" =>
+            case Shared.S_Target is
+               when "Darwin" =>
+                  null;
+               when others =>
+                  for Default_Switches ("Ada")
+                    use Linker'Default_Switches ("Ada") & ("-s");
+            end case;
+         when others =>
+            null;
+      end case;
+
+      case Shared.S_Target is
+         when "Windows_NT" =>
+            for Default_Switches ("Ada")
+               use Tools.Linker'Default_Switches ("Ada") &
+                 ("../" & Shared.Target_Dir & "/common/win32/aws.coff");
+         when others =>
+            null;
+      end case;
+
+   end Linker;
+
+   -------------
+   -- Install --
+   -------------
+
+   package Install is
+
+      for Artifacts ("bin") use ("awsascb");
+
+   end Install;
+
+end Tools;

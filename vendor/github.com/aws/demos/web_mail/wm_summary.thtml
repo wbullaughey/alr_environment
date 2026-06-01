@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>AWS Web Mail Demo</title>
+</head>
+
+<body>
+<p>Simple Web Mail (AWS @_AWS_VERSION_@)
+
+<br>
+
+<p>Mailbox for <b>@_WM_USER_NAME_@</b> (size @_WM_MAILBOX_SIZE_@)
+on server @_WM_POP_SERVER_@
+
+<p><a href="/wm_summary">refresh</a>
+
+<br>
+<br>
+
+<table width="90%" border="1">
+
+<tr>
+<th>N°
+<th>From
+<th>Received
+<th>Size
+<th>Subject
+<th>Delete
+</tr>
+
+@@TABLE@@
+<tr>
+<td><a href="/wm_message?NO_MESSAGE=@_WM_MESSAGE_V_@">@_WM_MESSAGE_V_@</a>
+<td>@_WEB_ESCAPE:WM_FROM_V_@
+<td>@_WM_DATE_V_@
+<td>@_WM_SIZE_V_@
+<td>@_WM_SUBJECT_V_@
+<td><a href="/wm_delete?NO_MESSAGE=@_WM_MESSAGE_V_@">del</a>
+</tr>
+@@SECTION@@
+<tr bgcolor=turquoise>
+<td><a href="/wm_message?NO_MESSAGE=@_WM_MESSAGE_V_@">@_WM_MESSAGE_V_@</a>
+<td>@_WEB_ESCAPE:WM_FROM_V_@
+<td>@_WM_DATE_V_@
+<td>@_WM_SIZE_V_@
+<td>@_WM_SUBJECT_V_@
+<td><a href="/wm_delete?NO_MESSAGE=@_WM_MESSAGE_V_@">del</a>
+</tr>
+@@END_TABLE@@
+
+</table>
+</body>
+</html>

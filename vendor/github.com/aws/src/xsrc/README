@@ -1,0 +1,4 @@
+
+In this directory are all AWS files that depends on XML/Ada.
+
+These files are compiled as part of the build of project ../src/src.gpr.

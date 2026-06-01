@@ -1,0 +1,11 @@
+Start main, wait for server to start...
+Server started
+
+Client Filename = test.out
+Server Filename = ./.test.out
+=> call ok
+
+Client Filename = upload.adb
+Server Filename = ./.upload.adb
+=> call ok
+

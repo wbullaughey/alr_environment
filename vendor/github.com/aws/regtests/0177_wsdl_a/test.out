@@ -1,0 +1,12 @@
+
+   - record          R
+        X : Float (xsd:float)
+   > procedure       P
+        A : Data (n3:Data)
+   - record          Data
+        A : Integer (xsd:int)
+        B : Integer (xsd:int)
+        X : Float (xsd:float)
+        Y : Float (xsd:float)
+
+WSDL document wsdl_a.wsdl is created for wsdl_a.ads.

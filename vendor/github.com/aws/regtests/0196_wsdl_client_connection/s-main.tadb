@@ -1,0 +1,99 @@
+------------------------------------------------------------------------------
+--                              Ada Web Server                              --
+--                                                                          --
+--                     Copyright (C) 2009-2012, AdaCore                     --
+--                                                                          --
+--  This is free software;  you can redistribute it  and/or modify it       --
+--  under terms of the  GNU General Public License as published  by the     --
+--  Free Software  Foundation;  either version 3,  or (at your option) any  --
+--  later version.  This software is distributed in the hope  that it will  --
+--  be useful, but WITHOUT ANY WARRANTY;  without even the implied warranty --
+--  of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU     --
+--  General Public License for  more details.                               --
+--                                                                          --
+--  You should have  received  a copy of the GNU General  Public  License   --
+--  distributed  with  this  software;   see  file COPYING3.  If not, go    --
+--  to http://www.gnu.org/licenses for a complete copy of the license.      --
+------------------------------------------------------------------------------
+
+package API_@_UNIT_NAME_@ is
+
+   procedure Start;
+   procedure Stop;
+
+end API_@_UNIT_NAME_@;
+
+------------------------------------------------------------------------------
+--                              Ada Web Server                              --
+--                                                                          --
+--                     Copyright (C) 2009-2012, AdaCore                     --
+--                                                                          --
+--  This is free software;  you can redistribute it  and/or modify it       --
+--  under terms of the  GNU General Public License as published  by the     --
+--  Free Software  Foundation;  either version 3,  or (at your option) any  --
+--  later version.  This software is distributed in the hope  that it will  --
+--  be useful, but WITHOUT ANY WARRANTY;  without even the implied warranty --
+--  of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU     --
+--  General Public License for  more details.                               --
+--                                                                          --
+--  You should have  received  a copy of the GNU General  Public  License   --
+--  distributed  with  this  software;   see  file COPYING3.  If not, go    --
+--  to http://www.gnu.org/licenses for a complete copy of the license.      --
+------------------------------------------------------------------------------
+
+with AWS.Config.Set;
+with AWS.Server;
+with AWS.Status;
+with AWS.Response;
+with SOAP.Dispatchers.Callback;
+
+with API_Service.CB;
+with API_Service.Server;
+
+package body API_@_UNIT_NAME_@ is
+
+   use AWS;
+
+   WS : AWS.Server.HTTP;
+
+   --------
+   -- CB --
+   --------
+
+   function CB
+      (Request : Status.Data)
+       return Response.Data
+   is
+      R : Response.Data;
+   begin
+      return R;
+   end CB;
+
+   -----------
+   -- Start --
+   -----------
+
+   procedure Start is
+      Conf : Config.Object;
+      Disp : API_Service.CB.Handler;
+   begin
+      Config.Set.Server_Host (Conf, "localhost");
+      Config.Set.Server_Port (Conf, API_Service.Server.Port);
+
+      Disp := SOAP.Dispatchers.Callback.Create
+        (CB'Unrestricted_Access,
+         @_SOAP_SERVICE_@.CB.SOAP_CB'Access);
+
+      AWS.Server.Start (WS, Disp, Conf);
+   end Start;
+
+   ----------
+   -- Stop --
+   ----------
+
+   procedure Stop is
+   begin
+      AWS.Server.Shutdown (WS);
+   end Stop;
+
+end API_@_UNIT_NAME_@;

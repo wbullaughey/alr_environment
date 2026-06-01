@@ -1,0 +1,20 @@
+=============== req
+<?xml version='1.0' encoding='UTF-8'?>
+<soapenv:Envelope soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<soapenv:Body
+ xmlns:awsns="http://soapaws/"
+ xmlns:tns="http://simple.doc.net/sd">
+ <tns:myMethod>
+   <tns:x>6</tns:x>
+   <tns:y>1.12300E+00</tns:y>
+ </tns:myMethod>
+</soapenv:Body>
+</soapenv:Envelope>
+=============== rep
+<?xml version='1.0' encoding='UTF-8'?>
+<soapenv:Envelope soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<soapenv:Body
+ xmlns:tns="http://simple.doc.net/sd">
+<tns:myMethodResponse/>
+</soapenv:Body>
+</soapenv:Envelope>

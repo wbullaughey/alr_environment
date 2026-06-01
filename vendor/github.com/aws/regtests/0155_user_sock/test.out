@@ -1,0 +1,28 @@
+Bind on U_Socket
+Listen on U_Socket
+Connect on U_Socket
+Accept_Socket on U_Socket
+started
+Shutdown on U_Socket
+Accept_Socket on U_Socket
+Accept_Socket on U_Socket
+Receive on U_Socket
+Receive on U_Socket
+Receive on U_Socket
+Receive on U_Socket
+Callback... /toto
+Got : --
+HTTP/1.1 200 OK
+Date: xxx, xx xxx xxxx xx:xx:xx xxx
+Server: AWS (Ada Web Server) vx.y
+Connection: close
+Content-Length: 22
+Content-Type: text/html
+
+response from U_Socket
+--
+Shutdown on U_Socket
+Shutdown on U_Socket
+Shutdown on U_Socket
+Shutdown on U_Socket
+shutdown

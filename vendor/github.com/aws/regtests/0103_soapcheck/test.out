@@ -1,0 +1,2 @@
+Parameter error in Call (Integer expected, found SOAP.TYPES.XSD_STRING)
+Parameter error in Print (Integer expected, found SOAP.TYPES.XSD_STRING)

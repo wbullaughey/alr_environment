@@ -1,0 +1,52 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 44461 (0xadad)
+        Signature Algorithm: ecdsa-with-SHA256
+        Issuer: C=FR, ST=Ile de France, O=AdaCore, OU=CA, CN=CA-Web-Server/emailAddress=ca-aws@adacore.com
+        Validity
+            Not Before: Feb  8 07:19:27 2023 GMT
+            Not After : Dec 17 07:19:27 2032 GMT
+        Subject: C=FR, ST=Ile de France, O=AdaCore, OU=Test, CN=localhost/emailAddress=Test-AWS@AdaCore.com
+        Subject Public Key Info:
+            Public Key Algorithm: id-ecPublicKey
+                Public-Key: (256 bit)
+                pub:
+                    04:97:91:a1:bc:dd:52:94:be:e1:41:13:9f:58:6f:
+                    de:37:22:a3:a7:9b:b7:77:56:7e:5b:94:5e:fc:83:
+                    57:d3:bb:a8:7c:85:88:71:34:cf:e0:e4:89:c5:22:
+                    c1:b2:1f:1d:7f:50:09:24:b6:cb:4a:26:0d:0b:42:
+                    31:0e:fe:fe:0a
+                ASN1 OID: prime256v1
+                NIST CURVE: P-256
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            X509v3 Subject Key Identifier: 
+                8D:2D:D1:32:B8:F2:0E:B6:98:04:5E:24:D5:B9:99:15:82:AD:DB:67
+            X509v3 Authority Key Identifier: 
+                DirName:/C=FR/ST=Ile de France/O=AdaCore/OU=CA/CN=CA-Web-Server/emailAddress=ca-aws@adacore.com
+                serial:07:F0:9F:58:51:FA:0C:00:05:73:B4:7B:4A:97:B1:50:84:9D:11:C9
+    Signature Algorithm: ecdsa-with-SHA256
+    Signature Value:
+        30:45:02:20:20:62:8e:3f:c2:45:ed:ce:a6:3d:29:a7:07:2a:
+        12:ec:ad:5e:9b:ed:ef:ac:54:c9:95:09:dd:a3:a9:f9:f0:ca:
+        02:21:00:bd:20:18:7d:82:43:15:e3:20:84:4b:41:a2:0e:de:
+        f5:93:02:7d:5c:c6:9a:a2:dc:57:40:66:9e:08:3f:e1:81
+-----BEGIN CERTIFICATE-----
+MIICyDCCAm6gAwIBAgIDAK2tMAoGCCqGSM49BAMCMH8xCzAJBgNVBAYTAkZSMRYw
+FAYDVQQIDA1JbGUgZGUgRnJhbmNlMRAwDgYDVQQKDAdBZGFDb3JlMQswCQYDVQQL
+DAJDQTEWMBQGA1UEAwwNQ0EtV2ViLVNlcnZlcjEhMB8GCSqGSIb3DQEJARYSY2Et
+YXdzQGFkYWNvcmUuY29tMB4XDTIzMDIwODA3MTkyN1oXDTMyMTIxNzA3MTkyN1ow
+fzELMAkGA1UEBhMCRlIxFjAUBgNVBAgMDUlsZSBkZSBGcmFuY2UxEDAOBgNVBAoM
+B0FkYUNvcmUxDTALBgNVBAsMBFRlc3QxEjAQBgNVBAMMCWxvY2FsaG9zdDEjMCEG
+CSqGSIb3DQEJARYUVGVzdC1BV1NAQWRhQ29yZS5jb20wWTATBgcqhkjOPQIBBggq
+hkjOPQMBBwNCAASXkaG83VKUvuFBE59Yb943IqOnm7d3Vn5blF78g1fTu6h8hYhx
+NM/g5InFIsGyHx1/UAkktstKJg0LQjEO/v4Ko4HYMIHVMAkGA1UdEwQCMAAwHQYD
+VR0OBBYEFI0t0TK48g62mAReJNW5mRWCrdtnMIGoBgNVHSMEgaAwgZ2hgYSkgYEw
+fzELMAkGA1UEBhMCRlIxFjAUBgNVBAgMDUlsZSBkZSBGcmFuY2UxEDAOBgNVBAoM
+B0FkYUNvcmUxCzAJBgNVBAsMAkNBMRYwFAYDVQQDDA1DQS1XZWItU2VydmVyMSEw
+HwYJKoZIhvcNAQkBFhJjYS1hd3NAYWRhY29yZS5jb22CFAfwn1hR+gwABXO0e0qX
+sVCEnRHJMAoGCCqGSM49BAMCA0gAMEUCICBijj/CRe3Opj0ppwcqEuytXpvt76xU
+yZUJ3aOp+fDKAiEAvSAYfYJDFeMghEtBog7e9ZMCfVzGmqLcV0Bmngg/4YE=
+-----END CERTIFICATE-----

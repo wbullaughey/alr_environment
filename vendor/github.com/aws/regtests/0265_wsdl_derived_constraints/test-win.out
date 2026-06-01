@@ -1,0 +1,53 @@
+Service Deriveconst_Demo
+   WSDL File for Deriveconst Demo
+
+Procedure call SOAPAction:call
+   Input
+      [record] params ; big
+         [simple] id ; Integer
+         [derived] one ; PercentCompleteInteger
+         [derived] two ; NonNegativeInt
+         [derived] three ; NonNegativeFloat
+         [derived] four ; Name
+         [array] five ; ArrayOfName [Name]
+         [derived] six ; Address
+         [derived] seven ; Code1
+         [derived] eight ; Code2
+   Output
+   > call
+Procedure call2 SOAPAction:call2
+   Input
+      [derived] params2 ; MByte
+   Output
+   > call2
+Run OK
+Call 1
+Call 2
+OK
+Id 3
+Faultcode   : soapenv:Client
+Faultstring : Parameter error in call (www-ecerami-com-wsdl-deriveconstservice_wsdl-name_type_pkg.ads:38 length check failed)
+Id 4
+Faultcode   : soapenv:Client
+Faultstring : Parameter error in call (www-ecerami-com-wsdl-deriveconstservice_wsdl-percentcompleteinteger_type_pkg.ads:41 range check failed)
+Id 5
+Faultcode   : soapenv:Client
+Faultstring : Parameter error in call (www-ecerami-com-wsdl-deriveconstservice_wsdl-name_type_pkg.ads:38 length check failed)
+Id 6
+Faultcode   : soapenv:Client
+Faultstring : Parameter error in call (www-ecerami-com-wsdl-deriveconstservice_wsdl-nonnegativefloat_type_pkg.ads:39 range check failed)
+Id 7
+Faultcode   : soapenv:Client
+Faultstring : Parameter error in call (www-ecerami-com-wsdl-deriveconstservice_wsdl-nonnegativeint_type_pkg.ads:39 range check failed)
+Id 8
+Faultcode   : soapenv:Client
+Faultstring : Parameter error in call (dynamic_predicate failed at www-ecerami-com-wsdl-deriveconstservice_wsdl-address_type_pkg.ads:45)
+Id 9
+Faultcode   : soapenv:Client
+Faultstring : Parameter error in call (dynamic_predicate failed at www-ecerami-com-wsdl-deriveconstservice_wsdl-address_type_pkg.ads:45)
+Id 10
+Faultcode   : soapenv:Client
+Faultstring : Parameter error in call (dynamic_predicate failed at www-ecerami-com-wsdl-deriveconstservice_wsdl-code1_type_pkg.ads:45)
+Id 11
+Faultcode   : soapenv:Client
+Faultstring : Parameter error in call (dynamic_predicate failed at www-ecerami-com-wsdl-deriveconstservice_wsdl-code1_type_pkg.ads:45)

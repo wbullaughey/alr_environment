@@ -1,0 +1,36 @@
+started
+
+*** ID =100
+*** N Attachments =  0
+
+*** ID =101
+*** N Attachments =  2
+Filename       file1.dat
+Local Filename ./XpidX-0.file1.dat
+Filename       file2.dat
+Local Filename ./XpidX-1.file2.dat
+
+*** ID =102
+*** N Attachments =  2
+Filename       file1.dat
+Local Filename ./XpidX-2.file1.dat
+Filename       file2.dat
+Local Filename ./XpidX-3.file2.dat
+
+*** ID =103
+*** N Attachments =  2
+Filename       file1.dat
+Local Filename ./XpidX-4.file1.dat
+Filename       file2.dat
+Local Filename ./XpidX-5.file2.dat
+
+allow client upload
+
+*** ID =104
+*** N Attachments =  2
+Filename       file1.dat
+Local Filename ./XpidX-6.file1.dat
+Filename       file2.dat
+Local Filename ./XpidX-7.file2.dat
+big-data size 5610000 bytes
+shutdown

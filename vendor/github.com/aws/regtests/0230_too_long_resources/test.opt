@@ -1,0 +1,2 @@
+vxworks DEAD "require awsres"
+windows-host DEAD "filename = pathname limit"

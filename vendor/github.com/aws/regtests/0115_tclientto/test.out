@@ -1,0 +1,18 @@
+Start main, wait for server to start...
+Server started
+
+=> GET Timeout
+
+=> 3sec ok
+
+=> 10sec ok
+
+=> GET Timeout
+
+-> 3sec ok
+
+-> GET Timeout
+
+-> 3sec ok
+
+-> GET Timeout
