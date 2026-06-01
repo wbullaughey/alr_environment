@@ -1,21 +1,32 @@
 #!/usr/bin/env bash
 #
-# global_tag_ai.sh
+# git-tag-submodules.sh
 #
-# Create -- and optionally push -- a tag on a Git superproject and, when asked,
-# the same tag inside every (recursive) submodule.
+# Create and push a tag on a Git superproject and on its own (top-level)
+# submodules, then push everything.
 #
 # Why this exists:
-#   A superproject already records the exact commit of each submodule (the
-#   "gitlink"), so tagging only the superproject is enough to reproduce the
-#   whole tree later via `git submodule update --init --recursive`. For a
-#   coordinated release, though, this script also tags each submodule's *own*
-#   repository with the same tag, and pushes everything, by default.
+#   A superproject already records the exact commit of every submodule (the
+#   "gitlink"), recursively, so tagging only the superproject is enough to
+#   reproduce the whole tree later via `git submodule update --init --recursive`.
+#   For a coordinated release, this script also tags each *top-level* submodule's
+#   own repository with the same tag and pushes it.
+#
+#   It deliberately does NOT recurse into nested submodules, and it SKIPS any
+#   submodule whose path matches SKIP_PATTERN (vendored third-party deps). Those
+#   are repos you typically don't own -- recursing into them hits broken nested
+#   .gitmodules entries, and pushing to them fails with "permission denied".
+#   The superproject's gitlink still captures their exact commits regardless.
+#   A submodule push that fails (e.g. a third-party remote) warns and continues.
 
 set -euo pipefail
 
 # Remote pushed to for both superproject and submodules. Change if yours differs.
 REMOTE="origin"
+
+# Submodule paths matching this case-glob are skipped (not tagged, not pushed).
+# Set to an empty string to operate on every top-level submodule.
+SKIP_PATTERN="vendor/*"
 
 MSG=""
 SIGN=0
@@ -82,11 +93,17 @@ if [ "$SIGN" -eq 1 ]; then tag_flags+=(-s); else tag_flags+=(-a); fi
 if [ "$FORCE" -eq 1 ]; then tag_flags+=(-f); fi
 
 if [ "$RECURSE" -eq 1 ]; then
-    echo ">> Tagging submodules..."
-    # foreach runs each command via a fresh shell in every submodule dir;
-    # exported vars are inherited, so messages with spaces stay intact.
-    export SM_TAG="$TAG" SM_MSG="$MSG" SM_SIGN="$SIGN" SM_FORCE="$FORCE"
-    git submodule foreach --recursive '
+    echo ">> Tagging submodules (top-level only, skipping '$SKIP_PATTERN')..."
+    # No --recursive: nested submodules of vendored deps often have broken
+    # .gitmodules entries and would abort the run. foreach runs each command in
+    # a fresh shell per submodule; exported vars are inherited.
+    export SM_TAG="$TAG" SM_MSG="$MSG" SM_SIGN="$SIGN" SM_FORCE="$FORCE" SM_SKIP="$SKIP_PATTERN"
+    git submodule foreach '
+        if [ -n "$SM_SKIP" ]; then
+            case "$sm_path" in
+                $SM_SKIP) echo "  skipping $sm_path"; exit 0 ;;
+            esac
+        fi
         flags="-a"
         [ "$SM_SIGN" = "1" ] && flags="-s"
         [ "$SM_FORCE" = "1" ] && flags="$flags -f"
@@ -100,9 +117,17 @@ git tag "${tag_flags[@]}" -m "$MSG" "$TAG"
 if [ "$PUSH" -eq 1 ]; then
     # Push submodules before the superproject so their refs exist first.
     if [ "$RECURSE" -eq 1 ]; then
-        echo ">> Pushing submodule tags to $REMOTE..."
-        export SM_REMOTE="$REMOTE" SM_TAG="$TAG"
-        git submodule foreach --recursive 'git push "$SM_REMOTE" "refs/tags/$SM_TAG"'
+        echo ">> Pushing submodule tags to $REMOTE (skipping '$SKIP_PATTERN')..."
+        export SM_REMOTE="$REMOTE" SM_TAG="$TAG" SM_SKIP="$SKIP_PATTERN"
+        git submodule foreach '
+            if [ -n "$SM_SKIP" ]; then
+                case "$sm_path" in
+                    $SM_SKIP) echo "  skipping $sm_path"; exit 0 ;;
+                esac
+            fi
+            git push "$SM_REMOTE" "refs/tags/$SM_TAG" \
+                || echo "  WARN: could not push tag to $sm_path (continuing)"
+        '
     fi
     echo ">> Pushing superproject tag to $REMOTE..."
     git push "$REMOTE" "refs/tags/$TAG"
