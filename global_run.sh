@@ -87,16 +87,28 @@ output TRACE Optional parameters: $RUN_PARAMETERS
 set -A WORDS ${=RUN_PARAMETERS}
 output TRACE words $WORDS
 
+CAMERA_CONFIGURATION=0
 #for PARAMETER in "$WORDS"; do
 foreach PARAMETER ($WORDS) {
     output TRACE PARAMETER $PARAMETER
-    # Check if parameter starts with '-'
-    if [[ ${PARAMETER[1]} == "-" ]]; then        # Concatenate to OPTIONS variable
-        output TRACE add option $PARAMETER
-        OPTIONS+="$PARAMETER "
+    if [ $CAMERA_CONFIGURATION -eq 1 ]; then
+      OPTIONS+= "-C $PARAMETER"
+      output TRACE added -C $PARAMETER
+      CAMERA_CONFIGURATION=0
     else
-        output TRACE add parameter $PARAMETER
-        PARAMETERS+="$PARAMETER "
+       # Check if parameter starts with '-'
+       if [[ ${PARAMETER[1]} == "-" ]]; then        # Concatenate to OPTIONS variable
+         if [[ ${PARAMETER[2]} == "C" ]]; then
+           output TRACE camera configuration
+           CAMERA_CONFIGURATION=1
+         else
+           OPTIONS+="$PARAMETER "
+           output TRACE add option $PARAMETER
+         fi
+       else
+           output TRACE add parameter $PARAMETER
+           PARAMETERS+="$PARAMETER "
+       fi
     fi
 }
 
@@ -165,6 +177,28 @@ case "$ACTION" in
 
 esac
 
+case $UNIT_TEST_LOCATION in
+
+   home)
+      CAMERA_OPTIONS=-r
+      ;;
+
+   ucwc)
+      CAMERA_LOCATION=
+      ;;
+
+    "")
+       output LIST no UNIT_TEST_LOCATION option provided
+       exit
+       ;;
+
+    *)
+      echo unrecognized UNIT_TEST_LOCATION $UNIT_TEST_LOCATION
+      exit
+      ;;
+
+esac
+
 case $USE_DBDAEMON in
 
    FALSE)
@@ -177,7 +211,7 @@ case $USE_DBDAEMON in
             ;;
 
          "remote")
-            export DATABASE_OPTION="-r"
+#           export DATABASE_OPTION="-@b"
             extract
             parse
             ;;
@@ -198,7 +232,7 @@ case $USE_DBDAEMON in
             ;;
 
          "remote")
-            export DATABASE_OPTION="-r localhost -R /home/wayne/bin/dbdaemon -u wayne"
+            export DATABASE_OPTION="-@b localhost -R /home/wayne/bin/dbdaemon -u wayne"
             ;;
 
          "none")
@@ -288,7 +322,7 @@ case $USE_DBDAEMON in
        ;;
 
 esac
-export COMMAND="$GDB $OPTIONS $DATABASE_OPTION $SUITE_OPTION $ROUTINE_OPTION" # -S 1
+export COMMAND="$GDB $OPTIONS $DATABASE_OPTION $SUITE_OPTION $ROUTINE_OPTION $CAMERA_OPTIONS" # -S 1
 output TRACE "command: $COMMAND"
 run
 
