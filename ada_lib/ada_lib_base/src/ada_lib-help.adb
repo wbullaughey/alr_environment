@@ -93,8 +93,10 @@ package body Ada_Lib.Help is
       Source_Line                : in     String := Ada_Lib.Trace.Here) is
    ----------------------------------------------------------------------------
 
+      Log_It         : constant Boolean := Debug or else Trace_Options;
+
    begin
-      Log_In (Debug, Option.Image &
+      Log_In (Log_It, Option.Image &
          " trace option " & Trace_Option'img &
          Quote (" Parameter", Parameter) &
          Quote (" Description", Description) &
@@ -123,12 +125,12 @@ package body Ada_Lib.Help is
             Source_Line_Length=> Source_Line'length,
             Trace_Option_Set  => False),
          Option            => Option));
-      Log_Out (Debug);
+      Log_Out (Log_It);
 
    exception
 
       when Fault: Constraint_Error =>
-         Trace_Message_Exception (Debug, Fault, Option.Image);
+         Trace_Message_Exception (Log_It, Fault, Option.Image);
          declare
             -------------------------------------------------------
             procedure Process (
@@ -147,7 +149,7 @@ package body Ada_Lib.Help is
                            Quote (" at ", Contents.Source_Line) &
                            Quote (" set from", Source_Line);
             begin
-               Log_Here (Debug or Trace_Options, Quote ("Description", Description) &
+               Log_Here (Log_It, Quote ("Description", Description) &
                   Quote ("Component", Component) &
                   Quote ("Message", Message));
                if Option = Element.Option then
@@ -175,7 +177,7 @@ package body Ada_Lib.Help is
       when Fault: others =>
          Put_Line (Option.Image & Quote (" Description ", Description) &
             Quote (" for ", Component) & " already defined");
-         Trace_Message_Exception (Debug, Fault, Option.Image);
+         Trace_Message_Exception (Log_It, Fault, Option.Image);
          raise;
 
    end Add_Option;
@@ -183,6 +185,8 @@ package body Ada_Lib.Help is
    ----------------------------------------------------------------------------
    procedure Check_Traces is
    ----------------------------------------------------------------------------
+
+      Log_It         : constant Boolean := Debug or else Trace_Options;
 
       -------------------------------------------------------------------------
       procedure Check (
@@ -193,7 +197,7 @@ package body Ada_Lib.Help is
          Contents    : Element_Contents_Type renames Element.Contents.all;
 
       begin
-         Log_Here (Debug,
+         Log_Here (Log_It,
             " has trace " & Contents.Has_Trace'img &
             " Trace_Option_Set " & Contents.Trace_Option_Set'img &
             " kind " & Element.Option.Kind'img & " " &
@@ -216,11 +220,11 @@ package body Ada_Lib.Help is
 
 
    begin
-      Log_In (Debug);
+      Log_In (Log_It);
       if Do_Trace_Checks then
          Line_Package.Iterate (Lines, Check'access);
       end if;
-      Log_Out (Debug);
+      Log_Out (Log_It);
    end Check_Traces;
 
    ----------------------------------------------------------------------------
@@ -236,8 +240,10 @@ package body Ada_Lib.Help is
 
       Flags          : constant Ada_Lib.Options.Flag_Option_Type :=
                         Options.Initialize (Option, Modifier);
+      Log_It         : constant Boolean := Debug or else Trace_Options;
+
    begin
-      Log_In (Debug, Quote ("option", option) &
+      Log_In (Log_It, Quote ("option", option) &
          " trace option " & Trace_Option'img &
          Quote (" parameter", Parameter) &
          Quote (" description", Description) &
@@ -246,11 +252,12 @@ package body Ada_Lib.Help is
 
       Add_Option (Flags, Trace_Option, Parameter, Description, Component,
          Source_Line);
-      Log_Out (Debug);
+      Log_Out (Log_It);
    end Create_Option;
 
    ----------------------------------------------------------------------------
    procedure Display (
+      Parameters                 : in     Ada_Lib.Options.Argument_Array;
       Output_Line                : not null access procedure (
       Line                       : in     String))is
    ----------------------------------------------------------------------------
@@ -316,9 +323,23 @@ package body Ada_Lib.Help is
       end Output;
       -------------------------------------------------------------------------
 
+      First_Parameter   : Boolean := True;
+
    begin
-      Log_In (Debug);
-      Put_Line (Command_Name & " command line options:");
+      Log_In (Debug, "parameters length" & Parameters'length'img);
+      Put (Command_Name & " ");
+      if Parameters'length >= 1 then
+         for Parameter of Parameters loop
+            if First_Parameter then
+               First_Parameter := False;
+            else
+               Put (", ");
+            end if;
+            Log_Here (Debug, Quote ("parameter", Parameter.Coerce));
+            Put (Parameter.Coerce & " ");
+         end loop;
+      end if;
+      Put_Line ("<command line options>:");
       Line_Package.Iterate (Lines, Output'access);
       Log_Out (Debug);
    end Display;
@@ -336,11 +357,13 @@ package body Ada_Lib.Help is
    ----------------------------------------------------------------------------
    procedure Find_Duplicate (
       Option         : in     Ada_Lib.Options.Flag_Option_Type;
-      options      : in     String;
+      options        : in     String;
       Description    : in     String;
       Component      : in     String;
       From           : in     String) is
    ----------------------------------------------------------------------------
+
+      Log_It         : constant Boolean := Debug or else Trace_Options;
 
       -------------------------------------------------------------------------
       procedure Check (
@@ -351,8 +374,9 @@ package body Ada_Lib.Help is
                                     Cursor);
 
       begin
-         Log_Here (Debug, Option_Image (Element, True));
+         Log_Here (Log_It, Option_Image (Element, True));
          if Element.Option = Option then
+            Log_Here (Log_It, "option " & Option'img);
             declare
                Message  : constant String :=
                   "duplicate options for help. Existing " &
@@ -372,9 +396,9 @@ package body Ada_Lib.Help is
       -------------------------------------------------------------------------
 
    begin
-      Log_In (Debug);
+      Log_In (Log_It, "option " & Option'img);
       Line_Package.Iterate (Lines, Check'access);
-      Log_Out (Debug);
+      Log_Out (Log_It);
    end Find_Duplicate;
 
    ----------------------------------------------------------------------------

@@ -53,6 +53,7 @@ package Ada_Lib.Options.Unit_Test is
       Random_Seed_Mode  : Random_Seed_Mode_Type := Seed_Not_Set;
       Report_Random     : Boolean := False;
       Routine           : Ada_Lib.Strings.Unlimited.String_Type;
+      Short_Test        : Boolean := False;
       Suite_Name        : Ada_Lib.Strings.Unlimited.String_Type;
       Suite_Set         : Suite_Set_Type := (others => False);
    end record;

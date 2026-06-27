@@ -264,14 +264,6 @@ package body Ada_Lib.Database.Server.State is
 --    return Server.GUI;
 -- end Get_Top;
 --
--- --------------------------------------------------------------------------------
--- function Get_Main_Window return Gnoga.Gui.Window.Pointer_To_Window_Class is
--- --------------------------------------------------------------------------------
---
--- begin
---    return Server.GUI.Top_Window;
--- end Get_Main_Window;
-
    --------------------------------------------------------------------------------
    function Get_Server (
       Server                     : in     Server_Type

@@ -1,3 +1,5 @@
+with Ada_Lib.Help;
+with Ada_Lib.Options;
 with Ada_Lib.Trace; use Ada_Lib.Trace;
 
 package body Ada_Lib.Options.Nested is
@@ -13,8 +15,10 @@ package body Ada_Lib.Options.Nested is
    procedure Display_Help (            -- common for all programs that use GNOGA_Options
                               -- prints full help, aborts program
      Options                     : in     Nested_Options_Type;  -- only used for dispatch
+     Parameters                  : in     Ada_Lib.Options.Argument_Array;
      Message                     : in     String := "";   -- leave blank no error help
      Halt                        : in     Boolean := True) is
+   pragma Unreferenced (Parameters, Options, Message, Halt);
    ----------------------------------------------------------------------------
 
    begin

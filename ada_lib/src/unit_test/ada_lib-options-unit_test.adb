@@ -365,14 +365,11 @@ return "";
                      end;
 
                   when 'l' =>
-log_here;
                      if Options.Routine.Length > 0 or else
                            Options.Suite_Name.Length > 0 then
-log_here;
                         Bad_Options;
                      end if;
                      Options.Mode := List_Suites;
-log_here;
 
                   when 'm' =>    -- manual operation
                      Options.Manual := True;
@@ -415,6 +412,9 @@ log_here;
                         Put_Line ("random seed" & Options.Random_Seed_Count'img & " =" &
                            Options.Random_Seeds (Options.Random_Seed_Count)'img);
                      end if;
+
+                  when 's' =>
+                     Options.Short_Test := True;
 
                   when 'S' =>
                      Options.Report_Random := True;
@@ -479,15 +479,15 @@ log_here;
 
       when Ada_Lib.Options.Program_Mode =>
          -- options without modifier
-         Ada_Lib.Help.Create_Option ('e', False, "routine", "routine to test.", Component, Ada_Lib.Help.Unmodified_Flag);
+         Ada_Lib.Help.Create_Option ('e', False, "routine", "routine to test.", Component, Ada_Lib.Options.Unmodified_Flag);
          Ada_Lib.Help.Create_Option ('s', False, "suite to test", "select test suite to run.",
-            Component, Ada_Lib.Help.Unmodified_Flag);
+            Component, Ada_Lib.Options.Unmodified_Flag);
          Ada_Lib.Help.Create_Option ('A', False, "suites", "enable default disabled suites.",
             Component, Ada_Lib.Help.Modifier);
          Ada_Lib.Help.Create_Option ('U', True, "unit test trace Ada_Lib",
-            "select trace", Component, Ada_Lib.Help.Unmodified_Flag);
+            "select trace", Component, Ada_Lib.Options.Unmodified_Flag);
          Ada_Lib.Help.Create_Option ('x', False, "", "exit on tests complete", Component,
-            Ada_Lib.Help.Unmodified_Flag);
+            Ada_Lib.Options.Unmodified_Flag);
          -- options with modifier
          Ada_Lib.Help.Create_Option ('d', False, "", "driver suites", Component,
             Ada_Lib.Help.Modifier);
@@ -496,13 +496,15 @@ log_here;
          Ada_Lib.Help.Create_Option ('m', False, "", "manual operations.", Component,
             Ada_Lib.Help.Modifier);
          Ada_Lib.Help.Create_Option ('n', False, "", "no camera", Component,
-            Ada_Lib.Help.Unmodified_Flag);
+            Ada_Lib.Options.Unmodified_Flag);
          Ada_Lib.Help.Create_Option ('S', False, "trace options", "trace flags",
-            Component, Ada_Lib.Help.Unmodified_Flag);
+            Component, Ada_Lib.Options.Unmodified_Flag);
          Ada_Lib.Help.Create_Option ('n', False, "number of random seeds", "number seeds.",
             Component,
             Ada_Lib.Help.Modifier);
          Ada_Lib.Help.Create_Option ('P', False, "", "Print test suites.", Component,
+            Ada_Lib.Help.Modifier);
+         Ada_Lib.Help.Create_Option ('s', False, "", "short test", Component,
             Ada_Lib.Help.Modifier);
          Ada_Lib.Help.Create_Option ('S', False, "", "report random seed", Component,
             Ada_Lib.Help.Modifier);
@@ -512,7 +514,7 @@ log_here;
             Ada_Lib.Help.Modifier);
 
       when Ada_Lib.Options.Trace_Mode =>
-         Ada_Lib.Help.Set_Has_Trace ('U', Ada_Lib.Help.Unmodified_Flag);
+         Ada_Lib.Help.Set_Has_Trace ('U', Ada_Lib.Options.Unmodified_Flag);
          Put_Line ("Ada_Lib unit test library trace options (-" &
             Trace_Option & ")");
          Put_Line ("      a               all");

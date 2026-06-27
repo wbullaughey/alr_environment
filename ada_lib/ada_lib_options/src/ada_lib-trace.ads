@@ -287,6 +287,10 @@ package Ada_Lib.Trace is
       Where       : in   String := GNAT.Source_Info.Source_Location;
       Who         : in   String := GNAT.Source_Info.Enclosing_Entity);
 
+   function Trace_Pre_Post (
+      Debug       : in     Boolean
+   ) return Boolean;
+
    function Trace_Return (
       Debug       : in     Boolean;
       Value       : in     Boolean;

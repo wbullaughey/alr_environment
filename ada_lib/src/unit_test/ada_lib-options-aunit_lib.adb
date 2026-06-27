@@ -31,7 +31,7 @@ package body Ada_Lib.Options.AUnit_Lib is
 --                                     Initialize (
 --                                        'tT', Ada_Lib.Help.Modifier) &
 --                                     Initialize (
---                                        "d", Ada_Lib.Help.Unmodified_Flag);
+--                                        "d", Ada_Lib.Options.Unmodified_Flag);
    Trace_Modifier             : character renames Ada_Lib.Help.Trace_Modifier;
 
    ----------------------------------------------------------------------------
@@ -39,6 +39,7 @@ package body Ada_Lib.Options.AUnit_Lib is
    procedure Display_Help (
                -- prints full help
      Options   : in     Aunit_Program_Options_Type;     -- only used for dispatch
+     Parameters: in     Ada_Lib.Options.Argument_Array;
      Message   : in     String := "";  -- leave blank no error help
      Halt      : in     Boolean := True) is
    ----------------------------------------------------------------------------
@@ -85,7 +86,8 @@ package body Ada_Lib.Options.AUnit_Lib is
 --
 --    end loop;
 
-      Program.Program_Options_Type (Options).Display_Help ("", False);
+      Program.Program_Options_Type (Options).Display_Help (
+         Program.Get_Command_Parameters.all, "", False);
 --    Options.Program_Help (Trace_Mode);
 --    Options.Get_Read_Only_Nested_Program_Options.Program_Help (Trace_Mode);
 
@@ -432,7 +434,8 @@ return false;
                Iterator, Option) or else
             Options.GNOGA_Unit_Test_Options.Process_Option (
                Iterator, Option) or else
-            Options.Nested_Unit_Test_Options.Process_Option (Iterator, Option));
+            Options.Nested_Unit_Test_Options.Process_Option (Iterator, Option),
+            Trace_Options or Debug);
 --          Program.Program_Options_Type (Options).Process_Option (
 --               Iterator, Option),
 --             Trace_Options or Debug, Option.Image & " processed");
@@ -454,10 +457,10 @@ return false;
 
       when Program_Mode =>
          Ada_Lib.Help.Create_Option (Trace_Option, True, "trace options",
-            "ada_lib trace options", Component, Ada_Lib.Help.Unmodified_Flag);
+            "ada_lib trace options", Component, Ada_Lib.Options.Unmodified_Flag);
 
       when Trace_Mode =>
-         Ada_Lib.Help.Set_Has_Trace (Trace_Option, Ada_Lib.Help.Unmodified_Flag);
+         Ada_Lib.Help.Set_Has_Trace (Trace_Option, Ada_Lib.Options.Unmodified_Flag);
          Put_Line (Ada_Lib.Trace.Who & " trace options (-" &
             Trace_Option & ")");
          Put_Line ("      a               all");
@@ -503,9 +506,10 @@ return false;
             Options.Database_Only.Program_Help (Help_Mode);
 
       end case;
+      Options.Ada_Lib_Trace_Options.Program_Help (Help_Mode);
       Options.GNOGA_Unit_Test_Options.Program_Help (Help_Mode);
       Options.Nested_Unit_Test_Options.Program_Help (Help_Mode);
---    Program.Program_Options_Type (Options).Program_Help (Help_Mode);
+--    Ada_Lib.Options.Program.Program_Options_Type'class (Options).Program_Help (Help_Mode);
 
       Log_Out (Debug or Trace_Options);
    end Program_Help;

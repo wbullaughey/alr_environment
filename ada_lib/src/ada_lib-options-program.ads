@@ -1,4 +1,4 @@
---with Ada_Lib.Options.Library;
+--with Ada_Lib.Help;
 with Ada_Lib.Options.Verification;
 with Ada_Lib.Trace;
 --with GNAT.Source_Info;
@@ -28,6 +28,7 @@ package Ada_Lib.Options.Program is
    procedure Display_Help (            -- common for all programs that use GNOGA_Options
                               -- prints full help, aborts program
      Options                     : in     Nested_Program_Options_Type;  -- only used for dispatch
+     Parameters                  : in     Ada_Lib.Options.Argument_Array;
      Message                     : in     String := "";   -- leave blank no error help
      Halt                        : in     Boolean := True);
 
@@ -136,6 +137,7 @@ package Ada_Lib.Options.Program is
    procedure Display_Help (   -- common for all programs that use GNOGA_Options
                               -- prints full help, aborts program
      Options   : in     Program_Options_Type;  -- only used for dispatch
+     Parameters: in     Ada_Lib.Options.Argument_Array;
      Message   : in     String := "";   -- leave blank no error help
      Halt      : in     Boolean := True);
 
@@ -230,9 +232,20 @@ package Ada_Lib.Options.Program is
       Options                    : in out Program_Options_Type;
       Iterator                   : in out Command_Line_Iterator_Interface'class);
 
+   function Get_Command_Parameters
+   return Options.Argument_Array_Constant_Access
+   with Pre    => Has_Command_Parameters;
+
    function Has_Camera
    return Boolean
    with Pre    => Verification.Have_Ada_Lib_Verification_Options;
+
+   function Has_Command_Parameters
+   return Boolean;
+
+   procedure Set_Command_Parameters (
+      Command_Parameters_Pointer
+         : in     Options.Argument_Array_Constant_Access);
 
 private
 

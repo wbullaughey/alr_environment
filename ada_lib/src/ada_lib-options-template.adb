@@ -123,18 +123,18 @@ package body Ada_Lib.Options.Template is
 --          if Ada_Lib.Options.Ada_Lib_Environment.Help_Test then
                New_Line;
 --             Ada_Lib.Help.Create_Option (Trace_Option, "options", -- t
---                "enables trace template unit tests", Component, Ada_Lib.Help.Unmodified_Flag);
+--                "enables trace template unit tests", Component, Ada_Lib.Options.Unmodified_Flag);
                Ada_Lib.Help.Create_Option (
                   Option         => Trace_Option,
                   Trace_Option   => True,
                   Parameter      => "options",
                   Description    => "enables trace template unit tests",
                   Component      => Component,
-                  Modifier       => Ada_Lib.Help.Unmodified_Flag);
+                  Modifier       => Ada_Lib.Options.Unmodified_Flag);
 --          end if;
 
          when Ada_Lib.Options.Trace_Mode =>
-            Ada_Lib.Help.Set_Has_Trace (Trace_Option, Ada_Lib.Help.Unmodified_Flag);
+            Ada_Lib.Help.Set_Has_Trace (Trace_Option, Ada_Lib.Options.Unmodified_Flag);
             Put_Line (Component & " (-" & Trace_Option & ")");
             Put_Line ("      a               all");
             Put_Line ("      c               compile");

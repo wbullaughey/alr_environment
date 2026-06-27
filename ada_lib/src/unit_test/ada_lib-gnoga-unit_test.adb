@@ -58,7 +58,7 @@ package body Ada_Lib.GNOGA.Unit_Test is
          " Wait_For_Message_Loop_Exit " & Wait_For_Message_Loop_Exit'img);
 --tag_history (options.all'tag);
 --not_implemented;
-      Ada_Lib.Unit_Test.Test_Cases.Test_Case_Type (Test).Set_Up;
+--    Ada_Lib.Unit_Test.Test_Cases.Test_Case_Type (Test).Set_Up;
       if not Test.Test_Driver then
          Log_Here (Debug, -- "URL_Opened " & URL_Opened'img &
             " Initialize_GNOGA " & Test.Initialize_GNOGA'img);
@@ -91,8 +91,8 @@ package body Ada_Lib.GNOGA.Unit_Test is
          delay 0.2;  -- let server stop
       end if;
 
-      GNOGA_Ada_Lib.Base.Set_Main_Created (False);
-      Clear_Main_Window;
+--    GNOGA_Ada_Lib.Base.Set_Main_Created (False);
+      Create_Main_Window_Package.Clear_Main_Window;
       Ada_Lib.Unit_Test.Test_Cases.Test_Case_Type (Test).Tear_Down;
       Log_Out (Debug or Trace_Set_Up_Tear_Down);
 

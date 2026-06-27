@@ -473,8 +473,7 @@ package body Ada_Lib.Trace is
    -------------------------------------------------------------------
 
    begin
-      Log_Here (Enable or else (Trace_Pre_Post_False and not Result),
-         "result " & Result'img & " " & Message, Where, Who);
+      Log_Here (Enable, "result " & Result'img & " " & Message, Where, Who);
       return Result;
    end Log_Here;
 
@@ -507,8 +506,7 @@ package body Ada_Lib.Trace is
    -------------------------------------------------------------------
 
    begin
---put_Line (here & " recursed " & recursed'img & " enable " & enable'img);
-      Log_In (Enable or else Trace_Pre_Post_False, Message, Where, Who);
+      Log_In (Enable, Message, Where, Who);
 
       if Recursed then
          Put_Line ("recursive call from " & Where & " by " & Who &
@@ -547,8 +545,7 @@ package body Ada_Lib.Trace is
    -------------------------------------------------------------------
 
    begin
-      Log_Out (Enable or else Trace_Pre_Post_Conditions or else
-         (Trace_Pre_Post_False and not Result),
+      Log_Out (Enable,
          "result " & Result'img & " " & Message, Where, Who);
       return Result;
    end Log_Out;
@@ -565,7 +562,7 @@ package body Ada_Lib.Trace is
    begin
       if Recursed then
          Recursed := False;
-         Log_Out (Enable or else Trace_Pre_Post_False, Message, Where, Who);
+         Log_Out (Enable, Message, Where, Who);
       else
          raise Recursive_Failure with "not logged in from " & Where & " by " & Who;
       end if;
@@ -585,7 +582,7 @@ package body Ada_Lib.Trace is
    begin
       if Recursed then
          Recursed := False;
-         Log_Out (Enable or else Trace_Pre_Post_False,
+         Log_Out (Enable,
             "recursed " & Recursed'img &
             " result " & Result'img & " " & Message, Where, Who);
          return Result;
@@ -1385,6 +1382,19 @@ not_implemented;
 not_implemented;
    end Set;
 
+   ------------------------------------------------------------
+   function Trace_Pre_Post (
+      Debug       : in     Boolean
+   ) return Boolean is
+   ------------------------------------------------------------
+
+   begin
+      return Debug or else
+             Trace_Pre_Post_Conditions or else
+             Trace_Pre_Post_False;
+   end Trace_Pre_Post;
+
+   ------------------------------------------------------------
    procedure Unlocked_Put (
       Enable   : in     Boolean;
       Context  : in     Context_Type;

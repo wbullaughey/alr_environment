@@ -78,7 +78,7 @@ package body Ada_Lib.GNOGA.Unit_Test.Base is
       Log_In (Debug, Quote ("URL", URL));
 --    Window_Lock.Set_Window (Main_Window'unchecked_access);
       Pause_On_Flag ("exit handler");
-      GNOGA_Ada_Lib.Base.Set_Main_Created (True);
+      Ada_Lib.GNOGA.Get_Window_Connection_Data.Set_Main_Created;
       GNOGA_Ada_Lib.Base.Message_Loop_Signal.Completed;
       Log_Out (Debug);
    end Connect_Browser_Handler;
@@ -118,7 +118,7 @@ package body Ada_Lib.GNOGA.Unit_Test.Base is
          Connection_Data.Display_Window.Put_Line ("test window content");
          Main_Window.Connection_Data (Connection_Data);
          Pause_On_Flag ("exit handler");
-         GNOGA_Ada_Lib.Base.Set_Main_Created (True);
+         Ada_Lib.GNOGA.Get_Window_Connection_Data.Set_Main_Created;
          GNOGA_Ada_Lib.Base.Message_Loop_Signal.Completed;
       end;
       Log_Out (Debug);
@@ -173,7 +173,7 @@ exception
          Connection_Data.Button.On_Click_Handler (Button_On_Exit'Unrestricted_Access);
          Pause_On_Flag ("handler set");
          Button_On_Exit (Connection_Data.Button);
-         GNOGA_Ada_Lib.Base.Set_Main_Created (True);
+         Ada_Lib.GNOGA.Get_Window_Connection_Data.Set_Main_Created;
          GNOGA_Ada_Lib.Base.Message_Loop_Signal.Completed;
          Pause_On_Flag ("exit handler");
       end;
@@ -295,7 +295,7 @@ not_implemented;
    begin
       Log_In (Debug or Trace_Set_Up_Tear_Down);
 --    GNOGA_Ada_Lib.Clear_Connection_Data;
-      GNOGA_Ada_Lib.Base.Set_Main_Created (False);
+--    GNOGA_Ada_Lib.Base.Set_Main_Created (False);
       Ada_Lib.GNOGA.Unit_Test.GNOGA_Tests_Type (Test).Tear_Down;
       Log_Out (Debug or Trace_Set_Up_Tear_Down);
    end Tear_Down;

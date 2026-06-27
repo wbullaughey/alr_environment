@@ -16,31 +16,34 @@ package body Ada_Lib.Options.Program is
 
    procedure Set_All;
 
-   Debug                         : Boolean renames Ada_Lib.Options.
-                                    Ada_Lib_Options_Program.Debug;
-   Include_Task                  : Boolean renames
-                                    Ada_Lib.Options.Trace.Include_Task;
-   Include_Time                  : Boolean renames
-                                    Ada_Lib.Options.Trace.Include_Time;
-   Initialize_Recursed           : Boolean := False;
-   Test_Condition_Flag           : constant Character := 'c';
-   Options_With_Parameters       : aliased constant
-                                    Flag_List_Type :=
-                                       Initialize (
-                                          'a', Unmodified_flag);
-   Options_Without_Parameters    : aliased constant
-                                    Flag_List_Type :=
-                                       Initialize (
-                                          "hPv#", Unmodified_flag) &
-                                       Initialize (
-                                          "ipTx" & Test_Condition_Flag,
-                                          Ada_Lib.Help.Modifier);
+   Command_Parameters      : Options.Argument_Array_Constant_Access := Null;
+   Debug                   : Boolean renames Ada_Lib.Options.
+                              Ada_Lib_Options_Program.Debug;
+   Include_Task            : Boolean renames
+                              Ada_Lib.Options.Trace.Include_Task;
+   Include_Time            : Boolean renames
+                              Ada_Lib.Options.Trace.Include_Time;
+   Initialize_Recursed     : Boolean := False;
+   Test_Condition_Flag     : constant Character := 'c';
+   Options_With_Parameters : aliased constant
+                              Flag_List_Type :=
+                                 Initialize (
+                                    'a', Unmodified_flag);
+   Options_Without_Parameters
+                           : aliased constant
+                              Flag_List_Type :=
+                                 Initialize (
+                                    "hPv#", Unmodified_flag) &
+                                 Initialize (
+                                    "ipTx" & Test_Condition_Flag,
+                                    Ada_Lib.Help.Modifier);
 
    ----------------------------------------------------------------------------
    overriding
    procedure Display_Help (   -- common for all programs that use GNOGA_Options
                               -- prints full help
      Options   : in     Program_Options_Type;     -- only used for dispatch
+     Parameters: in     Ada_Lib.Options.Argument_Array;
      Message   : in     String := "";  -- leave blank no error help
      Halt      : in     Boolean := True) is
    ----------------------------------------------------------------------------
@@ -63,21 +66,13 @@ package body Ada_Lib.Options.Program is
          " halt " & Halt'img &
          Tag_Name (" options", Abstract_Runtime_Options_Type'class (
             Options)'tag));
---    if Options.In_Help then
---       Ada_Lib.OS.Immediate_Halt (Ada_Lib.OS.No_Error);
---    end if;
 
       if Message'length > 0 then
          Put_Line (Message);
       end if;
---log_here;
---      Verification.Get_Ada_Lib_Read_Only_Nested_Options.
---         Program_Help (Program_Mode);
 
---    Options.Nested_Program_Options.Program_Help (Program_Mode);
-      Ada_Lib.Options.Verification.Verification_Program_Options_Type'class (
-         Options).Program_Help (Program_Mode);
-      Ada_Lib.Help.Display (Print_Help'access);
+      Program_Options_Type'class (Options).Program_Help (Program_Mode);
+      Ada_Lib.Help.Display (Parameters, Print_Help'access);
       New_Line;
       Ada_Lib.Options.Verification.Verification_Program_Options_Type'class (
          Options).Program_Help (Trace_Mode);
@@ -95,20 +90,21 @@ package body Ada_Lib.Options.Program is
    procedure Display_Help (            -- common for all programs that use GNOGA_Options
                               -- prints full help
      Options                     : in     Nested_Program_Options_Type;     -- only used for dispatch
+     Parameters                  : in     Ada_Lib.Options.Argument_Array;
      Message                     : in     String := "";  -- leave blank no error help
      Halt                        : in     Boolean := True) is
    ----------------------------------------------------------------------------
 
-      -------------------------------------------------------------------------
-      procedure Print_Help (
-         Line                    : in     String) is
-      -------------------------------------------------------------------------
-
-      begin
-         Put ("    ");
-         Put_Line (Line);
-      end Print_Help;
-      -------------------------------------------------------------------------
+--    -------------------------------------------------------------------------
+--    procedure Print_Help (
+--       Line                    : in     String) is
+--    -------------------------------------------------------------------------
+--
+--    begin
+--       Put ("    ");
+--       Put_Line (Line);
+--    end Print_Help;
+--    -------------------------------------------------------------------------
 
    begin
       Log_In (Debug or Trace_Options, Quote ("message", Message) &
@@ -123,19 +119,20 @@ package body Ada_Lib.Options.Program is
       if Message'length > 0 then
          Put_Line (Message);
       end if;
-      Verification.Get_Ada_Lib_Read_Only_Program_Options.
-         Program_Help (Program_Mode);
-
-      Ada_Lib.Help.Display (Print_Help'access);
-      New_Line;
-
-      Options.GNOGA_Ada_Lib_Option.Program_Help (Program_Mode);
-
 
       if Halt then
          Ada_Lib.OS.Immediate_Halt (Ada_Lib.OS.No_Error);
       end if;
    end Display_Help;
+
+   ----------------------------------------------------------------------------
+   function Get_Command_Parameters
+   return Argument_Array_Constant_Access is
+   ----------------------------------------------------------------------------
+
+   begin
+      return Command_Parameters;
+   end Get_Command_Parameters;
 
    ----------------------------------------------------------------------------
    function Get_Modifiable_Program_Options (
@@ -242,6 +239,15 @@ package body Ada_Lib.Options.Program is
          raise;
 
    end Has_Camera;
+
+   ----------------------------------------------------------------------------
+   function Has_Command_Parameters
+   return Boolean is
+   ----------------------------------------------------------------------------
+
+   begin
+      return Command_Parameters /= Null;
+   end Has_Command_Parameters;
 
    ----------------------------------------------------------------------------
    function Have_Nested_Program_Options (
@@ -462,7 +468,8 @@ return false;
    exception
       when Fault: Ada_Lib.Options.Failed =>
          Trace_Exception (Debug or Trace_Options, Fault);
-         Options.Display_Help (Ada.Exceptions.Exception_Message (Fault), True);
+         Options.Display_Help (Help.Null_Parameters,
+            Ada.Exceptions.Exception_Message (Fault), True);
          raise;
 
       when Fault: others =>
@@ -520,7 +527,8 @@ return false;
    exception
       when Fault: Ada_Lib.Options.Failed =>
          Trace_Exception (Debug or Trace_Options, Fault);
-         Options.Display_Help (Ada.Exceptions.Exception_Message (Fault), True);
+         Options.Display_Help (Get_Command_Parameters.all,
+            Ada.Exceptions.Exception_Message (Fault), True);
          raise;
 
       when Fault: others =>
@@ -563,7 +571,8 @@ return false;
                      begin
                         Tag_history (Log_It,
                            "Program_Options", Program_Options.all'tag);
-                        Program_Options.Display_Help ("", False);
+                        Program_Options.Display_Help (
+                           Get_Command_Parameters.all, "", False);
                         Ada_Lib.Help.Check_Traces;
                         Log_Out (Log_It);
 
@@ -620,8 +629,7 @@ return false;
             Debug or Trace_Options,
             Quote (" option not handled", Option.Image));
       end if;
-      return Log_Out (True, Debug or Trace_Options,
-         " option" & Option.Image & " handled");
+      return Log_Out (True, Debug or Trace_Options, Option.Image & " handled");
    end Process_Option;
 
 --   ----------------------------------------------------------------------------
@@ -657,15 +665,13 @@ return false;
       when Ada_Lib.Options.Program_Mode =>
          Ada_Lib.Help.Create_Option ('a', True, "trace options",
             "Ada_Lib library trace options", Component,
-            Ada_Lib.Help.Unmodified_Flag);
+            Ada_Lib.Options.Unmodified_Flag);
          Ada_Lib.Help.Create_Option ('h', False, "", "this message",
-            Component, Ada_Lib.Help.Unmodified_Flag);
+            Component, Ada_Lib.Options.Unmodified_Flag);
          Ada_Lib.Help.Create_Option ('P', False, "", "set pause flag",
-            Component, Ada_Lib.Help.Unmodified_Flag);
---       Ada_Lib.Help.Create_Option ('s', False, "", "camera state path",
---          Component, Ada_Lib.Help.Unmodified_Flag);
+            Component, Ada_Lib.Options.Unmodified_Flag);
          Ada_Lib.Help.Create_Option ('v', False, "", "verbose", Component,
-            Ada_Lib.Help.Unmodified_Flag);
+            Ada_Lib.Options.Unmodified_Flag);
          Ada_Lib.Help.Create_Option (Test_Condition_Flag, False, "",
             "trace test condition", Component, Ada_Lib.Help.Modifier);
          Ada_Lib.Help.Create_Option ('i', False, "", "indent trace",
@@ -677,12 +683,12 @@ return false;
          Ada_Lib.Help.Create_Option ('x', False, "", "exclude time in trace",
             Component,Ada_Lib.Help.Modifier);
          Ada_Lib.Help.Create_Option ('#', False, "", "exclude trace checks",
-            Component, Ada_Lib.Help.Unmodified_Flag);
+            Component, Ada_Lib.Options.Unmodified_Flag);
          Ada_Lib.Help.Create_Option ('?', False, "", "this message",
-            Component, Ada_Lib.Help.Unmodified_Flag);
+            Component, Ada_Lib.Options.Unmodified_Flag);
 
       when Ada_Lib.Options.Trace_Mode =>
-         Ada_Lib.Help.Set_Has_Trace ('a', Ada_Lib.Help.Unmodified_Flag);
+         Ada_Lib.Help.Set_Has_Trace ('a', Ada_Lib.Options.Unmodified_Flag);
          Put_Line ("CAC ada_lib trace library options (-a)");
          Put_Line ("      a               all");
          Put_Line ("      b               database subscribe");
@@ -698,18 +704,22 @@ return false;
          Put_Line ("      m               timer");
          Put_Line ("      M               mail");
          Put_Line ("      o               os");
-         Put_Line ("      O               Ada_Lib.Options");
+         Put_Line ("      O               Ada_Lib.Options.Program.Debug:" &
+            " Ada_Lib_Options_Program.Debug");
          Put_Line ("      p               parser");
          Put_Line ("      P               database post");
-         Put_Line ("      r               run remote, database connect");
+         Put_Line ("      r               run remote");
          Put_Line ("      R               Ada_Lib.Options.Runstring.Debug");
          Put_Line ("      s               socket trace");
          Put_Line ("      S               socket Stream tracing");
          Put_Line ("      t               Ada_Lib.Trace");
          Put_Line ("      T               Ada_Lib.Trace_Tasks");
          Put_Line ("      v               Ada_Lib.Options.Verification.Debug");
+         Put_Line ("      V               Ada_Lib.Options.Trace_Conversions");
 --       Put_Line ("      x               Ada_Lib.Trace.Detail");
 --       Put_Line ("      @               Ada_Lib.Strings");
+         Put_Line ("      " & Ada_Lib.Help.Trace_Modifier &
+                           "b              database connect");
          Put_Line ("      " & Ada_Lib.Help.Trace_Modifier &
                            "c              Template Compile");
          Put_Line ("      " & Ada_Lib.Help.Trace_Modifier &
@@ -769,7 +779,7 @@ return false;
       Ada_Lib_Lock.Debug := True;
       Ada_Lib_EMail.Debug := True;
       Ada_Lib_Mail.Debug := True;
---    GNOGA_Options.Debug := True;
+      Ada_Lib_Options_Program.Debug := True;
       Ada_Lib_Options_Runstring.Debug := True;
       Ada_Lib_Options.Debug := True;
       Ada_Lib_OS.Trace := True;
@@ -782,8 +792,17 @@ return false;
       Ada_Lib_Timer.Debug := True;
       Ada_Lib_Trace_Tasks.Debug := True;
       Ada_Lib.Trace.Trace_Pre_Post_Conditions := True;
-      Debug := True;
    end Set_All;
+
+   ----------------------------------------------------------------------------
+   procedure Set_Command_Parameters (
+      Command_Parameters_Pointer
+         : in     Options.Argument_Array_Constant_Access) is
+   ----------------------------------------------------------------------------
+
+   begin
+      Command_Parameters := Command_Parameters_Pointer;
+   end Set_Command_Parameters;
 
 -- ----------------------------------------------------------------------------
 -- procedure Set_Nested_Program_Options (
@@ -861,14 +880,13 @@ return false;
                      Ada_Lib_OS.Trace := True;
 
                   when 'O' =>
-                     Debug := True;
+                     Ada_Lib_Options_Program.Debug := True;
 
                   when 'p' =>
                      Ada_Lib_Parser.Debug := True;
 
                   when 'r' =>
                      Ada_Lib_OS.Run_Debug := True;
-                     Ada_Lib_Database.Connection_Debug := True;
 
                   when 'R' =>
                      Ada_Lib_Options_Runstring.Debug := True;
@@ -888,6 +906,9 @@ return false;
                   when 'v' =>
                      Ada_Lib_Options_Verification.Debug := True;
 
+                  when 'V' =>
+                     Trace_Conversions := True;
+
                   when Ada_Lib.Help.Trace_Modifier =>
                      Extended := True;
 
@@ -900,6 +921,9 @@ return false;
             when True =>
 
                case Trace is
+
+                  when 'b' =>
+                     Ada_Lib_Database.Connection_Debug := True;
 
                   when 'c' =>
                      Ada_Lib_Template.Trace_Compile := True;
@@ -948,16 +972,6 @@ return false;
       end loop;
       Log_Out (Debug or Ada_Lib_Trace_Trace or Trace_Options);
    end Trace_Parse;
-
---   ----------------------------------------------------------------------------
---   procedure Program_Help (
---      Trace_Parse                : in     Program_Options_Type;  -- only used for dispatch
---      Iterator                   : in out Command_Line_Iterator_Interface'class) is
---   ----------------------------------------------------------------------------
---
---   begin
---not_implemented;
---   end Program_Help;
 
    ----------------------------------------------------------------------------
    overriding

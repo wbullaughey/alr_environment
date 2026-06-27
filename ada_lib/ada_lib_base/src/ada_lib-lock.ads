@@ -52,8 +52,6 @@ Pragma Elaborate_Body;
       Lock               : in out Lock_Type;
       From                 : in     String := GNAT.Source_Info.Source_Location);
 
-   Debug                   : aliased Boolean := False;
-
 private
 
    protected type Protected_Lock_Type is

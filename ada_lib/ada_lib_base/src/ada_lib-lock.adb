@@ -1,10 +1,12 @@
 --with Ada.Real_Time;
 --with Ada.Text_IO; use  Ada.Text_IO;
+with Ada_Lib.Options;
+with Ada_Lib.Strings; use Ada_Lib.Strings;
 with Ada_Lib.Trace; use Ada_Lib.Trace;
 
 package body Ada_Lib.Lock is
 
--- use type Ada.Real_Time.Time;
+   Debug    : Boolean renames Options.Ada_Lib_Lock.Debug;
 
    -------------------------------------------------------------------
    overriding
@@ -16,7 +18,7 @@ package body Ada_Lib.Lock is
 
    begin
       return Log_Here (Lock.Protected_Lock.Is_Locked, Debug,
-         "called from " & From);
+         "lock address " & Image (Lock'address) & " called from " & From);
    end Is_Locked;
 
    -------------------------------------------------------------------
@@ -32,7 +34,8 @@ package body Ada_Lib.Lock is
 
    begin
       Log_In (Debug, "locked " & Lock.Protected_Lock.Is_Locked'img &
-         " timeout " & Timeout'img & " from " & From);
+         " timeout " & Timeout'img &
+         " lock address " & Image (Lock'address) & " from " & From);
 
       if Timeout = Min_Lock_Time then
          Lock.Protected_Lock.Try_Lock (Result);
@@ -67,7 +70,7 @@ package body Ada_Lib.Lock is
    -------------------------------------------------------------------
 
    begin
-      Log_In (Debug, "from " & From);
+      Log_In (Debug, "lock address " & Image (Lock'address) & " from " & From);
       if not Lock.Lock then
          raise Already_Locked with "from " & From;
       end if;
@@ -98,7 +101,7 @@ package body Ada_Lib.Lock is
    -------------------------------------------------------------------
 
    begin
-      Log_Here (Debug, "from " & From);
+      Log_Here (Debug, "lock address " & Image (Lock'address) & "from " & From);
       Lock.Protected_Lock.Unlock;
    end Unlock;
 

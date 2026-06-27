@@ -14,9 +14,9 @@ package body Ada_Lib.Options.Database is
    Options_With_Parameters       : aliased constant
                                     Flag_List_Type :=
                                        Initialize (
-                                          "LprRu", Unmodified_flag) &
+                                          "LpRu", Unmodified_flag) &
                                        Initialize (
-                                          Remote_Daemon_Option, Help.Modifier);
+                                          Remote_Daemon_Option & 'b', Help.Modifier);
    Options_Without_Parameters    : aliased constant
                                     Flag_List_Type :=
                                        Initialize (
@@ -156,19 +156,6 @@ package body Ada_Lib.Options.Database is
                Options.Port := Ada_Lib.Database.Port_Type (
                   Iterator.Get_Integer);
 
-            when 'r' =>
-               Options.Cant_Be_Local;
-
-               declare
-                  Parameter   : constant String := Iterator.Get_Parameter;
-
-               begin
-                  Options.Remote_Host.Set (Parameter);
-                  Options.No_DBDaemon := False;
-                  Log_Here (Trace_Options or Debug, "Remote host '" &
-                     Parameter & "'");
-               end;
-
             when 'R' =>
                Options.Cant_Be_Local;
 
@@ -198,7 +185,30 @@ package body Ada_Lib.Options.Database is
 
             end case;
 
-         when Modified | Nil_Option =>
+         when Modified =>
+
+            case Option.Option is
+
+            when 'b' =>
+               Options.Cant_Be_Local;
+
+               declare
+                  Parameter   : constant String := Iterator.Get_Parameter;
+
+               begin
+                  Options.Remote_Host.Set (Parameter);
+                  Options.No_DBDaemon := False;
+                  Log_Here (Trace_Options or Debug, "Remote host '" &
+                     Parameter & "'");
+               end;
+
+            when Others =>
+               Log_Exception (Debug or Trace_Options);
+               raise Failed with "Has_Option incorrectly passed " & Option.Image;
+
+            end case;
+
+         when Nil_Option =>
             Log_Exception (Debug or Trace_Options);
             raise Failed with "Has_Option incorrectly passed " & Option.Image;
 
@@ -246,14 +256,24 @@ package body Ada_Lib.Options.Database is
       case Help_Mode is
 
       when Ada_Lib.Options.Program_Mode =>
-         Ada_Lib.Help.Create_Option ('l', False, "", "local dbdaemon.", Component, Ada_Lib.Help.Unmodified_Flag);
-         Ada_Lib.Help.Create_Option ('L', False, "path", "local dbdaemon path.", Component, Ada_Lib.Help.Unmodified_Flag);
-         Ada_Lib.Help.Create_Option ('p', False, "port number", "remote DBDaemon port number", Component, Ada_Lib.Help.Unmodified_Flag);
---       Ada_Lib.Help.Create_Option ('P', False, "browser port", Component, Ada_Lib.Help.Unmodified_Flag);
-         Ada_Lib.Help.Create_Option (Remote_Daemon_Option, False, "dbdaemon", "remote dbdaemon.",
+         Ada_Lib.Help.Create_Option ('l', False, "", "local dbdaemon.",
+            Component, Ada_Lib.Options.Unmodified_Flag);
+         Ada_Lib.Help.Create_Option ('L', False, "path",
+            "local dbdaemon path.", Component, Ada_Lib.Options.Unmodified_Flag);
+         Ada_Lib.Help.Create_Option ('p', False, "data base port number",
+            "remote DBDaemon port number", Component, Ada_Lib.Options.Unmodified_Flag);
+--       Ada_Lib.Help.Create_Option ('P', False, "browser port", Component,
+--          Ada_Lib.Options.Unmodified_Flag);
+         Ada_Lib.Help.Create_Option (Remote_Daemon_Option, False, "dbdaemon",
+            "remote dbdaemon.", Component, Ada_Lib.Help.Modifier);
+         Ada_Lib.Help.Create_Option ('r', False, "path", "remote host path.",
             Component, Ada_Lib.Help.Modifier);
-         Ada_Lib.Help.Create_Option ('R', False, "path", "remote dbdaemon path.", Component, Ada_Lib.Help.Unmodified_Flag);
-         Ada_Lib.Help.Create_Option ('u', False, "user", "remote user.", Component, Ada_Lib.Help.Unmodified_Flag);
+         Ada_Lib.Help.Create_Option ('R', False, "path",
+            "remote dbdaemon path.", Component, Ada_Lib.Options.Unmodified_Flag);
+         Ada_Lib.Help.Create_Option ('u', False, "user", "remote user.",
+            Component, Ada_Lib.Options.Unmodified_Flag);
+         Ada_Lib.Help.Create_Option ('b', False, "database", "remote database.",
+            Component, Ada_Lib.Help.Modifier);
 
       when Ada_Lib.Options.Trace_Mode =>
          Null;

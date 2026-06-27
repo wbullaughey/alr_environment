@@ -20,8 +20,10 @@ package body Ada_Lib.Options.Verification is
    ----------------------------------------------------------------
    procedure Display_Help (
      Options   : in     Verification_Program_Options_Type;
+     Parameters                  : in     Ada_Lib.Options.Argument_Array;
      Message   : in     String := "";   -- leave blank no error help
      Halt      : in     Boolean := True) is
+   pragma Unreferenced (Parameters, Options, Message, Halt);
    ----------------------------------------------------------------
 
    begin
@@ -298,12 +300,14 @@ not_implemented;
       ----------------------------------------------------------------
       procedure Display_Help (
         Options   : in     Verification_Options_Type;  -- only used for dispatch
+        Parameters: in     Ada_Lib.Options.Argument_Array;
         Message   : in     String := "";   -- leave blank no error help
         Halt      : in     Boolean := True) is
+      pragma Unreferenced (Parameters, Options, Message, Halt);
       ----------------------------------------------------------------
 
       begin
-   not_implemented;
+         Log_Here (Debug or Trace_Options);
       end Display_Help;
 
       ---------------------------------------------------------------

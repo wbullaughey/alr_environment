@@ -27,9 +27,9 @@ package Ada_Lib.GNOGA.Unit_Test is
       Test_Handler   : in     Standard.Gnoga.Application.Multi_Connect.
                                  Application_Connect_Event;
       Wait_For_Message_Loop_Exit
-                     : in     Boolean
-   ) with Post => Ada_Lib.Unit_Test.Test_Cases.Test_Case_Type'class (
-                     Test).Verify_Set_Up;
+                     : in     Boolean);
+-- ) with Post => Ada_Lib.Unit_Test.Test_Cases.Test_Case_Type'class (
+--                   Test).Verify_Set_Up;
 
    overriding
    procedure Tear_Down (

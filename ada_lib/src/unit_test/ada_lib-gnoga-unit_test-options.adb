@@ -89,15 +89,15 @@ package body Ada_Lib.GNOGA.Unit_Test.Options is
 
       when Ada_Lib.Options.Program_Mode =>
          Standard.Ada_Lib.Help.Create_Option ('g', True, "trace options",
-            "GNOGA Unit Test traces", Component, Ada_Lib.Help.Unmodified_Flag);
+            "GNOGA Unit Test traces", Component, Ada_Lib.Options.Unmodified_Flag);
 
       when Ada_Lib.Options.Trace_Mode =>
-         Ada_Lib.Help.Set_Has_Trace ('g', Ada_Lib.Help.Unmodified_Flag);
+         Ada_Lib.Help.Set_Has_Trace ('g', Ada_Lib.Options.Unmodified_Flag);
          Put_Line ("Ada_Lib GNOGA unit tests trace options (-" &
             Trace_Option & ")");
          Put_Line ("      a               all");
          Put_Line ("      b               Ada_Lib.GNOGA.Unit_Test.Base_Debug");
-         Put_Line ("      d               Ada_Lib.GNOGA.Unit_Test.Debug");
+         Put_Line ("      d               Ada_Lib.GNOGA.Unit_Test.Test_Debug");
          Put_Line ("      e               Ada_Lib.GNOGA.Unit_Test.Event_Debug");
          Put_Line ("      g               Ada_Lib.GNOGA.GNOGA_Debug");
          Put_Line ("      u               GNOGA unit Test (main window)");

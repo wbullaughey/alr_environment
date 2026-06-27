@@ -1,16 +1,13 @@
 with Ada.Characters.Handling;
 with Ada.Text_IO;use Ada.Text_IO;
 with AUnit.Assertions; use AUnit.Assertions;
---with Ada_Lib.Options.AUnit_Lib;
 with Ada_Lib.Options.Program;
 with Ada_Lib.Options.Unit_Test;
---with Ada_Lib.Options.Verification;
 with Ada_Lib.String_Quote; use Ada_Lib.String_Quote;
 with Ada_Lib.Strings;
 with Ada_Lib.Unit_Test;
 with Ada_Lib.Trace; use Ada_Lib.Trace;
 with AUnit.Test_Cases;
-with GNOGA_Ada_Lib.Base;
 with GNOGA_Ada_Lib.Interfaces;
 with Gnoga.GUI.Window;
 with Gnoga.Gui.Base;
@@ -657,10 +654,14 @@ exception
 
    begin
       Log_In (Debug or Trace_Set_Up_Tear_Down);
+      GNOGA.Create_Main_Window_Package.Lock_Create;
+
+--    Window_Lock.Clear_Window;
+      GNOGA_Tests_Type (Test).Set_Up;
 
       Test.Set_Up_With_Handler (Test_Handler'access,
          Wait_For_Message_Loop_Exit => False);
---    Window_Lock.Clear_Window;
+      GNOGA.Create_Main_Window_Package.Unlock_Create;
       Log_Out (Debug or Trace_Set_Up_Tear_Down);
    end Set_Up;
 
@@ -709,7 +710,8 @@ exception
 
       begin
          Log_Here (Debug, Quote ("URL", URL));
-         Ada_Lib.GNOGA.Set_Main_Window (Main_Window'unchecked_access);
+         Ada_Lib.GNOGA.Create_Main_Window_Package.Set_Main_Window (
+            Main_Window'unchecked_access);
          Connection_Data.Set_Connection_Data_Main_Window (
             Main_Window'unchecked_access);
          Connection_Data.Main_Window := Main_Window'unchecked_access;
@@ -720,7 +722,7 @@ exception
          Main_Window.Document.Title (Main_Window_Name);
          Main_Window.Connection_Data (Connection_Data);
          Pause_On_Flag ("exit handler");
-         GNOGA_Ada_Lib.Base.Set_Main_Created (True);
+         Ada_Lib.GNOGA.Get_Window_Connection_Data.Set_Main_Created;
       end;
       Log_Out (Debug);
    end Test_Handler;

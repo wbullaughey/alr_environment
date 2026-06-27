@@ -357,7 +357,6 @@ package body Ada_Lib.Trace.Tests is
                         ". line " & Output_Line &
                         " count" & Line_Count'img &
                         " from " & GNAT.Source_Info.Source_Location);
-log_here ("output line " & Output_Line & " time text " & Time_Text & " from " & GNAT.Source_Info.Source_Location);
                      AUnit.Assertions.Assert (
                         abs (Parsed_Time.Hundreds - Expected_Hundreds) <= 3,
                         "wrong hundreds got " &

@@ -1,4 +1,5 @@
 with Ada_Lib.Options;
+with Ada_Lib.Strings.Unlimited;
 with Ada_Lib.Trace;
 
 package Ada_Lib.Help is
@@ -18,9 +19,16 @@ package Ada_Lib.Help is
 
    procedure Check_Traces;
 
+-- type Parameter_Array   is array (Positive range <>) of
+--                         Ada_Lib.Strings.Unlimited.String_Type;
+--
+-- type Parameter_Array_Access
+--                      is access Parameter_Array;
+--
    procedure Display (
-      Output_Line                : not null access procedure (
-         Line                       : in     String));
+      Parameters        : in     Ada_Lib.Options.Argument_Array;
+      Output_Line       : not null access procedure (
+         Line              : in     String));
 
    procedure Reset;
 
@@ -30,9 +38,11 @@ package Ada_Lib.Help is
 
    Modifier          : constant Character := '@';
    Modifiers         : constant String    := "@";
+   Null_Parameters   : constant Options.Argument_Array (1 .. 0) := (others =>
+                        Strings.Unlimited.Null_String);
    Trace_Modifier    : constant Character := '#';
    Trace_Modifiers   : constant String    := "#";
-   Unmodified_Flag   : Character renames Ada_Lib.Options.Unmodified_Flag;
+-- Unmodified_Flag   : Character renames Ada_Lib.Options.Unmodified_Flag;
    Unit_Test_Modifier: constant Character := '$';
 
 end  Ada_Lib.Help;

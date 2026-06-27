@@ -156,6 +156,7 @@ package Ada_Lib.OS is
       Recursion_Exit,
       Unit_Test_Set_Up_Exception,
       Unit_Test_Tear_Down_Exception,
+      Missing_Argument,
       Unassigned);                                       -- no equivalent Linux code,
 
    for OS_Exit_Code_Type'size use 8;
@@ -300,6 +301,7 @@ package Ada_Lib.OS is
       Recursion_Exit => 204,
       Unit_Test_Set_Up_Exception => 205,
       Unit_Test_Tear_Down_Exception => 206,
+      Missing_Argument => 207,
       Unassigned => 255);
 
    subtype File_Descriptor       is GNAT.OS_Lib.File_Descriptor;

@@ -1,4 +1,5 @@
 with Ada_Lib.Database.Connection;
+--with Ada_Lib.Help;
 with Ada_Lib.Options.Database;
 with Ada_Lib.GNOGA.Unit_Test.Options;
 with Ada_Lib.Options.Program;
@@ -82,6 +83,7 @@ package Ada_Lib.Options.AUnit_Lib is
    procedure Display_Help (
                               -- prints full help, aborts program
      Options   : in     Aunit_Program_Options_Type;  -- only used for dispatch
+     Parameters: in     Ada_Lib.Options.Argument_Array;
      Message   : in     String := "";   -- leave blank no error help
      Halt      : in     Boolean := True);
 

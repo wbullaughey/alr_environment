@@ -1,4 +1,5 @@
 with Ada.Characters.Latin_1;
+with Ada_Lib.Strings.Unlimited;
 with GNAT.Source_Info;
 with Interfaces;
 
@@ -19,6 +20,15 @@ package Ada_Lib.Options is
 
    type Mode_Type                is (Driver_Suites, List_Suites, Print_Suites,
                                        Run_Tests);
+
+   type Argument_Array   is array (Positive range <>) of
+                           Ada_Lib.Strings.Unlimited.String_Type;
+
+   type Argument_Array_Access
+                        is access Argument_Array;
+
+   type Argument_Array_Constant_Access
+                        is access constant Argument_Array;
 
    type Flag_Option_Kind_Type    is (Nil_Option, Plain, Modified);
    type SubFlag_Option_Kind_Type is (Plain, Modified);
@@ -236,6 +246,7 @@ package Ada_Lib.Options is
    procedure Display_Help (            -- common for all programs that use GNOGA_Options
                               -- prints full help, aborts program
      Options                     : in     Abstract_Runtime_Options_Type;  -- only used for dispatch
+     Parameters                  : in     Argument_Array;
      Message                     : in     String := "";   -- leave blank no error help
      Halt                        : in     Boolean := True) is abstract;
 
@@ -377,8 +388,9 @@ package Ada_Lib.Options is
    end Ada_Lib_Environment;
 
    package Ada_Lib_GNOGA is  -- options for the Ada_Lib GNOGA library
+      Ada_Lib_Debug              : aliased Boolean := False;   -- Ada_Lib.GNOGA
       Debug                      : aliased Boolean := False;
---    Debug                 : aliased Boolean := False;
+      Base_Debug                 : aliased Boolean := False;
    end Ada_Lib_GNOGA;
 
    package Ada_Lib_Help is
@@ -476,10 +488,8 @@ package Ada_Lib.Options is
    package GNOGA is  -- options for the GNOGA Library
       Debug        : aliased Boolean := False; -- GNOGA_Ada_Lib.Base
       Library_Debug     : aliased Boolean := False; -- GNOGA library
-      Server_Debug      : aliased Boolean := False; -- GNOGA server
       Options_Debug     : aliased Boolean := False; -- GNOGA Options
---    GNOGA_Trace             : aliased Boolean := False;
-                                 -- GNOGA Unit Test app
+      Server_Debug      : aliased Boolean := False; -- GNOGA server
    end GNOGA;
 
    package ICON is

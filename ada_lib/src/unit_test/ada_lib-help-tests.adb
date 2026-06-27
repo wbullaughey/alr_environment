@@ -166,7 +166,7 @@ package body Ada_Lib.Help.Tests is
          Line.Description.all, "", Unmodified_Flag);
       end loop;
 
-      Ada_Lib.Help.Display (Check_Test_Suite_And_Routine'access);
+      Ada_Lib.Help.Display (Null_Parameters, Check_Test_Suite_And_Routine'access);
       Log_Out (Debug);
    end Test_Help;
 
@@ -248,7 +248,7 @@ package body Ada_Lib.Help.Tests is
             Trace_Option   => False);
       end loop;
 
-      Ada_Lib.Help.Display (Check_Test_Suite_And_Routine'access);
+      Ada_Lib.Help.Display (Null_Parameters, Check_Test_Suite_And_Routine'access);
       Log_out (Debug);
    end Test_Prefix_Help;
 

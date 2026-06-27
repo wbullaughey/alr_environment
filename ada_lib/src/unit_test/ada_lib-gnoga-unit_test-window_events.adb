@@ -9,7 +9,7 @@ with Ada_Lib.String_Quote; use Ada_Lib.String_Quote;
 with Ada_Lib.Unit_Test;
 with GNOGA_Ada_Lib.Interfaces;
 with Ada_Lib.Trace; use Ada_Lib.Trace;
-with GNOGA_Ada_Lib.Base;
+--with GNOGA_Ada_Lib.Base;
 with Gnoga.Gui.Base;
 with Gnoga.Gui.Element.Common;
 with Gnoga.Gui.Element.Form;
@@ -541,26 +541,27 @@ exception
       Window_Connection_Data
                : Window_Connection_Data_Type renames
                   Window_Connection_Data_Type (Connection_Data.all);
-      Move_Event        : Standard.Gnoga.Gui.Base.Mouse_Event_Record := (
-                           Message       => Standard.Gnoga.Gui.Base.Mouse_Move,
-                           X             => 0,
-                           Y             => 0,
-                           Screen_X      => 30,
-                           Screen_Y      => 40,
-                           Left_Button   => True,
-                           Middle_Button => False,
-                           Right_Button  => False,
-                           Alt           => True,
-                           Control       => False,
-                           Shift         => True,
-                           Meta          => False
-                        );
-      Steps             : constant Natural := (if Test_Condition then
-                              10
-                           else
-                              100);
-      Move_Steps        : constant Natural := Steps - 1;
-
+      Move_Event
+               : Standard.Gnoga.Gui.Base.Mouse_Event_Record := (
+                  Message       => Standard.Gnoga.Gui.Base.Mouse_Move,
+                  X             => 0,
+                  Y             => 0,
+                  Screen_X      => 30,
+                  Screen_Y      => 40,
+                  Left_Button   => True,
+                  Middle_Button => False,
+                  Right_Button  => False,
+                  Alt           => True,
+                  Control       => False,
+                  Shift         => True,
+                  Meta          => False
+               );
+      Steps    : constant Natural := (if Nested_Options.Short_Test then
+                     10
+                  else
+                     100);
+      Move_Steps
+               : constant Natural := Steps - 1;
    begin
       Log_In (Debug);
       Pause_On_Flag ("start of test");
@@ -761,6 +762,7 @@ exception
 
    begin
       Log_In (Debug or Trace_Set_Up_Tear_Down);
+      GNOGA.Create_Main_Window_Package.Lock_Create;
       Ada_Lib.GNOGA.Unit_Test.Set_Up_With_Handler (
          Test                    => GNOGA_Tests_Type'class (Test),
          Test_Handler            => Test_Handler'access,
@@ -772,7 +774,8 @@ exception
                                  Ada_Lib.GNOGA.Get_Window_Connection_Data);
       begin
          Connection_Data.Top_View.Create (
-            Ada_Lib.GNOGA.Get_Main_Window.all, "Top_View_ID");
+            Ada_Lib.GNOGA.Create_Main_Window_Package.Get_Main_Window.all,
+            "Top_View_ID");
          Connection_Data.Top_View.Border (
             Width       => "3px",
             Style       => Standard.Gnoga.Gui.Element.Solid,
@@ -787,6 +790,8 @@ exception
    --      Test.Main_Window := Window_Lock.Get_Window;
    --      Window_Lock.Clear_Window;
       end;
+      GNOGA_Tests_Type (Test).Set_Up;
+      GNOGA.Create_Main_Window_Package.Unlock_Create;
       Log_Out (Debug or Trace_Set_Up_Tear_Down);
 
    exception
@@ -834,7 +839,8 @@ exception
 
    begin
       Log_In (Debug);
-      Ada_Lib.GNOGA.Set_Main_Window (Main_Window'unchecked_access);
+      Ada_Lib.GNOGA.Create_Main_Window_Package.Set_Main_Window (
+         Main_Window'unchecked_access);
       declare
          Connection_Data
                : constant Window_Connection_Data_Access :=
@@ -845,7 +851,7 @@ exception
          Connection_Data.Main_Window := Main_Window'unchecked_access;
          Main_Window.Connection_Data (Connection_Data);
          Pause_On_Flag ("exit handler");
-         GNOGA_Ada_Lib.Base.Set_Main_Created (True);
+         Ada_Lib.GNOGA.Get_Window_Connection_Data.Set_Main_Created;
       end;
       Log_Out (Debug);
    end Test_Handler;

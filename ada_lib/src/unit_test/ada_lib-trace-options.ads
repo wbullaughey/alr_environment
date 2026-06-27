@@ -1,3 +1,4 @@
+with Ada_Lib.Help;
 with Ada_Lib.Options.Nested;
 
 package Ada_Lib.Trace.Options is
@@ -17,6 +18,7 @@ package Ada_Lib.Trace.Options is
    procedure Display_Help (            -- common for all programs that use GNOGA_Options
                               -- prints full help, aborts program
      Options                     : in     Ada_Lib_Trace_Options_Type;  -- only used for dispatch
+     Parameters                  : in     Ada_Lib.Options.Argument_Array;
      Message                     : in     String := "";   -- leave blank no error help
      Halt                        : in     Boolean := True);
 
