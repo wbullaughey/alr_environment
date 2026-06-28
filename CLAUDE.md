@@ -1,146 +1,176 @@
-# CLAUDE.md
+# Project: alr_environment
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Ada 2022 monorepo managed with Alire (alr) and GNAT. Uses git submodules for component isolation.
 
-## Repository Overview
+## Repository Layout
 
-This is an Ada language monorepo using [Alire](https://alire.ada.dev/) (Ada's package manager) and GPRbuild. The primary product is `ada_lib`, a general-purpose Ada library used by applications (e.g., `applications/video/camera`).
+```
+alr_environment/         ← top-level repo (this CLAUDE.md lives here)
+├── ada_lib/             ← shared Ada library (submodule)
+│   ├── ada_lib_tests/   ← library unit tests
+│   └── ada_lib_test_lib/
+├── applications/        ← applications (video/camera) (submodule)
+│   └── video/camera/
+│       ├── driver/unit_test/
+│       └── unit_test/
+├── aunit/               ← forked AUnit test framework (submodule)
+├── gnoga_lib/           ← Gnoga Ada web library (submodule)
+│   ├── gnoga_ada_lib/
+│   └── gnoga_options/
+├── vendor/github.com/gnoga/  ← Gnoga framework (submodule)
+├── src/                 ← top-level library source
+├── IDE/SlickEdit/       ← SlickEdit IDE config
+├── alire.toml           ← Alire crate manifest
+├── alr_environment.gpr  ← root GPR project file
+└── default_config.gpr   ← shared GNAT compiler switches
+```
 
-The repository consists of Git submodules plus local Alire crates pinned to sibling directories:
+## Language & Toolchain
 
-| Directory | Crate | Purpose |
-|---|---|---|
-| `ada_lib/ada_lib_base/` | `ada_lib_base` | Core foundational packages: trace, strings, OS, options parsing, help |
-| `ada_lib/ada_lib_options/` | `ada_lib_options` | Command-line flag/option registration |
-| `ada_lib/` | `ada_lib` | Main library: database, sockets, configuration, templates, timers, GNOGA |
-| `ada_lib/aunit/` | `ada_lib_aunit` | AUnit extensions for ada_lib testing |
-| `ada_lib/ada_lib_tests/` | `ada_lib_tests` | AUnit test executable for ada_lib |
-| `gnoga_lib/` | `gnoga_ada_lib` | Ada extensions for GNOGA (web framework) |
-| `aunit/` | `aunit` | Local AUnit framework crate |
-| `vendor/github.com/gnoga/` | `gnoga` | GNOGA web framework |
-| `applications/` | — | Applications built on ada_lib (video/camera) |
-
-The root `alr_environment.gpr` is an abstract GPR project that provides shared compiler switches, build mode, and linker options to all sub-crates via `[[pins]]` in each `alire.toml`.
+- **Language**: Ada 2022 (`-gnat2022` switch)
+- **Compiler**: GNAT (GCC Ada)
+- **Package manager**: Alire (`alr`) — crates defined in `alire.toml`
+- **Project files**: GNAT Project (`.gpr`) — define source dirs, library type, switches
+- **IDE**: SlickEdit (`.vtg` / `.vpj` project files)
+- **Testing**: AUnit framework (custom fork in `aunit/` submodule)
+- **Web UI**: Gnoga framework (Ada-to-JavaScript bridge)
 
 ## Build System
 
-### BUILD_MODE
+### Build modes (`BUILD_MODE` external variable)
+- `execute` — normal application/library build
+- `help_test` — builds help-test variant (skipped for libraries)
 
-All builds take a `BUILD_MODE` environment variable (set via `-XBUILD_MODE=...` in alr):
+### Library types (`LIBRARY_TYPE` / `ALR_ENVIRONMENT_LIBRARY_TYPE`)
+- `static` (default), `relocatable`, `static-pic`
 
-- `execute` — normal library/program build
-- `help_test` — builds `bin/help_test` (tests the `--help`/`-h` option output)
-- `aunit` — builds `bin/test_ada_lib` (AUnit test runner)
+### Key build commands
 
-### Build Commands
+```bash
+# Build this crate
+./build.sh execute          # or: help_test | both | all
 
-Build a single crate from its directory:
-```zsh
-# From any crate directory (e.g., ada_lib/ada_lib_tests/)
-../../global_build.sh execute program test_ada_lib
-../../global_build.sh help_test program test_ada_lib
-# Or via the local wrapper:
-./build.sh execute test_ada_lib
+# Build all submodules in correct dependency order
+./global_build.sh all library
+
+# Direct alr invocation (from within a submodule dir)
+alr build -- -j10 -s -k -gnatE -vl -v -XBUILD_MODE=execute
 ```
 
-Build everything from the repo root:
-```zsh
-./build_all.sh
-# Or individually:
-./global_build.sh all library ada_lib      # builds all modes
-./global_build.sh execute library ada_lib  # builds only execute mode
-```
+### Submodule build order (enforced by `global_build.sh`)
+1. `aunit`
+2. `ada_lib`
+3. `ada_lib/aunit`
+4. `ada_lib/ada_lib_test_lib`
+5. `ada_lib/ada_lib_tests`
+6. `applications/video/camera`
+7. `applications/video/camera/driver`
+8. `applications/video/camera/driver/unit_test`
+9. `applications/video/camera/test_lib`
+10. `applications/video/camera/unit_test`
+11. `gnoga_lib/gnoga_ada_lib`
+12. `gnoga_lib/gnoga_options`
+13. `vendor/github.com/gnoga`
+14. `.` (top-level)
 
-The core alr invocation inside `global_build.sh`:
-```zsh
-alr build -- -j10 -s -k -gnatE -vl -v -XBUILD_MODE=<mode>
-```
+## GNAT Compiler Flags (from `default_config.gpr`)
+
+Always enabled:
+- `-gnat2022` — Ada 2022 standard
+- `-gnatE` — dynamic elaboration checks
+- `-gnata` — enable Assert, Pre/Post conditions
+- `-gnatwa` — all warnings
+- `-gnatVa` — all validity checks
+- `-gnatyO` — overriding subprograms must be marked `overriding`
+- `-gnatyx` — check extra parentheses
+- `-U -gnatu` — unit-by-unit compilation
+- `-Og -g` — optimize for debug, include debug info
+- `-Es` (binder) — symbolic traceback on exceptions
+
+Style checks enabled: `-gnatyA`, `-gnatyB`, `-gnatype`, `-gnatyf`, `-gnatyp`, `-gnatyS`
 
 ## Testing
 
-### Run All Tests
-
-```zsh
+```bash
+# Run all unit tests
 ./run_all_tests.sh
+
+# Run specific test suites
+cd ada_lib/ada_lib_tests && ./run.sh local all all
+cd applications/video/camera/unit_test && ./driver_test.sh test
+cd applications/video/camera/driver/unit_test && ./run.sh
+
+# Run help tests only
+./run_help_tests.sh
 ```
 
-### Run ada_lib Unit Tests
+Tests use AUnit. Test directories follow `*_tests` or `*_test` naming.
 
-From `ada_lib/ada_lib_tests/`:
-```zsh
-# Run all suites
-./run.sh local all all
+## Version Control
 
-# Run a specific suite
-./run.sh local all <SuiteName>
+All submodules are committed together using `check_in.sh`:
 
-# Run a specific test routine in a suite
-./run.sh local <SuiteName> <RoutineName>
+```bash
+# Commit all submodules + top-level with same message
+./check_in.sh "your commit message"
 
-# List available suites
-./run.sh -@l
+# Pull all submodules
+./pull_all.sh
+
+# Tag all submodules at once
+./global_tag.sh <tag>
+
+# Switch all submodules to a branch
+./global_branch.sh <branch>
 ```
 
-The `run.sh` script calls `global_run.sh` which launches `bin/test_ada_lib` (or `bin/help_test` for `help_test` mode). The `USE_DBDAEMON` flag controls whether a local/remote DB daemon process is expected.
+Submodule remotes use SSH: `git@github.com:wbullaughey/<name>`
 
-### Test Architecture
+Default branch: `master` (top-level), `main` (submodules)
 
-Tests use a custom AUnit wrapper:
-- Test types extend `Ada_Lib.Unit_Test.Test_Cases.Test_Case_Type` (which extends `AUnit.Test_Cases.Test_Case`)
-- Each test module exports a `Suite` function returning `Access_Test_Suite`
-- Suites are registered in `ada_lib/src/unit_test/ada_lib-test-run_suite.adb`
-- Suite names (for `-s` flag) come from the `Suite_Name` constant in each test package
+## Ada Code Conventions
 
-## Key Architectural Patterns
+- Package hierarchy uses dot notation: `Ada_Lib.Strings`, `Ada_Lib.Strings.Bounded`, etc.
+- Separate spec (`.ads`) and body (`.adb`) files
+- Access types named with `_Access` suffix (e.g., `String_Access`, `String_Access_All`)
+- Stream attributes explicitly set with `for Type'Read use ...`
+- Unchecked_Deallocation wrapped in named `Free` procedures
+- `Debug : Boolean := False;` package-level debug flag pattern
+- Pre/Post conditions on subprograms (enforced at runtime via `-gnata`)
+- Dynamic elaboration — beware of elaboration order; `pragma Elaborate_All` or `pragma Elaborate` may be needed
 
-### Tracing / Logging
+## Code Review Checklist (Ada-specific)
 
-All packages use `Ada_Lib.Trace` for debug output. Standard idiom:
-```ada
-with Ada_Lib.Trace; use Ada_Lib.Trace;
+When reviewing Ada code in this repo:
+- Check elaboration order — dynamic elaboration (`-gnatE`) means runtime checks, not compile-time
+- Verify `overriding` keyword on all dispatching subprogram overrides (enforced by `-gnatyO`)
+- Check access type use — prefer named `Free` procedures over inline deallocation
+- Assert Pre/Post conditions are meaningful and tested
+- Confirm new packages follow `Ada_Lib.*` hierarchy if they belong in `ada_lib`
+- Check that new GPR source dirs are added to the correct `.gpr` file
+- Verify `alire.toml` is updated if new external dependencies are added
+- Confirm submodule pins (`alr_environment.gpr` `with` statements) are correct
 
--- At subprogram entry/exit:
-Log_In  (Debug, "message " & value'img);
-Log_Out (Debug, "message");
+## Debugging Notes
 
--- Mid-routine:
-Log_Here (Debug, "message");
+- Symbolic tracebacks enabled (`-Es`) — exceptions print full Ada call stack
+- Build output logged to `list-*.txt` files in each directory
+- Trace output written to `TRACE.txt` by build scripts
+- `DO_TRACE=TRUE` in build scripts enables verbose tracing
+- `DEBUG_OPTIONS="-vv -d"` in `global_build.sh` for alr verbose mode (uncomment to enable)
+- Object files in `obj/<build_profile>/`, libraries in `lib/<build_profile>/`
 
--- `Here` = current source location, `Who` = enclosing entity
-Log_Here (Debug, "at " & Here);
-```
+## Architecture Notes
 
-`Debug` is typically a `Boolean` variable renaming a package-specific trace flag from `Ada_Lib.Trace_Options_Package`.
+- **ada_lib**: Core reusable library — strings, streams, data structures, Gnoga bindings
+- **aunit**: Custom AUnit fork — may diverge from upstream AdaCore AUnit
+- **gnoga_lib**: Ada abstractions over Gnoga (HTML/CSS/JS web framework in Ada)
+- **applications**: End-user programs; `video/camera` is the main application
+- Top-level `alr_environment` is a library crate that `with`s `default_config.gpr` globally
 
-### Options Processing
+## macOS-specific
 
-Command-line options use a multi-level hierarchy:
-1. `Ada_Lib.Options` — base flag/modifier type definitions
-2. `Ada_Lib.Options.Runstring` — registration and processing of option letters
-3. `Ada_Lib.Options.Program` — `Nested_Program_Options_Type` base for program-specific option records
-4. `Ada_Lib.Options.Verification` — validates options before execution
-5. `Ada_Lib.Options.AUnit_Lib` — AUnit-specific option type (`Aunit_Program_Options_Type`)
-
-The pattern in `main` programs: `Initialize` → `Process` → `Post_Process`.
-
-### Package Naming
-
-Ada child packages follow `Ada_Lib.*` hierarchy. File names use hyphens for dots: `ada_lib-database-server.adb` = `Ada_Lib.Database.Server`.
-
-### Strings
-
-`Ada_Lib.Strings.Unlimited.String_Type` is the preferred unbounded string type (wraps `Ada.Strings.Unbounded`). Import with `use Ada_Lib.Strings.Unlimited` for operator overloading.
-
-## Compiler Switches
-
-Key switches set in `alr_environment.gpr` (applied to all sub-crates):
-- `-gnat2022` — Ada 2022 standard
-- `-gnata` — Enable assertions, pre/post conditions
-- `-gnatwa` — All warnings enabled
-- `-gnatVa` — All validity checks
-- `-g` — Debug info
-- `-gnatn` — Limited inlining
-
-## IDE
-
-SlickEdit project files (`.vpj`) are in `IDE/SlickEdit/`. The build and run commands in SlickEdit invoke `build.sh` and `global_run.sh` with appropriate parameters.
+- Linker option `-Wl,-ld_classic` applied on macOS versions other than 12.7.6
+- `OS_VERSION` external variable used to conditionally set linker options
+- `~/.zshrc` sourced at start of build scripts (tool paths, environment)
+- Project stored at `/Volumes/wayne/Project/git/alr/alr_environment/`
