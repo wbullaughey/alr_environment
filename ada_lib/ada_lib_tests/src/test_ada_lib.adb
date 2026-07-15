@@ -27,14 +27,16 @@ begin
          Multi_Test        => True,
          Options_Selection => Ada_Lib.Options.AUnit_Lib.
                                  Unit_Test_With_Database_And_Template);
-      Debug          : Boolean renames
-                        Ada_Lib.Options.Unit_Test.Ada_Lib_AUnit.Tester_Debug;
---    Nested_Program_Options
---                   : aliased Ada_Lib.Options.
---                      Unit_Test.Ada_Lib_Unit_Test_Nested_Options_Type;
+      Command_Parameters
+            : aliased constant Ada_Lib.Options.Argument_Array := (1 .. 0 => <>);
+      Debug : Boolean renames
+               Ada_Lib.Options.Unit_Test.Ada_Lib_AUnit.Tester_Debug;
+
    begin
 --Debug := True;
       Log_Here (Debug);
+      Ada_Lib.Options.Program.Set_Command_Parameters (
+         Command_Parameters'unchecked_access);
       Ada_Lib.Options.Verification.Set_Ada_Lib_Program_Options (
          Ada_Lib.Options.Verification.Verification_Program_Options_Type'class (
             Aunit_Options)'unchecked_access,
@@ -60,7 +62,7 @@ begin
                end if;
             else
                Log_Here (Debug);
-               if Camera.Lib.Unit_Test.Has_Camera_Specification then
+--             if Camera.Lib.Unit_Test.Has_Camera_Specification then
                   Ada_Lib.Trace_Tasks.Start ("main");
                   Log_Here (Debug);
                   Ada_Lib.Test.Run_Suite (Aunit_Options);
@@ -73,9 +75,9 @@ begin
 
                   Ada_Lib.Trace_Tasks.Stop;
                   Ada_Lib.Trace_Tasks.Report;
-               else
-                  Put_Line ("Missing camera specification");
-               end if;
+--             else
+--                Put_Line ("Missing camera specification");
+--             end if;
 
             end if;
          else

@@ -17,7 +17,7 @@ package body Ada_Lib.Maps.Table is
 
    ---------------------------------------------------------------------------
    procedure Add (
-      Table             : in out Map_Type;
+      Table                : in out Map_Type;
       Key                  : in   String;
       Initializer          : in   Initializer_Type;
       New_Element          :   out Element_Access) is

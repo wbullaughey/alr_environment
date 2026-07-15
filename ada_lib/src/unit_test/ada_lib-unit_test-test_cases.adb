@@ -20,9 +20,12 @@ package body Ada_Lib.Unit_Test.Test_Cases is
       Needs_Camera         : in     Boolean) is
    ----------------------------------------------------------------------------
 
+      Has_Camera  : constant Boolean := Ada_Lib.Options.Program.Has_Camera;
+
    begin
---log_here ("needs camera " & Needs_Camera'img);
-      if Needs_Camera and then not Ada_Lib.Options.Program.Has_Camera then
+      Log_Here (Debug, "needs camera " & Needs_Camera'img &
+         " Has_Camera " & Has_Camera'img);
+      if Needs_Camera and then not Has_Camera then
          Put_Line ("skipping " & Suite_Name & " routine " & Routine_Name);
       else
          Test.Add_Routine (AUnit.Test_Cases.Routine_Spec'(
@@ -317,8 +320,7 @@ package body Ada_Lib.Unit_Test.Test_Cases is
                                        not Test.Set_Up_Failed;
 
       begin
-         return Log_Here (Result,
-            Debug or else Trace_Pre_Post_Conditions,
+         return Log_Here (Result, Trace_Pre_Post (Result, Debug),
             "Set_Up_Succeeded " & Test.Set_Up_Succeeded'img &
             " Set_Up_Failed " & Test.Set_Up_Failed'img &
             " called from " & Here);
@@ -335,8 +337,7 @@ package body Ada_Lib.Unit_Test.Test_Cases is
       Result   : constant Boolean := Test.Torn_Down and then
                                        not Test.Tear_Down_Failed;
       begin
-         return Log_Here (Result,
-            Debug or else Trace_Pre_Post_Conditions,
+         return Log_Here (Result, Trace_Pre_Post (Result, Debug),
             "Torn_Down " & Test.Torn_Down'img &
             " Tear_Down_Failed " & Test.Tear_Down_Failed'img &
             " called from " & Here);

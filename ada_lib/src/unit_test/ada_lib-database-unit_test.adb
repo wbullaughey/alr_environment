@@ -100,7 +100,7 @@ package body Ada_Lib.Database.Unit_Test is
       Result   : constant Boolean := Test.Database /= Null;
 
    begin
-      return Log_Here (Result, Debug or Trace_Pre_Post_Conditions or not Result,
+      return Log_Here (Result, Trace_Pre_Post (Result, Debug or Trace_Pre_Post_Conditions),
          "no database set");
    end Has_Database;
 

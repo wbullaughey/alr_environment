@@ -25,7 +25,7 @@ package Ada_Lib.Path_Test is
       Entity_Length        : Natural;
       Source_Location_Length  : Natural)  is record
       Entity               : String (1 .. Entity_Length);
-      Source_Location         : String (1 .. Source_Location_Length);
+      Source_Location      : String (1 .. Source_Location_Length);
       Instance          : Natural;
    end record;
 

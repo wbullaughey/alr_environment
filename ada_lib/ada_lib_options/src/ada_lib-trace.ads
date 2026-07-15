@@ -5,6 +5,7 @@ with Ada.Tags;
 with Ada.Exceptions;
 with Ada.Strings.Unbounded;
 with Ada.Text_IO;
+with Ada_Lib.Options;
 with Ada_Lib.Strings;
 with Ada_Lib.Trace_Options_Package;
 with GNAT.Source_Info;
@@ -61,6 +62,8 @@ package Ada_Lib.Trace is
          Ada_Lib.Trace_Options_Package.Test_Condition;
    Trace_Conversions             : Boolean  renames
          Ada_Lib.Trace_Options_Package.Trace_Conversions;
+   Trace_Errors                  : Boolean  renames
+         Ada_Lib.Trace_Options_Package.Trace_Exceptions;
    Trace_Exceptions              : Boolean  renames
          Ada_Lib.Trace_Options_Package.Trace_Exceptions;
    Trace_Levels                  : Boolean  renames
@@ -288,8 +291,10 @@ package Ada_Lib.Trace is
       Who         : in   String := GNAT.Source_Info.Enclosing_Entity);
 
    function Trace_Pre_Post (
-      Debug       : in     Boolean
-   ) return Boolean;
+      Result         : in     Boolean;
+      Debug          : in     Boolean;
+      Expect_Result  : in     Boolean := True
+   ) return Boolean renames Options.Trace_Pre_Post;
 
    function Trace_Return (
       Debug       : in     Boolean;

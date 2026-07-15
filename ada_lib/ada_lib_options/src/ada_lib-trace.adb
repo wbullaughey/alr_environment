@@ -3,7 +3,6 @@ with Ada.Command_Line;
 with Ada.Task_Identification;
 with Ada.Text_IO; use  Ada.Text_IO;
 --with Ada_Lib.Maps.Element;
-with Ada_Lib.Options;
 with Ada_Lib.OS;
 --with Ada_Lib.Specifications;
 --with Ada_Lib.Strings;
@@ -473,7 +472,8 @@ package body Ada_Lib.Trace is
    -------------------------------------------------------------------
 
    begin
-      Log_Here (Enable, "result " & Result'img & " " & Message, Where, Who);
+      Log_Here (Trace_Pre_Post (Result, Enable), "result " &
+         Result'img & " " & Message, Where, Who);
       return Result;
    end Log_Here;
 
@@ -545,7 +545,7 @@ package body Ada_Lib.Trace is
    -------------------------------------------------------------------
 
    begin
-      Log_Out (Enable,
+      Log_Out (Trace_Pre_Post (Result, Enable),
          "result " & Result'img & " " & Message, Where, Who);
       return Result;
    end Log_Out;
@@ -1381,18 +1381,6 @@ not_implemented;
    begin
 not_implemented;
    end Set;
-
-   ------------------------------------------------------------
-   function Trace_Pre_Post (
-      Debug       : in     Boolean
-   ) return Boolean is
-   ------------------------------------------------------------
-
-   begin
-      return Debug or else
-             Trace_Pre_Post_Conditions or else
-             Trace_Pre_Post_False;
-   end Trace_Pre_Post;
 
    ------------------------------------------------------------
    procedure Unlocked_Put (

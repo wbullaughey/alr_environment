@@ -1,0 +1,1 @@
+rsync -vau --exclude='Backups.backupdb' --exclude='.Spotlight-V100/' --exclude='.DocumentRevisions-V100' --exclude='.DS_STORE' --exclude='.Trashes' --exclude='.fseventsd/' --exclude .TemporaryItems /Userx/wayne/Project'git/alr/alr_environment /Volumes/Scratch/ALR_Environment\	Macintosh\ HD

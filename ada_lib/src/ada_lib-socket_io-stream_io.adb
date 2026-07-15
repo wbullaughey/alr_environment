@@ -1388,8 +1388,11 @@ package body Ada_Lib.Socket_IO.Stream_IO is
          exception
             when Fault: GNAT.Sockets.Socket_Error =>
                declare
+                  Socket_State   : constant Ada_Lib.Socket_IO.Stream_IO.
+                                       Event_Type :=
+                                    Stream_Pointer.Input_Buffer.Get_State;
                   Socket_Closed  : constant Boolean :=
-                                    Stream_Pointer.Input_Buffer.Get_State = Closed;
+                                    Socket_State = Closed;
                begin
                   Trace_Message_Exception (Trace and not Socket_Closed, Fault,
 --                Trace_Message_Exception (true or Trace, Fault,
@@ -1397,7 +1400,8 @@ package body Ada_Lib.Socket_IO.Stream_IO is
                         ""
                      else
                         "not ") &
-                     "expected exception Socket closed " & Stream_Pointer.Image);
+                     "expected exception Socket closed " & Stream_Pointer.Image &
+                     " state " & Socket_State'img);
                   if not Socket_Closed then
                      Stream_Pointer.Input_Buffer.Set_Event (Closed);
                   end if;

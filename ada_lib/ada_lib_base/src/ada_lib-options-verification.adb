@@ -5,7 +5,7 @@ with Ada.Text_IO;use Ada.Text_IO;
 with Ada_Lib.String_Quote; use Ada_Lib.String_Quote;
 with Ada_Lib.Strings.Unlimited;
 with Ada_Lib.Trace; use Ada_Lib.Trace;
-with Ada_Lib.Trace_Options_Package;
+--with Ada_Lib.Trace_Options_Package;
 --with System;
 
 package body Ada_Lib.Options.Verification is
@@ -110,9 +110,7 @@ not_implemented;
                   Verification_Nested_Options /= Null;
 
    begin
-      return Option_Log (Result,
-         Ada_Lib.Trace_Options_Package.Trace_Pre_Post_Conditions or
-            (Ada_Lib.Trace_Options_Package.Trace_Pre_Post_False and not Result));
+      return Option_Log (Result, Trace_Pre_Post (Result, Debug));
    end Have_Ada_Lib_Nested_Verification_Options;
 
    ----------------------------------------------------------------------------
@@ -123,10 +121,7 @@ not_implemented;
       Result   : constant Boolean := Modifialbe_Verification_Options /= Null;
 
    begin
-      return Option_Log (Result,
-         Ada_Lib.Trace_Options_Package.Trace_Pre_Post_Conditions or else
-            (Ada_Lib.Trace_Options_Package.Trace_Pre_Post_False and
-             not Result),
+      return Option_Log (Result, Trace_Pre_Post (Result, Debug),
          " result " & Result'img);
    end Have_Ada_Lib_Verification_Options;
 
@@ -330,8 +325,8 @@ not_implemented;
 
       begin
          Log_In_Checked (Recursed, Debug or Trace_Options,
-         Tag_Name ("options",
-            Verification_Options_Type'class (Options)'tag) &
+            Tag_Name ("options",
+               Verification_Options_Type'class (Options)'tag) &
             " from " & From & " options address " &
             Ada_Lib.Strings.Image (Options'address));
          Tag_History (Debug or Trace_Options, "Options",
@@ -551,7 +546,7 @@ not_implemented;
          ) return Boolean;
 
          Log_It   : constant Boolean := Debug or Trace_Options or
-                     Trace_Pre_Post_Conditions;
+                     Trace_Pre_Post_Conditions or Trace_Pre_Post_False;
          Labels   : constant array (Initialization_Step_Type) of
                      Strings.String_Access := (
                         Initialized       => new String'("initialize"),
@@ -568,7 +563,7 @@ not_implemented;
          begin
             Tag_History (Log_It or else not Result, "options",
                Verification_Options_Type'class (Options)'tag, From);
-            return Log_Out (Result, Log_It,
+            return Log_Out (Result, Debug,
                Tag_Name (" options",
                   Verification_Options_Type'class (Options)'tag) &
                " at " & This_From & " from " & From & " who " & Who);
@@ -673,10 +668,7 @@ not_implemented;
          Tag_History (Debug or Trace_Options, "options",
             Verification_Options_Type'class (Options)'tag);
          return Log_Here (Options.Steps (Initialized),
-            Debug or else
-            Trace_Options or else
-            Trace_Pre_Post_Conditions or else
-            not Options.Steps (Initialized));
+            Debug or else Trace_Options);
       end Was_Initialized;
 
    end Verification_Package;

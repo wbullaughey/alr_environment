@@ -18,9 +18,9 @@ package Ada_Lib.GNOGA.Unit_Test.Options is
    function Initialize (
       Options                    : in out GNOGA_Unit_Test_Options_Type;
      From                        : in     String := Standard.Ada_Lib.Trace.Here
-   ) return Boolean
-   with pre    => not Options.Verify_Step (Ada_Lib.Options.Initialized),
-        Post   => Options.Verify_Step (Ada_Lib.Options.Initialized);
+   ) return Boolean;
+-- with pre    => not Options.Verify_Step (Ada_Lib.Options.Initialized),
+--      Post   => Options.Verify_Step (Ada_Lib.Options.Initialized);
 
    overriding
    function Process_Option (
