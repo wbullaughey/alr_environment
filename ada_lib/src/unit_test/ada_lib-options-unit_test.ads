@@ -43,6 +43,7 @@ package Ada_Lib.Options.Unit_Test is
       Filter            : aliased Standard.AUnit.Test_Filters.Ada_lib.
                            Ada_Lib_Filter;
       Have_Camera       : Boolean := True;
+      Remote_Camera     : Boolean := False;  -- camera under test is remote
       Mode              : Mode_Type := Run_Tests;  -- run unit tests
       Manual            : Boolean := False;  -- GUI interactions must be
                                              -- performed manually

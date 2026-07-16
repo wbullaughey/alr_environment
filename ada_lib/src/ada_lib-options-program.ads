@@ -240,6 +240,10 @@ package Ada_Lib.Options.Program is
    return Boolean
    with Pre    => Verification.Have_Ada_Lib_Verification_Options;
 
+   function Remote_Camera
+   return Boolean
+   with Pre    => Verification.Have_Ada_Lib_Verification_Options;
+
    function Has_Command_Parameters
    return Boolean;
 

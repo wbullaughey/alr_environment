@@ -1471,7 +1471,7 @@ not_implemented;
 -- := True;
 --Elaborate := True;
 --Trace_Conversions := True;
---Trace_Options := True;
+Trace_Options := True;
 --Trace_Pre_Post_False := True;
 --Trace_Set_Up_Tear_Down := True;
 --Trace_Tests := True;

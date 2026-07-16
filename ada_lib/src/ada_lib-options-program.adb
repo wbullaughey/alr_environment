@@ -242,6 +242,42 @@ package body Ada_Lib.Options.Program is
 
    end Has_Camera;
 
+   -------------------------------------------------------------------------
+   function Remote_Camera
+   return Boolean is
+   -------------------------------------------------------------------------
+
+      Trace_Log   : constant Boolean := Debug or Trace_Pre_Post_Conditions
+                     or Trace_Pre_Post_False;
+
+   begin
+      Log_In (Trace_Log);
+      declare
+         Options  : constant Verification.
+                     Verification_Program_Options_Constant_Class_Access :=
+                        Verification.Get_Ada_Lib_Read_Only_Program_Options;
+      begin
+         Tag_History (Trace_Log, "options", Options.all'tag);
+
+         declare
+            Nested_Options
+               : Unit_Test.Ada_Lib_Unit_Test_Nested_Options_Type renames
+                  AUnit_Lib.Aunit_Program_Options_Constant_Class_Access (
+                     Options).Nested_Unit_Test_Options;
+            Result   : constant Boolean := Nested_Options.Remote_Camera;
+
+         begin
+            return Log_Out (Result, Trace_Pre_Post (Result, Debug));
+         end;
+      end;
+
+   exception
+      when Fault: others =>
+         Trace_Exception (Trace_Log, Fault);
+         raise;
+
+   end Remote_Camera;
+
    ----------------------------------------------------------------------------
    function Has_Command_Parameters
    return Boolean is

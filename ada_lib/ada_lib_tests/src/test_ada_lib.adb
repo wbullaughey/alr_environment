@@ -64,20 +64,18 @@ begin
                end if;
             else
                Log_Here (Debug);
---             if Camera.Lib.Unit_Test.Has_Camera_Specification then
-                  Ada_Lib.Trace_Tasks.Start ("main");
-                  Log_Here (Debug);
-                  Ada_Lib.Test.Run_Suite (Aunit_Options);
-                  Gnoga.Application.Multi_Connect.End_Application;
-                  Log_Here (Debug, "exit on done " &
-                     Aunit_Options.Nested_Unit_Test_Options.Exit_On_Done'img);
-                  if Aunit_Options.Nested_Unit_Test_Options.Exit_On_Done then
-                     Ada_Lib.OS.Immediate_Halt (Ada_Lib.OS.No_Error);
-                  end if;
+               Ada_Lib.Trace_Tasks.Start ("main");
+               Log_Here (Debug);
+               Ada_Lib.Test.Run_Suite (Aunit_Options);
+               Gnoga.Application.Multi_Connect.End_Application;
+               Log_Here (Debug, "exit on done " &
+                  Aunit_Options.Nested_Unit_Test_Options.Exit_On_Done'img);
+               if Aunit_Options.Nested_Unit_Test_Options.Exit_On_Done then
+                  Ada_Lib.OS.Immediate_Halt (Ada_Lib.OS.No_Error);
+               end if;
 
-                  Ada_Lib.Trace_Tasks.Stop;
-                  Ada_Lib.Trace_Tasks.Report;
-
+               Ada_Lib.Trace_Tasks.Stop;
+               Ada_Lib.Trace_Tasks.Report;
             end if;
          else
             Put_Line ("Options.Process failed");

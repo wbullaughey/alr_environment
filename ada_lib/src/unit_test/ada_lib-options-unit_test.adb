@@ -36,7 +36,7 @@ package body Ada_Lib.Options.Unit_Test is
    Options_Without_Parameters : aliased constant
                                  Flag_List_Type :=
                                     Initialize (
-                                       "nx", Unmodified_flag) &
+                                       "nrx", Unmodified_flag) &
                                     Initialize (
                                        Driver_List_Option & "lmPsSu",
                                        Ada_Lib.Help.Modifier);
@@ -300,6 +300,9 @@ return "";
 
                   when 'n' =>    -- no camera
                      Options.Have_Camera := False;
+
+                  when 'r' =>    -- remote camera
+                     Options.Remote_Camera := True;
 
                   when 's' =>    -- suites to include
                      if Options.Mode /= Run_Tests then
