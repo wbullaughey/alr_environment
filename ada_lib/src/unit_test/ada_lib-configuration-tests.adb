@@ -16,6 +16,7 @@ package body Ada_Lib.Configuration.Tests is
    procedure Update_Same_Configuration (
       Test                       : in out AUnit.Test_Cases.Test_Case'class);
 
+   Debug                         : Boolean := False;
    Root_Path                     : constant String := "tests/data/";
    Default_Configuration_Path    : constant String := Root_Path &
                                                       "configuration.cfg";
@@ -123,6 +124,14 @@ package body Ada_Lib.Configuration.Tests is
 
       Log_Out (Debug);
    end Register_Tests;
+
+   ---------------------------------------------------------------
+   procedure Set_Debug is
+   ---------------------------------------------------------------
+
+   begin
+      Debug := True;
+   end Set_Debug;
 
    ---------------------------------------------------------------
    overriding

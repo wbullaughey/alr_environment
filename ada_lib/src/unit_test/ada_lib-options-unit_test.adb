@@ -12,7 +12,7 @@ with Ada_Lib.Options.Runstring;
 with Ada_Lib.String_Quote; use Ada_Lib.String_Quote;
 with Ada_Lib.Trace; use Ada_Lib.Trace;
 --with Ada_Lib.Unit_Test.Test_Cases;
---with AUnit.Ada_Lib; -- debug moved to Ada_Lib.Options.Aunit
+with AUnit.Ada_Lib; -- debug moved to Ada_Lib.Options.Aunit
 --with Debug_Options;
 
 -- pragma Elaborate (Ada_Lib.OS);
@@ -536,6 +536,8 @@ return "";
          Put_Line ("      u               Ada_Lib.Unit_Test.Debug Library");
          Put_Line ("      U               Ada_Lib.Unit_Test.Test_Cases.Debug Library");
          Put_Line ("      " & Trace_Modifier &
+                         "a              Ada_Lib_Aunit.Debug");
+         Put_Line ("      " & Trace_Modifier &
                          "a              AUnit.Ada_Lib.Debug");
          Put_Line ("      " & Trace_Modifier &
                          "s              Ada_Lib.Unit_Test.Test_States.Debug");
@@ -638,7 +640,8 @@ return "";
    begin
       Log_In (Trace_Options or Debug,  Quote ("parameter", Parameter));
       for Trace of Parameter loop
-         Log_Here (Trace_Options or Debug, Quote ("trace", Trace));
+         Log_Here (Trace_Options or Debug, Quote ("trace", Trace) &
+            " Suboption " & Suboption'img);
 
          case Suboption is
             when Plain =>
@@ -647,7 +650,6 @@ return "";
 
                   when 'a' =>
                      Debug := True;
-                     Ada_Lib.Trace.Trace_Exceptions := True;
                      Ada_Lib.Trace.Trace_Pre_Post_Conditions := True;
                      Ada_Lib.Trace.Trace_Set_Up_Tear_Down := True;
                      Ada_Lib.Trace.Trace_Tests := True;
@@ -666,6 +668,7 @@ return "";
                      Options.Debug := True;
                      Ada_Lib_Unit_Test_Test_Cases.Debug := True;
                      Ada_Lib_Test_States.Debug := True;
+                     Standard.AUnit.Ada_Lib.Debug := True;
 
                   when 'A' =>
                      Ada_Lib.Trace.Trace_Tests := True;
@@ -674,9 +677,6 @@ return "";
                      Ada_Lib_Database_Unit_Test.Debug := True;
 
                   when 'e' =>
-                     Ada_Lib.Trace.Trace_Exceptions := True;
-
-                  when 'E' =>
                      Ada_Lib_Event_Unit_Test.Debug := True;
 
                   when 'f' =>
@@ -739,6 +739,9 @@ return "";
 
                   when 'a' =>
                      Ada_Lib_Aunit.Debug := True;
+
+                  when 'A' =>
+                     Standard.AUnit.Ada_Lib.Debug := True;
 
                   when 's' =>
                      Ada_Lib_Test_States.Debug := True;

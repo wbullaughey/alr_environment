@@ -340,6 +340,13 @@ package Ada_Lib.Options is
   procedure Parsing_Failed;
   function Parsing_Failed return Boolean;
 
+  function Trace_Pre_Post (
+      Result         : in     Boolean;
+      Debug          : in     Boolean;
+      Expect_Result  : in     Boolean := True
+  ) return Boolean;
+
+
    Null_Flag_List                   : constant Flag_List_Type;
 
    package Ada_Lib_Command_Line_Iterator is

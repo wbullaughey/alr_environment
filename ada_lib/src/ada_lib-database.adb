@@ -459,7 +459,8 @@ package body Ada_Lib.Database is
                               exit;
                            end if;
 
-                           raise Timed_Out with "timeout waiting for socket read";
+                           raise Timed_Out with "timeout waiting for socket read. timrout " &
+                              Timeout'img;
                         else
                            exit;
                         end if;
@@ -791,9 +792,10 @@ package body Ada_Lib.Database is
     ) return Boolean is
     ---------------------------------------------------------------------------
 
+      Result   : constant Boolean := Database.Socket_Opened and then Database.Selector_Created;
     begin
-      return Log_Here (Database.Socket_Opened and then Database.Selector_Created,
-         Trace_All or Trace_Pre_Post_Conditions,
+      return Log_Here (Result,
+         Trace_All,
           Ada_Lib.Strings.Image (Database'address) &
          " socket opened " & Database.Socket_Opened'img &
          " selector created " & Database.Selector_Created'img &

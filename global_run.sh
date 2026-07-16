@@ -92,7 +92,7 @@ CAMERA_CONFIGURATION=0
 foreach PARAMETER ($WORDS) {
     output TRACE PARAMETER $PARAMETER
     if [ $CAMERA_CONFIGURATION -eq 1 ]; then
-      OPTIONS+= "-C $PARAMETER"
+      OPTIONS="$OPTIONS -C $PARAMETER"
       output TRACE added -C $PARAMETER
       CAMERA_CONFIGURATION=0
     else
@@ -129,6 +129,7 @@ case $RESULT in
 esac
 
 parse
+output TRACE 2nd parameter $RESULT
 case $RESULT in
 
    "hide")
@@ -148,6 +149,7 @@ case $RESULT in
 esac
 
 parse
+output TRACE 3rd parameter $RESULT
 export ACTION=$RESULT
 output TRACE parse RESULT $ RESULT ACTION $ACTION
 
@@ -177,82 +179,43 @@ case "$ACTION" in
 
 esac
 
-case $UNIT_TEST_LOCATION in
-
-   home)
-      CAMERA_OPTIONS=-r
-      ;;
-
-   ucwc)
-      CAMERA_LOCATION=
-      ;;
-
-    "")
-       output LIST no UNIT_TEST_LOCATION option provided
-       exit
-       ;;
-
-    *)
-      echo unrecognized UNIT_TEST_LOCATION $UNIT_TEST_LOCATION
-      exit
-      ;;
-
-esac
-
 case $USE_DBDAEMON in
 
    FALSE)
+      ;;
+
+   TRUE)
+      echo USE_DBDAEMON not implemented
+      exit;
+      ;;
+
+esac
       output TRACE check database  "$ACTION"
       case $ACTION in
 
-         "local")
-            extract
-            parse
-            ;;
-
-         "remote")
+         "local-camera")
 #           export DATABASE_OPTION="-@b"
             extract
             parse
             ;;
-      esac
+
+         "local-no-camera")
+            export OPTIONS="$OPTIONS -@N"
+            extract
+            parse
       ;;
 
-   TRUE)
-      output TRACE check database  "$ACTION"
-      case $ACTION in
-
-         "connect")
-            export DATABASE_OPTION="-l"
-            export KILL=false
-            ;;
-
-         "local")
-            export DATABASE_OPTION="-l -L /Users/wayne/bin/dbdaemon"
-            ;;
-
-         "remote")
-            export DATABASE_OPTION="-@b localhost -R /home/wayne/bin/dbdaemon -u wayne"
-            ;;
-
-         "none")
-            ;;
-
-         "")
-            output LIST no database option provided
-            exit
-         ;;
-
-         *)
-            output LIST unrecognize database option \"$DATABASE\" allowed: local,remote,none
-            exit
-            ;;
-
-      esac
-      export KILL=true
+         "remote-camera")
+            export OPTIONS="$OPTIONS -r"
       extract
       parse
       ;;
+
+         *)
+      echo bad action $ACTION
+      echo valid: local-camera local-no-camera remote-camera
+            exit
+            ;;
 esac
 
 case $UNIT_TEST in

@@ -412,6 +412,22 @@ package body Ada_Lib.Options is
       return Parameter_Parsing_Failed;
    end Parsing_Failed;
 
+   ------------------------------------------------------------
+   function Trace_Pre_Post (
+      Result         : in     Boolean;
+      Debug          : in     Boolean;
+      Expect_Result  : in     Boolean := True
+   ) return Boolean is
+   ------------------------------------------------------------
+
+   begin
+--Log_Here_Non_Locking ("result " & result'img & " debug " & debug'img & " Trace_Pre_Post_Conditions " & Trace_Pre_Post_Conditions'img & " Trace_Pre_Post_False " & Trace_Pre_Post_False'img);
+      return Debug or else
+             Ada_Lib.Trace_Options_Package.Trace_Pre_Post_Conditions or else
+             (Ada_Lib.Trace_Options_Package.Trace_Pre_Post_False and then
+             not (Result = Expect_Result));
+   end Trace_Pre_Post;
+
 begin
    declare
       use Trace;

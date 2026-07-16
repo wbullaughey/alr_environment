@@ -16,7 +16,7 @@ export HELP_TEST=" \
    -T aceElot \
    -u user  \
    -U aAglprstT"
-export USE_DBDAEMON=TRUE
+export USE_DBDAEMON=FALSE
 
 source ../../global_run.sh $OUTPUT $PROGRAM $DO_TRACE $HELP_TEST $USE_DBDAEMON TRUE $*
 

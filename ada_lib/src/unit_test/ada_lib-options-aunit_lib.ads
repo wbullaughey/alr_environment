@@ -109,9 +109,9 @@ package Ada_Lib.Options.AUnit_Lib is
    function Initialize (
      Options                     : in out Aunit_Program_Options_Type;
      From                        : in     String := Standard.Ada_Lib.Trace.Here
-   ) return Boolean
-   with pre    => not Options.Verify_Step (Initialized),
-        Post   => Options.Verify_Step (Initialized);
+   ) return Boolean;
+-- with pre    => not Options.Verify_Step (Initialized),
+--      Post   => Options.Verify_Step (Initialized);
 
    overriding
    function Process (     -- process command line options

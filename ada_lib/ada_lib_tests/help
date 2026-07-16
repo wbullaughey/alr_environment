@@ -1,6 +1,6 @@
 test_ada_lib
 
-test_ada_lib command line options:
+test_ada_lib <command line options>:
     -#                            : exclude trace checks              (Ada_Lib)
     -?                            : this message                      (Ada_Lib)
     -a <trace options>            : Ada_Lib library trace options     (Ada_Lib)
@@ -10,7 +10,7 @@ test_ada_lib command line options:
     -l                            : local dbdaemon.                   (Ada_Lib.Options.Database)
     -L <path>                     : local dbdaemon path.              (Ada_Lib.Options.Database)
     -n                            : no camera                         (test_ada_lib)
-    -p <port number>              : remote DBDaemon port number       (Ada_Lib.Options.Database)
+    -p <data base port number>    : remote DBDaemon port number       (Ada_Lib.Options.Database)
     -P                            : set pause flag                    (Ada_Lib)
     -R <path>                     : remote dbdaemon path.             (Ada_Lib.Options.Database)
     -s <suite to test>            : select test suite to run.         (test_ada_lib)
@@ -45,7 +45,7 @@ test_ada_lib command line options:
 Ada_Lib.Options.AUnit_Lib.Program_Help trace options (-t)
       a               all
       A               AUnit debug
-      c               configuration
+      c               Ada_Lib.Configuration.Test
       C               command line iterator
       d               directory compare and copy
       h               help test
@@ -90,6 +90,7 @@ CAC ada_lib trace library options (-a)
       c               Ada_Lib.Command_Line Trace
       C               Ada_Lib.Configuration Trace
       e               Event
+      E               Ada_Lib.Trace.Trace_Errors
       h               Help
       i               interrupt
       I               Ada_Lib.interface
@@ -97,7 +98,7 @@ CAC ada_lib trace library options (-a)
       m               timer
       M               mail
       o               os
-      O               Ada_Lib.Options
+      O               Ada_Lib.Options.Program.Debug: Ada_Lib_Options_Program.Debug
       p               parser
       P               database post
       r               run remote
@@ -108,6 +109,7 @@ CAC ada_lib trace library options (-a)
       T               Ada_Lib.Trace_Tasks
       v               Ada_Lib.Options.Verification.Debug
       V               Ada_Lib.Options.Trace_Conversions
+      x               Ada_Lib.Trace.Trace_Exceptionss
       #b              database connect
       #c              Template Compile
       #d              Template Detail
@@ -148,6 +150,7 @@ Ada_Lib unit test library trace options (-U)
       T               Ada_Lib.Trace.Debug_Trace
       u               Ada_Lib.Unit_Test.Debug Library
       U               Ada_Lib.Unit_Test.Test_Cases.Debug Library
+      #a              Ada_Lib_Aunit.Debug
       #a              AUnit.Ada_Lib.Debug
       #s              Ada_Lib.Unit_Test.Test_States.Debug
       #S              Database Server Debug

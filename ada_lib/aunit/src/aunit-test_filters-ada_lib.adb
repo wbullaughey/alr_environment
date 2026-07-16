@@ -36,5 +36,8 @@ package body AUnit.Test_Filters.Ada_lib is
       return Log_Out (Name_Filter (Filter).Is_Active (Test), Debug);
    end Is_Active;
 
+begin
+--debug := True;
+   Log_Here (Debug);
 end AUnit.Test_Filters.Ada_lib;
 

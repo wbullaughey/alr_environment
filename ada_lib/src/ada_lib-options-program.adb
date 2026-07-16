@@ -211,7 +211,8 @@ package body Ada_Lib.Options.Program is
    return Boolean is
    -------------------------------------------------------------------------
 
-      Trace_Log   : constant Boolean := Debug or Trace_Pre_Post_Conditions;
+      Trace_Log   : constant Boolean := Debug or Trace_Pre_Post_Conditions
+                     or Trace_Pre_Post_False;
 
    begin
       Log_In (Trace_Log);
@@ -227,9 +228,10 @@ package body Ada_Lib.Options.Program is
                : Unit_Test.Ada_Lib_Unit_Test_Nested_Options_Type renames
                   AUnit_Lib.Aunit_Program_Options_Constant_Class_Access (
                      Options).Nested_Unit_Test_Options;
+            Result   : constant Boolean := Nested_Options.Have_Camera;
+
          begin
-            return Log_Out (Nested_Options.Have_Camera,
-               Trace_Log);
+            return Log_Out (Result, Trace_Pre_Post (Result, Debug));
          end;
       end;
 
@@ -245,8 +247,10 @@ package body Ada_Lib.Options.Program is
    return Boolean is
    ----------------------------------------------------------------------------
 
+      Result   : constant Boolean := Command_Parameters /= Null;
+
    begin
-      return Command_Parameters /= Null;
+      return Log_Here (Result, Debug);
    end Has_Command_Parameters;
 
    ----------------------------------------------------------------------------
@@ -257,9 +261,7 @@ package body Ada_Lib.Options.Program is
 
       Result   : constant Boolean :=
                   Verification.Have_Ada_Lib_Nested_Verification_Options;
-      Log_It   : constant Boolean := Debug or else
-                                     Trace_Pre_Post_Conditions or else
-                                     (Trace_Pre_Post_False and not Result);
+      Log_It   : constant Boolean := Trace_Pre_Post (Result, Debug);
 
    begin
       return Log_Here (Result, Log_It,
@@ -697,6 +699,9 @@ return false;
          Put_Line ("      e               Event");
 --       Put_Line ("      g               GNOGA.Debug");
 --       Put_Line ("      G               GNOGA_Options.Debug");
+         Put_Line ("      E               Ada_Lib.Trace.Trace_Errors");
+--       Put_Line ("      g               GNOGA.Debug");
+--       Put_Line ("      G               GNOGA_Options.Debug");
          Put_Line ("      h               Help");
          Put_Line ("      i               interrupt");
          Put_Line ("      I               Ada_Lib.interface");
@@ -717,6 +722,8 @@ return false;
          Put_Line ("      v               Ada_Lib.Options.Verification.Debug");
          Put_Line ("      V               Ada_Lib.Options.Trace_Conversions");
 --       Put_Line ("      x               Ada_Lib.Trace.Detail");
+--       Put_Line ("      @               Ada_Lib.Strings");
+         Put_Line ("      x               Ada_Lib.Trace.Trace_Exceptionss");
 --       Put_Line ("      @               Ada_Lib.Strings");
          Put_Line ("      " & Ada_Lib.Help.Trace_Modifier &
                            "b              database connect");
@@ -791,6 +798,8 @@ return false;
       Ada_Lib_Strings.Debug := True;
       Ada_Lib_Timer.Debug := True;
       Ada_Lib_Trace_Tasks.Debug := True;
+      Ada_Lib.Trace.Trace_Errors := True;
+      Ada_Lib.Trace.Trace_Exceptions := True;
       Ada_Lib.Trace.Trace_Pre_Post_Conditions := True;
    end Set_All;
 
@@ -857,6 +866,15 @@ return false;
 --                when 'G' =>
 --                   GNOGA_Options.Debug := True;
 
+                  when 'E' =>
+                     Ada_Lib.Trace.Trace_Errors := True;
+
+--                when 'g' =>
+--                   GNOGA_Options.Debug := True;
+
+--                when 'G' =>
+--                   GNOGA_Options.Debug := True;
+
                   when 'h' =>
                      Ada_Lib_Help.Debug := True;
 
@@ -908,6 +926,9 @@ return false;
 
                   when 'V' =>
                      Trace_Conversions := True;
+
+                  when 'x' =>
+                     Ada_Lib.Trace.Trace_Exceptions := True;
 
                   when Ada_Lib.Help.Trace_Modifier =>
                      Extended := True;

@@ -488,11 +488,12 @@ package body Ada_Lib.Database.Server is
    ) return Boolean is
    ---------------------------------------------------------------------------------
 
+      Result   : constant Boolean := Server.Is_Started and then Server.Read_Database.Is_Open and then
+            Server.Write_Database.Is_Open;
+
    begin
-      return Log_Here (
-         Server.Is_Started and then Server.Read_Database.Is_Open and then
-            Server.Write_Database.Is_Open,
-         Trace_All or Trace_Pre_Post_Conditions,
+      return Log_Here (Result,
+         Trace_All,
             "Is_Started " & Server.Is_Started'img &
             " Read_Database.Is_Open " & Server.Read_Database.Is_Open'img &
             " Write_Database.Is_Open " & Server.Write_Database.Is_Open'img);

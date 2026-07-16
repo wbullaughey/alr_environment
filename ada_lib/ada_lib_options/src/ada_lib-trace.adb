@@ -1384,6 +1384,7 @@ not_implemented;
 
    ------------------------------------------------------------
    function Trace_Pre_Post (
+      Result      : in     Boolean;
       Debug       : in     Boolean
    ) return Boolean is
    ------------------------------------------------------------
@@ -1391,7 +1392,7 @@ not_implemented;
    begin
       return Debug or else
              Trace_Pre_Post_Conditions or else
-             Trace_Pre_Post_False;
+             (Trace_Pre_Post_False and Result);
    end Trace_Pre_Post;
 
    ------------------------------------------------------------
