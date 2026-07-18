@@ -6,6 +6,7 @@ export NO_WARNINGS=$4
 export DIRECTORY=`pwd`
 export SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 export DO_TRACE=FALSE
+export MACOSX_DEPLOYMENT_TARGET=14.0
 echo SCRIPT_DIR $SCRIPT_DIR
 #SCRIPT_DIR=$(dirname "$0")
 #echo SCRIPT_DIR $SCRIPT_DIR

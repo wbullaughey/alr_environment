@@ -54,6 +54,7 @@
         <F N="../../applications/video/camera/unit_test/camera_tests.gpr"/>
         <F N="../../applications/video/camera/unit_test/config/camera_tests_config.gpr"/>
         <F N="../../applications/video/camera/unit_test/driver_test.sh"/>
+        <F N="../../gen_doc.zsh"/>
         <F N="../../applications/video/camera/driver/help"/>
         <F N="../../applications/video/camera/unit_test/help"/>
         <F N="../../applications/video/camera/unit_test/LC_RPATH.txt"/>

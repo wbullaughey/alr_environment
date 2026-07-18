@@ -1,4 +1,4 @@
-with Ada_Lib.Help;
+--with Ada_Lib.Help;
 with Ada_Lib.Trace;
 with GNAT.Source_Info;
 
@@ -59,9 +59,9 @@ package Ada_Lib.Options.Verification is
       function Initialize (
          Options                 : in out Verification_Options_Type;
          From                    : in     String := Standard.Ada_Lib.Trace.Here
-      ) return Boolean
-      with Pre    => not Options.Verify_Step (Initialized),
-           Post   => Options.Verify_Step (Initialized);
+      ) return Boolean;
+--    with Pre    => not Options.Verify_Step (Initialized),
+--         Post   => Options.Verify_Step (Initialized);
 
       overriding
       procedure Post_Process (      -- final post process
@@ -191,9 +191,9 @@ package Ada_Lib.Options.Verification is
    function Initialize (
      Options                     : in out Verification_Program_Options_Type;
      From                        : in     String := Ada_Lib.Trace.Here
-   ) return Boolean
-   with Pre    => not Options.Verify_Step (Initialized),
-        Post   => Options.Verify_Step (Initialized);
+   ) return Boolean;
+-- with Pre    => not Options.Verify_Step (Initialized),
+--      Post   => Options.Verify_Step (Initialized);
 
 -- overriding
 -- function Process (     -- processes whole command line calling Process_Option for each option

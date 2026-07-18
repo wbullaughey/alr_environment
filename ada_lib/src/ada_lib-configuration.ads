@@ -8,10 +8,6 @@ package Ada_Lib.Configuration is
 
    type Configuration_Type       is tagged private;
 
--- procedure Clear (
---    Configuration              : in out Configuration_Type
--- ) with Pre => Configuration.Is_Open;
---
    procedure Close (
       Configuration              : in out Configuration_Type
    ) with Pre => Configuration.Is_Open;
@@ -44,15 +40,20 @@ package Ada_Lib.Configuration is
    ) return Boolean
    with Pre => Configuration.Is_Open;
 
+   function Is_Empty (
+      Configuration              : in     Configuration_Type
+   ) return Boolean;
+
    function Is_Open (
       Configuration              : in     Configuration_Type
    ) return Boolean;
 
    procedure Load (
-      Configuration              :    out Configuration_Type;
+      Configuration              : in out Configuration_Type;
       Path                       : in     String;
       Create                     : in     Boolean
-   ) with Pre => Path'length > 0;
+   ) with Pre => Path'length > 0 and then
+                 Configuration.Is_Empty;
 
    procedure Set (
       Configuration              : in out Configuration_Type;
@@ -70,6 +71,10 @@ package Ada_Lib.Configuration is
    procedure Store (
       Configuration              :    out Configuration_Type;
       Path                       : in     String);
+
+   procedure Unload (
+      Configuration              : in out Configuration_Type
+   ) with Post    => Configuration.Is_Empty;
 
 private
 

@@ -23,8 +23,9 @@ package body Ada_Lib.Configuration is
    ---------------------------------------------------------------
 
    begin
-      Log_Here (Trace, "configuration " & Ada_Lib.Strings.Image (Configuration'address));
-      Table_Package.Clear (Configuration.Table);
+      Log_Here (Trace, "configuration " & Ada_Lib.Strings.Image (
+         Configuration'address));
+      Configuration.Unload;
       Configuration.Opened := False;
    end Close;
 
@@ -115,20 +116,37 @@ package body Ada_Lib.Configuration is
    end Has_Value;
 
    ---------------------------------------------------------------
+   function Is_Empty (
+      Configuration              : in     Configuration_Type
+   ) return Boolean is
+   ---------------------------------------------------------------
+
+      Result   : constant Boolean :=
+                  Table_Package.Is_Empty (Configuration.Table);
+
+   begin
+      return Log_Here (Result, Trace, "configuration " &
+         Ada_Lib.Strings.Image (Configuration'address));
+   end Is_Empty;
+   ---------------------------------------------------------------
+
+   ---------------------------------------------------------------
    function Is_Open (
       Configuration              : in     Configuration_Type
    ) return Boolean is
    ---------------------------------------------------------------
 
+      Result         : constant Boolean := Configuration.Opened;
+
    begin
-      return Log_Here (Configuration.Opened, Trace or Trace_Pre_Post_Conditions,
+      return Log_Here (Result, Trace,
          "opened " & Configuration.Opened'img &
          " configuration " & Ada_Lib.Strings.Image (Configuration'address));
    end Is_Open;
 
    ---------------------------------------------------------------
    procedure Load (
-      Configuration              :    out Configuration_Type;
+      Configuration           : in out Configuration_Type;
       Path                    : in     String;
       Create                  : in     Boolean) is
    ---------------------------------------------------------------
@@ -142,7 +160,7 @@ package body Ada_Lib.Configuration is
          Ada_Lib.Directory.Full_Name (Path));
 
       Log_In (Trace, Quote (" path ", Path) & Quote (" full path", Full_Path) &
-         " create " & Create'img & " configuration " &
+         " create " & Create'img & " configuration address " &
          Ada_Lib.Strings.Image (Configuration'address));
 
       if Ada.Directories.Exists (Full_Path.Coerce)  then
@@ -171,6 +189,7 @@ package body Ada_Lib.Configuration is
                end if;
 
                if Last > 0 then  -- not blank line
+                  Log_Here (Trace, Quote ("line", Line (Line'first .. Last)));
 
                   Pound := Ada.Strings.Fixed.Index (Line (1 .. Last), "#");
                   if Pound = 0 then -- not a comment
@@ -309,7 +328,7 @@ package body Ada_Lib.Configuration is
    procedure Store (
       Configuration              :    out Configuration_Type;
       Path                       : in     String) is
-   pragma Unreferenced (Configuration);
+-- pragma Unreferenced (Configuration);
    ---------------------------------------------------------------
 
       File                       : Ada.Text_IO.File_Type;
@@ -361,6 +380,17 @@ package body Ada_Lib.Configuration is
          Trace_Exception (Trace, Fault);
          raise;
    end Store;
+
+   ---------------------------------------------------------------
+   procedure Unload (
+      Configuration              : in out Configuration_Type) is
+   ---------------------------------------------------------------
+
+   begin
+      Log_Here (Trace, "configuration " &
+         Ada_Lib.Strings.Image (Configuration'address));
+      Table_Package.Clear (Configuration.Table);
+   end Unload;
 
 begin
 --Trace := True;

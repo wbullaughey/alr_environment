@@ -14,6 +14,9 @@ with Ada_Lib.String_Quote; use Ada_Lib.String_Quote;
 with Ada_Lib.Template;
 with Ada_Lib.Trace; use Ada_Lib.Trace;
 with Ada_Lib.Unit_Test;
+with AUnit;
+
+pragma Elaborate_All (Aunit);
 
 -- tests for the Ada_Lib unit tests
 package body Ada_Lib.Options.AUnit_Lib is
@@ -465,7 +468,7 @@ return false;
             Trace_Option & ")");
          Put_Line ("      a               all");
          Put_Line ("      A               AUnit debug");
-         Put_Line ("      c               configuration");
+         Put_Line ("      c               Ada_Lib.Configuration.Test");
          Put_Line ("      C               command line iterator");
          Put_Line ("      d               directory compare and copy");
          Put_Line ("      h               help test");
@@ -566,7 +569,7 @@ return false;
 
                      when 'a' =>
                         Ada_Lib_Command_Line_Iterator.Tests_Debug := True;
-                        Ada_Lib.Configuration.Tests.Debug := True;
+                        Ada_Lib.Configuration.Tests.Set_Debug;
                         Ada_Lib.Database.Server.Tests.Debug := True;
                         AUnit.Debug := True;
                         Ada_Lib.Mail.Tests.Debug := True;
@@ -586,10 +589,10 @@ return false;
                         Unit_Test.Ada_Lib_Options_Unit_Test.Client_Debug := True;
 
                      when 'A' =>
-                        AUnit.Debug := True;
+                           Standard.AUnit.Debug := True;
 
                      when 'c' =>
-                        Ada_Lib.Configuration.Tests.Debug := True;
+                        Ada_Lib.Configuration.Tests.Set_Debug;
 
                      when 'C' =>
                         Ada_Lib_Command_Line_Iterator.Tests_Debug := True;
@@ -663,11 +666,15 @@ return false;
 begin
 -- AUnit_Lib_Options := Protected_Options'access;
 -- Elaborate := True;
+   Debug := False;
    Debug := Debug or Debug_All;
 --Trace_Options := True;
 --debug := True;
 --Protected_Options.Tester_Debug := True;
-   Log_Here (Elaborate or Trace_Options or Debug);
+   Log_Here (Elaborate or Trace_Options or Debug,
+      "elaborate " & Elaborate'img &
+      " Trace_Options " & Trace_Options'img &
+      " Debug " & Debug'img);
 
 exception
    when Fault: others =>

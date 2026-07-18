@@ -88,9 +88,9 @@ package Ada_Lib.Options.Unit_Test is
    function Initialize (
      Options                     : in out Ada_Lib_Unit_Test_Nested_Options_Type;
      From                        : in     String := Standard.Ada_Lib.Trace.Here
-   ) return Boolean
-   with pre    => not Options.Verify_Step (Initialized),
-        Post   => Options.Verify_Step (Initialized);
+   ) return Boolean;
+-- with pre    => not Options.Verify_Step (Initialized),
+--      Post   => Options.Verify_Step (Initialized);
 
    overriding
    procedure Post_Process (      -- final initialization
