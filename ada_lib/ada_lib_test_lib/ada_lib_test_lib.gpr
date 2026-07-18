@@ -12,7 +12,7 @@ project Ada_Lib_Test_Lib is
    for Library_Name use "Ada_Lib_Test_Lib";
    for Library_Version use Project'Library_Name & ".so." & ALR_Environment.Crate_Version;
 
-   for Source_Dirs use ("src/", "config/");
+   for Source_Dirs use ("config/");
    for Object_Dir use "obj/" & Alr_Environment.Build_Profile;
    for Create_Missing_Dirs use "True";
    for Library_Dir use "lib/" & ALR_Environment.Build_Mode;
