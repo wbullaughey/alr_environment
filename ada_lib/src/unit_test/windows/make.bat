@@ -1,1 +1,0 @@
-gnatmake -aI../../../simulator -aI../..  -aI../../../lib -aI.. %1% 
