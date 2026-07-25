@@ -6,6 +6,7 @@
    --  can cause trouble. These issues are not specific to Ada; they depend
    --  primarily on the operating system.
 
+with Ada_Lib.Options;
 with Ada_Lib.Trace;use Ada_Lib.Trace;
 with GNAT.OS_Lib;
 
@@ -14,6 +15,7 @@ package body Ada_Lib.OS.Process_Manager is
    use type GNAT.OS_Lib.Process_Id;
 
    Server_Path                   : constant String := "c:\build\bin\Ada_Lib_os_process_manager_server.exe";
+   Trace        : Boolean renames Ada_Lib.Options.Ada_Lib_OS.Trace;
 
    ---------------------------------------------------------------------------
    overriding

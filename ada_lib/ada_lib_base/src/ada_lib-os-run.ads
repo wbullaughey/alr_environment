@@ -87,5 +87,4 @@ package Ada_Lib.OS.Run is
    procedure Wait_For_Remote (
       Process_ID                 :     out GNAT.OS_Lib.Process_Id);
 
-   Debug                         : aliased Boolean := False;
 end Ada_Lib.OS.Run;

@@ -1,5 +1,6 @@
 with Ada.Text_IO;
 with Ada_Lib.Directory;
+with Ada_Lib.Options;
 with Ada_Lib.OS.Run;
 with Ada_Lib.String_Quote; use Ada_Lib.String_Quote;
 -- with Ada_Lib.Strings.Unlimited;use Ada_Lib.Strings.Unlimited;
@@ -13,6 +14,8 @@ package body Ada_Lib.OS.Base64 is
       Parameter                  : in     String;
       Source                     : in     String
    ) return String;
+
+   Trace        : Boolean renames Ada_Lib.Options.Ada_Lib_OS.Trace;
 
    -------------------------------------------------------------------
    function Decode (

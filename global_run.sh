@@ -90,6 +90,9 @@ output TRACE words $WORDS
 
 CAMERA_CONFIGURATION=0
 #for PARAMETER in "$WORDS"; do
+export LOCATION=""
+export DISPLAY=true
+STEP="1"
 foreach PARAMETER ($WORDS) {
     output TRACE PARAMETER $PARAMETER
     if [ $CAMERA_CONFIGURATION -eq 1 ]; then
@@ -107,101 +110,78 @@ foreach PARAMETER ($WORDS) {
            output TRACE add option $PARAMETER
          fi
        else
-           output TRACE add parameter $PARAMETER
-           PARAMETERS+="$PARAMETER "
+         case $PARAMETER in
+
+            "local" | "remote" | "no-camera")
+               export LOCATION=$PARAMETER
+               ;;
+
+            "help")
+                  export COMMAND="$OPTIONS -h"
+                  run
+                  ;;
+
+            "help_test")
+               output LIST Help
+               export BUILD_MODE=help_test
+               export PROGRAM=bin/help_test
+               export COMMAND="$GDB $OPTIONS $HELP_TEST"
+               export UNIT_TEST=FALSE
+               output TRACE Help Test OPTIONS $OPTIONS HELP_TEST $HELP_TEST COMMAND $COMMAND
+               run
+               ;;
+
+            "hide")
+               extract
+               export DISPLAY=false
+               ;;
+
+            "ignore")
+               extract
+               export DISPLAY=ignore
+               ;;
+
+            "suites")
+                  output  list suites
+                  export COMMAND="$OPTIONS -@l"
+                  output TRACE  "command: $COMMAND"  | tee -a $OUTPUT
+                  run
+                  ;;
+
+            *)
+               output TRACE  STEP $STEP
+               case $STEP in
+
+                  "1")
+                    output TRACE add parameter $PARAMETER
+                    export SUITE="$PARAMETER"
+                    output TRACE  SUITE $SUITE
+
+                    STEP="2"
+                    ;;
+
+                  "2")
+                    output TRACE add parameter $PARAMETER
+                    export ROUTINE="$PARAMETER"
+                    output TRACE  ROUTINE $ROUTINE
+                    STEP="3"
+                    ;;
+
+                  *)
+                     echo too many parameters
+                     exit
+                     ;;
+               esac
+               ;;
+         esac
        fi
     fi
 }
+output TRACE LOCATION $LOCATION
 
 output TRACE RUN_PARAMETERS $RUN_PARAMETERS OPTIONS $OPTIONS PARAMETERS $PARAMETERS
 
-parse
-output TRACE 1st parameter $RESULT
-case $RESULT in
-
-   "gdb")
-      extract
-      export GDB=gdb
-      ;;
-
-   *)
-      ;;
-
-esac
-
-parse
-output TRACE 2nd parameter $RESULT
-case $RESULT in
-
-   "hide")
-      extract
-      export DISPLAY=false
-      ;;
-
-   "ignore")
-      extract
-      export DISPLAY=ignore
-      ;;
-
-   *)
-      export DISPLAY=true
-      ;;
-
-esac
-
-parse
-output TRACE 3rd parameter $RESULT
-export ACTION=$RESULT
-output TRACE parse RESULT $ RESULT ACTION $ACTION
-
-case "$ACTION" in
-
-   "help")
-      export COMMAND="$OPTIONS -h"
-      run
-      ;;
-
-   "help_test")
-      output LIST Help
-      export BUILD_MODE=help_test
-      export PROGRAM=bin/help_test
-      export COMMAND="$GDB $OPTIONS $HELP_TEST"
-      export UNIT_TEST=FALSE
-      output TRACE Help Test OPTIONS $OPTIONS HELP_TEST $HELP_TEST COMMAND $COMMAND
-      run
-      ;;
-
-   "suites")
-      output  list suites
-      export COMMAND="$OPTIONS -@l"
-      output TRACE  "command: $COMMAND"  | tee -a $OUTPUT
-      run
-      ;;
-
-esac
-
-#case $UNIT_TEST_LOCATION in
-#
-#   home)
-#      CAMERA_OPTIONS=-r
-#      ;;
-#
-#   ucwc)
-#      CAMERA_LOCATION=
-#      ;;
-#
-#    "")
-#       output LIST no UNIT_TEST_LOCATION option provided
-#       exit
-#       ;;
-#
-#    *)
-#      echo unrecognized UNIT_TEST_LOCATION $UNIT_TEST_LOCATION
-#      exit
-#      ;;
-#
-#esac
-
+output TRACE USE_DBDAEMON $USE_DBDAEMON
 case $USE_DBDAEMON in
 
    FALSE)
@@ -241,80 +221,81 @@ case $USE_DBDAEMON in
 #           ;;
 
 esac
-output TRACE check database  "$ACTION"
-case $ACTION in
+output TRACE check location  "$LOCATION"
+case $LOCATION in
 
-   "local-camera")
+   "local")
       extract
       parse
       ;;
 
-   "local-no-camera")
+   "no-camera")
       export OPTIONS="$OPTIONS -@N"
       extract
       parse
       ;;
 
-   "remote-camera")
+   "remote")
       export OPTIONS="$OPTIONS -r"
       extract
       parse
       ;;
 
    *)
-      echo bad action $ACTION
-      echo valid: local-camera local-no-camera remote-camera
-      exit
       ;;
 esac
+output TRACE OPTIONS "$OPTIONS"
 
+output TRACE UNIT_TEST "$UNIT_TEST"
 case $UNIT_TEST in
 
    TRUE)
-      export SUITE=$RESULT
-      extract
-      parse
-      export ROUTINE=$RESULT   # all or test routine name
-      extract
-      output LIST ACTION $ACTION SUITE $SUITE routine $ROUTINE
+#     export SUITE=$RESULT
+#     extract
+#     parse
+#     export ROUTINE=$RESULT   # all or test routine name
+#     extract
+      output TRACE ACTION $ACTION SUITE /$SUITE/ ROUTINE /$ROUTINE/
 
-      case "$SUITE" in
+      case $SUITE in
 
          all)
             ;;
 
          "")
             output LIST "missing suite"
-            exit;
+            exit
             ;;
 
          *)
-             export SUITE_OPTION="-s $SUITE"
-             ;;
+          export SUITE_OPTION="-s $SUITE"
+          ;;
 
       esac
+      output TRACE SUITE_OPTION "$SUITE_OPTION"
 
-      case "$ROUTINE" in
+      case $ROUTINE in
 
          all)
             ;;
 
          -*)
             output LIST missing routine
-            exit;
+            exit
             ;;
 
          "")
             output LIST missing routine
-            exit;
+            exit
             ;;
 
          *)
-            output LIST routine $ROUTINE
+            output LIST ROUTINE $ROUTINE
             export ROUTINE_OPTION="-e $ROUTINE"
             ;;
 
       esac
+      output TRACE ROUTINE "$ROUTINE"
       ;;
 
    FALSE)

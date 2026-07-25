@@ -1348,6 +1348,6 @@ if Trace_Tests then
       Debug := Trace_Tests;
    end if;
 --Debug := True;
-   Log_Here (Trace_Options or Elaborate);
+   Log_Here (Trace_Options or Elaborate, "elaborate");
 end Ada_Lib.Socket_IO.Stream_IO.Unit_Test;
 

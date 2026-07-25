@@ -352,5 +352,4 @@ package Ada_Lib.OS is
 
    subtype Argument_Array     is GNAT.OS_Lib.String_List;
 
-   Trace        : aliased Boolean := False;
 end Ada_Lib.OS;

@@ -45,7 +45,7 @@ test_ada_lib <command line options>:
 Ada_Lib.Options.AUnit_Lib.Program_Help trace options (-t)
       a               all
       A               AUnit debug
-      c               configuration
+      c               Ada_Lib.Configuration.Test
       C               command line iterator
       d               directory compare and copy
       h               help test
@@ -90,6 +90,7 @@ CAC ada_lib trace library options (-a)
       c               Ada_Lib.Command_Line Trace
       C               Ada_Lib.Configuration Trace
       e               Event
+      E               Ada_Lib.Trace.Trace_Errors
       h               Help
       i               interrupt
       I               Ada_Lib.interface
@@ -108,6 +109,7 @@ CAC ada_lib trace library options (-a)
       T               Ada_Lib.Trace_Tasks
       v               Ada_Lib.Options.Verification.Debug
       V               Ada_Lib.Options.Trace_Conversions
+      x               Ada_Lib.Trace.Trace_Exceptionss
       #b              database connect
       #c              Template Compile
       #d              Template Detail
@@ -116,8 +118,10 @@ CAC ada_lib trace library options (-a)
       #E              Template Expand
       #l              Template Load
       #o              Trace_Options
+      #O              Ada_Lib.OS.Tests.Unit_Test_Trace (Trace)
       #p              Trace Pre and Post Condtion functions
       #P              Trace Pre and Post Condtion false
+      #r              Ada_Lib.OS.Tests.Run_Debug (Debug)
       #s              Strings
       #S              Socket_IO IO
       #t              Ada_Lib.Text

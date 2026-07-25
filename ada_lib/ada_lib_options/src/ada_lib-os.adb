@@ -1,7 +1,7 @@
 with Ada.Characters.Latin_1;
 --with Ada.Dynamic_Priorities;
 with Ada.Text_IO; use  Ada.Text_IO;
---with Ada_Lib.Options;
+with Ada_Lib.Options;
 with Ada_Lib.OS_Strings;
 with Ada_Lib.String_Quote; use Ada_Lib.String_Quote;
 with Ada_Lib.Strings;
@@ -12,13 +12,12 @@ with Interfaces.C;
 
 package body Ada_Lib.OS is
 
-
    function getpid
    return Interfaces.C.Int;
 
    pragma Import (C, getpid);
 
--- Shell_File_Name            : constant String := "/bin/sh";
+   Trace        : Boolean renames Ada_Lib.Options.Ada_Lib_OS.Trace;
 
    -------------------------------------------------------------------
    -- creates scrtach file and returns its name

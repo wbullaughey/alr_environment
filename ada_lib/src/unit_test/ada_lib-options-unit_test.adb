@@ -812,7 +812,7 @@ begin
 --Debug := True;
 --Trace_Options := True;
 --AUnit.Debug := True;
-   Log_Here (Debug or Elaborate or Trace_Options);
+   Log_Here (Debug or Elaborate or Trace_Options, "elaborate");
 
 exception
    when Fault: others =>

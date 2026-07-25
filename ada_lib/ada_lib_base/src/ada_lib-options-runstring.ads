@@ -42,7 +42,10 @@ package Ada_Lib.Options.Runstring is
    type Registrations_Type is new  Registrations_Package.List with null record;
 
    subtype Constant_Reference_Type
-                           is Registrations_Package.Constant_Reference_Type;
+      is Registrations_Package.Constant_Reference_Type;
+
+   type Constant_Referece_Access
+      is access constant Element_Type;
 
    function Image (
       Registrations        : in     Registrations_Type

@@ -1310,7 +1310,7 @@ package body Ada_Lib.Database is
          Trace := False;
          Trace_All := False;
          Ada_Lib.Database.Connection.Debug := False;
-         Ada_Lib.OS.Run.Debug := False;
+--       Ada_Lib.OS.Run.Debug := False;
      end Trace_Clear;
 
      ---------------------------------------------------------------

@@ -453,6 +453,7 @@ package Ada_Lib.Options is
    package Ada_Lib_OS is
       Trace                         : Boolean := False;
       Run_Debug                     : Boolean := False;
+      Unit_Test_Trace               : Boolean := False;
    end Ada_Lib_OS;
 
    package Ada_Lib_Parser is

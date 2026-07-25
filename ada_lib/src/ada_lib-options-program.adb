@@ -737,9 +737,13 @@ return false;
          Put_Line ("      " & Ada_Lib.Help.Trace_Modifier &
                            "o              Trace_Options");
          Put_Line ("      " & Ada_Lib.Help.Trace_Modifier &
+                           "O              Ada_Lib.OS.Tests.Unit_Test_Trace (Trace)");
+         Put_Line ("      " & Ada_Lib.Help.Trace_Modifier &
                            "p              Trace Pre and Post Condtion functions");
          Put_Line ("      " & Ada_Lib.Help.Trace_Modifier &
                            "P              Trace Pre and Post Condtion false");
+         Put_Line ("      " & Ada_Lib.Help.Trace_Modifier &
+                           "r              Ada_Lib.OS.Tests.Run_Debug (Debug)");
          Put_Line ("      " & Ada_Lib.Help.Trace_Modifier &
                            "s              Strings");
          Put_Line ("      " & Ada_Lib.Help.Trace_Modifier &
@@ -785,6 +789,8 @@ return false;
       Ada_Lib_Options_Runstring.Debug := True;
       Ada_Lib_Options.Debug := True;
       Ada_Lib_OS.Trace := True;
+      Ada_Lib_OS.Run_Debug := True;
+      Ada_Lib_OS.Unit_Test_Trace := True;
       Ada_Lib_OS.Run_Debug := True;
       Ada_Lib_Parser.Debug := True;
       Ada_Lib_Socket_IO.Trace := True;
@@ -956,11 +962,17 @@ return false;
                   when 'o' =>
                      Trace_Options := True;
 
+                  when 'O' =>
+                     Ada_Lib_OS.Unit_Test_Trace := True;
+
                   when 'p' =>
                      Ada_Lib.Trace.Trace_Pre_Post_Conditions := True;
 
                   when 'P' =>
                      Ada_Lib.Trace.Trace_Pre_Post_False := True;
+
+                  when 'r' =>
+                     Ada_Lib_OS.Run_Debug := True;
 
                   when 's' =>
                      Ada_Lib_Strings.Debug := True;

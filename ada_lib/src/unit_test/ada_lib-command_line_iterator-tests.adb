@@ -19,7 +19,7 @@ package body Ada_Lib.Command_Line_Iterator.Tests is
       Test                       : in out AUnit.Test_Cases.Test_Case'class);
 
    Debug                         : Boolean renames Options.
-                                    Ada_Lib_Command_Line_Iterator.Debug;
+                                    Ada_Lib_Command_Line_Iterator.Tests_Debug;
 
    ---------------------------------------------------------------
    procedure Options(

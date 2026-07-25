@@ -17,7 +17,7 @@ package body AUnit.Test_Filters.Ada_lib is
       Test_Name            : constant String := AUnit.Simple_Test_Cases.Name (
                               AUnit.Simple_Test_Cases.Test_Case'Class (Test)).all;
    begin
-      Log_In (Debug);
+      Log_In (Debug, Quote ("filter name ", Filter.Name));
       if Filter.Name /= Null then
          declare
             Result         : constant Boolean := Test_Name = Filter.Name.all;

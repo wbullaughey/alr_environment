@@ -3,6 +3,7 @@ with Ada.Exceptions;
 with Ada.Strings.Fixed;
 with Ada.Text_IO; use Ada.Text_IO;
 with AUnit.Assertions; use AUnit.Assertions;
+with Ada_Lib.Directory;
 --with Ada_Lib.Options.Flags;
 with Ada_Lib.Options.AUnit_Lib;
 --with Ada_Lib.Options.Unit_Test;
@@ -19,18 +20,20 @@ with AUnit.Test_Cases;
 package body Ada_Lib.OS.Tests is
 
    procedure Encode_Decode (
-      Test                       : in out AUnit.Test_Cases.Test_Case'class);
+      Test     : in out AUnit.Test_Cases.Test_Case'class);
 
    procedure Kill_All (
-      Test                       : in out AUnit.Test_Cases.Test_Case'class);
+      Test     : in out AUnit.Test_Cases.Test_Case'class);
 
    procedure Run_Local(
-      Test                       : in out AUnit.Test_Cases.Test_Case'class);
+      Test     : in out AUnit.Test_Cases.Test_Case'class);
 
    procedure Run_Remote (
-      Test                       : in out AUnit.Test_Cases.Test_Case'class);
+      Test     : in out AUnit.Test_Cases.Test_Case'class);
 
-   Encode_Source                 : constant String := "abcdef";
+   Encode_Source
+               : constant String := "abcdef";
+   Trace       : Boolean renames Ada_Lib.Options.Ada_Lib_OS.Unit_Test_Trace;
 
    ---------------------------------------------------------------
    procedure Encode_Decode(
@@ -43,9 +46,9 @@ package body Ada_Lib.OS.Tests is
 
       declare
          Encoded                  : constant String :=
-                                    Ada_Lib.OS.Base64.Encode (Encode_Source);
+                                    Base64.Encode (Encode_Source);
          Decoded                  : constant String :=
-                                    Ada_Lib.OS.Base64.Decode (Encoded);
+                                    Base64.Decode (Encoded);
 
       begin
          Log_Here (Trace, Quote ("Encoded", Encoded), Quote (" Decoded", Decoded));
@@ -76,9 +79,9 @@ package body Ada_Lib.OS.Tests is
 
    begin
       Log (Trace, Here, Who & Program & " 500");
-      Assert (Ada_Lib.OS.Run.Non_Blocking_Spawn (Program, "500"), "could not run sleep command");
+      Assert (OS.Run.Non_Blocking_Spawn (Program, "500"), "could not run sleep command");
       Log (Trace, Here, Who & Program & " spawned, kill it");
-      Ada_Lib.OS.Run.Kill_All (Program);
+      OS.Run.Kill_All (Program);
    end Kill_All;
 
    ---------------------------------------------------------------
@@ -123,20 +126,27 @@ package body Ada_Lib.OS.Tests is
 
       Lines                      : Natural := 0;
       Local_Program              : constant String := "/bin/ls";
+      Log_Directory              : constant String :=
+                                    OS.Run.Path.Local_Home_Directory & "/tmp";
       Parameters                 : constant String := "src";
       Result                     : Boolean := False;
       Return_Code                : OS_Exit_Code_Type;
       Test_Pattern               : constant String :=
                                     "test_ada_lib.adb";
-
    begin
-      Log_In (Trace, Here, Who & " enter User '" & Ada_Lib.OS.Run.Path.User &
-         "' Log_File '" & Ada_Lib.OS.Run.Path.Log_File &
-            "' Parameters '" & Parameters & "'");
-      Return_Code := Ada_Lib.OS.Run.Spawn (
+      Log_In (Trace, Here, Who &
+         Quote (" User", OS.Run.Path.User) &
+         Quote (" local program", Local_Program) &
+         Quote (" Log_File", OS.Run.Path.Log_File) &
+         Quote (" Parameters", Parameters));
+
+      Assert (Directory.Exists (Log_Directory),
+         Log_Directory & " does not exist");
+
+      Return_Code := OS.Run.Spawn (
          Program     => Local_Program,
          Parameters  => Parameters,
-         Output_File => Ada_Lib.OS.Run.Path.Log_File);
+         Output_File => OS.Run.Path.Log_File);
 
       Log (Trace, Here, Who & " Return_Code " & Return_Code'img);
       if Return_Code /= No_Error then
@@ -147,9 +157,9 @@ package body Ada_Lib.OS.Tests is
          File                    : Ada.Text_IO.File_Type;
 
       begin
-         Log_Here (Trace, Quote ("open", Ada_Lib.OS.Run.Path.Log_File));
+         Log_Here (Trace, Quote ("open", OS.Run.Path.Log_File));
          Ada.Text_IO.Open (File, Ada.Text_IO.In_File,
-            Ada_Lib.OS.Run.Path.Log_File);
+            OS.Run.Path.Log_File);
 
          while not Ada.Text_IO.End_Of_File (File) loop
             declare
@@ -221,19 +231,19 @@ package body Ada_Lib.OS.Tests is
                                           "test_ada_lib.adb";
 
          begin
-            Log (Trace, Here, Who & " enter User '" & Ada_Lib.OS.Run.Path.User &
-               "' Local_Home_Directory '" & Ada_Lib.OS.Run.Path.
+            Log (Trace, Here, Who & " enter User '" & OS.Run.Path.User &
+               "' Local_Home_Directory '" & OS.Run.Path.
                                              Local_Home_Directory &
-               "' Remote_Home_Directory '" & Ada_Lib.OS.Run.Path.
+               "' Remote_Home_Directory '" & OS.Run.Path.
                                              Remote_Home_Directory &
-               "' Log_File '" & Ada_Lib.OS.Run.Path.Log_File &
+               "' Log_File '" & OS.Run.Path.Log_File &
                   "' Parameters '" & Parameters & "'");
-            Return_Code := Ada_Lib.OS.Run.Spawn (
+            Return_Code := OS.Run.Spawn (
                Remote      => Options.Database_Options.Remote_Host.Coerce,
                Program     => Remote_Program,
                User        => Options.Database_Options.Remote_User.Coerce,
                Parameters  => Parameters,
-               Output_File => Ada_Lib.OS.Run.Path.Log_File);
+               Output_File => OS.Run.Path.Log_File);
 
             Log (Trace, Here, Who & " Return_Code " & Return_Code'img);
             if Return_Code /= No_Error then
@@ -245,9 +255,9 @@ package body Ada_Lib.OS.Tests is
                File                    : Ada.Text_IO.File_Type;
 
             begin
-               Log_Here (Trace, Quote ("open", Ada_Lib.OS.Run.Path.Log_File));
+               Log_Here (Trace, Quote ("open", OS.Run.Path.Log_File));
                Ada.Text_IO.Open (File, Ada.Text_IO.In_File,
-                  Ada_Lib.OS.Run.Path.Log_File);
+                  OS.Run.Path.Log_File);
 
                while not Ada.Text_IO.End_Of_File (File) loop
                   declare

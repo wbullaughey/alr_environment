@@ -12,7 +12,7 @@ package body Ada_Lib.Options.Runstring is
    function Find_Registration (
       Registrations           : in     Registrations_Type;
       Option                  : in     Flag_Option_Type
-   ) return Constant_Reference_Type;
+   ) return Constant_Referece_Access;
 
    Debug       : Boolean renames Ada_Lib_Options_Runstring.Debug;
    Debug_All   : Boolean renames Ada_Lib_Options.Debug_All;
@@ -75,7 +75,7 @@ package body Ada_Lib.Options.Runstring is
    function Find_Registration (
       Registrations              : in     Registrations_Type;
       Option                     : in     Flag_Option_Type
-   ) return Constant_Reference_Type is
+   ) return Constant_Referece_Access is
    -------------------------------------------------------------------
 
       use Registrations_Package;
@@ -86,13 +86,16 @@ package body Ada_Lib.Options.Runstring is
       Log_In (Debug, Option.Image & " registrations" & Registrations.Length'img);
       while Has_Element (Cursor) loop
          declare
-            Element  : constant Constant_Reference_Type :=
-                        Constant_Reference (Registrations, Cursor);
+            Element  : aliased constant Constant_Reference_Type :=
+                           Registrations_Package.Constant_Reference (
+                              Registrations_Package.List (Registrations), Cursor);
+--          Result   : constant Registrations_Constant_Access :=
+--                      Registrations_Constant_Access'(Element'unchecked_access);
          begin
             Log_Here (Debug, Element.Option.Image);
             if Element.Option.all = Option then
                Log_Out (Debug, "found " & Element.Option.Image);
-               return Element;
+               return Element'unchecked_Access;
             end if;
          end;
 
@@ -155,7 +158,7 @@ package body Ada_Lib.Options.Runstring is
       begin
          if Is_Registered (Option) then
             declare
-               Parameter          : constant Constant_Reference_Type :=
+               Parameter          : constant Constant_Referece_Access :=
                                     Find_Registration (Registrations, Option);
             begin
                return Parameter.Kind = With_Parameters;
