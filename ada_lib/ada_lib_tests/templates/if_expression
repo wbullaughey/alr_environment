@@ -1,2 +1,0 @@
-if expression test
-@@IF@@condition@@true@@ELSE@@false@@END_IF@@
