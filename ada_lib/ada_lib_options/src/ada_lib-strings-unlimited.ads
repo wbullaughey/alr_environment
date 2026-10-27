@@ -131,8 +131,8 @@ package Ada_Lib.Strings.Unlimited is
    ) return Natural;
 
    function Quote (
-      Variable             : in   String;
-      Value                : in   String_Type
+      Value                      : in   String_Type;
+      Label                      : in   String
    ) return String;
 
    function Quote (
@@ -142,8 +142,8 @@ package Ada_Lib.Strings.Unlimited is
    ) return String_Type;
 
    function Quote (
-      Label                      : in     String;
       Source                     : in     String_Type;
+      Label                      : in     String;
       Substiture_For_Non_Alpha   : in     Boolean := False;
       Quote                      : in     Character := '"'
    ) return String_Type;

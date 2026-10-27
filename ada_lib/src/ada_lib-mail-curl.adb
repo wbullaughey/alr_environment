@@ -81,7 +81,7 @@ package body Ada_Lib.Mail.CURL is
    begin
       Log_In (Debug,
          Quote ("To_Address", To_Address) &
-         Quote (" From_Address", Credential.From_Address) &
+         Credential.From_Address.Quote (" From_Address") &
          Quote (" Subject", Subject) &
          Quote (" Path", Path));
 

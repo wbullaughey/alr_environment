@@ -44,7 +44,7 @@ package body Ada_Lib.Timer is
    ---------------------------------------------------------------------------
 
    begin
-      Log_In (Trace, Quote ("description", Event.Description) &
+      Log_In (Trace, Quote ("description", Event.Description.all) &
             " state " & Event.State'img);
 
       case Event.State is
@@ -63,7 +63,7 @@ package body Ada_Lib.Timer is
          when others =>
             declare
                Message  : constant String := "could not cancel event " &
-                           Quote ("description", Event.Description) &
+                           Quote ("description", Event.Description.all) &
                            " state " & Event.State'img;
             begin
                Event.State := Canceled;
@@ -80,7 +80,7 @@ package body Ada_Lib.Timer is
    ---------------------------------------------------------------------------
 
    begin
-      Log_In (Trace, Quote ("description", Event.Description) &
+      Log_In (Trace, Quote ("description", Event.Description.all) &
             " state " & Event.State'img);
 
       case Event.State is
@@ -95,7 +95,7 @@ package body Ada_Lib.Timer is
          when others =>
             declare
                Message  : constant String := "could not cancel event " &
-                           Quote ("description", Event.Description) &
+                           Quote ("description", Event.Description.all) &
                            " state " & Event.State'img;
             begin
                Event.State := Canceled;
@@ -125,7 +125,7 @@ package body Ada_Lib.Timer is
                            Ada_Lib.Strings.Unlimited.Coerce ("no description");
 
    begin
-      Log_In (Trace, Quote ("description", Event.Description) &
+      Log_In (Trace, Quote ("description", Event.Description.all) &
          " state " & Event.State'img &
          " dynamic " & Event.Dynamic'img &
          " address " & Ada_Lib.Strings.Image (Event'address));
@@ -153,15 +153,13 @@ package body Ada_Lib.Timer is
          end;
 
       end if;
-      Log_Out (Trace, Ada_Lib.Strings.Unlimited.Quote ("description",
-         Save_Description));
+      Log_Out (Trace, Save_Description.Quote ("description"));
 
 exception
    when FAult: others =>
       declare
          Message  : constant String := "address " & Ada_Lib.Strings.Image (Event'address) &
-            Ada_Lib.Strings.Unlimited.Quote (" description",
-               Save_Description) &
+            Save_Description.Quote (" description") &
             " dynamic " & Event.Dynamic'img;
 
       begin
@@ -263,7 +261,7 @@ exception
       if    Event.Description /= Null and then
             Event.Description /= Uninitialized_Event_Description'
                unchecked_access then
-         Log_Here (Trace, Quote ("replace description", Event.Description));
+         Log_Here (Trace, Quote ("replace description", Event.Description.all));
          Free (Event.Description);
       end if;
       Event.Description := new String'(Description);
@@ -345,7 +343,7 @@ exception
 --    Event.Started := True;
 
       Log_Here (Trace, "wait " & Event.Wait'img &
-         Quote ( " description", Event.Description) &
+         Quote ( " description", Event.Description.all) &
          " dynamic " & Event.Dynamic'img &
          " repeating " & Event.Repeating'img &
          " state " & Event.State'img);
@@ -362,36 +360,36 @@ exception
          when Waiting =>
             Event.Start_Time := Ada_Lib.Time.Now;
             while Event.State = Waiting loop -- if null then canceled before set
-               Log_Here (Trace, Quote ("description", Event.Description) &
+               Log_Here (Trace, Quote ("description", Event.Description.all) &
                   " dynamic " & Event.Dynamic'img &
                   " start time " & Ada_Lib.Time.From_Start (True) &
                   " start loop delay time " & Event.Wait'img &
                   " address " & Ada_Lib.Strings.Image (Event.all'address));
                select
                   accept Cancel do
-                     Log_Here (Trace, Quote ("description", Event.Description));
+                     Log_Here (Trace, Quote ("description", Event.Description.all));
                      Event.State := Canceled;
                   end Cancel;
                or
                   delay Event.Wait;          -- delay until timeout
-                  Log_Here (Trace, Quote ("description", Event.Description) &
+                  Log_Here (Trace, Quote ("description", Event.Description.all) &
                      " initialized " & Event.Initialized'img);
                   if not Event.Initialized then
-                     raise Failed with Quote ("event", Event.Description) &
+                     raise Failed with Quote ("event", Event.Description.all) &
                         " not initialized";
                   end if;
                   Event.Callback;
                   if not Event.Repeating then
                      Event.State := Completed;
                   end if;
-                  Log_Here (Trace, Quote ("description", Event.Description) &
+                  Log_Here (Trace, Quote ("description", Event.Description.all) &
                      " repeating " & Event.Repeating'img);
                end select;
             end loop;
 
       end case;
       Log_Here (Trace, "event state " & Event.State'img
-         & Quote (" description", Event.Description) & " completed");
+         & Quote (" description", Event.Description.all) & " completed");
 
       Ada_Lib.Trace_Tasks.Stop;
       Log_Out (Trace);

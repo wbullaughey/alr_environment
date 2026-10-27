@@ -476,10 +476,10 @@ package body Ada_Lib.Database.Subscribe is
                                     Ada_Lib.Database.Updater.Updater_Interface_Class_Access  (
                                        Hash_Table_Package.Element (Cursor));
            begin
-              Log (Debug_Subscribe, Here, Who & Quote (" notify name", Name_Value.Name) &
+              Log (Debug_Subscribe, Here, Who & Name_Value.Name.Quote (" notify name") &
                  Quote (" Updater name value", Updater.Image) &
                  " update mode " & Updater.Update_Mode'img &
-                 Quote (" notify tag", Name_Value.Tag));
+                 Name_Value.Tag.Quote (" notify tag"));
 
               if    Updater.Name = Name and then
                     Name_Value.Tag = Updater.DBDaemon_Tag then

@@ -65,8 +65,8 @@ package body Ada_Lib.Database.Unit_Test is
       Result                    : constant Name_Value_Class_Type := Test.Database.all.Get (Name, Index, Tag);
 
    begin
-      Log_Here (Debug, Ada_Lib.Strings.Unlimited.Quote ("name", Result.Name) &
-         Ada_Lib.Strings.Unlimited.Quote ("value", Result.Value));
+      Log_Here (Debug, Ada_Lib.Strings.Unlimited.Quote (Result.Name, "name") &
+         Ada_Lib.Strings.Unlimited.Quote (Result.Value, "value"));
       return Result;
    end Get;
 

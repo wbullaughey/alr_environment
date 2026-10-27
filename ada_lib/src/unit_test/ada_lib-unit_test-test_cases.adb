@@ -305,7 +305,7 @@ package body Ada_Lib.Unit_Test.Test_Cases is
 
       begin
          Test.Tear_Down_Failed := True;
-         Log_Here;
+         Log_Here ("from " & Here);
       end Tear_Down_Failed;
 
       ----------------------------------------------------------------------------

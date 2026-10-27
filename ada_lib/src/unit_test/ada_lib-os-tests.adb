@@ -210,10 +210,8 @@ package body Ada_Lib.OS.Tests is
                            Get_Ada_Lib_Read_Only_Program_Options).all;
    begin
       Log_In (Trace,
-         Quote ("remote host",
-            Options.Database_Options.Remote_Host) &
-         Quote ("remote user",
-            Options.Database_Options.Remote_User));
+         Options.Database_Options.Remote_Host.Quote ("remote host") &
+         Options.Database_Options.Remote_User.Quote ("remote user"));
       if Options.Database_Options.Remote_Host.Length > 0 then
          if Options.Database_Options.Remote_User.Length = 0 then
             Put_Line ("could not run test" & Who & ". No user specified");

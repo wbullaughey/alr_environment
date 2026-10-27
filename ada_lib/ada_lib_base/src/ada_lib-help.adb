@@ -317,7 +317,7 @@ package body Ada_Lib.Help is
             Line.Append ("(" & String (Contents.Component) & ")");
          end if;
 
-         Log_Here (Debug, Ada_Lib.Strings.Unlimited.Quote ("line", Line));
+         Log_Here (Debug, Ada_Lib.Strings.Unlimited.Quote (Line, "line"));
          Output_Line (Line.Coerce);
          Log_Out (Debug);
       end Output;

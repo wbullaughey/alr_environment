@@ -196,7 +196,7 @@ package body Ada_Lib.Socket_IO is
             " no socket"
          else
             GNAT.Sockets.Image (Socket.GNAT_Socket)) &
-         Quote (" description", Socket.Description) &
+         Quote (" description", Socket.Description.all) &
          " socket open " & Socket.Open'img & " GNAT socket " & Socket.GNAT_Socket_Open'img &
          " address " & Image (Socket'address);
    end Image;

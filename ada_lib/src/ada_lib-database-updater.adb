@@ -181,7 +181,7 @@ not_implemented;
       begin
          Log_In (Trace and Detail, " from " & From);
          Put_Line ("Dump " & Title & " " & Updater.Image);
-         Put_LIne (Quote ("   ID", Updater.ID));
+         Put_LIne (Updater.ID.Quote ("   ID"));
          Put_Line ("   name_index_tag " & Base_Updater_Type'class (Updater).Name_Index_Tag.Image);
          Put_Line ("   update mode " & Updater.Update_Mode'img);
       end Dump;

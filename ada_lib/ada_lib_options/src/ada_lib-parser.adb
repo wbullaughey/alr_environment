@@ -162,7 +162,7 @@ package body Ada_Lib.Parser is
          end if;
          Log_Exception (Debug);
          raise Underflow with Ada_Lib.Strings.Unlimited.Quote (
-            "iterator buffer", Iterator.Buffer);
+            Iterator.Buffer, "iterator buffer");
       end if;
 
       declare

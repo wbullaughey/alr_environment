@@ -427,7 +427,7 @@ package body Ada_Lib.Command_Line_Iterator.Tests is
                begin
                   Log_Here (Debug, "Argument index" &
                      Iterator_Arguments (Current_Argument)'img &
-                     Quote (" expected", Expected));
+                     Quote (" expected", Expected.all));
                   if Argument = Expected.all then
                      Got_Argument (Current_Argument) := True;
                   else

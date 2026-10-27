@@ -493,7 +493,7 @@ package body Ada_Lib.Database.Server.State is
                                        Server.Host_Name) > 0;
    begin
       return Log_Here (Result, Trace_Pre_Post (Result, Debug),
-         Ada_Lib.Strings.Unlimited.Quote ("Host Name", Server.Host_Name));
+         Ada_Lib.Strings.Unlimited.Quote (Server.Host_Name, "Host Name"));
    end Is_Host_Known;
 
 --   ---------------------------------------------------------------

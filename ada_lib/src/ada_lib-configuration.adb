@@ -15,7 +15,7 @@ package body Ada_Lib.Configuration is
    use type Ada.Directories.File_Kind;
 
 
-   Trace             : Boolean renames Options.Ada_Lib_Configuration.Trace;
+   Trace : Boolean renames Options.Ada_Lib_Configuration.Trace;
 
    ---------------------------------------------------------------
    procedure Close (
@@ -62,8 +62,7 @@ package body Ada_Lib.Configuration is
          end;
       else
          Log_Exception (Trace, Quote (" no name", Name));
-         raise Failed with Quote ("Name", Name) & Quote (" not found for ",
-            Configuration.Path);
+         raise Failed with Quote ("Name", Name) & Configuration.Path.Quote (" not found for ");
       end if;
 
    exception
@@ -154,12 +153,11 @@ package body Ada_Lib.Configuration is
       File                    : Ada.Text_IO.File_Type;
       Full_Path               : Ada_Lib.Strings.Unlimited.String_Type;
       Line_Number             : Positive := 1;
-
    begin
       Full_Path := Ada_Lib.Strings.Unlimited.Coerce (
          Ada_Lib.Directory.Full_Name (Path));
 
-      Log_In (Trace, Quote (" path ", Path) & Quote (" full path", Full_Path) &
+      Log_In (Trace, Quote (" path ", Path) & Full_Path.Quote (" full path") &
          " create " & Create'img & " configuration address " &
          Ada_Lib.Strings.Image (Configuration'address));
 
@@ -197,10 +195,12 @@ package body Ada_Lib.Configuration is
                      Equal := Ada.Strings.Fixed.Index (Line (1 .. Last), "=");
 
                      if Equal = 0 then
-                        Log_Exception (Trace, "missing equal sign line" & Line_Number'img &
+                        Log_Exception (Trace, "missing equal sign line" &
+                           Line_Number'img &
                            " in " & Path);
                         Ada.Exceptions.Raise_Exception (Constraint_Error'Identity,
-                           "missing equal sign line" & Line_Number'img &
+                           "missing equal sign line" &
+                              Line_Number'img &
                            " in " & Path);
                      end if;
 
@@ -233,7 +233,8 @@ package body Ada_Lib.Configuration is
                end if;
             end;
 
-            Line_Number := Line_Number + 1;
+            Line_Number :=
+               Line_Number + 1;
          end loop;
          Ada.Text_IO.Close (File);
          Configuration.Opened := True;
@@ -249,12 +250,12 @@ package body Ada_Lib.Configuration is
          Ada.Exceptions.Raise_Exception (Ada.IO_Exceptions.Name_Error'Identity);
       end if;
 
-      Log_Out (Trace);
+      Log_Out (Trace, "Number Lines" & Line_Number'img);
 
    exception
 
       when Ada.IO_Exceptions.Name_Error =>
-         raise Failed with Quote ("Full_Path", Full_Path) & " does not exist";
+         raise Failed with Full_Path.Quote ("Full_Path") & " does not exist";
 
       when Fault : others =>
          Trace_Message_Exception (Fault, "Full_Path '" & Full_Path.Coerce & "' create " & Create'img);
@@ -352,7 +353,7 @@ package body Ada_Lib.Configuration is
       Full_Path := Ada_Lib.Strings.Unlimited.Coerce (
          Ada_Lib.Directory.Full_Name (Path));
 
-      Log_In (Trace, Quote ("path", Path) & Quote (" full path", Full_Path));
+      Log_In (Trace, Quote ("path", Path) & Full_Path.Quote (" full path"));
 
       declare
          Containing_Directory    : constant String :=

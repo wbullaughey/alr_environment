@@ -17,8 +17,8 @@ package body AUnit.Test_Filters.Ada_lib is
       Test_Name            : constant String := AUnit.Simple_Test_Cases.Name (
                               AUnit.Simple_Test_Cases.Test_Case'Class (Test)).all;
    begin
-      Log_In (Debug, Quote ("filter name ", Filter.Name));
       if Filter.Name /= Null then
+         Log_In (Debug, Quote ("filter name ", Filter.Name.all));
          declare
             Result         : constant Boolean := Test_Name = Filter.Name.all;
 
@@ -31,6 +31,8 @@ package body AUnit.Test_Filters.Ada_lib is
                return Log_Out (True, Debug);
             end if;
          end;
+      else
+         Log_In (Debug, "no filter name");
       end if;
 
       return Log_Out (Name_Filter (Filter).Is_Active (Test), Debug);

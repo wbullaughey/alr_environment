@@ -257,7 +257,7 @@ package body Ada_Lib.Template.Compile is
       begin
          Log_In (Trace_Compile, Quote ("variable", Variable));
          for Parameter of Parameters loop
-            Log_Here (Trace_Compile, Quote ("parameter", Parameter.Name));
+            Log_Here (Trace_Compile, Parameter.Name.Quote ("parameter"));
             if Parameter.Name = Variable then
                declare
                   Result         : constant String :=
@@ -755,7 +755,7 @@ not_implemented;
       end loop;
 
       Ada.Text_IO.Close (Input);
-      Log_Out (Trace_Compile, Quote ("loaded", Source));
+      Log_Out (Trace_Compile, Source.Quote ("loaded"));
       return Source.Coerce;
 
    exception

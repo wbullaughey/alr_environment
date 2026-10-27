@@ -221,7 +221,7 @@ package body Ada_Lib.Trace.Tests is
       for Line of List loop
          Line_Count := Line_Count + 1;
          if Line_Count > Expected'length then
-            AUnit.Assertions.Assert (False, Quote ("too many output lines", Line));
+            AUnit.Assertions.Assert (False, Line.Quote ("too many output lines"));
          end if;
 
          declare
@@ -243,7 +243,7 @@ package body Ada_Lib.Trace.Tests is
          begin
             Log_Here (Debug_Test, "Exception_Test " & Exception_Test'img &
                " count" & Line_Count'img &
-               Quote (" line", Line) &
+               Line.Quote (" line") &
                " expected level" & Expected_Entry.Level'img &
                Quote (" expected line", Expected_Line) &
                " expected seconds " & Expected_Seconds'img &
@@ -253,7 +253,7 @@ package body Ada_Lib.Trace.Tests is
                   Aunit_Program_Options_Constant_Class_Access (
                      Program_Options).
                         Get_Read_Only_Nested_Program_Options.Verbose then
-               Ada.Text_IO.Put_Line (Quote ("line", Line));
+               Ada.Text_IO.Put_Line (Line.Quote ("line"));
             end if;
 
             if Exception_Test then
@@ -270,7 +270,7 @@ package body Ada_Lib.Trace.Tests is
                   Test := Trimmed (Trimmed'first .. Trimmed_Length) =
                      Pattern (Pattern'first .. Pattern_Length);
                   Log_Here(Debug_Test, "test " & Test'img &
-                     Quote (" line", Line) &
+                     Line.Quote (" line") &
                      Quote (" pattern", Pattern (Pattern'first .. Pattern_Length)) &
                      " length" & Pattern_Length'img &
                      Quote (" trimmed", Trimmed (Trimmed'first .. Trimmed_Length)) &

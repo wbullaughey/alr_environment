@@ -3,6 +3,8 @@ with Ada_Lib.Substiture_For_Non_Alpha;
 
 package body Ada_Lib.String_Quote is
 
+   use type Strings.String_Constant_Access;
+
    -------------------------------------------------------------------
    function Quote (
       Value                : in   Character
@@ -60,20 +62,31 @@ package body Ada_Lib.String_Quote is
       return Variable & ": " & Quote (Value);
    end Quote;
 
-   -------------------------------------------------------------------
-   function Quote (
-      Variable             : in   String;
-      Value                : access constant String
-   ) return String is
-   -------------------------------------------------------------------
+-- -------------------------------------------------------------------
+-- function Quote (
+--    Variable             : in   String;
+--    Value                : access String
+-- ) return String is
+-- -------------------------------------------------------------------
+--
+-- begin
+--    return Variable & ": " & Quote (Value.all);
+-- end Quote;
 
-   begin
-      return Quote (Variable, (if Value = Null then
-            "null pointer"
-         else
-            Value.all));
-   end Quote;
-
+-- -------------------------------------------------------------------
+-- function Quote (
+--    Variable             : in  String;
+--    Value                : in  Strings.String_Constant_Access
+-- ) return String is
+-- -------------------------------------------------------------------
+--
+-- begin
+--    return Quote (Variable, (if Value = Null then
+--          "null pointer"
+--       else
+--          Value.all));
+-- end Quote;
+--
    -------------------------------------------------------------------
    function Quote (
       Variable             : in   String;
@@ -85,5 +98,15 @@ package body Ada_Lib.String_Quote is
       return Quote (Variable, Ada.Strings.Unbounded.To_String (Value));
    end Quote;
 
+-- -------------------------------------------------------------------
+-- function Quote (
+--    Variable             : in   String;
+--    Value                : in   Ada_Lib.Strings.Unlimited.String_Type
+-- ) return String is
+-- -------------------------------------------------------------------
+--
+-- begin
+--    return Ada_Lib.Strings.Unlimited.Quote (Value, Variable);
+-- end Quote;
 
 end Ada_Lib.String_Quote;

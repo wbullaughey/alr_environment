@@ -346,7 +346,7 @@ package body Ada_Lib.Database.Server.Tests is
 
          Assert (Cursor.Updater.Name = Local_Name_Value.Name.Coerce,
             Quote ("wrong name value got ", Cursor.Updater.Name) &
-            Quote ("expected ", Local_Name_Value.Name));
+            Local_Name_Value.Name.Quote ("expected "));
          Assert (Cursor.Update_Mode = Update_Mode, "wrong on change");
          Cursor.Counter := Cursor.Counter + 1;
          return True;
@@ -564,8 +564,8 @@ package body Ada_Lib.Database.Server.Tests is
                                        Ada_Lib.Database.No_Vector_Index, "", Read_Timeout);
 
       begin
-         Log_Here (Debug, Quote ("name '", Response.Name) &
-            Quote ("value", Response.Value));
+         Log_Here (Debug, Response.Name.Quote ("name '") &
+            Response.Value.Quote ("value"));
          Assert (Response.Name = Name_2, "got wrong name expected '" & Name_2 &
             Construct ("' got '", Response.Name & "'"));
          Assert (Response.Value = Value_2, Construct ("got wrong value expected '" & Value_2 &

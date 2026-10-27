@@ -215,8 +215,8 @@ package body Ada_Lib.Socket_IO.Stream_IO is
                                              Socket.Description.all & " write task"));
    begin
       Log_In (Tracing, Socket.Image &
-         Quote (" reader description", Reader_Task_Description) &
-         Quote (" writer description", Writer_Task_Description) &
+         Quote (" reader description", Reader_Task_Description.all) &
+         Quote (" writer description", Writer_Task_Description.all) &
          " Default_Read_Timeout " &
          Format_Timeout (Default_Read_Timeout) &
          " Default_Write_Timeout " &
@@ -1270,7 +1270,7 @@ package body Ada_Lib.Socket_IO.Stream_IO is
       Stream_Pointer             : Stream_Access;
 
    begin
-      Log_In (Trace, Quote ("description", Description));
+      Log_In (Trace, Quote ("description", Description.all));
       Ada_Lib.Trace_Tasks.Start ("input task", Here);
       accept Open (
          Stream                  : in   Stream_Access;
@@ -1410,7 +1410,7 @@ package body Ada_Lib.Socket_IO.Stream_IO is
          end;
 
       end loop;
-      Log_Here (Trace, "loop exit " & Quote ("description", Description));
+      Log_Here (Trace, "loop exit " & Quote ("description", Description.all));
       Stream_Pointer.Reader_Stopped := True;
 
       Ada_Lib.Trace_Tasks.Stop;
@@ -1434,7 +1434,7 @@ package body Ada_Lib.Socket_IO.Stream_IO is
       Stream_Pointer             : Stream_Access;
 
    begin
-      Log_In (Trace, Quote ("description", Description));
+      Log_In (Trace, Quote ("description", Description.all));
 
       accept Open (
          Stream                  : in   Stream_Access;
@@ -1458,7 +1458,7 @@ package body Ada_Lib.Socket_IO.Stream_IO is
                         Stream_Pointer.Output_Buffer.Get_State;
          begin
             Log_Here (Trace,
-               Quote ("descritpion", Stream_Pointer.Socket.Description) & " " &
+               Quote ("descritpion", Stream_Pointer.Socket.Description.all) & " " &
                " state " & State'img & " " &
                Stream_Pointer.Socket.Image);
             case State is

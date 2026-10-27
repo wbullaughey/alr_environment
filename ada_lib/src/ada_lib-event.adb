@@ -3,7 +3,7 @@ with Ada_Lib.String_Quote; use Ada_Lib.String_Quote;
 --with Ada.Text_IO; use  Ada.Text_IO;
 with Ada_Lib.Trace; use Ada_Lib.Trace;
 
-with Ada_Lib.Database;
+--with Ada_Lib.Database;
 
 package body Ada_Lib.Event is
 
@@ -16,7 +16,7 @@ package body Ada_Lib.Event is
       Result                     : constant Boolean :=
                                     Object.Event_Object.Did_Occure;
    begin
-      Log_Here (Debug, Quote ("event", Object.Description) &
+      Log_Here (Debug, Quote ("event", Object.Description.all) &
          " occured " & Result'img);
       return Result;
    end Event_Occured;
@@ -39,7 +39,7 @@ package body Ada_Lib.Event is
       Is_Locked                  : constant Boolean := Object.Event_Object.Did_Occure;
 
    begin
-      Log_In (Debug, Quote ("event", Object.Description) &
+      Log_In (Debug, Quote ("event", Object.Description.all) &
          " from " & From & " locked " & Is_Locked'img );
 
       Object.Event_Object.Set_Occured (From);
@@ -53,7 +53,7 @@ package body Ada_Lib.Event is
    -------------------------------------------------------------------
 
    begin
-      Log_In (Debug, Quote ("event ", Object.Description));
+      Log_In (Debug, Quote ("event ", Object.Description.all));
       Object.Event_Object.Wait_For_Event (From);
       Log_Out (Debug);
    end Wait_For_Event;
@@ -66,7 +66,7 @@ package body Ada_Lib.Event is
       ---------------------------------------------------------------
 
       begin
-         Log_Here (Debug, Quote ("event", Description) &
+         Log_Here (Debug, Quote ("event", Description.all) &
             " occured " & Occured'img);
          return Occured;
       end Did_Occure;
@@ -85,10 +85,10 @@ package body Ada_Lib.Event is
       ---------------------------------------------------------------
 
       begin
-         Log_Here (Debug, Quote ("description ", Description) &
+         Log_Here (Debug, Quote ("description ", Description.all) &
             " occured " & Occured'img);
          if Occured then
-            raise Failed with Quote ("event ", Description) &
+            raise Failed with Quote ("event ", Description.all) &
                " allready occured from " & From;
          end if;
          Occured := True;
@@ -101,7 +101,7 @@ package body Ada_Lib.Event is
       ---------------------------------------------------------------
 
       begin
-         Log_Here (Debug, Quote ("event", Description) &
+         Log_Here (Debug, Quote ("event", Description.all) &
             " from " & From);
       end Wait_For_Event;
 

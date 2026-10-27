@@ -644,14 +644,14 @@ package body Ada_Lib.Database is
          Buffer.Append (Next);
       end loop;
 
-      Log (Trace, Here, Who & Quote (" result", Buffer));
+      Log (Trace, Here, Who & Buffer.Quote (" result"));
 
       if Buffer.Length = 0 and then not Allow_Null then
          Log_Exception (Trace);
          raise Failed;
       end if;
 
-      Log_Out (Trace, Quote ("result", Buffer));
+      Log_Out (Trace, Buffer.Quote ("result"));
       return Buffer.Coerce;
    end Get_Subscription_Field;
 
@@ -1031,7 +1031,7 @@ package body Ada_Lib.Database is
                      end if;
 
                      Tag := Tag & Value;
-                     Log_Here (Trace, Quote ("Tag", Tag));
+                     Log_Here (Trace, Tag.Quote ("Tag"));
                   end;
 
                when '.' =>    -- end of name, start of index
@@ -1090,7 +1090,7 @@ package body Ada_Lib.Database is
          Seperator               : constant Character := Iterator.Get_Seperator;
 
       begin
-         Log_Here (Trace, Quote ("Name", Name) & Quote (" Index", Index) &
+         Log_Here (Trace, Name.Quote ("Name") & Index.Quote (" Index") &
             Quote (" Remainder", Remainder) & Quote (" Seperator", Seperator));
 
          if Remainder'length = 0 and then Seperator /= No_File_Seperator then
@@ -1298,8 +1298,8 @@ package body Ada_Lib.Database is
     -------------------------------------------------------------------
 
     begin
-       return Quote ("Name", Name_Value.Name) & "Index" & Name_Value.Index'img &
-         Quote (" Tag", Name_Value.Tag) & Quote (" Value", Name_Value.Value);
+       return Name_Value.Name.Quote ("Name") & "Index" & Name_Value.Index'img &
+         Name_Value.Tag.Quote (" Tag") & Name_Value.Value.Quote (" Value");
     end To_String;
 
      ---------------------------------------------------------------

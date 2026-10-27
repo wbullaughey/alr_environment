@@ -1,4 +1,5 @@
 with Ada.Strings.Unbounded;
+with Ada_Lib.Strings; -- .Unlimited;
 
 package Ada_Lib.String_Quote is
 
@@ -24,10 +25,15 @@ package Ada_Lib.String_Quote is
       Value                : in   String
    ) return String;
 
-   function Quote (
-      Variable             : in   String;
-      Value                : access constant String
-   ) return String;
+-- function Quote (
+--    Variable             : in     String;
+--    Value                : access String
+-- ) return String;
+--
+-- function Quote (
+--    Variable             : in  String;
+--    Value                : in  Strings.String_Constant_Access
+-- ) return String;
 
    function Quote (
       Variable             : in   String;

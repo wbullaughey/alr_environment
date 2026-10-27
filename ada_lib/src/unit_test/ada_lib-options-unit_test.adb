@@ -295,8 +295,7 @@ return "";
                      end if;
                      Options.Update_Filter;
                      Log_Here (Trace_Options or Debug,
-                        Ada_Lib.Strings.Unlimited.Quote ("filter Routine",
-                           Options.Routine));
+                        Options.Routine.Quote ("filter Routine"));
 
                   when 'n' =>    -- no camera
                      Options.Have_Camera := False;
@@ -312,8 +311,7 @@ return "";
                      end if;
                      Options.Update_Filter;
                      Log_Here (Trace_Options or Debug,
-                        Ada_Lib.Strings.Unlimited.Quote ("filter Suite_Name",
-                           Options.Suite_Name));
+                        Options.Suite_Name.Quote ("filter Suite_Name"));
 
                   when 'U' =>       -- trace options
                      Options.Trace_Parse (Iterator);
@@ -787,17 +785,17 @@ return "";
       Log_In (Debug or Trace_Options, "options " &
          Ada_Lib.Strings.Image (Options'address) & " filter " &
          Ada_Lib.Strings.Image (Options.Filter'address) &
-         Ada_Lib.Strings.Unlimited.Quote (" Suite", Options.Suite_Name) &
-         Ada_Lib.Strings.Unlimited.Quote (" routine", Options.Routine));
+         Ada_Lib.Strings.Unlimited.Quote (Options.Suite_Name, " Suite") &
+         Ada_Lib.Strings.Unlimited.Quote (Options.Routine, " routine"));
       if Options.Suite_Name.Length > 0 then
          if Options.Routine.Length > 0 then
             Log_Here (Debug,
-               Ada_Lib.Strings.Unlimited.Quote ("suite", Options.Suite_Name) &
-               Ada_Lib.Strings.Unlimited.Quote (" routine", Options.Routine));
+               Ada_Lib.Strings.Unlimited.Quote (Options.Suite_Name, "suite") &
+               Ada_Lib.Strings.Unlimited.Quote (Options.Routine, " routine"));
             Options.Filter.Set_Name (Options.Suite_Name.Coerce & " : " & Options.Routine.Coerce);
          else
             Log_Here (Debug,
-               Ada_Lib.Strings.Unlimited.Quote ("suite", Options.Suite_Name) &
+               Ada_Lib.Strings.Unlimited.Quote (Options.Suite_Name, "suite") &
                " no routine");
             Options.Filter.Set_Name (Options.Suite_Name.Coerce);
          end if;

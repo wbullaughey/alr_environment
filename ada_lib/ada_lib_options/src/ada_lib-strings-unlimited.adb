@@ -241,13 +241,13 @@ package body Ada_Lib.Strings.Unlimited is
 
    ---------------------------------------------------------------
    function Quote (
-      Variable             : in   String;
-      Value                : in   String_Type
+      Value             : in   String_Type;
+      Label             : in   String
    ) return String is
    ---------------------------------------------------------------
 
    begin
-      return Variable & " '" & Coerce (Value) & "'";
+      return Label & " '" & Coerce (Value) & "'";
    end Quote;
 
    ---------------------------------------------------------------
@@ -264,8 +264,8 @@ package body Ada_Lib.Strings.Unlimited is
 
    ---------------------------------------------------------------
    function Quote (
-      Label                      : in     String;
       Source                     : in     String_Type;
+      Label                      : in     String;
       Substiture_For_Non_Alpha   : in     Boolean := False;
       Quote                      : in     Character := '"'
    ) return String_Type is

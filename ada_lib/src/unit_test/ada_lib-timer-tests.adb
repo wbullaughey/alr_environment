@@ -46,7 +46,7 @@ package body Ada_Lib.Timer.Tests is
    begin
       Event.Occurred := True;
       Event.Occured_At := Ada_Lib.Time.Now;
-      Log_Here (Debug, Quote ("description", Event.Description) &
+      Log_Here (Debug, Quote ("description", Event.Description.all) &
          " occured at " & Ada_Lib.Time.From_Start (Event.Occured_At, True));
    end Callback;
 
@@ -159,7 +159,7 @@ package body Ada_Lib.Timer.Tests is
                         " state " & Event.State'img &
                         " wait " & Event.Wait'img &
                         " start " & Ada_Lib.Time.From_Start (Event.Start_Time) &
-                        Quote (" description", Event.Description));
+                        Quote (" description", Event.Description.all));
 
                   end;
                end loop;
@@ -194,11 +194,11 @@ package body Ada_Lib.Timer.Tests is
 
                         begin
                            Log_Here (Debug, "index" & Index'img &
-                              Quote ( " description", Event.Description) &
+                              Quote ( " description", Event.Description.all) &
                               " event active " & Active'img &
                               " expected " & Expected'img);
                            Assert (Active = Expected,
-                              Quote ("description", Event.Description) &
+                              Quote ("description", Event.Description.all) &
                               " index" & Index'img & " expected to be " &
                               (if Expected then
                                  "active but was not."
@@ -232,12 +232,12 @@ package body Ada_Lib.Timer.Tests is
                               when Canceled =>
                                  Assert (Index = Cancel_Event_Index,
                                     "wrong event" & Index'img &
-                                    Quote ( " description", Event.Description) &
+                                    Quote ( " description", Event.Description.all) &
                                     " cancled");
 
                               when Waiting =>
                                  Log_Here (Debug, Index'img &
-                                    Quote ( " description", Event.Description) &
+                                    Quote ( " description", Event.Description.all) &
                                     " still waiting");
                                  if Ada_Lib.Time.Now > Failed_Time then
                                     Assert (False, "not all events completed");

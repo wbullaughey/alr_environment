@@ -200,7 +200,7 @@ package body Ada_Lib.Database.Subscription is
             Buffer.Append (Next);
          end loop;
 
-         Log_Here (Debug_Subscribe, Quote (" result", Buffer));
+         Log_Here (Debug_Subscribe, Buffer.Quote (" result"));
 
          if Buffer.Length = 0 and then not Allow_Null then
             Log_Exception (Debug_Subscribe);

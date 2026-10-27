@@ -59,7 +59,7 @@ package body Ada_Lib.Database.Connection is
    ---------------------------------------------------------------
 
    begin
-      Log_In (Debug, "port" & Port'img & Quote (" DBDaemon_Path", DBDaemon_Path));
+      Log_In (Debug, "port" & Port'img & DBDaemon_Path.Quote (" DBDaemon_Path"));
       Local.Start := DBDaemon_Path.Length > 0;
       Local.Port := Port;
       Local.DBDaemon_Path := DBDaemon_Path;
@@ -208,7 +208,7 @@ package body Ada_Lib.Database.Connection is
       Process_ID                 : aliased GNAT.OS_Lib.Process_Id;
 
    begin
-    Log (Debug, Here, Who & Quote ("Remote Database Path:", DBDaemon_Path));
+    Log (Debug, Here, Who & DBDaemon_Path.Quote ("Remote Database Path:"));
 
     if    Host'Length = 0 or else
           DBDaemon_Path.Length = 0 then
