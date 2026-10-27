@@ -5,7 +5,7 @@ export PROGRAM=$3
 export NO_WARNINGS=$4
 export DIRECTORY=`pwd`
 export SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
-export DO_TRACE=FALSE
+export DO_TRACE=TRUE
 export MACOSX_DEPLOYMENT_TARGET=14.0
 echo SCRIPT_DIR $SCRIPT_DIR
 #SCRIPT_DIR=$(dirname "$0")
@@ -92,7 +92,18 @@ function build () {
       fi
    #  echo building `pwd` BUILD_MODE $BUILD_MODE
 #     $SCRIPT_DIR/fix_alire_toml.sh alire.toml.source
-      COMMAND="alr $DEBUG_OPTIONS build -- -j10 -s -k -gnatE -vl -v $ALR_OPTIONS -XBUILD_MODE=$BUILD_MODE -largs"
+
+      case $PROGRAM in
+
+         program)
+             ;;
+
+         *)
+            PROGRAM_OPTION="-u -f $PROGRAM"
+            ;;
+      esac
+
+      COMMAND="alr $DEBUG_OPTIONS build -- -j10 -s -k -gnatE -vl -v $PROGRAM_OPTION $ALR_OPTIONS -XBUILD_MODE=$BUILD_MODE -largs"
 
       output TRACE COMMAND $COMMAND
 #     echo pwd `pwd`

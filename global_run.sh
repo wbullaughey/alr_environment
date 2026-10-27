@@ -290,7 +290,6 @@ case $UNIT_TEST in
             ;;
 
          *)
-            output LIST ROUTINE $ROUTINE
             export ROUTINE_OPTION="-e $ROUTINE"
             ;;
 
@@ -301,6 +300,7 @@ case $UNIT_TEST in
    FALSE)
       ;;
 esac
+output LIST SUITE $SUITE ROUTINE "$ROUTINE"
 
 case $USE_DBDAEMON in
 

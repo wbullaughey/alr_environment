@@ -59,7 +59,16 @@
                 ClearProcessBuffer="1"
                 Verbose="1"
                 Beep="1">
-                <Exec CmdLine="./build.sh execute  test_ada_lib"/>
+                <Exec CmdLine="./build.sh execute  program FALSE"/>
+            </Target>
+            <Target
+                Name="Compile_One"
+                MenuCaption="Compile_One"
+                RunFromDir="%rw"
+                SaveOption="SaveAll"
+                CaptureOutputWith="ProcessBuffer"
+                ClearProcessBuffer="1">
+                <Exec CmdLine="./build.sh execute %f FLASE"/>
             </Target>
             <Target
                 Name="Compile"
@@ -171,13 +180,6 @@
                 SaveOption="SaveWorkspaceFiles">
                 <Exec CmdLine="./build.sh all"/>
             </Target>
-            <Target
-                Name="Compile_One"
-                MenuCaption="Compile_One"
-                RunFromDir="/Users/wayne/Project/git/alr/alr_environment/applications/video/camera/unit_test/"
-                SaveOption="SaveAll">
-                <Exec CmdLine="./build.sh execute %f"/>
-            </Target>
         </Menu>
         <Rules Name="Compile">
             <Rule
@@ -211,7 +213,16 @@
                 ClearProcessBuffer="1"
                 Verbose="1"
                 Beep="1">
-                <Exec CmdLine="./build.sh execute  test_ada_lib"/>
+                <Exec CmdLine="./build.sh execute  program FALSE"/>
+            </Target>
+            <Target
+                Name="Compile_One"
+                MenuCaption="Compile_One"
+                RunFromDir="%rw"
+                SaveOption="SaveAll"
+                CaptureOutputWith="ProcessBuffer"
+                ClearProcessBuffer="1">
+                <Exec CmdLine="./build.sh execute %f FLASE"/>
             </Target>
             <Target
                 Name="Compile"
@@ -322,13 +333,6 @@
                 CaptureOutputWith="ProcessBuffer"
                 SaveOption="SaveWorkspaceFiles">
                 <Exec CmdLine="./build.sh all"/>
-            </Target>
-            <Target
-                Name="Compile_One"
-                MenuCaption="Compile_One"
-                RunFromDir="/Users/wayne/Project/git/alr/alr_environment/applications/video/camera/unit_test/"
-                SaveOption="SaveAll">
-                <Exec CmdLine="./build.sh execute %f"/>
             </Target>
         </Menu>
         <Rules Name="Compile">
