@@ -1,0 +1,260 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+    WorkingDir="../../applications/video/camera/library"
+    Version="10.0"
+    VendorName="SlickEdit"
+    TemplateName="Ada - GNU Ada Compiler"
+    Customized="1"
+    BuildSystem=""
+    BuildMakeFile=""
+    BuildMakeJobs="">
+    <Files>
+        <Folder
+            Name="Source Files"
+            Filters="*.ada;*.adb;*.c;*.cpp"
+            GUID="{DD698650-54B0-466A-9CAA-746475042AB8}"/>
+        <Folder
+            Name="Header Files"
+            Filters="*.h;*.ads"
+            GUID="{1F5F778F-DCCF-480A-8395-4124EA2409B5}"/>
+        <Folder
+            Name="Resource Files"
+            Filters="*.def;*.res"
+            GUID="{CDA7E371-218C-4535-A168-C79161C33C6A}"/>
+        <Folder
+            Name="Other Files"
+            Filters="*.*"
+            GUID="{937FED33-58F4-4B2E-BCAB-4EC60EBFABF8}"/>
+        <F
+            N="../../applications/video/camera/library/src/*.ad?"
+            Recurse="0"
+            Excludes="b__*"
+            L="1"/>
+        <F
+            N="../../applications/video/camera/library/src/stubs/*.ad?"
+            Recurse="0"
+            Excludes="b__*"
+            L="1"/>
+        <F N="../../applications/video/camera/library/alire.toml"/>
+        <F N="../../applications/video/camera/library/build.sh"/>
+        <F N="../../applications/video/camera/library/camera_lib.gpr"/>
+    </Files>
+    <Config
+        Name="Debug"
+        Type="gnuc"
+        DebugCallbackName="gdb"
+        OutputFile="camera_lib"
+        CompilerConfigName="Latest Version">
+        <Menu>
+            <Target
+                Name="Build"
+                MenuCaption="&amp;Build"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw"
+                ClearProcessBuffer="1"
+                Verbose="1"
+                Beep="1">
+                <Exec CmdLine="./build.sh execute camera_lib"/>
+            </Target>
+            <Target
+                Name="Rebuild"
+                MenuCaption="&amp;Rebuild"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveAll"
+                RunFromDir="%rw"
+                ClearProcessBuffer="1"
+                Verbose="1"
+                Beep="1">
+                <Exec CmdLine="./build.sh execute no_warnings"/>
+            </Target>
+            <Target
+                Name="Compile"
+                MenuCaption="&amp;Compile"
+                Dialog="_gnuc_options_form Compile"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveCurrent"
+                RunFromDir="%rw">
+                <Exec CmdLine='gnat -c -g %i -o "%bd%n.o" "%f"'/>
+            </Target>
+            <Target
+                Name="Link"
+                MenuCaption="&amp;Link"
+                Dialog="_gnuc_options_form Link">
+                <Exec CmdLine='gnat -g -o "%o" %f %libs'/>
+            </Target>
+            <Target
+                Name="Debug"
+                MenuCaption="&amp;Debug"
+                Dialog="_gnuc_options_form Run/Debug"
+                BuildFirst="1"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveNone"
+                RunFromDir="%rw">
+                <Exec CmdLine='vsdebugio -prog "%o"'/>
+            </Target>
+            <Target
+                Name="Execute"
+                MenuCaption="E&amp;xecute"
+                Dialog="_gnuc_options_form Run/Debug"
+                BuildFirst="1"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine='"%o"'/>
+            </Target>
+            <Target
+                Name="dash"
+                MenuCaption="-"
+                Deletable="0">
+                <Exec/>
+            </Target>
+            <Target
+                Name="GNU C Options"
+                MenuCaption="GNU C &amp;Options..."
+                ShowOnMenu="HideIfNoCmdLine"
+                Deletable="0"
+                SaveOption="SaveNone">
+                <Exec
+                    CmdLine="gnucoptions"
+                    Type="Slick-C"/>
+            </Target>
+            <Target
+                Name="Install"
+                MenuCaption="Install"
+                RunFromDir="/Users/wayne/vendor/gprbuild/"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveWorkspaceFiles">
+                <Exec CmdLine="./build.sh install"/>
+            </Target>
+        </Menu>
+        <Rules Name="Compile">
+            <Rule
+                InputExts="*.ada"
+                OutputExts="*.o"
+                LinkObject="1">
+                <Exec CmdLine='gnat -c -g -o "%bd%n.o" "%f"'/>
+            </Rule>
+            <Rule
+                InputExts="*.adb"
+                OutputExts="*.o"
+                LinkObject="1">
+                <Exec CmdLine='gnat -c -g -o "%bd%n.o" "%f"'/>
+            </Rule>
+        </Rules>
+    </Config>
+    <Config
+        Name="Release"
+        Type="gnuc"
+        DebugCallbackName="gdb"
+        OutputFile="camera_lib"
+        CompilerConfigName="Latest Version">
+        <Menu>
+            <Target
+                Name="Build"
+                MenuCaption="&amp;Build"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw"
+                ClearProcessBuffer="1"
+                Verbose="1"
+                Beep="1">
+                <Exec CmdLine="./build.sh execute camera_lib"/>
+            </Target>
+            <Target
+                Name="Rebuild"
+                MenuCaption="&amp;Rebuild"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveAll"
+                RunFromDir="%rw"
+                ClearProcessBuffer="1"
+                Verbose="1"
+                Beep="1">
+                <Exec CmdLine="./build.sh execute no_warnings"/>
+            </Target>
+            <Target
+                Name="Compile"
+                MenuCaption="&amp;Compile"
+                Dialog="_gnuc_options_form Compile"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveCurrent"
+                RunFromDir="%rw">
+                <Exec CmdLine='gnat -O -c %i -o "%bd%n.o" "%f"'/>
+            </Target>
+            <Target
+                Name="Link"
+                MenuCaption="&amp;Link"
+                Dialog="_gnuc_options_form Link">
+                <Exec CmdLine='gnat -O -o "%o" %f %libs'/>
+            </Target>
+            <Target
+                Name="Debug"
+                MenuCaption="&amp;Debug"
+                Dialog="_gnuc_options_form Run/Debug"
+                BuildFirst="1"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveNone"
+                RunFromDir="%rw">
+                <Exec CmdLine='vsdebugio -prog "%o"'/>
+            </Target>
+            <Target
+                Name="Execute"
+                MenuCaption="E&amp;xecute"
+                Dialog="_gnuc_options_form Run/Debug"
+                BuildFirst="1"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine='"%o"'/>
+            </Target>
+            <Target
+                Name="dash"
+                MenuCaption="-"
+                Deletable="0">
+                <Exec/>
+            </Target>
+            <Target
+                Name="GNU C Options"
+                MenuCaption="GNU C &amp;Options..."
+                ShowOnMenu="HideIfNoCmdLine"
+                Deletable="0"
+                SaveOption="SaveNone">
+                <Exec
+                    CmdLine="gnucoptions"
+                    Type="Slick-C"/>
+            </Target>
+            <Target
+                Name="Install"
+                MenuCaption="Install"
+                RunFromDir="/Users/wayne/vendor/gprbuild/"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveWorkspaceFiles">
+                <Exec CmdLine="./build.sh install"/>
+            </Target>
+        </Menu>
+        <Rules Name="Compile">
+            <Rule
+                InputExts="*.ada"
+                OutputExts="*.o"
+                LinkObject="1">
+                <Exec CmdLine='gnat -O -c -o "%bd%n.o" "%f"'/>
+            </Rule>
+            <Rule
+                InputExts="*.adb"
+                OutputExts="*.o"
+                LinkObject="1">
+                <Exec CmdLine='gnat -O -c -o "%bd%n.o" "%f"'/>
+            </Rule>
+        </Rules>
+    </Config>
+    <List Name="RTE">
+    </List>
+</Project>

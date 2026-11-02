@@ -1,0 +1,171 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+    BuildSystem=""
+    BuildMakeFile=""
+    Version="10.0"
+    VendorName="SlickEdit"
+    TemplateName="ada"
+    Customized="1"
+    WorkingDir="../../ada_lib/"
+    BuildMakeJobs="">
+    <Config
+        Name="Macosx"
+        Type="gnuc"
+        DebugCallbackName="gdb"
+        Version="1"
+        OutputFile="%bdada_lib.a"
+        CompilerConfigName="Latest Version">
+        <Menu>
+            <Target
+                Name="Build"
+                MenuCaption="&amp;Build"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveAll"
+                RunFromDir="%rw"
+                ClearProcessBuffer="1"
+                Beep="1"
+                Verbose="1">
+                <Exec CmdLine="./build.sh execute ada_lib"/>
+            </Target>
+            <Target
+                Name="build all"
+                MenuCaption="build all"
+                RunFromDir="%rw"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveAll"
+                ClearProcessBuffer="1">
+                <Exec CmdLine="./build.sh all"/>
+            </Target>
+            <Target
+                Name="Install"
+                MenuCaption="Install"
+                RunFromDir="/Users/wayne/project/ada_lib/"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveAll">
+                <Exec CmdLine="sh ./install.sh macosx"/>
+            </Target>
+            <Target
+                Name="Compile"
+                MenuCaption="&amp;Compile"
+                Dialog="_gnuc_options_form Compile"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                OutputExts="*.o"
+                SaveOption="SaveCurrent"
+                RunFromDir="%rw">
+                <Exec CmdLine='g++ -c %xup  %defd -g -o "%bd%n%oe" %i "%f"'/>
+            </Target>
+            <Target
+                Name="Link"
+                MenuCaption="&amp;Link"
+                ShowOnMenu="Never"
+                Dialog="_gnuc_options_form Link"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveCurrent"
+                RunFromDir="%rw">
+                <Exec CmdLine='ar -rs %xup "%o" %f'/>
+            </Target>
+            <Target
+                Name="Rebuild"
+                MenuCaption="&amp;Rebuild"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine=""/>
+            </Target>
+            <Target
+                Name="Debug"
+                MenuCaption="&amp;Debug"
+                Dialog="_gnuc_options_form Run/Debug"
+                BuildFirst="1"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveNone"
+                RunFromDir="%rw">
+                <Exec CmdLine=""/>
+            </Target>
+            <Target
+                Name="Execute"
+                MenuCaption="E&amp;xecute"
+                Dialog="_gnuc_options_form Run/Debug"
+                BuildFirst="1"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine=""/>
+            </Target>
+            <Target
+                Name="dash"
+                MenuCaption="-"
+                Deletable="0">
+                <Exec/>
+            </Target>
+            <Target
+                Name="GNU C Options"
+                MenuCaption="GNU C &amp;Options..."
+                ShowOnMenu="HideIfNoCmdLine"
+                Deletable="0"
+                SaveOption="SaveNone">
+                <Exec
+                    CmdLine="gnucoptions"
+                    Type="Slick-C"/>
+            </Target>
+        </Menu>
+        <List Name="GNUC Options">
+            <Item
+                Name="LinkerOutputType"
+                Value="StaticLibrary"/>
+        </List>
+    </Config>
+    <Files>
+        <Folder
+            Name="Source Files"
+            Filters="*.c;*.C;*.cc;*.cpp;*.cp;*.cxx;*.c++;*.prg;*.pas;*.dpr;*.asm;*.s;*.bas;*.java;*.cs;*.sc;*.scala;*.e;*.cob;*.html;*.rc;*.tcl;*.py;*.pl;*.d;*.m;*.mm;*.go;*.groovy;*.gsh"
+            GUID="{02949E19-5C02-42FB-94E8-5B7F25549D69}"/>
+        <Folder
+            Name="Header Files"
+            Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.h++;*.inc;*.sh;*.cpy;*.if"
+            GUID="{0600D5F1-6BD2-4A1E-AABA-97AB95AE82D5}">
+            <F N="../../ada_lib/build.sh"/>
+        </Folder>
+        <Folder
+            Name="Resource Files"
+            Filters="*.ico;*.cur;*.dlg"
+            GUID="{6F456807-F36A-41D0-AB1C-579B5E62E610}"/>
+        <Folder
+            Name="Bitmaps"
+            Filters="*.bmp"
+            GUID="{411E8294-8ED3-43A0-8F5B-A5BC6F40CF0A}"/>
+        <Folder
+            Name="Other Files"
+            Filters=""
+            GUID="{1EEF058F-AE1B-4D78-B790-FF05641865EE}">
+            <F
+                N="../../ada_lib/src/*.ad?"
+                Recurse="0"
+                Excludes=""
+                L="1"/>
+            <F
+                N="../../ada_lib/src/macosx/*.ad?"
+                Recurse="0"
+                Excludes=""
+                L="1"/>
+            <F
+                N="../../ada_lib/src/unit_test/*.ad?"
+                Recurse="0"
+                Excludes="*.a;*.o;*.ali"
+                L="1"/>
+            <F N="../../ada_lib/.gitignore"/>
+            <F N="../../ada_lib/ada_lib.gpr"/>
+            <F N="../../ada_lib/config/ada_lib_config.gpr"/>
+            <F N="../../ada_lib/alire.toml"/>
+            <F N="../../ada_lib/alire.toml.source"/>
+        </Folder>
+    </Files>
+    <List Name="RTE">
+    </List>
+</Project>

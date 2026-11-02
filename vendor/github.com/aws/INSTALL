@@ -1,0 +1,45 @@
+Building a release
+------------------
+
+The static AWS libraries are always built. The shared libraries are built
+by default if the platform supports them (this is automatically detected).
+
+If you have not installed XML/Ada in the standard directory and plan to build
+AWS with SOAP support you must be sure that ADA_PROJECT_PATH points to the
+XML/Ada projects. See XML/Ada documentation.
+
+Then to build AWS:
+
+   $ git clone --recursive https://github.com/AdaCore/aws
+   $ cd aws
+   $ make setup build install
+
+For information about all possible settings, look at make's variables in
+makefile.conf.
+
+Note that you can find more information about the build procedure in the AWS
+User's Guide.
+
+This release requires an Ada compiler supporting some Ada 2012 features. It
+is possible to build this release starting with the following compilers:
+
+        GNAT Pro 7.4.2
+
+        GNAT GPL 2016 Edition
+
+To build the documentation in HTML, PDF and plain text formats you need to
+have a working Sphinx package installed on your system.
+
+   $ make build-doc
+
+Building on Windows
+-------------------
+
+On Windows, you can build from the standard Windows command line using the
+provided scripts win32\build.cmd. The argument is the path where AWS is to be
+installed. It is recommended to install AWS with the compiler, so for example:
+
+   c:> win32\build.cmd c:\gnat\2016
+
+An alternative is to install either the Cygwin or MSYS toolset. In this case
+the procedure described above using 'make' can be used.

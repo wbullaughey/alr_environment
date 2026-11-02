@@ -1,0 +1,4 @@
+ssl REQUIRED
+gnutls OUT test-gnutls.out
+NT DEAD test requires UNIX shell
+linux XFAIL investigated under VC15-012

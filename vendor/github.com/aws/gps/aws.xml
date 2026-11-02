@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<index>
+   <doc_path>share/doc/aws</doc_path>
+
+   <submenu before="About" action = "">
+      <title>/Help/AWS</title>
+   </submenu>
+
+   <documentation_file>
+      <name>aws/index.html</name>
+      <descr>AWS User's Guide</descr>
+      <category>AWS</category>
+      <menu>/Help/AWS/AWS User's Guide</menu>
+   </documentation_file>
+
+   <documentation_file>
+      <name>aws/templates_parser/index.html</name>
+      <descr>Templates Parser User's Guide</descr>
+      <category>AWS</category>
+      <menu>/Help/AWS/Templates Parser User's Guide</menu>
+   </documentation_file>
+
+</index>

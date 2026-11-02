@@ -1,0 +1,247 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+    WorkingDir="."
+    Version="10.0"
+    VendorName="SlickEdit"
+    TemplateName="Ada - GNU Ada Compiler"
+    Customized="1">
+    <Files>
+        <Folder
+            Name="Source Files"
+            Filters="*.ada;*.adb;*.c;*.cpp"
+            GUID="{5ED863A4-8476-4EFC-B51A-5338062C4C90}"/>
+        <Folder
+            Name="Header Files"
+            Filters="*.h;*.ads"
+            GUID="{E6FCDFA9-2AEE-41D4-BC0B-691D2B923BFF}"/>
+        <Folder
+            Name="Resource Files"
+            Filters="*.def;*.res"
+            GUID="{26DF36E3-9E05-444D-8CEC-DC35A3188132}"/>
+        <Folder
+            Name="Other Files"
+            Filters="*.*"
+            GUID="{51CBFBE8-1E8F-4F28-8CCA-A890BC895B87}"/>
+        <F
+            N="../../vendor/github.com/AdaCore/gprbuild/*.ad?"
+            Recurse="1"
+            Excludes=""/>
+        <F
+            N="../../vendor/github.com/AdaCore/gprbuild/*.gpr"
+            Recurse="1"
+            Excludes=""/>
+        <F
+            N="../../vendor/github.com/AdaCore/gprbuild/Makefile"
+            Type="Makefile"/>
+    </Files>
+    <Config
+        Name="Debug"
+        Type="gnuc"
+        DebugCallbackName="gdb"
+        OutputFile="gprbuild"
+        CompilerConfigName="Latest Version">
+        <Menu>
+            <Target
+                Name="Compile"
+                MenuCaption="&amp;Compile"
+                Dialog="_gnuc_options_form Compile"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveCurrent"
+                RunFromDir="%rw">
+                <Exec CmdLine='gnat -c -g %i -o "%bd%n.o" "%f"'/>
+            </Target>
+            <Target
+                Name="Link"
+                MenuCaption="&amp;Link"
+                Dialog="_gnuc_options_form Link">
+                <Exec CmdLine='gnat -g -o "%o" %f %libs'/>
+            </Target>
+            <Target
+                Name="Build"
+                MenuCaption="&amp;Build"
+                Dialog="_gnuc_options_form Compile"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t build'/>
+            </Target>
+            <Target
+                Name="Rebuild"
+                MenuCaption="&amp;Rebuild"
+                Dialog="_gnuc_options_form Compile"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t rebuild'/>
+            </Target>
+            <Target
+                Name="Debug"
+                MenuCaption="&amp;Debug"
+                Dialog="_gnuc_options_form Run/Debug"
+                BuildFirst="1"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveNone"
+                RunFromDir="%rw">
+                <Exec CmdLine='vsdebugio -prog "%o"'/>
+            </Target>
+            <Target
+                Name="Execute"
+                MenuCaption="E&amp;xecute"
+                Dialog="_gnuc_options_form Run/Debug"
+                BuildFirst="1"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine='"%o"'/>
+            </Target>
+            <Target
+                Name="dash"
+                MenuCaption="-"
+                Deletable="0">
+                <Exec/>
+            </Target>
+            <Target
+                Name="GNU C Options"
+                MenuCaption="GNU C &amp;Options..."
+                ShowOnMenu="HideIfNoCmdLine"
+                Deletable="0"
+                SaveOption="SaveNone">
+                <Exec
+                    CmdLine="gnucoptions"
+                    Type="Slick-C"/>
+            </Target>
+            <Target
+                Name="Install"
+                MenuCaption="Install"
+                RunFromDir="/Users/wayne/vendor/gprbuild/"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveWorkspaceFiles">
+                <Exec CmdLine="./build.sh install"/>
+            </Target>
+        </Menu>
+        <Rules Name="Compile">
+            <Rule
+                InputExts="*.ada"
+                OutputExts="*.o"
+                LinkObject="1">
+                <Exec CmdLine='gnat -c -g -o "%bd%n.o" "%f"'/>
+            </Rule>
+            <Rule
+                InputExts="*.adb"
+                OutputExts="*.o"
+                LinkObject="1">
+                <Exec CmdLine='gnat -c -g -o "%bd%n.o" "%f"'/>
+            </Rule>
+        </Rules>
+    </Config>
+    <Config
+        Name="Release"
+        Type="gnuc"
+        DebugCallbackName="gdb"
+        OutputFile="gprbuild"
+        CompilerConfigName="Latest Version">
+        <Menu>
+            <Target
+                Name="Compile"
+                MenuCaption="&amp;Compile"
+                Dialog="_gnuc_options_form Compile"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveCurrent"
+                RunFromDir="%rw">
+                <Exec CmdLine='gnat -O -c %i -o "%bd%n.o" "%f"'/>
+            </Target>
+            <Target
+                Name="Link"
+                MenuCaption="&amp;Link"
+                Dialog="_gnuc_options_form Link">
+                <Exec CmdLine='gnat -O -o "%o" %f %libs'/>
+            </Target>
+            <Target
+                Name="Build"
+                MenuCaption="&amp;Build"
+                Dialog="_gnuc_options_form Compile"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t build'/>
+            </Target>
+            <Target
+                Name="Rebuild"
+                MenuCaption="&amp;Rebuild"
+                Dialog="_gnuc_options_form Compile"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t rebuild'/>
+            </Target>
+            <Target
+                Name="Debug"
+                MenuCaption="&amp;Debug"
+                Dialog="_gnuc_options_form Run/Debug"
+                BuildFirst="1"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveNone"
+                RunFromDir="%rw">
+                <Exec CmdLine='vsdebugio -prog "%o"'/>
+            </Target>
+            <Target
+                Name="Execute"
+                MenuCaption="E&amp;xecute"
+                Dialog="_gnuc_options_form Run/Debug"
+                BuildFirst="1"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine='"%o"'/>
+            </Target>
+            <Target
+                Name="dash"
+                MenuCaption="-"
+                Deletable="0">
+                <Exec/>
+            </Target>
+            <Target
+                Name="GNU C Options"
+                MenuCaption="GNU C &amp;Options..."
+                ShowOnMenu="HideIfNoCmdLine"
+                Deletable="0"
+                SaveOption="SaveNone">
+                <Exec
+                    CmdLine="gnucoptions"
+                    Type="Slick-C"/>
+            </Target>
+            <Target
+                Name="Install"
+                MenuCaption="Install"
+                RunFromDir="/Users/wayne/vendor/gprbuild/"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveWorkspaceFiles">
+                <Exec CmdLine="./build.sh install"/>
+            </Target>
+        </Menu>
+        <Rules Name="Compile">
+            <Rule
+                InputExts="*.ada"
+                OutputExts="*.o"
+                LinkObject="1">
+                <Exec CmdLine='gnat -O -c -o "%bd%n.o" "%f"'/>
+            </Rule>
+            <Rule
+                InputExts="*.adb"
+                OutputExts="*.o"
+                LinkObject="1">
+                <Exec CmdLine='gnat -O -c -o "%bd%n.o" "%f"'/>
+            </Rule>
+        </Rules>
+    </Config>
+    <List Name="RTE">
+    </List>
+</Project>

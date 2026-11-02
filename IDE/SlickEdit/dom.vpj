@@ -1,0 +1,120 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+    WorkingDir="../../vendor/github.com/AdaCore/xmlada/dom/"
+    DisableExeName="1"
+    Version="10.0"
+    VendorName="SlickEdit"
+    TemplateName="Ada - gprbuild">
+    <Files>
+        <Folder
+            Name="Source Files"
+            Filters="*.ada;*.adb;*.c;*.cpp"
+            GUID="{58E9C063-9261-411B-8E03-02330C9FDD29}"></Folder>
+        <Folder
+            Name="Header Files"
+            Filters="*.h;*.ads"
+            GUID="{4C25DD9F-6F23-40BA-B08E-9CD70862FFE3}"/>
+        <Folder
+            Name="Resource Files"
+            Filters="*.def;*.res"
+            GUID="{EBCEFF33-500E-401F-860C-3C4183403C8D}"/>
+        <Folder
+            Name="Other Files"
+            Filters="*.*"
+            GUID="{EC4ACF7F-F788-46B4-A7A5-EBD9FA655B7F}"/>
+        <F
+            N="../../vendor/github.com/AdaCore/xmlada/dom/*.ad?"
+            Recurse="1"
+            Excludes=""/>
+        <F
+            N="../../vendor/github.com/AdaCore/xmlada/dom/*.gpr"
+            Recurse="1"
+            Excludes=""/>
+        <F N="../../vendor/github.com/AdaCore/xmlada/dom/alire.toml"/>
+        <F N="../../vendor/github.com/AdaCore/xmlada/dom/build.sh"/>
+    </Files>
+    <Config
+        Name="Debug"
+        Type="gnuc"
+        DebugCallbackName="gdb"
+        OutputFile="main%exe"
+        ObjectDir="obj"
+        CompilerConfigName="Latest Version">
+        <Menu>
+            <Target
+                Name="Build"
+                MenuCaption="&amp;Build"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine="./build.sh"/>
+            </Target>
+            <Target
+                Name="Rebuild"
+                MenuCaption="&amp;Rebuild"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine="gprbuild -d -f -p -P%rn.gpr "/>
+            </Target>
+            <Target
+                Name="Compile"
+                MenuCaption="&amp;Compile"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine="gprbuild -ws -c -f -u -p -P%rn.gpr %f"/>
+            </Target>
+            <Target
+                Name="Clean"
+                MenuCaption="C&amp;lean"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine="gprclean -r -p -P%rn.gpr -f"/>
+            </Target>
+            <Target
+                Name="Pretty Print"
+                MenuCaption="&amp;Pretty Print"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine="gnat pretty -rnb -P%rn.gpr %f"/>
+            </Target>
+            <Target
+                Name="Debug"
+                MenuCaption="&amp;Debug"
+                BuildFirst="1"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveNone"
+                RunFromDir="%rw">
+                <Exec CmdLine='vsdebugio -prog "%o"'/>
+            </Target>
+            <Target
+                Name="Execute"
+                MenuCaption="E&amp;xecute"
+                Dialog="_gnuc_options_form Run/Debug"
+                BuildFirst="1"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine='"%o"'/>
+            </Target>
+            <Target
+                Name="dash"
+                MenuCaption="-"
+                Deletable="0">
+                <Exec/>
+            </Target>
+        </Menu>
+    </Config>
+    <List Name="RTE">
+    </List>
+</Project>

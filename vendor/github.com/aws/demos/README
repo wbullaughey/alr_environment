@@ -1,0 +1,22 @@
+
+This directory contains some AWS's demos. To run the demos AWS must have
+been built and installed properly.
+
+To build:
+
+     $ make
+
+To clean-up:
+
+     $ make clean
+
+To launch the demo just run the executable(s) produced.
+
+In cross-environment you'll need to enter each directory manually and call
+the proper cross compiler to build the demo.
+
+     $ cd demos/hello_world
+
+     $ powerpc-wrs-vxworks-gnatmake -P hello_world
+or
+     $ gprbuild --target=powerpc-wrs-vxworks -P hello_world

@@ -1,0 +1,125 @@
+------------------------------------------------------------------------------
+--                              Ada Web Server                              --
+--                                                                          --
+--                     Copyright (C) 2003-2014, AdaCore                     --
+--                                                                          --
+--  This is free software;  you can redistribute it  and/or modify it       --
+--  under terms of the  GNU General Public License as published  by the     --
+--  Free Software  Foundation;  either version 3,  or (at your option) any  --
+--  later version.  This software is distributed in the hope  that it will  --
+--  be useful, but WITHOUT ANY WARRANTY;  without even the implied warranty --
+--  of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU     --
+--  General Public License for  more details.                               --
+--                                                                          --
+--  You should have  received  a copy of the GNU General  Public  License   --
+--  distributed  with  this  software;   see  file COPYING3.  If not, go    --
+--  to http://www.gnu.org/licenses for a complete copy of the license.      --
+------------------------------------------------------------------------------
+
+with "shared";
+with "include/zlib/zlib.gpr";
+
+aggregate library project AWS is
+
+   for Project_Files use ("include/include.gpr", "src/src.gpr", "ssl/ssl.gpr");
+
+   case ZLib.Zlib_Activated is
+      when "Yes" =>
+         for Project_Files
+           use Project'Project_Files & ("include/zlib/zlib.gpr");
+      when "No" =>
+         null;
+   end case;
+
+   for Library_Name use "aws";
+   for Library_Kind use Shared.Library_Type;
+   for Library_Dir use Shared'Library_Dir & "/aws";
+
+   case Shared.Library_Type is
+      when "static" | "static-pic" =>
+         null;
+
+      when "relocatable" =>
+         case Shared.S_Target is
+            when "Windows_NT" =>
+               for Library_Options use ("-lwsock32", "-lws2_32");
+            when others =>
+               null;
+         end case;
+
+         case Shared.LDAP is
+            when "Installed" =>
+               case Shared.S_Target is
+                  when "Windows_NT" =>
+                     for Library_Options use
+                       Project'Library_Options & ("-lwldap32");
+                  when others =>
+                     for Library_Options use
+                       Project'Library_Options & ("-lldap");
+               end case;
+
+            when "Disabled" =>
+               null;
+         end case;
+   end case;
+
+   -------------
+   -- Builder --
+   -------------
+
+   package Builder renames Shared.Builder;
+
+   -------------
+   -- Install --
+   -------------
+
+   package Install is
+      --  Examples
+
+      for Artifacts ("share/examples/aws/images")
+        use ("demos/runme/aws_*.png");
+      for Artifacts ("share/examples/aws/templates")
+        use ("demos/web_mail/*html");
+
+      for Artifacts ("share/examples/aws/certificates")
+        use ("demos/cert//aws-server.*");
+
+      --  Support files (templates)
+
+      for Artifacts ("share/examples/aws/templates")
+        use ("templates_parser/tools/templates.tads");
+      for Artifacts ("share/examples/aws/web_elements")
+        use ("web_elements/menu_css", "web_elements/notebook",
+             "web_elements/rounded_boxes", "web_elements/icons",
+             "web_elements/javascripts",
+             "web_elements/mime.types", "web_elements/readme.txt");
+
+      case Shared.S_Target is
+         when "Windows_NT" =>
+            for Artifacts ("lib/aws")
+              use (Shared.Target_Dir & "/common/win32/aws.coff");
+         when others =>
+            null;
+      end case;
+
+      -- Documentations
+
+      for Artifacts ("share/doc/aws") use ("docs/build/html");
+      for Artifacts ("share/doc/aws/pdf") use ("docs/build/latex/*.pdf");
+      for Artifacts ("share/doc/aws/templates_parser")
+        use ("templates_parser/docs/build/html");
+      for Artifacts ("share/doc/aws/templates_parser/pdf")
+        use ("templates_parser/docs/build/latex/*.pdf");
+
+      --  SOAP/WSDL templates
+
+      for Artifacts ("share/examples/aws/wsdl2aws-templates")
+        use ("tools/wsdl2aws-templates/s-*");
+
+      --  gps plug-ins
+
+      for Artifacts ("share/gps/plug-ins") use ("gps/*.xml", "gps/aws.py");
+
+   end Install;
+
+end AWS;

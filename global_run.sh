@@ -1,0 +1,324 @@
+#!/bin/zsh
+export OUTPUT=$1        # trace file name
+export PROGRAM=$2       # program to execute
+export DO_TRACE=$3      # 0 | 1
+export HELP_TEST=$4     # options to be tested
+export USE_DBDAEMON=$5  # FALSE | TRUE
+export UNIT_TEST=$6     # FALSE | TRUE
+shift 6
+export RUN_PARAMETERS=$*
+echo RUN_PARAMETERS $RUN_PARAMETERS
+
+export APPEND_OUTPUT=$APPEND_OUTPUT  # first time so output erased
+export BUILD_MODE=execute
+rm -f TRACE.txt
+
+echo OUTPUT $OUTPUT PROGRAM $PROGRAM DO_TRACE $DO_TRACE HELP_TEST $HELP_TEST \
+   USE_DBDAEMON $USE_DBDAEMON UNIT_TEST $UNIT_TEST RUN_PARAMETERS $RUN_PARAMETERS \
+    > TRACE.txt
+pwd  >> TRACE.txt
+
+function output() {
+   TRACE=$1
+   shift 1
+   echo "output TRACE $TRACE DO_TRACE $DO_TRACE APPEND TRACE $APPEND_OUTPUT \
+      PARAMETERS $*" >> TRACE.txt
+   case $TRACE in
+
+      "LIST")
+         ;;
+
+      "TRACE")
+         if [ "$DO_TRACE" -eq 0 ]; then
+            return
+         fi
+   esac
+   echo $* 2>&1 | tee $APPEND_OUTPUT $OUTPUT
+   export APPEND_OUTPUT=-a  # append from now on
+}
+
+# Function to extract first field and update global RUN_PARAMETERS
+parse() {
+    # Check if global string is empty
+    if [[ -z "$RUN_PARAMETERS" ]]; then
+        echo "Error: RUN_PARAMETERS is empty"
+        return 1
+    fi
+
+    # Split string into array
+    local fields=(${(s: :)PARAMETERS})
+    # Store first field
+    local first_field=$fields[1]
+    # Return first field
+    export RESULT=$first_field
+    output TRACE 'parse' PARAMETERS $PARAMETERS RESULT $RESULT fields $fields
+}
+
+function extract(){
+    # Update global RUN_PARAMETERS
+    local fields=(${(s: :)PARAMETERS})
+    PARAMETERS=${(j: :)fields[2,-1]}
+    output TRACE 'extract' PARAMETERS left $PARAMETERS fields $fields
+}
+
+function run() {
+   output TRACE run EXECUTE $EXECUTE PROGRAM $PROGRAM COMMAND $COMMAND DISPLAY $DISPLAY
+   export EXECUTE="$PROGRAM $COMMAND"
+   output TRACE EXECUTE $EXECUTE
+
+   case "$DISPLAY" in
+
+      true)
+         ${=EXECUTE} 2>&1 | tee $APPEND_OUTPUT $OUTPUT
+         ;;
+
+      false)
+         ${=EXECUTE} 2>&1| /dev/null
+         ;;
+
+      ignore)
+         output LIST ignore $PROGRAM $COMMAND
+         ;;
+
+   esac
+   exit;
+}
+
+output TRACE Optional parameters: $RUN_PARAMETERS
+set -A WORDS ${=RUN_PARAMETERS}
+output TRACE words $WORDS
+
+CAMERA_CONFIGURATION=0
+#for PARAMETER in "$WORDS"; do
+export LOCATION=""
+export DISPLAY=true
+STEP="1"
+foreach PARAMETER ($WORDS) {
+    output TRACE PARAMETER $PARAMETER
+    if [ $CAMERA_CONFIGURATION -eq 1 ]; then
+      OPTIONS="$OPTIONS -C $PARAMETER "
+      output TRACE added -C $PARAMETER
+      CAMERA_CONFIGURATION=0
+    else
+       # Check if parameter starts with '-'
+       if [[ ${PARAMETER[1]} == "-" ]]; then        # Concatenate to OPTIONS variable
+         if [[ ${PARAMETER[2]} == "C" ]]; then
+           output TRACE camera configuration
+           CAMERA_CONFIGURATION=1
+         else
+           OPTIONS+="$PARAMETER "
+           output TRACE add option $PARAMETER
+         fi
+       else
+         case $PARAMETER in
+
+            "local" | "remote" | "no-camera")
+               export LOCATION=$PARAMETER
+               ;;
+
+            "help")
+                  export COMMAND="$OPTIONS -h"
+                  run
+                  ;;
+
+            "help_test")
+               output LIST Help
+               export BUILD_MODE=help_test
+               export PROGRAM=bin/help_test
+               export COMMAND="$GDB $OPTIONS $HELP_TEST"
+               export UNIT_TEST=FALSE
+               output TRACE Help Test OPTIONS $OPTIONS HELP_TEST $HELP_TEST COMMAND $COMMAND
+               run
+               ;;
+
+            "hide")
+               extract
+               export DISPLAY=false
+               ;;
+
+            "ignore")
+               extract
+               export DISPLAY=ignore
+               ;;
+
+            "suites")
+                  output  list suites
+                  export COMMAND="$OPTIONS -@l"
+                  output TRACE  "command: $COMMAND"  | tee -a $OUTPUT
+                  run
+                  ;;
+
+            *)
+               output TRACE  STEP $STEP
+               case $STEP in
+
+                  "1")
+                    output TRACE add parameter $PARAMETER
+                    export SUITE="$PARAMETER"
+                    output TRACE  SUITE $SUITE
+
+                    STEP="2"
+                    ;;
+
+                  "2")
+                    output TRACE add parameter $PARAMETER
+                    export ROUTINE="$PARAMETER"
+                    output TRACE  ROUTINE $ROUTINE
+                    STEP="3"
+                    ;;
+
+                  *)
+                     echo too many parameters
+                     exit
+                     ;;
+               esac
+               ;;
+         esac
+       fi
+    fi
+}
+output TRACE LOCATION $LOCATION
+
+output TRACE RUN_PARAMETERS $RUN_PARAMETERS OPTIONS $OPTIONS PARAMETERS $PARAMETERS
+
+output TRACE USE_DBDAEMON $USE_DBDAEMON
+case $USE_DBDAEMON in
+
+   FALSE)
+      ;;
+
+   TRUE)
+      echo USE_DBDAEMON not implemented
+      exit;
+      ;;
+#     output TRACE check database  "$ACTION"
+#     case $ACTION in
+#
+#        "connect")
+#           export DATABASE_OPTION="-l"
+#           export KILL=false
+#           ;;
+#
+#        "local")
+#           export DATABASE_OPTION="-l -L /Users/wayne/bin/dbdaemon"
+#           ;;
+#
+#        "remote")
+#           export DATABASE_OPTION="-@b localhost -R /home/wayne/bin/dbdaemon -u wayne"
+#           ;;
+#
+#        "none")
+#           ;;
+#
+#        "")
+#           output LIST no database option provided
+#           exit
+#        ;;
+#
+#        *)
+#           output LIST unrecognize database option \"$DATABASE\" allowed: local,remote,none
+#           exit
+#           ;;
+
+esac
+output TRACE check location  "$LOCATION"
+case $LOCATION in
+
+   "local")
+      extract
+      parse
+      ;;
+
+   "no-camera")
+      export OPTIONS="$OPTIONS -@N"
+      extract
+      parse
+      ;;
+
+   "remote")
+      export OPTIONS="$OPTIONS -r"
+      extract
+      parse
+      ;;
+
+   *)
+      ;;
+esac
+output TRACE OPTIONS "$OPTIONS"
+
+output TRACE UNIT_TEST "$UNIT_TEST"
+case $UNIT_TEST in
+
+   TRUE)
+#     export SUITE=$RESULT
+#     extract
+#     parse
+#     export ROUTINE=$RESULT   # all or test routine name
+#     extract
+      output TRACE ACTION $ACTION SUITE /$SUITE/ ROUTINE /$ROUTINE/
+
+      case $SUITE in
+
+         all)
+            ;;
+
+         "")
+            output LIST "missing suite"
+            exit
+            ;;
+
+         *)
+          export SUITE_OPTION="-s $SUITE"
+          ;;
+
+      esac
+      output TRACE SUITE_OPTION "$SUITE_OPTION"
+
+      case $ROUTINE in
+
+         all)
+            ;;
+
+         -*)
+            output LIST missing routine
+            exit
+            ;;
+
+         "")
+            output LIST missing routine
+            exit
+            ;;
+
+         *)
+            export ROUTINE_OPTION="-e $ROUTINE"
+            ;;
+
+      esac
+      output TRACE ROUTINE "$ROUTINE"
+      ;;
+
+   FALSE)
+      ;;
+esac
+output LIST SUITE $SUITE ROUTINE "$ROUTINE"
+
+case $USE_DBDAEMON in
+
+   FALSE)
+      ;;
+
+   TRUE)
+      ps ax | grep dbdaemon
+      killall -9 dbdaemon
+      ;;
+
+   false)
+       ;;
+
+esac
+export COMMAND="$GDB $OPTIONS $DATABASE_OPTION $SUITE_OPTION $ROUTINE_OPTION $CAMERA_OPTIONS" # -S 1
+output TRACE "command: $COMMAND"
+run
+
+sleep 1
+

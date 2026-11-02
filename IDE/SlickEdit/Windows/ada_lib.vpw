@@ -1,0 +1,15 @@
+<!DOCTYPE Workspace SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpw.dtd">
+<Workspace Version="10.0" VendorName="SlickEdit">
+    <Projects>
+        <Project File="../Ada.vpj"/>
+        <Project File="../ada_lib.vpj"/>
+        <Project File="../ada_lib_aunit.vpj"/>
+        <Project File="aunit.vpj"/>
+        <Project File="../aunit_library_test.vpj"/>
+        <Project File="../cac_os_process_manager_server.vpj"/>
+        <Project File="../documentation.vpj"/>
+        <Project File="../Gnoga.vpj"/>
+        <Project File="../gpr.vpj"/>
+        <Project File="../library.vpj"/>
+    </Projects>
+</Workspace>

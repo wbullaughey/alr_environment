@@ -1,0 +1,124 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+    WorkingDir="../../vendor/github.com/AdaCore/xmlada/unicode/"
+    DisableExeName="1"
+    Version="10.0"
+    VendorName="SlickEdit"
+    TemplateName="Ada - gprbuild">
+    <Files>
+        <Folder
+            Name="Source Files"
+            Filters="*.ada;*.adb;*.c;*.cpp"
+            GUID="{FE2D89B6-FFB0-4EE4-AE73-69FAF238B57D}"/>
+        <Folder
+            Name="Header Files"
+            Filters="*.h;*.ads"
+            GUID="{73CF47DA-2E5B-4D62-9F3D-D11729887CD0}"/>
+        <Folder
+            Name="Resource Files"
+            Filters="*.def;*.res"
+            GUID="{1DD9DC1A-2DA3-4B3A-B831-BF2F6FA5DCA7}"/>
+        <Folder
+            Name="Other Files"
+            Filters="*.*"
+            GUID="{947BD9EC-CD93-4B80-B162-26FE289B262D}"/>
+        <F
+            N="../../vendor/github.com/AdaCore/xmlada/unicode/*.ad?"
+            Recurse="1"
+            Excludes=""/>
+        <F
+            N="../../vendor/github.com/AdaCore/xmlada/unicode/*.gpr"
+            Recurse="1"
+            Excludes=""/>
+        <F N="../../vendor/github.com/AdaCore/xmlada/unicode/alire.toml"/>
+        <F N="../../vendor/github.com/AdaCore/xmlada/unicode/build.sh"/>
+        <F N="../../vendor/github.com/AdaCore/xmlada/unicode/xmlada_unicode.gpr"/>
+    </Files>
+    <Config
+        Name="Debug"
+        Type="gnuc"
+        DebugCallbackName="gdb"
+        OutputFile="main%exe"
+        ObjectDir="obj"
+        CompilerConfigName="Latest Version">
+        <Menu>
+            <Target
+                Name="Build"
+                MenuCaption="&amp;Build"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw"
+                ClearProcessBuffer="1"
+                Verbose="1"
+                Beep="1">
+                <Exec CmdLine="./build.sh"/>
+            </Target>
+            <Target
+                Name="Rebuild"
+                MenuCaption="&amp;Rebuild"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine="gprbuild -d -f -p -P%rn.gpr "/>
+            </Target>
+            <Target
+                Name="Compile"
+                MenuCaption="&amp;Compile"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine="gprbuild -ws -c -f -u -p -P%rn.gpr %f"/>
+            </Target>
+            <Target
+                Name="Clean"
+                MenuCaption="C&amp;lean"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine="gprclean -r -p -P%rn.gpr -f"/>
+            </Target>
+            <Target
+                Name="Pretty Print"
+                MenuCaption="&amp;Pretty Print"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine="gnat pretty -rnb -P%rn.gpr %f"/>
+            </Target>
+            <Target
+                Name="Debug"
+                MenuCaption="&amp;Debug"
+                BuildFirst="1"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveNone"
+                RunFromDir="%rw">
+                <Exec CmdLine='vsdebugio -prog "%o"'/>
+            </Target>
+            <Target
+                Name="Execute"
+                MenuCaption="E&amp;xecute"
+                Dialog="_gnuc_options_form Run/Debug"
+                BuildFirst="1"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine='"%o"'/>
+            </Target>
+            <Target
+                Name="dash"
+                MenuCaption="-"
+                Deletable="0">
+                <Exec/>
+            </Target>
+        </Menu>
+    </Config>
+    <List Name="RTE">
+    </List>
+</Project>

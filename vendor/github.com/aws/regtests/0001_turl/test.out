@@ -1,0 +1,194 @@
+http://toto.titi.tata/my_url/xyz
+http://toto.titi.tata/my_url/xyz
+   Server    : toto.titi.tata
+   Port      : 80
+   URI       : /my_url/xyz
+   *
+   Server    : toto.titi.tata
+   Port      : 80
+   URI       : /my_url/xyz
+http://a.b.c:1234/my_url/../xyz
+http://a.b.c:1234/my_url/../xyz
+   Server    : a.b.c
+   Port      : 1234
+   URI       : /my_url/../xyz
+   *
+   Server    : a.b.c
+   Port      : 1234
+   URI       : /xyz
+http://a/tata/my_url/xyz/../../b/c/d/../../z
+http://a/tata/my_url/xyz/../../b/c/d/../../z
+   Server    : a
+   Port      : 80
+   URI       : /tata/my_url/xyz/../../b/c/d/../../z
+   *
+   Server    : a
+   Port      : 80
+   URI       : /tata/b/z
+/azerty/me/too.html
+/azerty/me/too.html
+   Server    : 
+   Port      : 0
+   URI       : /azerty/me/too.html
+   *
+   Server    : 
+   Port      : 0
+   URI       : /azerty/me/too.html
+demo.html
+demo.html
+   Server    : 
+   Port      : 0
+   URI       : demo.html
+   *
+   Server    : 
+   Port      : 0
+   URI       : demo.html
+../demo.html
+../demo.html
+   Server    : 
+   Port      : 0
+   URI       : ../demo.html
+   *
+   Server    : 
+   Port      : 0
+   URI       : ../demo.html
+Error on http://myserver:8088/../demo.html - Wrong URL: (/../) Reference Web root parent directory.
+http://myserver.com
+http://myserver.com/
+   Server    : myserver.com
+   Port      : 80
+   URI       : /
+   *
+   Server    : myserver.com
+   Port      : 80
+   URI       : /
+http://myserver.com/./un/././deux.html
+http://myserver.com/./un/././deux.html
+   Server    : myserver.com
+   Port      : 80
+   URI       : /./un/././deux.html
+   *
+   Server    : myserver.com
+   Port      : 80
+   URI       : /un/deux.html
+https://myserver.com
+https://myserver.com/
+   Server    : myserver.com
+   Port      : 443
+   URI       : /
+   *
+   Server    : myserver.com
+   Port      : 443
+   URI       : /
+kye/demo.html
+kye/demo.html
+   Server    : 
+   Port      : 0
+   URI       : kye/demo.html
+   *
+   Server    : 
+   Port      : 0
+   URI       : kye/demo.html
+http://www.myserver.com:12/request?p1=9
+http://www.myserver.com:12/request?p1=9
+   Server    : www.myserver.com
+   Port      : 12
+   URI       : /request?p1=9
+   *
+   Server    : www.myserver.com
+   Port      : 12
+   URI       : /request?p1=9
+http://sinetics.der.edf.fr/./afficher_liste.php
+http://sinetics.der.edf.fr/./afficher_liste.php
+   Server    : sinetics.der.edf.fr
+   Port      : 80
+   URI       : /./afficher_liste.php
+   *
+   Server    : sinetics.der.edf.fr
+   Port      : 80
+   URI       : /afficher_liste.php
+
+
+   Server    : 
+   Port      : 80
+   URI       : 
+   *
+   Server    : 
+   Port      : 80
+   URI       : 
+http://www.myserver.com:89/app/request?p1=9&p2=toto
+http://www.myserver.com:89/app/request?p1=9&p2=toto
+   Server    : www.myserver.com
+   Port      : 89
+   URI       : /app/request?p1=9&p2=toto
+   *
+   Server    : www.myserver.com
+   Port      : 89
+   URI       : /app/request?p1=9&p2=toto
+http://www.myserver.com:89/app/request/?p1=9&p2=toto
+http://www.myserver.com:89/app/request/?p1=9&p2=toto
+   Server    : www.myserver.com
+   Port      : 89
+   URI       : /app/request/?p1=9&p2=toto
+   *
+   Server    : www.myserver.com
+   Port      : 89
+   URI       : /app/request/?p1=9&p2=toto
+http://www.myserver.com:89/app/request/?p1=9&url=http://titi
+http://www.myserver.com:89/app/request/?p1=9&url=http://titi
+   Server    : www.myserver.com
+   Port      : 89
+   URI       : /app/request/?p1=9&url=http://titi
+   *
+   Server    : www.myserver.com
+   Port      : 89
+   URI       : /app/request/?p1=9&url=http://titi
+Error on http://www.myserver.com:89/app/..\..\toto&url=http://titi - Wrong URL: (/../toto&url=http://) Reference Web root parent directory.
+http://www.myserver.com:89/app/.\..\toto&url=http://titi
+http://www.myserver.com:89/app/./../toto&url=http://titi
+   Server    : www.myserver.com
+   Port      : 89
+   URI       : /app/./../toto&url=http://titi
+   *
+   Server    : www.myserver.com
+   Port      : 89
+   URI       : /toto&url=http://titi
+Error on http://www.myserver.com:89/app//../\..\\..\toto?url=http://titi - Wrong URL: (/../../) Reference Web root parent directory.
+http://192.168.58.44:8083/whatever/me/dev[6]
+http://192.168.58.44:8083/whatever/me/dev[6]
+   Server    : 192.168.58.44
+   Port      : 8083
+   URI       : /whatever/me/dev[6]
+   *
+   Server    : 192.168.58.44
+   Port      : 8083
+   URI       : /whatever/me/dev[6]
+http://www.myserver.com:12/request?p1=9#fragment
+http://www.myserver.com:12/request?p1=9#fragment
+   Server    : www.myserver.com
+   Port      : 12
+   URI       : /request?p1=9
+   *
+   Server    : www.myserver.com
+   Port      : 12
+   URI       : /request?p1=9
+   Fragment  : #fragment
+http://www.itserver.com:34/query#fragment?question
+http://www.itserver.com:34/query#fragment?question
+   Server    : www.itserver.com
+   Port      : 34
+   URI       : /query
+   *
+   Server    : www.itserver.com
+   Port      : 34
+   URI       : /query
+   Fragment  : #fragment?question
+https://onlineadspy.com/suite/social/?&is_active=1059
+https://onlineadspy.com/suite/social/?&is_active=1059
+   Server    : onlineadspy.com
+   Port      : 443
+   URI       : /suite/social/?&is_active=1059
+   *
+   Server    : onlineadspy.com
+   Port      : 443
+   URI       : /suite/social/?&is_active=1059

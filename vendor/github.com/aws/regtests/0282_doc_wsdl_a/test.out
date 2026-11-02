@@ -1,0 +1,19 @@
+<xsd:element name="X" type="xsd:int"/>
+<xsd:element name="X" type="xsd:int"/>
+<xsd:element name="Image_Result" type="xsd:string"/>
+<xsd:element name="X" type="n1:Small_Integer"/>
+<xsd:element name="A" type="xsd:int"/>
+<xsd:element name="B" type="xsd:int"/>
+<xsd:element name="XC" type="n1:R"/>
+<xsd:element name="Call_Result" type="n1:R"/>
+<wsdl:part name="parameters" element="n1:Parameters_Print"/>
+<wsdl:part name="parameters" element="n1:Parameters_Image"/>
+<wsdl:part name="parameters" element="n1:Result_Image"/>
+<wsdl:part name="parameters" element="n1:Parameters_Print_Small"/>
+<wsdl:part name="parameters" element="n1:Parameters_Call"/>
+<wsdl:part name="parameters" element="n1:Result_Call"/>
+ 12
+ 98712
+ 122
+ 789
+-1

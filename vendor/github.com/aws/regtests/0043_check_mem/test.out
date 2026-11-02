@@ -1,0 +1,198 @@
+Start main, wait for server to start...
+Server started
+
+C=FR,ST=Ile de France,O=AWS Team,CN=0043_check_mem,EMAIL=aws@obry.net
+simple ok 0  
+simple ok 2 8 azerty qwerty
+simple ok 2 azerty qwerty 8
+/doesnotexist not found
+very_long_name_in_a_get_form=alongvalueforthistest 16 16
+multiple ok 5 1 2 3 4 whatever
+simple ok 2 8 azerty qwerty
+check_mem.adb
+45b13b1b60b07aeae8ade667e0704b74
+dummy
+check_mem.adb
+Ok
+ 6 bytes compressed to 14
+Ok
+ 155 bytes compressed to 118
+C=FR,ST=Ile de France,O=AWS Team,CN=0043_check_mem,EMAIL=aws@obry.net
+simple ok 0  
+simple ok 2 8 azerty qwerty
+simple ok 2 azerty qwerty 8
+/doesnotexist not found
+very_long_name_in_a_get_form=alongvalueforthistest 16 16
+multiple ok 5 1 2 3 4 whatever
+simple ok 2 8 azerty qwerty
+check_mem.adb
+5930946ee89a83c9776fb70798c3653e
+dummy
+check_mem.adb
+Ok
+ 6 bytes compressed to 14
+Ok
+ 155 bytes compressed to 118
+Start main, wait for server to start...
+Server started
+
+C=FR,ST=Ile de France,O=AWS Team,CN=0043_check_mem,EMAIL=aws@obry.net
+simple ok 0  
+simple ok 2 8 azerty qwerty
+simple ok 2 azerty qwerty 8
+/doesnotexist not found
+very_long_name_in_a_get_form=alongvalueforthistest 16 16
+multiple ok 5 1 2 3 4 whatever
+simple ok 2 8 azerty qwerty
+check_mem.adb
+45b13b1b60b07aeae8ade667e0704b74
+dummy
+check_mem.adb
+Ok
+ 6 bytes compressed to 14
+Ok
+ 155 bytes compressed to 118
+C=FR,ST=Ile de France,O=AWS Team,CN=0043_check_mem,EMAIL=aws@obry.net
+simple ok 0  
+simple ok 2 8 azerty qwerty
+simple ok 2 azerty qwerty 8
+/doesnotexist not found
+very_long_name_in_a_get_form=alongvalueforthistest 16 16
+multiple ok 5 1 2 3 4 whatever
+simple ok 2 8 azerty qwerty
+check_mem.adb
+5930946ee89a83c9776fb70798c3653e
+dummy
+check_mem.adb
+Ok
+ 6 bytes compressed to 14
+Ok
+ 155 bytes compressed to 118
+C=FR,ST=Ile de France,O=AWS Team,CN=0043_check_mem,EMAIL=aws@obry.net
+simple ok 0  
+simple ok 2 8 azerty qwerty
+simple ok 2 azerty qwerty 8
+/doesnotexist not found
+very_long_name_in_a_get_form=alongvalueforthistest 16 16
+multiple ok 5 1 2 3 4 whatever
+simple ok 2 8 azerty qwerty
+check_mem.adb
+88930900eddb27dccc53be6cc2413a08
+dummy
+check_mem.adb
+Ok
+ 6 bytes compressed to 14
+Ok
+ 155 bytes compressed to 118
+C=FR,ST=Ile de France,O=AWS Team,CN=0043_check_mem,EMAIL=aws@obry.net
+simple ok 0  
+simple ok 2 8 azerty qwerty
+simple ok 2 azerty qwerty 8
+/doesnotexist not found
+very_long_name_in_a_get_form=alongvalueforthistest 16 16
+multiple ok 5 1 2 3 4 whatever
+simple ok 2 8 azerty qwerty
+check_mem.adb
+28490aecb3c2da8409cd1f1d6f16531f
+dummy
+check_mem.adb
+Ok
+ 6 bytes compressed to 14
+Ok
+ 155 bytes compressed to 118
+C=FR,ST=Ile de France,O=AWS Team,CN=0043_check_mem,EMAIL=aws@obry.net
+simple ok 0  
+simple ok 2 8 azerty qwerty
+simple ok 2 azerty qwerty 8
+/doesnotexist not found
+very_long_name_in_a_get_form=alongvalueforthistest 16 16
+multiple ok 5 1 2 3 4 whatever
+simple ok 2 8 azerty qwerty
+check_mem.adb
+f7b5fdf4c1ef6ada67dfe17b16713c5a
+dummy
+check_mem.adb
+Ok
+ 6 bytes compressed to 14
+Ok
+ 155 bytes compressed to 118
+C=FR,ST=Ile de France,O=AWS Team,CN=0043_check_mem,EMAIL=aws@obry.net
+simple ok 0  
+simple ok 2 8 azerty qwerty
+simple ok 2 azerty qwerty 8
+/doesnotexist not found
+very_long_name_in_a_get_form=alongvalueforthistest 16 16
+multiple ok 5 1 2 3 4 whatever
+simple ok 2 8 azerty qwerty
+check_mem.adb
+5a1eecfbe32fa16c02c0e118eed11bb9
+dummy
+check_mem.adb
+Ok
+ 6 bytes compressed to 14
+Ok
+ 155 bytes compressed to 118
+C=FR,ST=Ile de France,O=AWS Team,CN=0043_check_mem,EMAIL=aws@obry.net
+simple ok 0  
+simple ok 2 8 azerty qwerty
+simple ok 2 azerty qwerty 8
+/doesnotexist not found
+very_long_name_in_a_get_form=alongvalueforthistest 16 16
+multiple ok 5 1 2 3 4 whatever
+simple ok 2 8 azerty qwerty
+check_mem.adb
+5a1eecfbe32fa16c02c0e118eed11bb9
+dummy
+check_mem.adb
+Ok
+ 6 bytes compressed to 14
+Ok
+ 155 bytes compressed to 118
+C=FR,ST=Ile de France,O=AWS Team,CN=0043_check_mem,EMAIL=aws@obry.net
+simple ok 0  
+simple ok 2 8 azerty qwerty
+simple ok 2 azerty qwerty 8
+/doesnotexist not found
+very_long_name_in_a_get_form=alongvalueforthistest 16 16
+multiple ok 5 1 2 3 4 whatever
+simple ok 2 8 azerty qwerty
+check_mem.adb
+5a1eecfbe32fa16c02c0e118eed11bb9
+dummy
+check_mem.adb
+Ok
+ 6 bytes compressed to 14
+Ok
+ 155 bytes compressed to 118
+C=FR,ST=Ile de France,O=AWS Team,CN=0043_check_mem,EMAIL=aws@obry.net
+simple ok 0  
+simple ok 2 8 azerty qwerty
+simple ok 2 azerty qwerty 8
+/doesnotexist not found
+very_long_name_in_a_get_form=alongvalueforthistest 16 16
+multiple ok 5 1 2 3 4 whatever
+simple ok 2 8 azerty qwerty
+check_mem.adb
+5a1eecfbe32fa16c02c0e118eed11bb9
+dummy
+check_mem.adb
+Ok
+ 6 bytes compressed to 14
+Ok
+ 155 bytes compressed to 118
+C=FR,ST=Ile de France,O=AWS Team,CN=0043_check_mem,EMAIL=aws@obry.net
+simple ok 0  
+simple ok 2 8 azerty qwerty
+simple ok 2 azerty qwerty 8
+/doesnotexist not found
+very_long_name_in_a_get_form=alongvalueforthistest 16 16
+multiple ok 5 1 2 3 4 whatever
+simple ok 2 8 azerty qwerty
+check_mem.adb
+5a1eecfbe32fa16c02c0e118eed11bb9
+dummy
+check_mem.adb
+Ok
+ 6 bytes compressed to 14
+Ok
+ 155 bytes compressed to 118

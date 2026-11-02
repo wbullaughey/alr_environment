@@ -1,0 +1,3 @@
+from test_support import *
+
+build_and_run('smem_sec');

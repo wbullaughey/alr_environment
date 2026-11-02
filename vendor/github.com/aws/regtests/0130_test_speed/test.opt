@@ -1,0 +1,2 @@
+xmlada REQUIRED
+ALL XFAIL "unreliable, see HC15-008"
